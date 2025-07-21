@@ -27,8 +27,12 @@ jobs:
         run: ls -l estatisticas/
 
       - name: Commit e Push do JSON gerado
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Atualiza a URL remota para usar o token de autenticação
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
           git add estatisticas/estatisticas_stacasa.json
           git diff --staged --quiet || (git commit -m "Atualizar estatísticas automaticamente" && git push)
