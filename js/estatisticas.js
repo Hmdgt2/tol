@@ -54,7 +54,7 @@ function calcularEstatisticas(sorteios, numero) {
   let ultimoIndice = -1;
 
   sorteios.forEach((sorteio, idx) => {
-    if (sorteio.numeros.includes(numero)) {
+    if (sorteio && Array.isArray(sorteio.numeros) && sorteio.numeros.includes(numero)) {
       numSaidas++;
       ultimoIndice = idx;
     }
