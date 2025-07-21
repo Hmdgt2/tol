@@ -1,8 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const PASTA_DADOS = path.join(__dirname, 'dados');
-const PASTA_ESTATISTICAS = path.join(__dirname, 'estatisticas');
+// Pasta dados e estatisticas uma nível acima de 'js'
+const PASTA_DADOS = path.join(__dirname, '..', 'dados');
+const PASTA_ESTATISTICAS = path.join(__dirname, '..', 'estatisticas');
 
 // Função para parsear data no formato "dd/mm/yyyy"
 function parseData(dataStr) {
@@ -26,7 +27,6 @@ function lerSorteiosAno(nomeFicheiro) {
   const caminho = path.join(PASTA_DADOS, nomeFicheiro);
   const conteudo = fs.readFileSync(caminho, 'utf-8');
   const dados = JSON.parse(conteudo);
-  // O JSON tem chave com o ano (ex: "2011"), que guarda um array de sorteios
   const ano = nomeFicheiro.replace('.json', '');
   return dados[ano] || [];
 }
