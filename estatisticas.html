@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <title>Estatísticas de Números por Ano</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    table { border-collapse: collapse; width: 100%; max-width: 700px; margin-top: 1em; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #f4f4f4; }
+    input, button, select { font-size: 1em; padding: 5px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Estatísticas de Números por Ano</h1>
+
+  <label for="ano">Escolha o ano:</label>
+  <select id="ano"></select>
+
+  <label for="numero">Escolha um número (1-50): </label>
+  <input type="number" id="numero" min="1" max="50" value="1" />
+  <button id="calcularBtn">Calcular Estatísticas</button>
+
+  <p id="status"></p>
+
+  <table id="resultado" style="display:none;">
+    <thead>
+      <tr>
+        <th>Números</th>
+        <th>Número de saídas</th>
+        <th>% de saídas</th>
+        <th>Último sorteio</th>
+        <th>Data do sorteio</th>
+        <th>Ausências *</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="num"></td>
+        <td id="num_saidas"></td>
+        <td id="percent_saidas"></td>
+        <td id="ultimo_sorteio"></td>
+        <td id="data_sorteio"></td>
+        <td id="ausencias"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="./estatisticas.js"></script>
+  <script>
+    // Iniciar a app, apontar para o ficheiro JSON na pasta dados
+    inicializar('./dados/anos.json');
+  </script>
+</body>
+</html>
