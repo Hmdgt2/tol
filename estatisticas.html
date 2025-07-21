@@ -43,6 +43,77 @@
     </tbody>
   </table>
 
-  <script src="./js/estatisticas.js"></script>
+  <script>
+    const selectNumero = document.getElementById('numero');
+    const btnCalcular = document.getElementById('calcularBtn');
+    const status = document.getElementById('status');
+    const resultado = document.getElementById('resultado');
+
+    // Campos da tabela
+    const campoNum = document.getElementById('num');
+    const campoNumSaidas = document.getElementById('num_saidas');
+    const campoPercentSaidas = document.getElementById('percent_saidas');
+    const campoUltimoSorteio = document.getElementById('ultimo_sorteio');
+    const campoDataSorteio = document.getElementById('data_sorteio');
+    const campoAusencias = document.getElementById('ausencias');
+
+    let dadosEstatisticas = null;
+
+    // Preencher select com números 1 a 49
+    function preencherSelect() {
+      for (let i = 1; i <= 49; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i;
+        selectNumero.appendChild(option);
+      }
+    }
+
+    // Carregar ficheiro JSON
+    async function carregarDados() {
+      status.textContent = 'A carregar dados...';
+      try {
+        const response = await fetch('estatisticas/estatisticas_stacasa.json');
+        if (!response.ok) throw new Error('Erro ao carregar ficheiro JSON');
+        dadosEstatisticas = await response.json();
+        status.textContent = `Dados carregados. Total de sorteios: ${dadosEstatisticas.total_sorteios}`;
+      } catch (error) {
+        status.textContent = 'Erro a carregar os dados: ' + error.message;
+      }
+    }
+
+    // Mostrar estatísticas para o número selecionado
+    function mostrarEstatisticas(numero) {
+      if (!dadosEstatisticas) {
+        status.textContent = 'Dados ainda não carregados.';
+        return;
+      }
+      const estat = dadosEstatisticas.estatisticas_por_numero[numero];
+      if (!estat) {
+        status.textContent = 'Número não encontrado nos dados.';
+        resultado.style.display = 'none';
+        return;
+      }
+
+      campoNum.textContent = estat.numero;
+      campoNumSaidas.textContent = estat.num_saidas;
+      campoPercentSaidas.textContent = estat.percent_saidas.toFixed(2) + '%';
+      campoUltimoSorteio.textContent = estat.ultimo_sorteio;
+      campoDataSorteio.textContent = estat.data_ultimo;
+      campoAusencias.textContent = estat.ausencias;
+
+      resultado.style.display = 'table';
+      status.textContent = '';
+    }
+
+    // Setup inicial
+    preencherSelect();
+    carregarDados();
+
+    btnCalcular.addEventListener('click', () => {
+      const numero = selectNumero.value;
+      mostrarEstatisticas(numero);
+    });
+  </script>
 </body>
 </html>
