@@ -1,111 +1,122 @@
-// Lista dos anos (ficheiros JSON na pasta dados)
-const listaAnos = [
-  "2011", "2012", "2013", "2014", "2015",
-  "2016", "2017", "2018", "2019", "2020",
-  "2021", "2022", "2023", "2024", "2025"
-];
+const fs = require('fs');
+const path = require('path');
 
-// Preenche dropdown 1 a 49
-function popularDropdownNumeros() {
-  const selectNumero = document.getElementById('numero');
-  for (let i = 1; i <= 49; i++) {
-    const option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    selectNumero.appendChild(option);
-  }
-}
+const PASTA_DADOS = path.join(__dirname, 'dados');
+const PASTA_ESTATISTICAS = path.join(__dirname, 'estatisticas');
 
-// Carrega os dados de um ano
-async function carregarDadosAno(ano) {
-  const resp = await fetch(`./dados/${ano}.json`);
-  if (!resp.ok) throw new Error(`Erro ao carregar dados do ano ${ano}`);
-  return await resp.json();
-}
-
-// Converte data dd/mm/yyyy para objeto Date para ordenar
+// Função para parsear data no formato "dd/mm/yyyy"
 function parseData(dataStr) {
-  if (!dataStr || typeof dataStr !== 'string') {
-    console.warn('dataStr inválido:', dataStr);
-    return new Date(0); // ou alguma data padrão, para evitar erro
-  }
-  const [dia, mes, ano] = dataStr.split('/').map(Number);
+  const partes = dataStr.split('/');
+  if (partes.length !== 3) return new Date(0);
+  const [dia, mes, ano] = partes.map(Number);
   return new Date(ano, mes - 1, dia);
 }
 
-// Junta todos os sorteios de todos os anos num array único e ordena por data
-async function carregarTodosSorteios() {
-  let todosSorteios = [];
-  for (const ano of listaAnos) {
+// Lista os ficheiros JSON na pasta dados que correspondem a anos (2011-2025)
+function listarFicheirosAnos() {
+  const files = fs.readdirSync(PASTA_DADOS);
+  return files.filter(f => {
+    const ano = f.replace('.json', '');
+    return /^\d{4}$/.test(ano) && Number(ano) >= 2011 && Number(ano) <= 2025;
+  });
+}
+
+// Lê os sorteios de um ficheiro JSON específico
+function lerSorteiosAno(nomeFicheiro) {
+  const caminho = path.join(PASTA_DADOS, nomeFicheiro);
+  const conteudo = fs.readFileSync(caminho, 'utf-8');
+  const dados = JSON.parse(conteudo);
+  // O JSON tem chave com o ano (ex: "2011"), que guarda um array de sorteios
+  const ano = nomeFicheiro.replace('.json', '');
+  return dados[ano] || [];
+}
+
+// Carrega e junta todos os sorteios dos ficheiros da pasta
+function carregarTodosSorteios() {
+  const ficheiros = listarFicheirosAnos();
+  let todos = [];
+  ficheiros.forEach(fich => {
     try {
-      const dadosAno = await carregarDadosAno(ano);
-      todosSorteios = todosSorteios.concat(dadosAno);
+      const sorteios = lerSorteiosAno(fich);
+      todos = todos.concat(sorteios);
     } catch (e) {
-      console.warn(e.message);
+      console.warn(`[Aviso] Erro a ler ${fich}:`, e.message);
     }
+  });
+  // Ordena por data
+  todos.sort((a, b) => parseData(a.data) - parseData(b.data));
+  return todos;
+}
+
+// Calcula estatísticas para números de 1 a 49
+function calcularEstatisticas(sorteios) {
+  const total = sorteios.length;
+  const estatisticas = {};
+
+  for (let numero = 1; numero <= 49; numero++) {
+    let num_saidas = 0;
+    let ultimo_idx = -1;
+
+    sorteios.forEach((sorteio, idx) => {
+      if (sorteio.numeros && sorteio.numeros.includes(numero)) {
+        num_saidas++;
+        ultimo_idx = idx;
+      }
+    });
+
+    const percent = total ? Number(((num_saidas / total) * 100).toFixed(2)) : 0;
+
+    let ultimo_sorteio = "-";
+    let data_ultimo = "-";
+    let ausencias = total;
+
+    if (ultimo_idx >= 0) {
+      ultimo_sorteio = sorteios[ultimo_idx].concurso || "-";
+      data_ultimo = sorteios[ultimo_idx].data || "-";
+      ausencias = total - ultimo_idx - 1;
+    }
+
+    estatisticas[numero.toString()] = {
+      numero,
+      num_saidas,
+      percent_saidas: percent,
+      ultimo_sorteio,
+      data_ultimo,
+      ausencias
+    };
   }
-  todosSorteios.sort((a, b) => parseData(a.data) - parseData(b.data));
-  return todosSorteios;
+
+  return estatisticas;
 }
 
-function calcularEstatisticas(sorteios, numero) {
-  const totalSorteios = sorteios.length;
-  let numSaidas = 0;
-  let ultimoIndice = -1;
+// Cria pasta se não existir
+function garantirPasta(pasta) {
+  if (!fs.existsSync(pasta)) {
+    fs.mkdirSync(pasta, { recursive: true });
+  }
+}
 
-  sorteios.forEach((sorteio, idx) => {
-    if (sorteio && Array.isArray(sorteio.numeros) && sorteio.numeros.includes(numero)) {
-      numSaidas++;
-      ultimoIndice = idx;
-    }
-  });
+// Função principal
+function main() {
+  console.log("A carregar sorteios...");
+  const sorteios = carregarTodosSorteios();
+  console.log(`Foram carregados ${sorteios.length} sorteios.`);
 
-  const percentSaidas = ((numSaidas / totalSorteios) * 100).toFixed(2);
-  const ultimoSorteio = ultimoIndice >= 0 ? sorteios[ultimoIndice].concurso : '-';
-  const dataUltimo = ultimoIndice >= 0 ? sorteios[ultimoIndice].data : '-';
-  const ausencias = ultimoIndice >= 0 ? totalSorteios - ultimoIndice - 1 : totalSorteios;
+  console.log("A calcular estatísticas...");
+  const estatisticas = calcularEstatisticas(sorteios);
 
-  return {
-    numero,
-    numSaidas,
-    percentSaidas,
-    ultimoSorteio,
-    dataUltimo,
-    ausencias,
+  const resultado = {
+    total_sorteios: sorteios.length,
+    estatisticas_por_numero: estatisticas
   };
-}
 
-async function main() {
-  popularDropdownNumeros();
+  garantirPasta(PASTA_ESTATISTICAS);
 
-  document.getElementById('calcularBtn').addEventListener('click', async () => {
-    const numero = parseInt(document.getElementById('numero').value, 10);
-    if (isNaN(numero) || numero < 1 || numero > 49) {
-      alert('Por favor, escolha um número entre 1 e 49');
-      return;
-    }
+  const destino = path.join(PASTA_ESTATISTICAS, 'estatisticas_ate_2025.json');
 
-    document.getElementById('status').textContent = 'A carregar dados, aguarde...';
-    document.getElementById('resultado').style.display = 'none';
+  fs.writeFileSync(destino, JSON.stringify(resultado, null, 2), 'utf-8');
 
-    try {
-      const sorteios = await carregarTodosSorteios();
-      const stats = calcularEstatisticas(sorteios, numero);
-
-      document.getElementById('num').textContent = stats.numero;
-      document.getElementById('num_saidas').textContent = stats.numSaidas;
-      document.getElementById('percent_saidas').textContent = stats.percentSaidas + '%';
-      document.getElementById('ultimo_sorteio').textContent = stats.ultimoSorteio;
-      document.getElementById('data_sorteio').textContent = stats.dataUltimo;
-      document.getElementById('ausencias').textContent = stats.ausencias;
-
-      document.getElementById('resultado').style.display = 'table';
-      document.getElementById('status').textContent = '';
-    } catch (err) {
-      document.getElementById('status').textContent = 'Erro ao carregar os dados.';
-      console.error(err);
-    }
-  });
+  console.log(`Estatísticas guardadas em: ${destino}`);
 }
 
 main();
