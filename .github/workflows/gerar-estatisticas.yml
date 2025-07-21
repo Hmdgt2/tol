@@ -1,0 +1,29 @@
+name: Gerar Estatísticas JSON
+
+on:
+  push:
+    branches:
+      - main    # Ou o ramo que usas para disparar o workflow
+  workflow_dispatch:   # Permite disparar manualmente pelo GitHub UI
+
+jobs:
+  gerar-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fazer checkout do código
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependências (se houver package.json)
+        run: npm install || echo "Sem dependências"
+
+      - name: Executar script para gerar JSON
+        run: node js/estatisticas.js
+
+      - name: Confirmar criação do ficheiro JSON
+        run: ls -l estatisticas/estatisticas_stacasa.json
