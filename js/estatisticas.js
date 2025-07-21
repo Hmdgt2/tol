@@ -25,6 +25,10 @@ async function carregarDadosAno(ano) {
 
 // Converte data dd/mm/yyyy para objeto Date para ordenar
 function parseData(dataStr) {
+  if (!dataStr || typeof dataStr !== 'string') {
+    console.warn('dataStr inválido:', dataStr);
+    return new Date(0); // ou alguma data padrão, para evitar erro
+  }
   const [dia, mes, ano] = dataStr.split('/').map(Number);
   return new Date(ano, mes - 1, dia);
 }
