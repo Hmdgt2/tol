@@ -1,0 +1,397 @@
+{
+  "total_sorteios": 1498,
+  "estatisticas_por_numero": {
+    "1": {
+      "numero": 1,
+      "num_saidas": 125,
+      "percent_saidas": 8.34,
+      "ultimo_sorteio": "055/2025",
+      "data_ultimo": "09/07/2025",
+      "ausencias": 3
+    },
+    "2": {
+      "numero": 2,
+      "num_saidas": 149,
+      "percent_saidas": 9.95,
+      "ultimo_sorteio": "040/2025",
+      "data_ultimo": "17/05/2025",
+      "ausencias": 18
+    },
+    "3": {
+      "numero": 3,
+      "num_saidas": 151,
+      "percent_saidas": 10.08,
+      "ultimo_sorteio": "047/2025",
+      "data_ultimo": "11/06/2025",
+      "ausencias": 11
+    },
+    "4": {
+      "numero": 4,
+      "num_saidas": 161,
+      "percent_saidas": 10.75,
+      "ultimo_sorteio": "051/2025",
+      "data_ultimo": "25/06/2025",
+      "ausencias": 7
+    },
+    "5": {
+      "numero": 5,
+      "num_saidas": 142,
+      "percent_saidas": 9.48,
+      "ultimo_sorteio": "046/2025",
+      "data_ultimo": "07/06/2025",
+      "ausencias": 12
+    },
+    "6": {
+      "numero": 6,
+      "num_saidas": 152,
+      "percent_saidas": 10.15,
+      "ultimo_sorteio": "046/2025",
+      "data_ultimo": "07/06/2025",
+      "ausencias": 12
+    },
+    "7": {
+      "numero": 7,
+      "num_saidas": 162,
+      "percent_saidas": 10.81,
+      "ultimo_sorteio": "054/2025",
+      "data_ultimo": "05/07/2025",
+      "ausencias": 4
+    },
+    "8": {
+      "numero": 8,
+      "num_saidas": 159,
+      "percent_saidas": 10.61,
+      "ultimo_sorteio": "041/2025",
+      "data_ultimo": "21/05/2025",
+      "ausencias": 17
+    },
+    "9": {
+      "numero": 9,
+      "num_saidas": 147,
+      "percent_saidas": 9.81,
+      "ultimo_sorteio": "056/2025",
+      "data_ultimo": "12/07/2025",
+      "ausencias": 2
+    },
+    "10": {
+      "numero": 10,
+      "num_saidas": 140,
+      "percent_saidas": 9.35,
+      "ultimo_sorteio": "053/2025",
+      "data_ultimo": "02/07/2025",
+      "ausencias": 5
+    },
+    "11": {
+      "numero": 11,
+      "num_saidas": 155,
+      "percent_saidas": 10.35,
+      "ultimo_sorteio": "049/2025",
+      "data_ultimo": "18/06/2025",
+      "ausencias": 9
+    },
+    "12": {
+      "numero": 12,
+      "num_saidas": 131,
+      "percent_saidas": 8.74,
+      "ultimo_sorteio": "044/2025",
+      "data_ultimo": "31/05/2025",
+      "ausencias": 14
+    },
+    "13": {
+      "numero": 13,
+      "num_saidas": 156,
+      "percent_saidas": 10.41,
+      "ultimo_sorteio": "039/2025",
+      "data_ultimo": "14/05/2025",
+      "ausencias": 19
+    },
+    "14": {
+      "numero": 14,
+      "num_saidas": 134,
+      "percent_saidas": 8.95,
+      "ultimo_sorteio": "044/2025",
+      "data_ultimo": "31/05/2025",
+      "ausencias": 14
+    },
+    "15": {
+      "numero": 15,
+      "num_saidas": 139,
+      "percent_saidas": 9.28,
+      "ultimo_sorteio": "058/2025",
+      "data_ultimo": "19/07/2025",
+      "ausencias": 0
+    },
+    "16": {
+      "numero": 16,
+      "num_saidas": 162,
+      "percent_saidas": 10.81,
+      "ultimo_sorteio": "049/2025",
+      "data_ultimo": "18/06/2025",
+      "ausencias": 9
+    },
+    "17": {
+      "numero": 17,
+      "num_saidas": 152,
+      "percent_saidas": 10.15,
+      "ultimo_sorteio": "048/2025",
+      "data_ultimo": "14/06/2025",
+      "ausencias": 10
+    },
+    "18": {
+      "numero": 18,
+      "num_saidas": 156,
+      "percent_saidas": 10.41,
+      "ultimo_sorteio": "057/2025",
+      "data_ultimo": "16/07/2025",
+      "ausencias": 1
+    },
+    "19": {
+      "numero": 19,
+      "num_saidas": 148,
+      "percent_saidas": 9.88,
+      "ultimo_sorteio": "057/2025",
+      "data_ultimo": "16/07/2025",
+      "ausencias": 1
+    },
+    "20": {
+      "numero": 20,
+      "num_saidas": 147,
+      "percent_saidas": 9.81,
+      "ultimo_sorteio": "015/2025",
+      "data_ultimo": "19/02/2025",
+      "ausencias": 43
+    },
+    "21": {
+      "numero": 21,
+      "num_saidas": 164,
+      "percent_saidas": 10.95,
+      "ultimo_sorteio": "053/2025",
+      "data_ultimo": "02/07/2025",
+      "ausencias": 5
+    },
+    "22": {
+      "numero": 22,
+      "num_saidas": 152,
+      "percent_saidas": 10.15,
+      "ultimo_sorteio": "052/2025",
+      "data_ultimo": "28/06/2025",
+      "ausencias": 6
+    },
+    "23": {
+      "numero": 23,
+      "num_saidas": 168,
+      "percent_saidas": 11.21,
+      "ultimo_sorteio": "058/2025",
+      "data_ultimo": "19/07/2025",
+      "ausencias": 0
+    },
+    "24": {
+      "numero": 24,
+      "num_saidas": 163,
+      "percent_saidas": 10.88,
+      "ultimo_sorteio": "023/2025",
+      "data_ultimo": "19/03/2025",
+      "ausencias": 35
+    },
+    "25": {
+      "numero": 25,
+      "num_saidas": 158,
+      "percent_saidas": 10.55,
+      "ultimo_sorteio": "056/2025",
+      "data_ultimo": "12/07/2025",
+      "ausencias": 2
+    },
+    "26": {
+      "numero": 26,
+      "num_saidas": 172,
+      "percent_saidas": 11.48,
+      "ultimo_sorteio": "054/2025",
+      "data_ultimo": "05/07/2025",
+      "ausencias": 4
+    },
+    "27": {
+      "numero": 27,
+      "num_saidas": 134,
+      "percent_saidas": 8.95,
+      "ultimo_sorteio": "057/2025",
+      "data_ultimo": "16/07/2025",
+      "ausencias": 1
+    },
+    "28": {
+      "numero": 28,
+      "num_saidas": 140,
+      "percent_saidas": 9.35,
+      "ultimo_sorteio": "055/2025",
+      "data_ultimo": "09/07/2025",
+      "ausencias": 3
+    },
+    "29": {
+      "numero": 29,
+      "num_saidas": 130,
+      "percent_saidas": 8.68,
+      "ultimo_sorteio": "058/2025",
+      "data_ultimo": "19/07/2025",
+      "ausencias": 0
+    },
+    "30": {
+      "numero": 30,
+      "num_saidas": 138,
+      "percent_saidas": 9.21,
+      "ultimo_sorteio": "057/2025",
+      "data_ultimo": "16/07/2025",
+      "ausencias": 1
+    },
+    "31": {
+      "numero": 31,
+      "num_saidas": 148,
+      "percent_saidas": 9.88,
+      "ultimo_sorteio": "056/2025",
+      "data_ultimo": "12/07/2025",
+      "ausencias": 2
+    },
+    "32": {
+      "numero": 32,
+      "num_saidas": 172,
+      "percent_saidas": 11.48,
+      "ultimo_sorteio": "057/2025",
+      "data_ultimo": "16/07/2025",
+      "ausencias": 1
+    },
+    "33": {
+      "numero": 33,
+      "num_saidas": 169,
+      "percent_saidas": 11.28,
+      "ultimo_sorteio": "044/2025",
+      "data_ultimo": "31/05/2025",
+      "ausencias": 14
+    },
+    "34": {
+      "numero": 34,
+      "num_saidas": 162,
+      "percent_saidas": 10.81,
+      "ultimo_sorteio": "058/2025",
+      "data_ultimo": "19/07/2025",
+      "ausencias": 0
+    },
+    "35": {
+      "numero": 35,
+      "num_saidas": 155,
+      "percent_saidas": 10.35,
+      "ultimo_sorteio": "040/2025",
+      "data_ultimo": "17/05/2025",
+      "ausencias": 18
+    },
+    "36": {
+      "numero": 36,
+      "num_saidas": 160,
+      "percent_saidas": 10.68,
+      "ultimo_sorteio": "058/2025",
+      "data_ultimo": "19/07/2025",
+      "ausencias": 0
+    },
+    "37": {
+      "numero": 37,
+      "num_saidas": 154,
+      "percent_saidas": 10.28,
+      "ultimo_sorteio": "038/2025",
+      "data_ultimo": "10/05/2025",
+      "ausencias": 20
+    },
+    "38": {
+      "numero": 38,
+      "num_saidas": 167,
+      "percent_saidas": 11.15,
+      "ultimo_sorteio": "045/2025",
+      "data_ultimo": "04/06/2025",
+      "ausencias": 13
+    },
+    "39": {
+      "numero": 39,
+      "num_saidas": 157,
+      "percent_saidas": 10.48,
+      "ultimo_sorteio": "045/2025",
+      "data_ultimo": "04/06/2025",
+      "ausencias": 13
+    },
+    "40": {
+      "numero": 40,
+      "num_saidas": 152,
+      "percent_saidas": 10.15,
+      "ultimo_sorteio": "052/2025",
+      "data_ultimo": "28/06/2025",
+      "ausencias": 6
+    },
+    "41": {
+      "numero": 41,
+      "num_saidas": 152,
+      "percent_saidas": 10.15,
+      "ultimo_sorteio": "051/2025",
+      "data_ultimo": "25/06/2025",
+      "ausencias": 7
+    },
+    "42": {
+      "numero": 42,
+      "num_saidas": 158,
+      "percent_saidas": 10.55,
+      "ultimo_sorteio": "051/2025",
+      "data_ultimo": "25/06/2025",
+      "ausencias": 7
+    },
+    "43": {
+      "numero": 43,
+      "num_saidas": 151,
+      "percent_saidas": 10.08,
+      "ultimo_sorteio": "016/2025",
+      "data_ultimo": "22/02/2025",
+      "ausencias": 42
+    },
+    "44": {
+      "numero": 44,
+      "num_saidas": 149,
+      "percent_saidas": 9.95,
+      "ultimo_sorteio": "053/2025",
+      "data_ultimo": "02/07/2025",
+      "ausencias": 5
+    },
+    "45": {
+      "numero": 45,
+      "num_saidas": 163,
+      "percent_saidas": 10.88,
+      "ultimo_sorteio": "053/2025",
+      "data_ultimo": "02/07/2025",
+      "ausencias": 5
+    },
+    "46": {
+      "numero": 46,
+      "num_saidas": 169,
+      "percent_saidas": 11.28,
+      "ultimo_sorteio": "055/2025",
+      "data_ultimo": "09/07/2025",
+      "ausencias": 3
+    },
+    "47": {
+      "numero": 47,
+      "num_saidas": 163,
+      "percent_saidas": 10.88,
+      "ultimo_sorteio": "056/2025",
+      "data_ultimo": "12/07/2025",
+      "ausencias": 2
+    },
+    "48": {
+      "numero": 48,
+      "num_saidas": 162,
+      "percent_saidas": 10.81,
+      "ultimo_sorteio": "041/2025",
+      "data_ultimo": "21/05/2025",
+      "ausencias": 17
+    },
+    "49": {
+      "numero": 49,
+      "num_saidas": 140,
+      "percent_saidas": 9.35,
+      "ultimo_sorteio": "043/2025",
+      "data_ultimo": "28/05/2025",
+      "ausencias": 15
+    }
+  }
+}
