@@ -112,7 +112,7 @@ function main() {
 
   garantirPasta(PASTA_ESTATISTICAS);
 
-  const destino = path.join(PASTA_ESTATISTICAS, 'estatisticas_ate_2025.json');
+  const destino = path.join(PASTA_ESTATISTICAS, 'estatisticas_stacasa.json');
 
   fs.writeFileSync(destino, JSON.stringify(resultado, null, 2), 'utf-8');
 
