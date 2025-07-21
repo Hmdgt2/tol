@@ -23,10 +23,12 @@ jobs:
       - name: Correr script estatísticas.js
         run: node js/estatisticas.js
 
+      - name: Listar ficheiros estatisticas (debug)
+        run: ls -l estatisticas/
+
       - name: Commit e Push do JSON gerado
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add estatisticas/estatisticas_stacasa.json
-          git commit -m "Atualizar estatísticas automaticamente" || echo "Sem alterações"
-          git push
+          git diff --staged --quiet || (git commit -m "Atualizar estatísticas automaticamente" && git push)
