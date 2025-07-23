@@ -1,7 +1,5 @@
 name: Enviar email Totoloto
 
-horario: verao
-
 on:
   schedule:
     - cron: "2 8 * * 4"     # quintas, 08:02 UTC
