@@ -55,7 +55,7 @@ def enviar_email_html(txt_path, remetente, senha_app, destinatario, assunto="Res
           </tr>
         </table>
 
-        <p style="{numeros_style} margin-top: 15px; letter-spacing: 14px; text-align: center;"
+        <p style="{numeros_style} margin-top: 15px; letter-spacing: 14px; text-align: center;">
           {numeros or ''} + {especial or ''}
         </p>
       </body>
