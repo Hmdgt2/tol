@@ -5,6 +5,8 @@ const path = require('path');
 const PASTA_DADOS = path.join(__dirname, '..', 'dados');
 const PASTA_ESTATISTICAS = path.join(__dirname, '..', 'estatisticas');
 
+// --- Funções utilitárias ---
+
 // Parse de data no formato "dd/mm/yyyy"
 function parseData(dataStr) {
   const partes = dataStr.split('/');
@@ -12,6 +14,13 @@ function parseData(dataStr) {
   const [dia, mes, ano] = partes.map(Number);
   return new Date(ano, mes - 1, dia);
 }
+
+// Garante que a pasta existe, cria se não existir
+function garantirPasta(pasta) {
+  if (!fs.existsSync(pasta)) fs.mkdirSync(pasta, { recursive: true });
+}
+
+// --- Leitura de dados ---
 
 // Lista ficheiros de anos válidos
 function listarFicheirosAnos() {
@@ -21,7 +30,7 @@ function listarFicheirosAnos() {
   });
 }
 
-// Lê um ficheiro de sorteios
+// Lê um ficheiro de sorteios de um ano
 function lerSorteiosAno(nomeFicheiro) {
   const caminho = path.join(PASTA_DADOS, nomeFicheiro);
   const conteudo = fs.readFileSync(caminho, 'utf-8');
@@ -45,7 +54,8 @@ function carregarTodosSorteios() {
   return todos;
 }
 
-// Calcula estatísticas básicas
+// --- Estatísticas e heurísticas ---
+
 function calcularEstatisticas(sorteios) {
   const total = sorteios.length;
   const estatisticas = {};
@@ -83,34 +93,6 @@ function calcularEstatisticas(sorteios) {
   return estatisticas;
 }
 
-// Heurística: maior frequência
-function pontuarPorFrequencia(est) {
-  const ordenado = Object.values(est).sort((a, b) => b.num_saidas - a.num_saidas);
-  return atribuirPontos(ordenado, 3);
-}
-
-// Heurística: maior ausência
-function pontuarPorAusencia(est) {
-  const ordenado = Object.values(est).sort((a, b) => b.ausencias - a.ausencias);
-  return atribuirPontos(ordenado, 2);
-}
-
-// Heurística: tendência de subida (último gap menor que o anterior)
-function pontuarPorTendencia(est) {
-  const candidatos = Object.values(est).filter(e => e.tendencia !== null && e.tendencia <= 10);
-  return atribuirPontos(candidatos, 2);
-}
-
-// Heurística: gap médio próximo de 40 (repetição com padrão)
-function pontuarPorGapMedio(est) {
-  const ordenado = Object.values(est)
-    .filter(e => e.gap_medio !== null)
-    .map(e => ({ ...e, desvio: Math.abs(e.gap_medio - 40) }))
-    .sort((a, b) => a.desvio - b.desvio);
-  return atribuirPontos(ordenado, 1);
-}
-
-// Distribui pontos aos N primeiros
 function atribuirPontos(lista, peso) {
   const pontos = {};
   lista.slice(0, 10).forEach((e, idx) => {
@@ -120,25 +102,31 @@ function atribuirPontos(lista, peso) {
   return pontos;
 }
 
-// Junta múltiplas heurísticas
-function combinarPontuacoes(...listas) {
-  const combinadas = {};
-  listas.forEach(lista => {
-    for (const [num, score] of Object.entries(lista)) {
-      combinadas[num] = (combinadas[num] || 0) + score;
-    }
-  });
-  return combinadas;
+// Heurísticas básicas
+function pontuarPorFrequencia(est) {
+  const ordenado = Object.values(est).sort((a, b) => b.num_saidas - a.num_saidas);
+  return atribuirPontos(ordenado, 3);
 }
 
-// Garante que pasta existe
-function garantirPasta(pasta) {
-  if (!fs.existsSync(pasta)) fs.mkdirSync(pasta, { recursive: true });
+function pontuarPorAusencia(est) {
+  const ordenado = Object.values(est).sort((a, b) => b.ausencias - a.ausencias);
+  return atribuirPontos(ordenado, 2);
 }
 
-// --- NOVAS FUNÇÕES DE HEURÍSTICAS ---
+function pontuarPorTendencia(est) {
+  const candidatos = Object.values(est).filter(e => e.tendencia !== null && e.tendencia <= 10);
+  return atribuirPontos(candidatos, 2);
+}
 
-// Calcula pares mais frequentes
+function pontuarPorGapMedio(est) {
+  const ordenado = Object.values(est)
+    .filter(e => e.gap_medio !== null)
+    .map(e => ({ ...e, desvio: Math.abs(e.gap_medio - 40) }))
+    .sort((a, b) => a.desvio - b.desvio);
+  return atribuirPontos(ordenado, 1);
+}
+
+// Pares frequentes
 function calcularParesFrequentes(sorteios) {
   const paresCount = {};
   sorteios.forEach(sorteio => {
@@ -153,21 +141,19 @@ function calcularParesFrequentes(sorteios) {
   return paresCount;
 }
 
-// Pontua números que fazem parte dos pares mais frequentes
 function pontuarPorPares(paresFreq) {
-  // Ordenar pares por frequência descendente
   const paresOrdenados = Object.entries(paresFreq).sort((a,b) => b[1] - a[1]).slice(0, 20);
   const pontos = {};
   paresOrdenados.forEach(([par, freq], idx) => {
     const [n1, n2] = par.split('-').map(Number);
-    const score = 15 - idx; // pontos decrescentes
+    const score = 15 - idx;
     pontos[n1] = (pontos[n1] || 0) + score;
     pontos[n2] = (pontos[n2] || 0) + score;
   });
   return pontos;
 }
 
-// Calcula trios mais frequentes
+// Trios frequentes
 function calcularTriosFrequentes(sorteios) {
   const triosCount = {};
   sorteios.forEach(sorteio => {
@@ -184,7 +170,6 @@ function calcularTriosFrequentes(sorteios) {
   return triosCount;
 }
 
-// Pontua números que fazem parte dos trios mais frequentes
 function pontuarPorTrios(triosFreq) {
   const triosOrdenados = Object.entries(triosFreq).sort((a,b) => b[1] - a[1]).slice(0, 10);
   const pontos = {};
@@ -198,9 +183,8 @@ function pontuarPorTrios(triosFreq) {
   return pontos;
 }
 
-// Frequência por ano (simples, soma frequência do número em cada ano)
+// Frequência por ano
 function calcularFrequenciaPorAno(sorteios) {
-  // Agrupa sorteios por ano
   const freqAno = {};
   sorteios.forEach(sorteio => {
     const ano = parseData(sorteio.data).getFullYear();
@@ -212,9 +196,8 @@ function calcularFrequenciaPorAno(sorteios) {
   return freqAno;
 }
 
-// Pontua números com crescimento de frequência ano a ano
+// Crescimento anual de frequência
 function pontuarCrescimentoAno(freqAno) {
-  // Transformar objeto em array de anos ordenados
   const anos = Object.keys(freqAno).map(a => +a).sort();
   const pontos = {};
 
@@ -227,18 +210,51 @@ function pontuarCrescimentoAno(freqAno) {
       const freqAnterior = freqAno[anoAnterior][num] || 0;
       if (freqAtual > freqAnterior) crescimentos++;
     }
-    if (crescimentos >= 2) { // 2 ou mais anos de crescimento consecutivo
+    if (crescimentos >= 2) {
       pontos[num] = crescimentos * 3;
     }
   }
   return pontos;
 }
 
-// --- FIM DAS NOVAS FUNÇÕES ---
+// Combina várias pontuações somando os scores
+function combinarPontuacoes(...listas) {
+  const combinadas = {};
+  listas.forEach(lista => {
+    for (const [num, score] of Object.entries(lista)) {
+      combinadas[num] = (combinadas[num] || 0) + score;
+    }
+  });
+  return combinadas;
+}
 
+// Normalização simples min-max
+function normalizarPontuacoes(pontos) {
+  const valores = Object.values(pontos);
+  const min = Math.min(...valores);
+  const max = Math.max(...valores);
+  const normalizado = {};
+  Object.entries(pontos).forEach(([num, score]) => {
+    normalizado[num] = +((score - min) / (max - min || 1)).toFixed(4);
+  });
+  return normalizado;
+}
 
-// Função principal
-function main() {
+// --- Avaliação da simulação ---
+
+function compararPrevisao(reais, previstos) {
+  const acertos = reais.filter(n => previstos.includes(n));
+  return {
+    reais,
+    previstos,
+    acertos,
+    num_acertos: acertos.length
+  };
+}
+
+// --- Função principal do programa (previsão para o próximo sorteio) ---
+
+function mainPrevisao() {
   console.log("A carregar sorteios...");
   const sorteios = carregarTodosSorteios();
   const ultimos50 = sorteios.slice(-50);
@@ -261,7 +277,6 @@ function main() {
     pontuarPorGapMedio(recentEst)
   );
 
-  // --- NOVAS HEURÍSTICAS AQUI ---
   const paresFreq = calcularParesFrequentes(sorteios);
   const triFreq = calcularTriosFrequentes(sorteios);
   const freqAno = calcularFrequenciaPorAno(sorteios);
@@ -269,9 +284,7 @@ function main() {
   const pontosPares = pontuarPorPares(paresFreq);
   const pontosTrios = pontuarPorTrios(triFreq);
   const pontosCrescimentoAno = pontuarCrescimentoAno(freqAno);
-  // --- FIM DAS NOVAS HEURÍSTICAS ---
 
-  // Combina tudo (mantendo o que já tinha + as novas heurísticas)
   const pontosCombinados = combinarPontuacoes(
     pontosTotal,
     pontosRecentes,
@@ -280,7 +293,6 @@ function main() {
     pontosCrescimentoAno
   );
 
-  // Ordenar pelos mais prováveis
   const provaveis = Object.entries(pontosCombinados)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 2)
@@ -288,7 +300,6 @@ function main() {
 
   console.log(`\n🔮 Números mais prováveis no próximo sorteio: ${provaveis.join(', ')}`);
 
-  // Salvar resultado, incluindo as novas heurísticas
   const resultado = {
     gerado_em: new Date().toISOString(),
     total_sorteios: sorteios.length,
@@ -309,4 +320,75 @@ function main() {
   console.log(`\n✅ Resultado guardado em ${destino}`);
 }
 
-main();
+// --- Função da simulação histórica ---
+
+function mainSimulacao() {
+  console.log("🔄 Simulação de sorteios de 2012 com base nos dados anteriores...");
+
+  const dados2011 = lerSorteiosAno('2011.json');
+  const dados2012 = lerSorteiosAno('2012.json');
+
+  const resultadosSimulacao = [];
+  let sorteiosDisponiveis = [...dados2011];
+
+  dados2012.forEach((sorteio2012, index) => {
+    const est = calcularEstatisticas(sorteiosDisponiveis);
+    const pares = calcularParesFrequentes(sorteiosDisponiveis);
+    const trios = calcularTriosFrequentes(sorteiosDisponiveis);
+    const freqAno = calcularFrequenciaPorAno(sorteiosDisponiveis);
+
+    const heuristicas = [
+      pontuarPorFrequencia(est),
+      pontuarPorAusencia(est),
+      pontuarPorTendencia(est),
+      pontuarPorGapMedio(est),
+      pontuarPorPares(pares),
+      pontuarPorTrios(trios)
+    ];
+
+    if (Object.keys(freqAno).length >= 2) {
+      heuristicas.push(pontuarCrescimentoAno(freqAno));
+    }
+
+    const heuristicasNormalizadas = heuristicas.map(normalizarPontuacoes);
+    const combinadas = combinarPontuacoes(...heuristicasNormalizadas);
+
+    const topPrevistos = Object.entries(combinadas)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 6)
+      .map(([numero]) => Number(numero));
+
+    const resultado = compararPrevisao(sorteio2012.numeros || [], topPrevistos);
+
+    resultadosSimulacao.push({
+      data: sorteio2012.data,
+      ...resultado
+    });
+
+    sorteiosDisponiveis.push(sorteio2012);
+  });
+
+  const total = resultadosSimulacao.length;
+  const mediaAcertos = +(resultadosSimulacao.reduce((s, r) => s + r.num_acertos, 0) / total).toFixed(2);
+  const distribuicao = {};
+  for (let i = 0; i <= 6; i++) distribuicao[i] = 0;
+  resultadosSimulacao.forEach(r => distribuicao[r.num_acertos]++);
+
+  const relatorioFinal = {
+    gerado_em: new Date().toISOString(),
+    total_sorteios_simulados: total,
+    media_acertos: mediaAcertos,
+    distribuicao_acertos: distribuicao,
+    simulacoes: resultadosSimulacao
+  };
+
+  garantirPasta(PASTA_ESTATISTICAS);
+  const destino = path.join(PASTA_ESTATISTICAS, 'analise_desvio.json');
+  fs.writeFileSync(destino, JSON.stringify(relatorioFinal, null, 2), 'utf-8');
+  console.log(`✅ Simulação guardada em ${destino}`);
+}
+
+// --- Executar as duas funções ---
+
+mainPrevisao();
+mainSimulacao();
