@@ -80,7 +80,7 @@ def atualizar_resultados():
     if existe:
         msg = f"Resultado do concurso {resultado['concurso']} já existe. Nada a fazer."
         print(msg)
-        escrever_log(msg)
+        escrever_log(msg, "santacasa")
     else:
         lista.append(resultado)
         lista.sort(key=lambda r: r["concurso"])
@@ -88,7 +88,7 @@ def atualizar_resultados():
         gravar_json(json_path, dados)
         msg = f"Resultado do concurso {resultado['concurso']} adicionado ao JSON {ano}."
         print(msg)
-        escrever_log(msg)
+        escrever_log(msg, "santacasa")
 
 if __name__ == "__main__":
     atualizar_resultados()
