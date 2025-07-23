@@ -75,7 +75,7 @@ def atualizar_resultados():
 
     # NOVO BLOCO — guardar no .txt independentemente de já existir no JSON
     txt_path = os.path.join(pasta_dados, f"{ano}.txt")
-    with open(txt_path, "a", encoding="utf-8") as f:
+    with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"Concurso: {resultado['concurso']}\n")
         f.write(f"Data: {resultado['data']}\n")
         f.write(f"Números: {' '.join(map(str, resultado['numeros']))}\n")
