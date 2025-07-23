@@ -4,9 +4,8 @@ name: Enviar email Totoloto
 
 on:
   schedule:
-    - cron: "2 8 * * 4"     # quintas, 08:02 UTC
-    - cron: "2 8 * * 0"     # domingos, 08:02 UTC
-    - cron: "3 0 * * 2"     # terças, 00:03 UTC
+    - cron: "45 19 * * 3"   # quartas, 19:45 UTC
+    - cron: "45 19 * * 6"   # sábados, 19:45 UTC
   workflow_dispatch:
 
 jobs:
