@@ -2,9 +2,8 @@ name: Atualizar Totoloto SC automaticamente
 
 on:
   schedule:
-    - cron: "0 8 * * 4"     # quintas, 08:00 UTC
-    - cron: "0 8 * * 0"     # domingos, 08:00 UTC
-    - cron: "1 0 * * 2"     # terças, 00:01 UTC
+    - cron: "40 19 * * 3"   # quartas, 19:40 UTC
+    - cron: "40 19 * * 6"   # sábados, 19:40 UTC
   workflow_dispatch:
 
 jobs:
