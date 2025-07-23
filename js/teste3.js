@@ -184,7 +184,7 @@ function main() {
   };
 
   garantirPasta(PASTA_ESTATISTICAS);
-  const destino = path.join(PASTA_ESTATISTICAS, 'previsao_completa.json');
+  const destino = path.join(PASTA_ESTATISTICAS, 'estatisticas_teste.json');
   fs.writeFileSync(destino, JSON.stringify(resultado, null, 2), 'utf-8');
   console.log(`\n✅ Resultado guardado em ${destino}`);
 }
