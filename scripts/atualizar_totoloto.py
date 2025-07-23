@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 import json
-import datetime
+from datetime import datetime, timezone
 
 def escrever_log(mensagem, origem):
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
