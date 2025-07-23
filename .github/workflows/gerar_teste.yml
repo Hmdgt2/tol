@@ -11,7 +11,7 @@ on:
   push:
     paths:
       - 'dados/**'
-      - 'js/estatisticas.js'
+      - 'js/teste3.js'
 
 jobs:
   gerar-json:
@@ -27,7 +27,7 @@ jobs:
           node-version: '18'
 
       - name: Correr script estatísticas.js
-        run: node js/estatisticas.js
+        run: node js/teste3.js
 
       - name: Listar ficheiros estatisticas (debug)
         run: ls -l estatisticas/
@@ -40,5 +40,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # Atualiza a URL remota para usar o token de autenticação
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          git add estatisticas/estatisticas_stacasa.json
+          git add estatisticas/estatisticas_teste.json
           git diff --staged --quiet || (git commit -m "Atualizar estatísticas automaticamente" && git push)
