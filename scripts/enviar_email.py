@@ -39,7 +39,7 @@ def enviar_email_html(txt_path, remetente, senha_app, destinatario, assunto="Res
 
     # Criar o corpo HTML do email
     corpo_html = f"""
-    <html>
+    <html lang="pt-PT">
       <body>
         <h2 style="{titulo_style}">Último Resultado</h2>
 
