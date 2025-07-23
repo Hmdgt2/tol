@@ -67,6 +67,7 @@ def enviar_email_html(txt_path, remetente, senha_app, destinatario, assunto="Res
     msg["From"] = remetente
     msg["To"] = destinatario
     msg["Subject"] = assunto
+    msg["Content-Language"] = "pt-PT"
     msg.set_content(corpo_txt)  # Versão texto puro
     msg.add_alternative(corpo_html, subtype='html')
 
