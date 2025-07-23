@@ -1,7 +1,5 @@
 name: Gerar Estatísticas
 
-horario: verao
-
 on:
   schedule:
     - cron: "15 8 * * 4"     # quintas, 08:15 UTC
