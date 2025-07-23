@@ -1,7 +1,11 @@
 name: Enviar email Totoloto
 
 on:
-  workflow_dispatch:  # Permite disparar manualmente
+  schedule:
+    - cron: "2 8 * * 4"     # quintas, 08:02 UTC
+    - cron: "2 8 * * 0"     # domingos, 08:02 UTC
+    - cron: "3 0 * * 2"     # terças, 00:03 UTC
+  workflow_dispatch:
 
 jobs:
   enviar_email:
