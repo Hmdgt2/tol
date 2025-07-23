@@ -47,7 +47,6 @@ def enviar_email_html(txt_path, remetente, senha_app, destinatario, assunto="Res
           <tr>
             <td style="border:1px solid #000; padding:10px; width:160px; text-align:center;">
               <img src="cid:{cid[1:-1]}" alt="Logo" style="max-width:150px; height:auto;">
-              <div style="{info_style}">toto.png</div>
             </td>
             <td style="border:1px solid #000; padding:10px; vertical-align: middle; {info_style}">
               <p><strong>Concurso:</strong> {concurso or 'N/A'}</p>
