@@ -3,9 +3,32 @@ from bs4 import BeautifulSoup
 import re
 import os
 import json
-from datetime import datetime
+import datetime
 
-def extrair_totoloto():
+def escrever_log(mensagem, origem):
+    pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    pasta_workflows = os.path.join(pasta_repo, ".github", "workflows")
+    os.makedirs(pasta_workflows, exist_ok=True)
+    log_path = os.path.join(pasta_workflows, "totoloto_log.txt")
+    agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(f"[{agora}] [{origem}] {mensagem}\n")
+
+def ler_json(json_path, ano):
+    if os.path.exists(json_path):
+        with open(json_path, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+        if str(ano) not in dados or not isinstance(dados[str(ano)], list):
+            dados[str(ano)] = []
+        return dados
+    else:
+        return {str(ano): []}
+
+def gravar_json(json_path, dados):
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(dados, f, indent=2, ensure_ascii=False)
+
+def extrair_totoloto_vercapas():
     url = "https://www.vercapas.com/jogos-santa-casa/numeros-chave-totoloto-resultados-premios/"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
@@ -56,37 +79,30 @@ def extrair_totoloto():
         "especial": especial
     }
 
-def salvar_no_json(resultado):
-    ano_corrente = datetime.now().year
+def atualizar_resultados():
+    resultado = extrair_totoloto_vercapas()
+    ano = resultado["data"].split("/")[-1]
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_dados = os.path.join(pasta_repo, "dados")
-    caminho_json = os.path.join(pasta_dados, f"{ano_corrente}.json")
-    chave_ano = str(ano_corrente)
+    os.makedirs(pasta_dados, exist_ok=True)
+    json_path = os.path.join(pasta_dados, f"{ano}.json")
 
-    # Carregar dados existentes, formato {"2025": [ ... ]}
-    if os.path.exists(caminho_json):
-        with open(caminho_json, "r", encoding="utf-8") as f:
-            try:
-                dados = json.load(f)
-            except json.JSONDecodeError:
-                dados = {}
-        # Corrigir formato se necessário
-        if not isinstance(dados, dict) or chave_ano not in dados or not isinstance(dados[chave_ano], list):
-            dados = {chave_ano: []}
-    else:
-        dados = {chave_ano: []}
+    dados = ler_json(json_path, ano)
+    lista = dados[str(ano)]
 
-    concursos_existentes = {d["concurso"] for d in dados[chave_ano]}
-    if resultado["concurso"] not in concursos_existentes:
-        dados[chave_ano].append(resultado)
-        with open(caminho_json, "w", encoding="utf-8") as f:
-            json.dump(dados, f, ensure_ascii=False, indent=2)
-        print("Novo resultado adicionado ao JSON.")
+    existe = any(r["concurso"] == resultado["concurso"] for r in lista)
+    if existe:
+        msg = f"Resultado do concurso {resultado['concurso']} já existe. Nada a fazer."
+        print(msg)
+        escrever_log(msg, "vercapas")
     else:
-        print("Resultado já existente. Nenhuma alteração feita.")
+        lista.append(resultado)
+        lista.sort(key=lambda r: r["concurso"])
+        dados[str(ano)] = lista
+        gravar_json(json_path, dados)
+        msg = f"Resultado do concurso {resultado['concurso']} adicionado ao JSON {ano}."
+        print(msg)
+        escrever_log(msg, "vercapas")
 
 if __name__ == "__main__":
-    resultado = extrair_totoloto()
-    print("Último resultado Totoloto extraído:")
-    print(resultado)
-    salvar_no_json(resultado)
+    atualizar_resultados()
