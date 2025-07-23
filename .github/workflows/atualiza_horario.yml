@@ -1,0 +1,48 @@
+name: Atualiza Horário Verão/Inverno
+
+on:
+  schedule:
+    # Início Horário de Verão (último domingo de março às 01:00 UTC)
+    - cron: "0 1 30 3 *"  # 2025-03-30
+    - cron: "0 1 29 3 *"  # 2026-03-29
+    - cron: "0 1 28 3 *"  # 2027-03-28
+    - cron: "0 1 26 3 *"  # 2028-03-26
+    - cron: "0 1 25 3 *"  # 2029-03-25
+    - cron: "0 1 31 3 *"  # 2030-03-31
+    - cron: "0 1 30 3 *"  # 2031-03-30
+    - cron: "0 1 29 3 *"  # 2032-03-29
+    - cron: "0 1 27 3 *"  # 2033-03-27
+    - cron: "0 1 26 3 *"  # 2034-03-26
+
+    # Início Horário de Inverno (último domingo de outubro às 01:00 UTC)
+    - cron: "0 1 26 10 *" # 2025-10-26
+    - cron: "0 1 25 10 *" # 2026-10-25
+    - cron: "0 1 31 10 *" # 2027-10-31
+    - cron: "0 1 29 10 *" # 2028-10-29
+    - cron: "0 1 28 10 *" # 2029-10-28
+    - cron: "0 1 30 10 *" # 2030-10-30
+    - cron: "0 1 29 10 *" # 2031-10-29
+    - cron: "0 1 31 10 *" # 2032-10-31
+    - cron: "0 1 30 10 *" # 2033-10-30
+    - cron: "0 1 29 10 *" # 2034-10-29
+
+  workflow_dispatch:
+
+jobs:
+  atualizar-ymls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Executar script de atualização
+        run: python scripts/atualiza_yml.py
