@@ -58,22 +58,27 @@ def extrair_totoloto():
 
 def salvar_no_json(resultado):
     ano_corrente = datetime.now().year
-    # Caminho relativo à raiz do repositório
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_dados = os.path.join(pasta_repo, "dados")
     caminho_json = os.path.join(pasta_dados, f"{ano_corrente}.json")
+    chave_ano = str(ano_corrente)
 
-    # Carregar dados existentes
+    # Carregar dados existentes, formato {"2025": [ ... ]}
     if os.path.exists(caminho_json):
         with open(caminho_json, "r", encoding="utf-8") as f:
-            dados = json.load(f)
+            try:
+                dados = json.load(f)
+            except json.JSONDecodeError:
+                dados = {}
+        # Corrigir formato se necessário
+        if not isinstance(dados, dict) or chave_ano not in dados or not isinstance(dados[chave_ano], list):
+            dados = {chave_ano: []}
     else:
-        dados = []
+        dados = {chave_ano: []}
 
-    # Evitar duplicados (pelo número do concurso)
-    concursos_existentes = {d["concurso"] for d in dados}
+    concursos_existentes = {d["concurso"] for d in dados[chave_ano]}
     if resultado["concurso"] not in concursos_existentes:
-        dados.append(resultado)
+        dados[chave_ano].append(resultado)
         with open(caminho_json, "w", encoding="utf-8") as f:
             json.dump(dados, f, ensure_ascii=False, indent=2)
         print("Novo resultado adicionado ao JSON.")
