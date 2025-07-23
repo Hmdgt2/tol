@@ -7,12 +7,21 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import datetime
+
+def escrever_log(mensagem):
+    pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    pasta_workflows = os.path.join(pasta_repo, ".github", "workflows")
+    os.makedirs(pasta_workflows, exist_ok=True)
+    log_path = os.path.join(pasta_workflows, "totoloto_log.txt")
+    agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(log_path, "a", encoding="utf-8") as f:
+        f.write(f"[{agora}] {mensagem}\n")
 
 def ler_json(json_path, ano):
     if os.path.exists(json_path):
         with open(json_path, "r", encoding="utf-8") as f:
             dados = json.load(f)
-        # Garante que existe a chave do ano
         if str(ano) not in dados or not isinstance(dados[str(ano)], list):
             dados[str(ano)] = []
         return dados
@@ -57,9 +66,7 @@ def extrair_totoloto_sc():
 
 def atualizar_resultados():
     resultado = extrair_totoloto_sc()
-    # Extrai o ano do concurso (formato NNN/AAAA)
     ano = resultado["concurso"].split("/")[1]
-    # Caminho do JSON do ano correto
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_dados = os.path.join(pasta_repo, "dados")
     os.makedirs(pasta_dados, exist_ok=True)
@@ -70,13 +77,17 @@ def atualizar_resultados():
 
     existe = any(r["concurso"] == resultado["concurso"] for r in lista)
     if existe:
-        print(f"Resultado do concurso {resultado['concurso']} já existe. Nada a fazer.")
+        msg = f"Resultado do concurso {resultado['concurso']} já existe. Nada a fazer."
+        print(msg)
+        escrever_log(msg)
     else:
         lista.append(resultado)
         lista.sort(key=lambda r: r["concurso"])
         dados[str(ano)] = lista
         gravar_json(json_path, dados)
-        print(f"Resultado do concurso {resultado['concurso']} adicionado ao JSON {ano}.")
+        msg = f"Resultado do concurso {resultado['concurso']} adicionado ao JSON {ano}."
+        print(msg)
+        escrever_log(msg)
 
 if __name__ == "__main__":
     atualizar_resultados()
