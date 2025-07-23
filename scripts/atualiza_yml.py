@@ -1,6 +1,6 @@
 import os
 import yaml
-from datetime import datetime
+from datetime import datetime, timezone
 
 WORKFLOWS_DIR = os.path.join(os.path.dirname(__file__), "..", ".github", "workflows")
 
@@ -56,7 +56,7 @@ def atualizar_crons_em_arquivo(filepath, usar_verao):
     print(f"{os.path.basename(filepath)} atualizado para {modo_atual}.")
 
 def detectar_modo():
-    mes = datetime.utcnow().month
+    mes = datetime.now(timezone.utc).month
     return 3 <= mes <= 10
 
 def main():
