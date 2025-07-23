@@ -1,7 +1,5 @@
 name: Atualizar Totoloto automaticamente
 
-horario: verao
-
 on:
   schedule:
     - cron: "10 8 * * 4"     # quintas, 08:15 UTC
