@@ -32,7 +32,7 @@ def enviar_email_html(txt_path, remetente, senha_app, destinatario, assunto="Res
     # Definir estilos que queres ajustar facilmente aqui:
     titulo_style = "font-family: Arial, sans-serif; font-size: 24px; color: #2E86C1; font-weight: bold;"
     info_style = "font-family: Verdana, sans-serif; font-size: 16px; color: #1B2631;"
-    numeros_style = "font-family: 'Courier New', monospace; font-size: 28px; color: #B03A2E; font-weight: bold;"
+    numeros_style = "font-family: 'Courier New', monospace; font-size: 32px; color: #B03A2E; font-weight: bold;"
 
     # Gerar um Content-ID para a imagem (para referência no HTML)
     cid = make_msgid(domain="exemplo.com")
