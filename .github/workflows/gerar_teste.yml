@@ -1,0 +1,44 @@
+name: Gerar Estatísticas
+
+# horario: verao
+
+on:
+  schedule:
+    - cron: "15 8 * * 4"     # quintas, 08:15 UTC
+    - cron: "15 8 * * 0"     # domingos, 08:15 UTC
+    - cron: "16 0 * * 2"     # terças, 00:16 UTC
+  workflow_dispatch:  # permite executar manualmente no GitHub
+  push:
+    paths:
+      - 'dados/**'
+      - 'js/estatisticas.js'
+
+jobs:
+  gerar-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Correr script estatísticas.js
+        run: node js/estatisticas.js
+
+      - name: Listar ficheiros estatisticas (debug)
+        run: ls -l estatisticas/
+
+      - name: Commit e Push do JSON gerado
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Atualiza a URL remota para usar o token de autenticação
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          git add estatisticas/estatisticas_stacasa.json
+          git diff --staged --quiet || (git commit -m "Atualizar estatísticas automaticamente" && git push)
