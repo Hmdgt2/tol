@@ -2,7 +2,7 @@ name: Atualizar Totoloto automaticamente
 
 on:
   schedule:
-    - cron: "0 9 * * 1,3,5"
+    - cron: "0 9 * * 1,3,5"    # segundas, quartas e sextas às 09:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -22,8 +22,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Atualização automática Totoloto"
-          git push
+          git add dados/
+          git add .github/workflows/totoloto_log.txt
+          # Só faz commit/push se houver mudanças
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualização automática Totoloto"
+            git push
+          else
+            echo "Nenhuma alteração, nada para commitar."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
