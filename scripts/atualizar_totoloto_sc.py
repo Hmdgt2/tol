@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
 
-ddef escrever_log(mensagem, origem):
+def escrever_log(mensagem, origem):
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # Grave em logs/ ou na raiz
     pasta_logs = os.path.join(pasta_repo, "logs")
