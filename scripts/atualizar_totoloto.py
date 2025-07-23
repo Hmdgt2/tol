@@ -7,9 +7,10 @@ import datetime
 
 def escrever_log(mensagem, origem):
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pasta_workflows = os.path.join(pasta_repo, ".github", "workflows")
-    os.makedirs(pasta_workflows, exist_ok=True)
-    log_path = os.path.join(pasta_workflows, "totoloto_log.txt")
+    # Grave em logs/ ou na raiz
+    pasta_logs = os.path.join(pasta_repo, "logs")
+    os.makedirs(pasta_logs, exist_ok=True)
+    log_path = os.path.join(pasta_logs, "totoloto_log.txt")
     agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(f"[{agora}] [{origem}] {mensagem}\n")
