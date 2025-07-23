@@ -136,6 +136,107 @@ function garantirPasta(pasta) {
   if (!fs.existsSync(pasta)) fs.mkdirSync(pasta, { recursive: true });
 }
 
+// --- NOVAS FUNÇÕES DE HEURÍSTICAS ---
+
+// Calcula pares mais frequentes
+function calcularParesFrequentes(sorteios) {
+  const paresCount = {};
+  sorteios.forEach(sorteio => {
+    const nums = sorteio.numeros || [];
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+        const par = [nums[i], nums[j]].sort((a,b) => a-b).join('-');
+        paresCount[par] = (paresCount[par] || 0) + 1;
+      }
+    }
+  });
+  return paresCount;
+}
+
+// Pontua números que fazem parte dos pares mais frequentes
+function pontuarPorPares(paresFreq) {
+  // Ordenar pares por frequência descendente
+  const paresOrdenados = Object.entries(paresFreq).sort((a,b) => b[1] - a[1]).slice(0, 20);
+  const pontos = {};
+  paresOrdenados.forEach(([par, freq], idx) => {
+    const [n1, n2] = par.split('-').map(Number);
+    const score = 15 - idx; // pontos decrescentes
+    pontos[n1] = (pontos[n1] || 0) + score;
+    pontos[n2] = (pontos[n2] || 0) + score;
+  });
+  return pontos;
+}
+
+// Calcula trios mais frequentes
+function calcularTriosFrequentes(sorteios) {
+  const triosCount = {};
+  sorteios.forEach(sorteio => {
+    const nums = sorteio.numeros || [];
+    for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+        for (let k = j + 1; k < nums.length; k++) {
+          const trio = [nums[i], nums[j], nums[k]].sort((a,b) => a-b).join('-');
+          triosCount[trio] = (triosCount[trio] || 0) + 1;
+        }
+      }
+    }
+  });
+  return triosCount;
+}
+
+// Pontua números que fazem parte dos trios mais frequentes
+function pontuarPorTrios(triosFreq) {
+  const triosOrdenados = Object.entries(triosFreq).sort((a,b) => b[1] - a[1]).slice(0, 10);
+  const pontos = {};
+  triosOrdenados.forEach(([trio, freq], idx) => {
+    const nums = trio.split('-').map(Number);
+    const score = 20 - idx * 2;
+    nums.forEach(n => {
+      pontos[n] = (pontos[n] || 0) + score;
+    });
+  });
+  return pontos;
+}
+
+// Frequência por ano (simples, soma frequência do número em cada ano)
+function calcularFrequenciaPorAno(sorteios) {
+  // Agrupa sorteios por ano
+  const freqAno = {};
+  sorteios.forEach(sorteio => {
+    const ano = parseData(sorteio.data).getFullYear();
+    if (!freqAno[ano]) freqAno[ano] = {};
+    (sorteio.numeros || []).forEach(num => {
+      freqAno[ano][num] = (freqAno[ano][num] || 0) + 1;
+    });
+  });
+  return freqAno;
+}
+
+// Pontua números com crescimento de frequência ano a ano
+function pontuarCrescimentoAno(freqAno) {
+  // Transformar objeto em array de anos ordenados
+  const anos = Object.keys(freqAno).map(a => +a).sort();
+  const pontos = {};
+
+  for (let num = 1; num <= 49; num++) {
+    let crescimentos = 0;
+    for (let i = 1; i < anos.length; i++) {
+      const anoAtual = anos[i];
+      const anoAnterior = anos[i-1];
+      const freqAtual = freqAno[anoAtual][num] || 0;
+      const freqAnterior = freqAno[anoAnterior][num] || 0;
+      if (freqAtual > freqAnterior) crescimentos++;
+    }
+    if (crescimentos >= 2) { // 2 ou mais anos de crescimento consecutivo
+      pontos[num] = crescimentos * 3;
+    }
+  }
+  return pontos;
+}
+
+// --- FIM DAS NOVAS FUNÇÕES ---
+
+
 // Função principal
 function main() {
   console.log("A carregar sorteios...");
@@ -160,8 +261,24 @@ function main() {
     pontuarPorGapMedio(recentEst)
   );
 
-  // Combina tudo
-  const pontosCombinados = combinarPontuacoes(pontosTotal, pontosRecentes);
+  // --- NOVAS HEURÍSTICAS AQUI ---
+  const paresFreq = calcularParesFrequentes(sorteios);
+  const triFreq = calcularTriosFrequentes(sorteios);
+  const freqAno = calcularFrequenciaPorAno(sorteios);
+
+  const pontosPares = pontuarPorPares(paresFreq);
+  const pontosTrios = pontuarPorTrios(triFreq);
+  const pontosCrescimentoAno = pontuarCrescimentoAno(freqAno);
+  // --- FIM DAS NOVAS HEURÍSTICAS ---
+
+  // Combina tudo (mantendo o que já tinha + as novas heurísticas)
+  const pontosCombinados = combinarPontuacoes(
+    pontosTotal,
+    pontosRecentes,
+    pontosPares,
+    pontosTrios,
+    pontosCrescimentoAno
+  );
 
   // Ordenar pelos mais prováveis
   const provaveis = Object.entries(pontosCombinados)
@@ -171,13 +288,16 @@ function main() {
 
   console.log(`\n🔮 Números mais prováveis no próximo sorteio: ${provaveis.join(', ')}`);
 
-  // Salvar resultado
+  // Salvar resultado, incluindo as novas heurísticas
   const resultado = {
     gerado_em: new Date().toISOString(),
     total_sorteios: sorteios.length,
     heuristicas: {
       total: pontosTotal,
-      ultimos50: pontosRecentes
+      ultimos50: pontosRecentes,
+      pares: pontosPares,
+      trios: pontosTrios,
+      crescimentoAno: pontosCrescimentoAno
     },
     combinadas: pontosCombinados,
     sugestao_final: provaveis
