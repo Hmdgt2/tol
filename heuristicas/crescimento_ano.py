@@ -1,18 +1,10 @@
-# heuristicas/crescimento_ano.py
-
-from collections import defaultdict
-from lib.dados import carregar_todos_sorteios
-
-def calcular_frequencia_por_ano(sorteios):
-    freq_ano = defaultdict(lambda: defaultdict(int))
-    for sorteio in sorteios:
-        ano = int(sorteio['data'].split('/')[-1])
-        for num in sorteio.get('numeros', []):
-            freq_ano[ano][num] += 1
-    return freq_ano
+from lib.dados import carregar_sorteios, calcular_frequencia_por_ano
 
 def numeros_crescimento_ano(min_crescimentos=2):
-    sorteios = carregar_todos_sorteios()
+    """
+    Retorna os números cuja frequência aumentou em pelo menos `min_crescimentos` anos.
+    """
+    sorteios = carregar_sorteios()
     freq_ano = calcular_frequencia_por_ano(sorteios)
     anos = sorted(freq_ano.keys())
 
@@ -27,6 +19,7 @@ def numeros_crescimento_ano(min_crescimentos=2):
         if crescimentos >= min_crescimentos:
             pontos[num] = crescimentos * 3
     return pontos
+
 
 if __name__ == '__main__':
     crescimento = numeros_crescimento_ano()
