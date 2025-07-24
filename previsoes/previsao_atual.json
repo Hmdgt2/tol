@@ -1,0 +1,54 @@
+{
+  "previsao": [
+    16,
+    45
+  ],
+  "detalhes": [
+    {
+      "heuristica": "pares_frequentes",
+      "numeros": [
+        45,
+        22
+      ]
+    },
+    {
+      "heuristica": "ausencia_superior_media",
+      "numeros": [
+        39,
+        3
+      ]
+    },
+    {
+      "heuristica": "trios_frequentes",
+      "numeros": [
+        6,
+        12
+      ]
+    },
+    {
+      "heuristica": "frequencia_total",
+      "numeros": [
+        16,
+        19
+      ]
+    },
+    {
+      "heuristica": "crescimento_ano",
+      "numeros": []
+    },
+    {
+      "heuristica": "gap_medio",
+      "numeros": [
+        16,
+        44
+      ]
+    },
+    {
+      "heuristica": "tendencia_recentes",
+      "numeros": [
+        13,
+        37
+      ]
+    }
+  ]
+}
