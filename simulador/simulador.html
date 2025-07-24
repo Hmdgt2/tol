@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Simulador Totoloto</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .box {
-      border: 1px solid #ccc;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-    }
-    .hidden { display: none; }
-  </style>
+  <link rel="stylesheet" href="estilo.css" />
 </head>
 <body>
   <div class="container">
@@ -48,71 +32,6 @@
     </div>
   </div>
 
-  <script>
-    let dados = {};
-    let anoAtual = "2011";
-    let indiceAtual = 0;
-
-    async function carregarDados() {
-      const resposta = await fetch(`../dados/${anoAtual}.json`);
-      const json = await resposta.json();
-      dados = json[anoAtual];
-      atualizarInterface();
-    }
-
-    function atualizarInterface() {
-      const atual = dados[indiceAtual];
-      const proximo = dados[indiceAtual + 1] || {};
-      document.getElementById('ano').textContent = anoAtual;
-      document.getElementById('concursoAtual').textContent = atual?.concurso || '-';
-      document.getElementById('proximoConcurso').textContent = proximo?.concurso || 'Não disponível';
-    }
-
-    function preverProximo() {
-      // Simula heurística (ex: previsão dummy)
-      const numeros = Array.from({ length: 2 }, () => Math.floor(Math.random() * 49 + 1));
-      document.getElementById('previsao').textContent = numeros.join(', ');
-    }
-
-    function mostrarResultadoReal() {
-      const proximo = dados[indiceAtual + 1];
-      if (proximo) {
-        document.getElementById('resultadoReal').textContent = proximo.numeros.join(', ');
-      } else {
-        document.getElementById('resultadoReal').textContent = 'Sem dados do próximo concurso.';
-      }
-    }
-
-    function gerarDesvio() {
-      const previsao = document.getElementById('previsao').textContent.split(', ').map(Number);
-      const proximo = dados[indiceAtual + 1];
-
-      if (!previsao.length || !proximo) return;
-
-      const acertos = previsao.filter(n => proximo.numeros.includes(n));
-      const desvio = {
-        concurso: proximo.concurso,
-        data: proximo.data,
-        previsao,
-        resultado: proximo.numeros,
-        acertos: acertos.length,
-        numerosCertos: acertos
-      };
-
-      // Simula salvar em ficheiro (em ambiente real seria via Python ou backend)
-      console.log('Gerado JSON de desvio:', desvio);
-      document.getElementById('msgDesvio').textContent = 'Desvio gerado! Consulte consola para verificar.';
-
-      // Simula aprendizagem ou atualização de heurísticas
-      // Ex: alertar métodos JS/Py futuros
-      indiceAtual++;
-      atualizarInterface();
-      document.getElementById('previsao').textContent = '';
-      document.getElementById('resultadoReal').textContent = '';
-      document.getElementById('msgDesvio').textContent += ' Pronto para o próximo concurso.';
-    }
-
-    carregarDados();
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
