@@ -1,21 +1,20 @@
-# heuristicas/trios_frequentes.py
-
 from collections import Counter
-from lib.dados import carregar_todos_sorteios
+from itertools import combinations
+from lib.dados import carregar_sorteios
 
 def calcular_trios_frequentes(sorteios):
+    """
+    Conta a frequência de cada trio de números nos sorteios.
+    """
     trios_count = Counter()
     for sorteio in sorteios:
         numeros = sorteio.get('numeros', [])
-        for i in range(len(numeros)):
-            for j in range(i + 1, len(numeros)):
-                for k in range(j + 1, len(numeros)):
-                    trio = tuple(sorted([numeros[i], numeros[j], numeros[k]]))
-                    trios_count[trio] += 1
+        trios = combinations(sorted(numeros), 3)
+        trios_count.update(trios)
     return trios_count
 
 def trios_mais_frequentes(top_n=10):
-    sorteios = carregar_todos_sorteios()
+    sorteios = carregar_sorteios()
     trios_freq = calcular_trios_frequentes(sorteios)
     return trios_freq.most_common(top_n)
 
