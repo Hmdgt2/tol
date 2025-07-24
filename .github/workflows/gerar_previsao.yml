@@ -10,9 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # necessário para o commit manual
 
-      - uses: actions/setup-python@v4
+      - name: Configurar Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
@@ -21,3 +25,13 @@ jobs:
 
       - name: Mostrar previsão gerada
         run: cat previsoes/previsao_atual.json
+
+      - name: Fazer commit do JSON gerado
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add previsoes/previsao_atual.json
+          git diff --cached --quiet || git commit -m "Atualiza previsão automática"
+          git push origin HEAD
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
