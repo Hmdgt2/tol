@@ -1,3 +1,5 @@
+# heuristicas/crescimento_ano.py
+
 from lib.dados import carregar_sorteios, calcular_frequencia_por_ano
 
 def numeros_crescimento_ano(min_crescimentos=2):
