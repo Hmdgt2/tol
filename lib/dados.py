@@ -1,3 +1,4 @@
+# lib/dados.py
 import os
 import json
 from collections import Counter, defaultdict
@@ -11,7 +12,6 @@ def carregar_sorteios(pasta=PASTA_DADOS):
         if ficheiro.endswith('.json'):
             with open(os.path.join(pasta, ficheiro), encoding='utf-8') as f:
                 dados_ano = json.load(f)
-                # dados_ano é um dict { ano: [lista de sorteios] }
                 for sorteios_ano in dados_ano.values():
                     todos.extend(sorteios_ano)
     return todos
