@@ -1,21 +1,14 @@
 # heuristicas/frequencia_total.py
 
-from collections import Counter
-from lib.dados import carregar_todos_sorteios
+from lib.dados import carregar_sorteios, contar_ocorrencias
 
 def frequencia_total(n=2):
     """
     Retorna os n números mais frequentes ao longo de todos os sorteios.
     """
-    sorteios = carregar_todos_sorteios()
-    contador = Counter()
-
-    for concurso in sorteios:
-        numeros = concurso["numeros"]
-        contador.update(numeros)
-
-    mais_frequentes = [num for num, _ in contador.most_common(n)]
-    return mais_frequentes
+    sorteios = carregar_sorteios()
+    contador = contar_ocorrencias(sorteios)
+    return [num for num, _ in contador.most_common(n)]
 
 # Exemplo de teste direto
 if __name__ == "__main__":
