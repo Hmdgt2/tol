@@ -4,6 +4,7 @@ import os
 import json
 from collections import Counter
 from itertools import combinations
+from lib.dados import carregar_todos_sorteios
 
 PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados_treino'))
 
