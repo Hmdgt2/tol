@@ -1,35 +1,11 @@
 # heuristicas/ausencia_superior_media.py
 
-from collections import defaultdict
-from lib.dados import carregar_sorteios
+from lib.dados import carregar_sorteios, calcular_ausencia_atual
 
 def ausencia_superior_media(n=2):
-    """
-    Retorna os n números com ausência superior à média de ausência geral.
-    """
     sorteios = carregar_sorteios()
-    ultima_ocorrencia = defaultdict(lambda: -1)
-    total_concursos = len(sorteios)
+    ausencia = calcular_ausencia_atual(sorteios)
 
-    # Regista o último índice em que cada número apareceu
-    for idx, concurso in enumerate(sorteios):
-        for numero in concurso.get("numeros", []):
-            ultima_ocorrencia[numero] = idx
-
-    # Calcula a ausência atual (quantos concursos desde a última ocorrência)
-    ausencia = {num: total_concursos - idx - 1 for num, idx in ultima_ocorrencia.items()}
-
-    # Calcula a média de ausência
-    media_ausencia = sum(ausencia.values()) / len(ausencia) if ausencia else 0
-
-    # Seleciona os que estão acima da média
-    candidatos = [num for num, dias in ausencia.items() if dias > media_ausencia]
-
-    # Ordena por maior ausência e devolve os top n
-    candidatos_ordenados = sorted(candidatos, key=lambda x: ausencia[x], reverse=True)
-    return candidatos_ordenados[:n]
-
-
-# Exemplo de teste rápido
-if __name__ == "__main__":
-    print("Ausentes acima da média:", ausencia_superior_media(2))
+    media = sum(ausencia.values()) / len(ausencia)
+    candidatos = [num for num, dias in ausencia.items() if dias > media]
+    return sorted(candidatos, key=lambda x: ausencia[x], reverse=True)[:n]
