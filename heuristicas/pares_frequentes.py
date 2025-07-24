@@ -1,3 +1,5 @@
+# heuristicas/pares_frequentes.py
+
 import os
 import json
 from collections import Counter
