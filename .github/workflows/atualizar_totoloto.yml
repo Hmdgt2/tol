@@ -4,9 +4,9 @@ name: Atualizar Totoloto automaticamente
 
 on:
   schedule:
-    - cron: "10 7 * * 4"     # quintas, 08:15 UTC
-    - cron: "10 7 * * 0"     # domingos, 08:15 UTC
-    - cron: "11 7 * * 2"     # terças, 00:16 UTC
+    - cron: "10 7 * * 4"     # quintas, 08:10 em Portugal (07:10 UTC)
+    - cron: "10 7 * * 0"     # domingos, 08:10 em Portugal (07:10 UTC)
+    - cron: "11 23 * * 1"    # terças, 00:11 em Portugal (23:11 UTC de segunda)
   workflow_dispatch:  # permite executar manualmente no GitHub
 
 jobs:
