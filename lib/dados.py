@@ -2,7 +2,6 @@
 import importlib
 import os
 import json
-from lib.dados import carregar_sorteios
 
 HEURISTICAS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'heuristicas'))
 PASTA_PREVISOES = os.path.abspath(os.path.join(os.path.dirname(__file__), 'previsoes')) # Use os.path.abspath aqui também
