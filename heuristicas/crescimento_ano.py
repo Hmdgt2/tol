@@ -1,3 +1,5 @@
+# heuristicas/crescimento_ano.py
+
 from collections import defaultdict
 from lib.dados import carregar_todos_sorteios
 
