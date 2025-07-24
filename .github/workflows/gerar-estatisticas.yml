@@ -4,9 +4,8 @@ name: Gerar Estatísticas
 
 on:
   schedule:
-    - cron: "15 8 * * 4"     # quintas, 08:15 UTC
-    - cron: "15 8 * * 0"     # domingos, 08:15 UTC
-    - cron: "16 0 * * 2"     # terças, 00:16 UTC
+  - cron: "59 21 * * 3"   # quartas, 22:59 em Portugal (21:59 UTC)
+  - cron: "59 21 * * 6"   # sábados, 22:59 em Portugal (21:59 UTC)
   workflow_dispatch:  # permite executar manualmente no GitHub
   push:
     paths:
