@@ -3,6 +3,7 @@
 import os
 import json
 from collections import defaultdict
+from lib.dados import carregar_todos_sorteios
 
 PASTA_DADOS = os.path.join(os.path.dirname(__file__), '..', 'dados_treino')
 
