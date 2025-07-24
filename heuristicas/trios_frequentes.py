@@ -1,3 +1,5 @@
+# heuristicas/trios_frequentes.py
+
 from collections import Counter
 from lib.dados import carregar_todos_sorteios
 
