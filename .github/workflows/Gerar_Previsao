@@ -1,0 +1,31 @@
+name: Gerar Previsão Totoloto
+
+on:
+  schedule:
+    # Executa diariamente às 8h da manhã (UTC)
+    - cron: '0 8 * * *'
+  workflow_dispatch:  # Permite executar manualmente pelo GitHub
+
+jobs:
+  gerar_previsao:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Executar gerar_previsao.py
+        run: python gerar_previsao.py
+
+      - name: Mostrar previsão gerada
+        run: cat previsoes/previsao_atual.json
