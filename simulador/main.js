@@ -61,18 +61,18 @@ async function gerarDesvio() {
         console.warn(`⚠️ Diferença anormal entre datas: ${dias} dias (${ultimaData} → ${primeiraData})`);
       }
 
-      // Avança para novo ano
-      anoAtual = proximoAno;
-      dados = novosDados;
-      indiceAtual = 0;
-      atualizarInterface();
-
-      document.getElementById('msgDesvio').textContent = `Novo ano (${anoAtual}) carregado. Pronto para continuar.`;
-    } catch (e) {
-      document.getElementById('msgDesvio').textContent = `Fim da simulação. Não foi possível carregar o ano ${proximoAno}.`;
-    }
+      // Avança para novo ano e continua simulação automaticamente
+    anoAtual = proximoAno;
+    dados = novosDados;
+    indiceAtual = 0;
+    gerarDesvio();  // Chamada recursiva controlada
     return;
+
+  } catch (e) {
+    document.getElementById('msgDesvio').textContent = `Fim da simulação. Não foi possível carregar o ano ${proximoAno}.`;
   }
+  return;
+}
 
   const previsao = document.getElementById('previsao').textContent.split(', ').map(Number);
   const proximo = dados[indiceAtual + 1];
