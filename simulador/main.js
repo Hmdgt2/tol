@@ -2,19 +2,48 @@ let dados = {};
 let anoAtual = "2011";
 let indiceAtual = 0;
 
+// Referências aos botões (devem existir no simulador.html)
+const btnPrever = document.querySelector('button[onclick="preverProximo()"]');
+const btnMostrar = document.querySelector('button[onclick="mostrarResultadoReal()"]');
+const btnGerar = document.querySelector('button[onclick="gerarDesvio()"]');
+const btnAtualizar = document.getElementById('btnAtualizar'); // botão novo que vais criar
+
+// Função para ativar/desativar botões conforme o estado da simulação
+function setBotoesEstado(prever, mostrar, gerar, atualizar) {
+  btnPrever.disabled = !prever;
+  btnMostrar.disabled = !mostrar;
+  btnGerar.disabled = !gerar;
+
+  if (atualizar) {
+    btnAtualizar.classList.remove('hidden');
+  } else {
+    btnAtualizar.classList.add('hidden');
+  }
+}
+
 async function carregarDados() {
   const resposta = await fetch(`../dados/${anoAtual}.json`);
   const json = await resposta.json();
   dados = json[anoAtual];
+  indiceAtual = 0; // garantir começa no primeiro concurso do ano
   atualizarInterface();
 }
 
 function atualizarInterface() {
   const atual = dados[indiceAtual];
   const proximo = dados[indiceAtual + 1] || {};
+
   document.getElementById('ano').textContent = anoAtual;
   document.getElementById('concursoAtual').textContent = atual?.concurso || '-';
   document.getElementById('proximoConcurso').textContent = proximo?.concurso || 'Não disponível';
+
+  // Limpar previsao, resultado e mensagens
+  document.getElementById('previsao').textContent = '';
+  document.getElementById('resultadoReal').textContent = '';
+  document.getElementById('msgDesvio').textContent = '';
+
+  // Estado inicial: só o botão "Prever" ativo
+  setBotoesEstado(true, false, false, false);
 }
 
 function preverProximo() {
@@ -23,6 +52,9 @@ function preverProximo() {
     numeros.add(Math.floor(Math.random() * 49 + 1));
   }
   document.getElementById('previsao').textContent = Array.from(numeros).join(', ');
+
+  // Desativa Prever, ativa Mostrar Resultado
+  setBotoesEstado(false, true, false, false);
 }
 
 function mostrarResultadoReal() {
@@ -32,6 +64,9 @@ function mostrarResultadoReal() {
   } else {
     document.getElementById('resultadoReal').textContent = 'Sem dados do próximo concurso.';
   }
+
+  // Desativa Mostrar Resultado, ativa Gerar JSON
+  setBotoesEstado(false, false, true, false);
 }
 
 function diasEntreDatas(data1, data2) {
@@ -44,36 +79,6 @@ function diasEntreDatas(data1, data2) {
 }
 
 async function gerarDesvio() {
-  if (indiceAtual + 1 >= dados.length) {
-    // Fim do ano, tentar carregar próximo
-    const proximoAno = (parseInt(anoAtual) + 1).toString();
-    try {
-      const resposta = await fetch(`../dados/${proximoAno}.json`);
-      if (!resposta.ok) throw new Error("Ficheiro não encontrado");
-
-      const json = await resposta.json();
-      const novosDados = json[proximoAno];
-
-      const ultimaData = dados[dados.length - 1].data;
-      const primeiraData = novosDados[0]?.data || '00/00/0000';
-      const dias = diasEntreDatas(ultimaData, primeiraData);
-      if (dias > 21 || dias < 1) {
-        console.warn(`⚠️ Diferença anormal entre datas: ${dias} dias (${ultimaData} → ${primeiraData})`);
-      }
-
-      // Avança para novo ano e continua simulação automaticamente
-    anoAtual = proximoAno;
-    dados = novosDados;
-    indiceAtual = 0;
-    gerarDesvio();  // Chamada recursiva controlada
-    return;
-
-  } catch (e) {
-    document.getElementById('msgDesvio').textContent = `Fim da simulação. Não foi possível carregar o ano ${proximoAno}.`;
-  }
-  return;
-}
-
   const previsao = document.getElementById('previsao').textContent.split(', ').map(Number);
   const proximo = dados[indiceAtual + 1];
 
@@ -92,11 +97,45 @@ async function gerarDesvio() {
   console.log('Gerado JSON de desvio:', desvio);
   document.getElementById('msgDesvio').textContent = 'Desvio gerado! Consulte consola para verificar.';
 
+  // Desativa gerar e ativa botão atualizar
+  setBotoesEstado(false, false, false, true);
+}
+
+// Função chamada pelo botão "Atualizar Simulação"
+async function atualizarSimulacao() {
   indiceAtual++;
+
+  if (indiceAtual + 1 >= dados.length) {
+    // Fim do ano, tentar carregar próximo
+    const proximoAno = (parseInt(anoAtual) + 1).toString();
+    try {
+      const resposta = await fetch(`../dados/${proximoAno}.json`);
+      if (!resposta.ok) throw new Error("Ficheiro não encontrado");
+
+      const json = await resposta.json();
+      const novosDados = json[proximoAno];
+
+      // Verificar diferença de datas
+      const ultimaData = dados[dados.length - 1].data;
+      const primeiraData = novosDados[0]?.data || '00/00/0000';
+      const dias = diasEntreDatas(ultimaData, primeiraData);
+      if (dias > 21 || dias < 1) {
+        console.warn(`⚠️ Diferença anormal entre datas: ${dias} dias (${ultimaData} → ${primeiraData})`);
+      }
+
+      // Troca ano e dados
+      anoAtual = proximoAno;
+      dados = novosDados;
+      indiceAtual = 0;
+
+    } catch (e) {
+      document.getElementById('msgDesvio').textContent = `Fim da simulação. Não foi possível carregar o ano ${proximoAno}.`;
+      setBotoesEstado(false, false, false, false);
+      return;
+    }
+  }
+
   atualizarInterface();
-  document.getElementById('previsao').textContent = '';
-  document.getElementById('resultadoReal').textContent = '';
-  document.getElementById('msgDesvio').textContent += ' Pronto para o próximo concurso.';
 }
 
 carregarDados();
