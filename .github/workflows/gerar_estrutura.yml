@@ -1,0 +1,26 @@
+name: Gerar Estrutura do Projeto
+
+on:
+  workflow_dispatch:  # permite correr manualmente
+
+jobs:
+  gerar-estrutura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositório
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Executar script assets/gerar_estrutura.py
+        run: python assets/gerar_estrutura.py
+
+      - name: Guardar estrutura como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: estrutura-projeto
+          path: assets/estrutura.txt
