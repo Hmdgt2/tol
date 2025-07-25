@@ -1,26 +1,37 @@
-name: Gerar Estrutura do Projeto
+name: Gerar Estrutura Totoloto
 
 on:
   workflow_dispatch:  # permite correr manualmente
 
 jobs:
-  gerar-estrutura:
+  gerar_estrutura:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositório
+      - name: Checkout do repositório
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # necessário para o commit manual
 
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
-      - name: Executar script assets/gerar_estrutura.py
+      - name: Executar gerar_estrutura.py
         run: python assets/gerar_estrutura.py
 
-      - name: Guardar estrutura como artefacto
-        uses: actions/upload-artifact@v3
-        with:
-          name: estrutura-projeto
-          path: assets/estrutura.txt
+      - name: Mostrar estrutura gerada
+        run: cat assets/estrutura.txt
+
+      - name: Commit do estrutura.txt gerado
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
+          git add assets/estrutura.txt
+          git diff --cached --quiet || git commit -m "Atualiza estrutura automática"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
