@@ -1,9 +1,23 @@
 {
   "previsao": [
     16,
-    45
+    44
   ],
   "detalhes": [
+    {
+      "heuristica": "repeticoes_sorteios_anteriores",
+      "numeros": [
+        13,
+        35
+      ]
+    },
+    {
+      "heuristica": "distribuicao_quadrantes",
+      "numeros": [
+        7,
+        44
+      ]
+    },
     {
       "heuristica": "pares_frequentes",
       "numeros": [
@@ -30,6 +44,13 @@
       "numeros": [
         16,
         19
+      ]
+    },
+    {
+      "heuristica": "soma_provavel",
+      "numeros": [
+        16,
+        44
       ]
     },
     {
