@@ -1,155 +1,73 @@
-gerar_previsao.py
-estatisticas.html
-index.html
-lib/dados.py
-assets/toto.png
-assets/gerar_estrutura.py
-previsoes/a.txt
-previsoes/previsao_atual.json
-.github/workflows/gerar_teste.yml
-.github/workflows/enviar_email.yml
-.github/workflows/atualizar_totoloto_sc.yml
-.github/workflows/atualizar_totoloto.yml
-.github/workflows/gerar_previsao.yml
-.github/workflows/gerar_estrutura.yml
-.github/workflows/atualiza_horario.yml
-.github/workflows/gerar-estatisticas.yml
-.git/index
-.git/FETCH_HEAD
-.git/description
-.git/shallow
-.git/config
-.git/HEAD
-.git/hooks/commit-msg.sample
-.git/hooks/pre-merge-commit.sample
-.git/hooks/pre-commit.sample
-.git/hooks/pre-rebase.sample
-.git/hooks/post-update.sample
-.git/hooks/pre-receive.sample
-.git/hooks/push-to-checkout.sample
-.git/hooks/pre-applypatch.sample
-.git/hooks/applypatch-msg.sample
-.git/hooks/fsmonitor-watchman.sample
-.git/hooks/pre-push.sample
-.git/hooks/update.sample
-.git/hooks/sendemail-validate.sample
-.git/hooks/prepare-commit-msg.sample
-.git/logs/HEAD
-.git/logs/refs/heads/main
-.git/logs/refs/remotes/origin/main
-.git/refs/heads/main
-.git/refs/remotes/origin/main
-.git/info/exclude
-.git/objects/11/2768498de536e88c61382ca63eed021202b464
-.git/objects/11/c60014de378387a7d43f7c065713a9ac4bac48
-.git/objects/c0/453ba21d1140d360ca9c86f7ed5304c9b3b283
-.git/objects/d8/b66a3a657e7a4100b217e391ed064926319d62
-.git/objects/c8/3bc4fdfccd7d8428cb65b2568cd4663943ba26
-.git/objects/99/64bbd86e3900c791c642e8da7a381e31a72222
-.git/objects/89/28d2a6c6fcc87fa77bb9718c2919153b1505d6
-.git/objects/f6/bbd51ad969c42eb66a45c949a880610f60e6ba
-.git/objects/d4/062ff9f4ebb4efe1c8340524028fe8bf9613cc
-.git/objects/d4/d8d5605914846c012c0ab104f57c3af3df9ae1
-.git/objects/9c/96c58c4402655ef034d67748429de4d14ab800
-.git/objects/c3/e8d6a4e56447d7a2a073077455a624a7cbe18a
-.git/objects/85/43418e38110e793db1b5eb41dedb6b1b6395ef
-.git/objects/23/1f09d10292a05cf89df039aa6433db6fcd77d4
-.git/objects/b9/5431efc4028c4fb5ed4b0c8da034105c61abe0
-.git/objects/bf/8013a5f598ba615dc7ecdb7c3166a579e2ab35
-.git/objects/17/1328744c7fde9850726ba60ec7de1f400cad72
-.git/objects/17/43eddead0b59488097eacee76e07dfe1ef7fff
-.git/objects/33/895aed046f5339ece773d793d1563661aa6778
-.git/objects/c6/0183684808a806893932cb6529022ed1c98f4d
-.git/objects/76/58fd60767c631c1db39763b0615f0b1f9bbced
-.git/objects/50/f8ac2d5a822c6f0fe3b7445e0d854c3b3d2562
-.git/objects/b7/e3bae85de163ae9077e3d93090e0b62ca891d7
-.git/objects/57/c0b3adb0f22a2d745b9dbc4b98b880ad1d2925
-.git/objects/a8/6ec3c9fc22978faed5a192f5bc0e6704a27c29
-.git/objects/a8/a5835c7b0e9b7e240e38787f7e1f351d4a9b71
-.git/objects/4c/3dc207126bde7cd59e465b579a90c5ba426ccf
-.git/objects/77/ed037913f8357069e040e36820abcb660dabea
-.git/objects/77/caa0e2228e5449e4688e380769dc139d1a7b87
-.git/objects/e3/77af661f7070b67b287717e141f366a6aca3c1
-.git/objects/8b/137891791fe96927ad78e64b0aad7bded08bdc
-.git/objects/d9/3ed4dce3f47d5ae9c2d6611cf1e90568ccef02
-.git/objects/2b/110e3282a04fe481a52be6f04ed72f35683b9c
-.git/objects/19/f2e2c16b281b712c884330e56dcc33a8f5ce70
-.git/objects/69/83e071c04685fb418cdf72f1644a6e81ccdc1e
-.git/objects/f2/6bb09bbb51a9067add4b3deee643cc0412c1c3
-.git/objects/fa/fe20a2e081f0f6c1a90fb69bf7ff7214f44c37
-.git/objects/8e/d961abaf0322fa2d60321ab239e721b4f3c704
-.git/objects/8e/7f8b0569bf8c212236b81b3dc967238e0a6c4b
-.git/objects/7b/64dbba79a7fb94c16e6c708d1477d986e842c0
-.git/objects/ce/0a2bddb52d7057ae5e56a8bead8839450228cb
-.git/objects/5a/df19f59fa54ad22122d6ff552c38234bd09e66
-.git/objects/c7/004d826db72c4c541eb30ee6bad43c7d4db02e
-.git/objects/cd/5621d27bfe1206de3a3e4fdb9d148aa040dfae
-.git/objects/c1/cd1380c39a40d7cc9bf2ddc3f644f479dc2b65
-.git/objects/eb/545c7671978a6f52fb8b0b64e2325149c99d0d
-.git/objects/eb/94ea8b259e4578109d082336c2904dc2227fd9
-.git/objects/54/63116351a7abf98948de2f930003cb7046acf0
-.git/objects/ff/278d18c44a62e315b74c4979fc4d30099419eb
-.git/objects/e9/67f4b18d6835cfb3ca3310e33281894532b5de
-.git/objects/5e/e221388be16730b560cb3240dcfc4af4ec508f
-.git/objects/0f/c4698d0195bba6650051120d1eeafdade61fb9
-.git/objects/c9/ba2ea52ccb540dde05403da4dc826fa4e4753e
-.git/objects/90/9907bc1a452d8267c9f5404d24631248e7b36b
-.git/objects/a4/c24c9054461108896345c84761391a874a755c
-.git/objects/a4/85aedc6301a8c981e28e82b3f5de4899cf25ac
-.git/objects/52/c3d792d0c242e2e1c1b9fc228f1fce98bce401
-.git/objects/cf/1605e3261052a4297063cd4c1fb70a9c7b4d00
-.git/objects/cf/63c8758f40c1dfd6dbef5fbb1b50b61cb39078
-.git/objects/a1/86474ac56708817c44f2eacb38abcbd15a1fe6
-.git/objects/80/d869415992bbcc5b5868b230f5b135a80eaa60
-.git/objects/82/57c4c72ca97e73604da6009a6bc9851292f45b
-.git/objects/ac/2ded522b71062097d10faace55893e2652f3fe
-.git/objects/fb/d1e41bc52adbeacec8a30a7555c1eead4a114b
-.git/objects/7d/3da868589c95c5d980cfd1440af3ecccd9ad32
-.git/objects/02/7dfc8eb3507774bb94409f7a7fafbc574de334
-.git/objects/b0/54186e32a1ac4a59eb51af86cf6b1d9af2413e
-.git/objects/92/d0c925120d601b4337aa4860112b4a0e31b596
-.git/objects/92/1524656de88b66021688d0075b13aeebd6f39e
-.git/objects/9e/9d7bddbb3582a0f9be9e575a46349f1d77b9ef
-.git/objects/b8/8c68a28d9e78524d25140663b9fe110e081408
-logs/totoloto_log.txt
-simulador/main.js
-simulador/simulador.html
-simulador/estilo.css
-js/teste3.js
-js/update_estatisticas.js
-js/estatisticas.js
-scripts/atualizar_totoloto_sc.py
-scripts/atualiza_yml.py
-scripts/enviar_email.py
-scripts/atualizar_totoloto.py
-dados_treino/a.txt
-dados_treino/2011.json
-heuristicas/repeticoes_sorteios_anteriores.py
-heuristicas/balanceamento_tipos.py
-heuristicas/distribuicao_quadrantes.py
-heuristicas/pares_frequentes.py
-heuristicas/ausencia_superior_media.py
-heuristicas/trios_frequentes.py
-heuristicas/frequencia_total.py
-heuristicas/soma_provavel.py
-heuristicas/crescimento_ano.py
-heuristicas/gap_medio.py
-heuristicas/tendencia_recentes.py
-dados/2022.json
-dados/2023.json
-dados/2012.json
-dados/2014.json
-dados/2016.json
-dados/2017.json
-dados/2015.json
-dados/2021.json
-dados/2025.json
-dados/2020.json
-dados/2018.json
-dados/2024.json
-dados/2013.json
-dados/2019.json
-dados/2011.json
-dados/2025.txt
-estatisticas/estatisticas_stacasa.json
-estatisticas/estatisticas_teste.json
+/
+├── .github
+│   └── workflows
+│       ├── atualiza_horario.yml
+│       ├── atualizar_totoloto.yml
+│       ├── atualizar_totoloto_sc.yml
+│       ├── enviar_email.yml
+│       ├── gerar-estatisticas.yml
+│       ├── gerar_estrutura.yml
+│       ├── gerar_previsao.yml
+│       └── gerar_teste.yml
+├── assets
+│   ├── estrutura.txt
+│   ├── gerar_estrutura.py
+│   └── toto.png
+├── dados
+│   ├── 2011.json
+│   ├── 2012.json
+│   ├── 2013.json
+│   ├── 2014.json
+│   ├── 2015.json
+│   ├── 2016.json
+│   ├── 2017.json
+│   ├── 2018.json
+│   ├── 2019.json
+│   ├── 2020.json
+│   ├── 2021.json
+│   ├── 2022.json
+│   ├── 2023.json
+│   ├── 2024.json
+│   ├── 2025.json
+│   └── 2025.txt
+├── dados_treino
+│   ├── 2011.json
+│   └── a.txt
+├── estatisticas
+│   ├── estatisticas_stacasa.json
+│   └── estatisticas_teste.json
+├── estatisticas.html
+├── gerar_previsao.py
+├── heuristicas
+│   ├── ausencia_superior_media.py
+│   ├── balanceamento_tipos.py
+│   ├── crescimento_ano.py
+│   ├── distribuicao_quadrantes.py
+│   ├── frequencia_total.py
+│   ├── gap_medio.py
+│   ├── pares_frequentes.py
+│   ├── repeticoes_sorteios_anteriores.py
+│   ├── soma_provavel.py
+│   ├── tendencia_recentes.py
+│   └── trios_frequentes.py
+├── index.html
+├── js
+│   ├── estatisticas.js
+│   ├── teste3.js
+│   └── update_estatisticas.js
+├── lib
+│   └── dados.py
+├── logs
+│   └── totoloto_log.txt
+├── previsoes
+│   ├── a.txt
+│   └── previsao_atual.json
+├── scripts
+│   ├── atualiza_yml.py
+│   ├── atualizar_totoloto.py
+│   ├── atualizar_totoloto_sc.py
+│   └── enviar_email.py
+└── simulador
+    ├── estilo.css
+    ├── main.js
+    └── simulador.html
