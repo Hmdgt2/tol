@@ -5,10 +5,17 @@
   ],
   "detalhes": [
     {
-      "heuristica": "repeticoes_sorteios_anteriores",
+      "heuristica": "tendencia_recentes",
       "numeros": [
         13,
-        35
+        37
+      ]
+    },
+    {
+      "heuristica": "ausencia_superior_media",
+      "numeros": [
+        39,
+        3
       ]
     },
     {
@@ -26,10 +33,17 @@
       ]
     },
     {
-      "heuristica": "ausencia_superior_media",
+      "heuristica": "soma_provavel",
       "numeros": [
-        39,
-        3
+        16,
+        44
+      ]
+    },
+    {
+      "heuristica": "gap_medio",
+      "numeros": [
+        16,
+        44
       ]
     },
     {
@@ -47,29 +61,15 @@
       ]
     },
     {
-      "heuristica": "soma_provavel",
+      "heuristica": "repeticoes_sorteios_anteriores",
       "numeros": [
-        16,
-        44
+        13,
+        35
       ]
     },
     {
       "heuristica": "crescimento_ano",
       "numeros": []
-    },
-    {
-      "heuristica": "gap_medio",
-      "numeros": [
-        16,
-        44
-      ]
-    },
-    {
-      "heuristica": "tendencia_recentes",
-      "numeros": [
-        13,
-        37
-      ]
     }
   ]
 }
