@@ -36,6 +36,6 @@ def prever(sorteios, n=2):
                 sugeridos.append(num)
 
     return {
-        "nome": "distribuicao_grupos",
+        "heuristica": "distribuicao_grupos",
         "numeros": sorted(list(set(sugeridos)))[:n]
     }
