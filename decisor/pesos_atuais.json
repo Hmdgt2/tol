@@ -1,6 +1,13 @@
 {
-  "frequencia_total": 0.9,
-  "gap_medio": 0.8,
-  "pares_frequentes": 0.75,
-  "ml_modelo": 1.2
+  "tendencia_recentes": 1.25,
+  "ausencia_superior_media": 0.75,
+  "distribuicao_quadrantes": 1.00,
+  "pares_frequentes": 0.60,
+  "soma_provavel": 1.20,
+  "balanceamento_tipos": 0.80,
+  "gap_medio": 1.10,
+  "trios_frequentes": 0.50,
+  "frequencia_total": 0.90,
+  "repeticoes_sorteios_anteriores": 0.80,
+  "crescimento_ano": 0.40
 }
