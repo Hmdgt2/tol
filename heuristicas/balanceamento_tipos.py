@@ -1,6 +1,7 @@
 # heuristicas/balanceamento_tipos.py
 from lib.dados import analisar_padrao_tipos_numeros, is_prime
 from collections import Counter
+from collections import defaultdict
 import random
 
 def prever(sorteios, n=2):
