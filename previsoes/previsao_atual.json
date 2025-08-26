@@ -5,6 +5,13 @@
   ],
   "detalhes": [
     {
+      "heuristica": "pares_consecutivos",
+      "numeros": [
+        15,
+        16
+      ]
+    },
+    {
       "heuristica": "tendencia_recentes",
       "numeros": [
         13,

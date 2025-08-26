@@ -9,5 +9,6 @@
   "trios_frequentes": 0.5,
   "frequencia_total": 0.83,
   "repeticoes_sorteios_anteriores": 0.5,
-  "crescimento_ano": 0.5
+  "crescimento_ano": 0.5,
+  "pares_consecutivos": 0.83
 }
