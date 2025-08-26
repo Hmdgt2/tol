@@ -1,13 +1,13 @@
 {
-  "tendencia_recentes": 1.25,
-  "ausencia_superior_media": 0.75,
-  "distribuicao_quadrantes": 1.00,
-  "pares_frequentes": 0.60,
-  "soma_provavel": 1.20,
-  "balanceamento_tipos": 0.80,
-  "gap_medio": 1.10,
-  "trios_frequentes": 0.50,
-  "frequencia_total": 0.90,
-  "repeticoes_sorteios_anteriores": 0.80,
-  "crescimento_ano": 0.40
+  "tendencia_recentes": 0.5,
+  "ausencia_superior_media": 0.5,
+  "distribuicao_quadrantes": 1.17,
+  "pares_frequentes": 1.17,
+  "soma_provavel": 1.5,
+  "balanceamento_tipos": 0.83,
+  "gap_medio": 1.5,
+  "trios_frequentes": 0.5,
+  "frequencia_total": 0.83,
+  "repeticoes_sorteios_anteriores": 0.5,
+  "crescimento_ano": 0.5
 }

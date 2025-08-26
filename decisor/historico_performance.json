@@ -1,1 +1,35 @@
-{}
+{
+  "tendencia_recentes": [
+    0
+  ],
+  "ausencia_superior_media": [
+    0
+  ],
+  "distribuicao_quadrantes": [
+    2
+  ],
+  "pares_frequentes": [
+    2
+  ],
+  "soma_provavel": [
+    3
+  ],
+  "balanceamento_tipos": [
+    1
+  ],
+  "gap_medio": [
+    3
+  ],
+  "trios_frequentes": [
+    0
+  ],
+  "frequencia_total": [
+    1
+  ],
+  "repeticoes_sorteios_anteriores": [
+    0
+  ],
+  "crescimento_ano": [
+    0
+  ]
+}
