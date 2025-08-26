@@ -20,6 +20,6 @@ def prever(sorteios, n=2):
     sugeridos = candidatos[:n]
 
     return {
-        "nome": "frequencia_terminacoes",
+        "heuristica": "frequencia_terminacoes",
         "numeros": sorted(list(set(sugeridos)))[:n]
     }
