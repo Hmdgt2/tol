@@ -40,6 +40,13 @@
       ]
     },
     {
+      "heuristica": "balanceamento_tipos",
+      "numeros": [
+        16,
+        19
+      ]
+    },
+    {
       "heuristica": "gap_medio",
       "numeros": [
         16,
