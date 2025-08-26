@@ -2,9 +2,11 @@
   "tendencia_recentes": [
     0,
     0,
+    0,
     0
   ],
   "ausencia_superior_media": [
+    0,
     0,
     0,
     0
@@ -12,9 +14,11 @@
   "distribuicao_quadrantes": [
     2,
     2,
+    2,
     2
   ],
   "pares_frequentes": [
+    2,
     2,
     2,
     2
@@ -22,9 +26,11 @@
   "soma_provavel": [
     3,
     3,
+    3,
     3
   ],
   "balanceamento_tipos": [
+    1,
     1,
     1,
     1
@@ -32,9 +38,11 @@
   "gap_medio": [
     3,
     3,
+    3,
     3
   ],
   "trios_frequentes": [
+    0,
     0,
     0,
     0
@@ -42,9 +50,11 @@
   "frequencia_total": [
     1,
     1,
+    1,
     1
   ],
   "repeticoes_sorteios_anteriores": [
+    0,
     0,
     0,
     0
@@ -52,9 +62,23 @@
   "crescimento_ano": [
     0,
     0,
+    0,
     0
   ],
   "pares_consecutivos": [
+    1,
     1
+  ],
+  "frequencia_soma": [
+    0
+  ],
+  "quentes_frios": [
+    0
+  ],
+  "frequencia_terminacoes": [
+    2
+  ],
+  "padrao_finais": [
+    0
   ]
 }

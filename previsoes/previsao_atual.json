@@ -1,9 +1,16 @@
 {
   "previsao": [
-    16,
-    44
+    13,
+    16
   ],
   "detalhes": [
+    {
+      "heuristica": "frequencia_soma",
+      "numeros": [
+        47,
+        48
+      ]
+    },
     {
       "heuristica": "pares_consecutivos",
       "numeros": [
@@ -47,6 +54,13 @@
       ]
     },
     {
+      "heuristica": "quentes_frios",
+      "numeros": [
+        3,
+        13
+      ]
+    },
+    {
       "heuristica": "balanceamento_tipos",
       "numeros": [
         16,
@@ -58,6 +72,13 @@
       "numeros": [
         16,
         44
+      ]
+    },
+    {
+      "heuristica": "frequencia_terminacoes",
+      "numeros": [
+        16,
+        22
       ]
     },
     {
@@ -84,6 +105,13 @@
     {
       "heuristica": "crescimento_ano",
       "numeros": []
+    },
+    {
+      "heuristica": "padrao_finais",
+      "numeros": [
+        7,
+        19
+      ]
     }
   ]
 }
