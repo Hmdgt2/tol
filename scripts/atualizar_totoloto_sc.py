@@ -102,3 +102,19 @@ def atualizar_resultados():
 
 if __name__ == "__main__":
     atualizar_resultados()
+
+    # NOVO BLOCO - criar ficheiro sorteio_atual.json
+    pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    pasta_dados = os.path.join(pasta_repo, "dados")
+    ano = datetime.datetime.now().year
+    json_path = os.path.join(pasta_dados, f"{ano}.json")
+
+    # Lê os dados do ano, pega o último concurso
+    if os.path.exists(json_path):
+        with open(json_path, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+        lista = dados.get(str(ano), [])
+        if lista:
+            mais_recente = lista[-1]
+            with open(os.path.join(pasta_dados, "sorteio_atual.json"), "w", encoding="utf-8") as f_out:
+                json.dump(mais_recente, f_out, indent=2, ensure_ascii=False)
