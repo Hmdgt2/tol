@@ -26,14 +26,19 @@ jobs:
       - name: Mostrar previsão gerada
         run: cat previsoes/previsao_atual.json
 
-      - name: Fazer commit do JSON gerado
+      - name: Avaliar heurísticas e atualizar pesos
+        run: python avaliador/avaliador.py
+
+      - name: Fazer commit dos JSONs gerados
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
 
           git add previsoes/previsao_atual.json
-          git diff --cached --quiet || git commit -m "Atualiza previsão automática"
+          git add decisor/pesos_atuais.json
+          git add decisor/historico_performance.json
+          git diff --cached --quiet || git commit -m "Atualiza previsão/pesos automática"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
