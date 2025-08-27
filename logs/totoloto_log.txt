@@ -29,3 +29,4 @@
 [2025-08-23 21:55:15] [santacasa] Resultado do concurso 068/2025 adicionado ao JSON 2025.
 [2025-08-24 07:24:59] [vercapas] Resultado do concurso 068/2025 já existe. Nada a fazer.
 [2025-08-25 23:26:10] [vercapas] Resultado do concurso 068/2025 já existe. Nada a fazer.
+[2025-08-27 21:52:00] [santacasa] Resultado do concurso 069/2025 adicionado ao JSON 2025.
