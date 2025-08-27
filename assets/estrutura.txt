@@ -13,6 +13,8 @@
 │   ├── estrutura.txt
 │   ├── gerar_estrutura.py
 │   └── toto.png
+├── avaliador
+│   └── avaliador.py
 ├── dados
 │   ├── 2011.json
 │   ├── 2012.json
@@ -29,10 +31,15 @@
 │   ├── 2023.json
 │   ├── 2024.json
 │   ├── 2025.json
-│   └── 2025.txt
+│   ├── 2025.txt
+│   └── sorteio_atual.json
 ├── dados_treino
 │   ├── 2011.json
 │   └── a.txt
+├── decisor
+│   ├── decisor_final.py
+│   ├── historico_performance.json
+│   └── pesos_atuais.json
 ├── estatisticas
 │   ├── estatisticas_stacasa.json
 │   └── estatisticas_teste.json
@@ -42,10 +49,16 @@
 │   ├── ausencia_superior_media.py
 │   ├── balanceamento_tipos.py
 │   ├── crescimento_ano.py
+│   ├── distribuicao_grupos.py
 │   ├── distribuicao_quadrantes.py
+│   ├── frequencia_soma.py
+│   ├── frequencia_terminacoes.py
 │   ├── frequencia_total.py
 │   ├── gap_medio.py
+│   ├── padrao_finais.py
+│   ├── pares_consecutivos.py
 │   ├── pares_frequentes.py
+│   ├── quentes_frios.py
 │   ├── repeticoes_sorteios_anteriores.py
 │   ├── soma_provavel.py
 │   ├── tendencia_recentes.py
