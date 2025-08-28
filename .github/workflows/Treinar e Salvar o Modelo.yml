@@ -9,6 +9,8 @@ on:
 jobs:
   train:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Permite que o workflow escreva no repositório
 
     steps:
       - name: Checkout do Repositório
@@ -32,6 +34,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add decisor/pesos_atuais.json
-          git commit -m "feat(decisor): Atualiza ficheiro de pesos do modelo" || echo "Nenhuma alteração a commitar"
+          git add decisor/pesos_atuais.joblib
+          git add decisor/heuristicas.json
+          git commit -m "feat(decisor): Atualiza ficheiros de modelo e heurísticas" || echo "Nenhuma alteração a commitar"
           git push
