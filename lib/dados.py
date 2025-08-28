@@ -38,7 +38,7 @@ def carregar_sorteios(pasta=PASTA_DADOS):
     
     if todos:
         # Tenta ordenar por data, usando um valor de fallback seguro
-        todos.sort(key=lambda s: datetime.datetime.strptime(s.get('data', '01-01-1900'), '%d-%m-%Y') if 'data' in s and isinstance(s.get('data'), str) else datetime.datetime.min)
+        todos.sort(key=lambda s: datetime.datetime.strptime(s.get('data', '01-01-1900'), '%d/%m/%Y') if 'data' in s and isinstance(s.get('data'), str) else datetime.datetime.min)
     
     return todos
 
