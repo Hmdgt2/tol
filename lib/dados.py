@@ -28,9 +28,9 @@ def carregar_sorteios(pasta=PASTA_DADOS):
                     
                     if isinstance(dados_carregados, dict):
                         # Se for um dicionário de anos, extrai as listas
-                        for ano in sorted(dados_carregados.keys()):
-                            if isinstance(dados_carregados[ano], list):
-                                todos.extend(dados_carregados[ano])
+                        for sorteios_do_ano in dados_carregados.values():
+                            if isinstance(sorteios_do_ano, list):
+                                todos.extend(sorteios_do_ano)
                     elif isinstance(dados_carregados, list):
                         # Se for uma lista direta, anexa
                         todos.extend(dados_carregados)
@@ -38,10 +38,15 @@ def carregar_sorteios(pasta=PASTA_DADOS):
                 print(f"Erro ao ler o arquivo {nome_arquivo}: {e}")
     
     if todos:
-        # Tenta ordenar por data, usando um valor de fallback seguro
-        todos.sort(key=lambda s: datetime.datetime.strptime(s.get('data', '01-01-1900'), '%d/%m/%Y') if 'data' in s and isinstance(s.get('data'), str) else datetime.datetime.min)
+        # Filtra os sorteios que são dicionários válidos antes de ordenar
+        sorteios_validos = [s for s in todos if isinstance(s, dict) and 'data' in s and isinstance(s.get('data'), str)]
+        
+        # Agora, ordena apenas a lista de sorteios válidos
+        sorteios_validos.sort(key=lambda s: datetime.datetime.strptime(s.get('data'), '%d/%m/%Y'))
+        
+        return sorteios_validos
     
-    return todos
+    return []
 
 def is_prime(n):
     if n < 2:
