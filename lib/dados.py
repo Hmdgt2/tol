@@ -86,6 +86,42 @@ def is_prime(n):
             return False
     return True
 
+def get_incremental_stats(stats_atuais, novo_sorteio):
+    """
+    Atualiza as estatísticas com os dados de um novo sorteio, de forma incremental.
+    """
+    if not stats_atuais:
+        stats_atuais = {
+            'frequencia_total': Counter(),
+            'frequencia_pares': Counter(),
+            'frequencia_trios': Counter(),
+            'numeros_recentes': [],
+            'ultimos_numeros': []
+        }
+
+    numeros_sorteio = novo_sorteio.get('numeros', [])
+    
+    # Atualiza a frequência total
+    stats_atuais['frequencia_total'].update(numeros_sorteio)
+    
+    # Atualiza a frequência de pares
+    pares = sorted(list(combinations(numeros_sorteio, 2)))
+    stats_atuais['frequencia_pares'].update(pares)
+    
+    # Atualiza a frequência de trios
+    trios = sorted(list(combinations(numeros_sorteio, 3)))
+    stats_atuais['frequencia_trios'].update(trios)
+
+    # Atualiza os números recentes
+    stats_atuais['numeros_recentes'].extend(numeros_sorteio)
+    # Mantém apenas os 500 mais recentes, por exemplo
+    stats_atuais['numeros_recentes'] = stats_atuais['numeros_recentes'][-500:] 
+
+    # Atualiza os últimos números
+    stats_atuais['ultimos_numeros'] = numeros_sorteio
+    
+    return stats_atuais
+
 def get_all_stats(sorteios, all_numbers=range(1, 50)):
     """
     Calcula todas as estatísticas e características de uma só vez para um conjunto de sorteios.
