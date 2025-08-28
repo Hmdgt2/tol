@@ -1,39 +1,66 @@
+# heuristicas/frequencia_soma.py
 from collections import Counter
 from itertools import combinations
-from lib.dados import calcular_somas_sorteios
 
-def prever(sorteios, n=2):
-    somas_por_sorteio = [sum(s['numeros']) for s in sorteios if 'numeros' in s]
-    if not somas_por_sorteio:
-        return {"nome": "frequencia_soma", "numeros": []}
-    
-    contador_somas = Counter(somas_por_sorteio)
-    soma_mais_comum = contador_somas.most_common(1)[0][0]
-    
-    frequencia_geral = Counter()
-    for s in sorteios:
-        frequencia_geral.update(s.get('numeros', []))
+def prever(estatisticas, n=2):
+    """
+    Prevê números com base na soma mais frequente dos sorteios.
 
-    candidatos_por_freq = [num for num, _ in frequencia_geral.most_common(20)]
+    Args:
+        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
+        n (int): O número de sugestões a retornar.
     
-    melhores_combinacoes_de_5 = []
-    
-    for comb in combinations(candidatos_por_freq, 5):
-        if sum(comb) == soma_mais_comum:
-            melhores_combinacoes_de_5.append(comb)
-            if len(melhores_combinacoes_de_5) > 500: # Limite para performance
-                break
+    Returns:
+        dict: Um dicionário com o nome da heurística e os números sugeridos.
+    """
+    soma_mais_comum = estatisticas.get('soma_mais_comum', 0)
+    frequencia = estatisticas.get('frequencia_total', {})
 
-    if not melhores_combinacoes_de_5:
-        return {"nome": "frequencia_soma", "numeros": []}
-    
-    contador_numeros = Counter()
-    for comb in melhores_combinacoes_de_5:
-        contador_numeros.update(comb)
-    
-    sugeridos = [num for num, _ in contador_numeros.most_common(n)]
+    if not frequencia or soma_mais_comum == 0:
+        return {
+            "nome": "frequencia_soma",
+            "numeros": []
+        }
 
+    # A lógica original com 'combinations' é muito pesada para um backtesting eficiente.
+    # Vamos simplificar, priorizando números que contribuíram para a soma mais comum.
+    # Abordagem:
+    # 1. Encontrar os números mais frequentes.
+    # 2. Selecionar aqueles que, ao serem somados, tendem a atingir a soma mais comum.
+    #    Vamos focar nos números mais frequentes que são "candidatos" a essa soma.
+
+    # Esta versão otimizada simplesmente retorna os números mais frequentes que estão
+    # dentro de uma faixa de soma que tende a ser a mais comum.
+
+    # Em vez de gerar todas as combinações, vamos pegar nos números mais frequentes
+    # e verificar se eles se encaixam na soma.
+
+    # Seleciona os números mais frequentes para o nosso conjunto de candidatos
+    candidatos = [num for num, _ in Counter(frequencia).most_common(20)]
+    
+    melhores_combinacoes = []
+    
+    # Cria combinações de 2 números e verifica a soma.
+    # Esta é uma otimização para a sua heurística de 'n=2'.
+    for comb in combinations(candidatos, 2):
+        if sum(comb) == soma_mais_comum // (49/5): # Proporção da soma
+            melhores_combinacoes.append(comb)
+            
+    # Se encontramos combinações que se encaixam na soma, sugerimos os números mais comuns nessas combinações.
+    if melhores_combinacoes:
+        contador_numeros_comb = Counter()
+        for comb in melhores_combinacoes:
+            contador_numeros_comb.update(comb)
+        
+        sugeridos = [num for num, _ in contador_numeros_comb.most_common(n)]
+        
+        return {
+            "nome": "frequencia_soma",
+            "numeros": sorted(sugeridos)
+        }
+    
+    # Se não houver combinações, recorre aos números mais frequentes
     return {
-        "heuristicas": "frequencia_soma",
-        "numeros": sorted(list(set(sugeridos)))[:n]
+        "nome": "frequencia_soma",
+        "numeros": sorted([num for num, _ in Counter(frequencia).most_common(n)])
     }
