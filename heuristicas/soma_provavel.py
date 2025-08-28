@@ -2,7 +2,7 @@
 from collections import Counter
 from itertools import combinations
 
-def prever(estatisticas, n=2):
+def prever(estatisticas, n=5):
     """
     Prevê números com base na soma mais provável dos sorteios.
 
