@@ -1,5 +1,5 @@
 # heuristicas/gap_medio.py
-def prever(estatisticas, n=2):
+def prever(estatisticas, n=5):
     """
     Prevê números com base no seu gap médio (intervalo médio entre saídas),
     sugerindo os números com o gap mais curto.
