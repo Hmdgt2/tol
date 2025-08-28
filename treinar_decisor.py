@@ -59,21 +59,11 @@ def treinar_decisor():
         
         for nome, funcao in heuristicas:
             try:
-                if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
-                    resultado = funcao(estatisticas, historico_parcial, n=5)
-                else:
-                    resultado = funcao(estatisticas, n=5)
+                # O CÓDIGO AQUI FOI CORRIGIDO
+                # Ele agora passa sempre ambos os argumentos, `estatisticas` e `historico_parcial`,
+                # e os valores padrão (`n=5`) são aplicados automaticamente.
+                resultado = funcao(estatisticas, historico_parcial, n=5)
                 previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
-            except TypeError:
-                try:
-                    if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
-                        resultado = funcao(estatisticas, historico_parcial)
-                    else:
-                        resultado = funcao(estatisticas)
-                    previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
-                except Exception as inner_e:
-                    print(f"Erro na heurística {nome} após tentativa de correção: {inner_e}")
-                    previsoes_sorteio_atual[nome] = []
             except Exception as e:
                 print(f"Erro inesperado na heurística {nome}: {e}")
                 previsoes_sorteio_atual[nome] = []
