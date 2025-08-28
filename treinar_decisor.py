@@ -4,6 +4,7 @@ import importlib
 from collections import defaultdict, Counter
 from itertools import combinations
 import json
+import inspect # Importa o módulo inspect para inspecionar funções
 
 # Adiciona o diretório raiz ao caminho do sistema
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -56,10 +57,16 @@ def treinar_decisor():
         
         for nome, funcao in heuristicas:
             try:
-                # O CÓDIGO CORRIGIDO ESTÁ AQUI
-                # A chamada agora passa todos os argumentos possíveis para todas as heurísticas.
-                # A correção virá no passo 2, onde as heurísticas vão ignorar os argumentos extra.
-                resultado = funcao(estatisticas=estatisticas, sorteios_historico=historico_parcial, n=5)
+                # Usa inspect para obter os parâmetros da função 'prever'
+                parametros = inspect.signature(funcao).parameters
+                
+                # Se a função espera o argumento 'sorteios_historico', passa-o
+                if 'sorteios_historico' in parametros:
+                    resultado = funcao(estatisticas, historico_parcial, n=5)
+                # Caso contrário, chama a função apenas com 'estatisticas'
+                else:
+                    resultado = funcao(estatisticas, n=5)
+                    
                 previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
             except Exception as e:
                 print(f"Erro inesperado na heurística {nome}: {e}")
