@@ -14,6 +14,8 @@ def prever(estatisticas, sorteios_historico, n=5, num_sorteios_anteriores=5):
     Returns:
         dict: Um dicionário com o nome da heurística e os números sugeridos.
     """
+    
+    # Esta estatística é gerada no gerar_previsao.py e no treinar_decisor.py
     probabilidades_repeticoes = estatisticas.get('repeticoes_ultimos_sorteios', {})
     frequencia_geral = estatisticas.get('frequencia_total', {})
     
@@ -24,12 +26,17 @@ def prever(estatisticas, sorteios_historico, n=5, num_sorteios_anteriores=5):
         }
     
     # Identifica o número de repetições mais provável
+    # O valor padrão é 0 se o dicionário estiver vazio, o que significa que é improvável que haja repetições
     num_repeticoes_mais_provavel = max(probabilidades_repeticoes, key=probabilidades_repeticoes.get, default=0)
     
     # Obtém os números dos últimos sorteios
     numeros_recentes = Counter()
-    for i in range(1, num_sorteios_anteriores + 1):
-        numeros_recentes.update(sorteios_historico[len(sorteios_historico) - i].get('numeros', []))
+    # Pega os números dos últimos 'num_sorteios_anteriores'
+    indices_recentes = range(len(sorteios_historico) - 1, len(sorteios_historico) - 1 - num_sorteios_anteriores, -1)
+    
+    for i in indices_recentes:
+        numeros_do_sorteio = sorteios_historico[i].get('numeros', [])
+        numeros_recentes.update(numeros_do_sorteio)
 
     sugeridos = []
     
@@ -37,7 +44,7 @@ def prever(estatisticas, sorteios_historico, n=5, num_sorteios_anteriores=5):
         # Se é provável que haja repetições, sugere os números mais frequentes dos sorteios recentes
         sugeridos.extend([num for num, _ in numeros_recentes.most_common(n)])
     else:
-        # Se é provável que NÃO haja repetições
+        # Se é provável que NÃO haja repetições, sugere os números que não saíram recentemente
         todos_numeros = set(range(1, 50))
         numeros_recentes_set = set(numeros_recentes.keys())
         numeros_nao_recentes = list(todos_numeros - numeros_recentes_set)
