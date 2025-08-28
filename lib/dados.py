@@ -9,15 +9,36 @@ import datetime
 PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados'))
 
 def carregar_sorteios(pasta=PASTA_DADOS):
+    """
+    Carrega todos os sorteios de arquivos JSON em um diretório,
+    garantindo que o formato esteja correto.
+    """
     todos = []
-    for ficheiro in sorted(os.listdir(pasta)):
-        if ficheiro.endswith('.json'):
-            with open(os.path.join(pasta, ficheiro), encoding='utf-8') as f:
-                dados_ano = json.load(f)
-                todos.extend(dados_ano)
     
-    # Sort by date to ensure chronological order
-    todos.sort(key=lambda s: datetime.datetime.strptime(s['data'], '%d-%m-%Y') if 'data' in s else datetime.datetime.min)
+    if not os.path.exists(pasta):
+        print(f"Diretório '{pasta}' não encontrado.")
+        return []
+
+    for nome_arquivo in sorted(os.listdir(pasta)):
+        if nome_arquivo.endswith('.json'):
+            caminho_completo = os.path.join(pasta, nome_arquivo)
+            try:
+                with open(caminho_completo, "r", encoding="utf-8") as f:
+                    dados_carregados = json.load(f)
+                    # Verifica se o arquivo contém um dicionário com anos
+                    if isinstance(dados_carregados, dict):
+                        for ano in dados_carregados.keys():
+                            if isinstance(dados_carregados[ano], list):
+                                todos.extend(dados_carregados[ano])
+                    # Ou se contém uma lista direta de sorteios (para o caso de arquivos mais antigos)
+                    elif isinstance(dados_carregados, list):
+                        todos.extend(dados_carregados)
+            except (json.JSONDecodeError, FileNotFoundError) as e:
+                print(f"Erro ao ler o arquivo {nome_arquivo}: {e}")
+    
+    if todos:
+        # Tenta ordenar por data, usando um valor de fallback seguro
+        todos.sort(key=lambda s: datetime.datetime.strptime(s.get('data', '01-01-1900'), '%d-%m-%Y') if 'data' in s and isinstance(s.get('data'), str) else datetime.datetime.min)
     
     return todos
 
@@ -36,20 +57,20 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
     """
     if not sorteios:
         return {
-            'frequencia': {n: 0 for n in all_numbers},
+            'frequencia_total': {n: 0 for n in all_numbers},
             'ausencia_atual': {n: 0 for n in all_numbers},
             'gaps_medios': {n: float('inf') for n in all_numbers},
             'pares_frequentes': {},
             'trios_frequentes': {},
             'frequencia_por_ano': {},
-            'padroes_tipos_numeros': { (0, 0, 0): 0 },
-            'somas_sorteios': [],
-            'distribuicao_quadrantes': { tuple([0] * 4): 0 },
-            'distribuicao_dezenas': { tuple([0] * 5): 0 },
+            'padrao_tipos_numeros': (0, 0, 0),
+            'soma_mais_comum': 0,
+            'distribuicao_quadrantes': (0, 0, 0, 0),
+            'distribuicao_dezenas': (0, 0, 0, 0, 0),
             'repeticoes_ultimos_sorteios': {}
         }
 
-    frequencia = Counter()
+    frequencia_total = Counter()
     ultima_ocorrencia = defaultdict(lambda: -1)
     posicoes = defaultdict(list)
     frequencia_por_ano = defaultdict(lambda: defaultdict(int))
@@ -59,11 +80,12 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
     distribuicoes_dezenas = Counter()
     pares_frequentes = Counter()
     trios_frequentes = Counter()
-    
+    repeticoes_ultimos_sorteios = defaultdict(int)
+
     total_concursos = len(sorteios)
-    
     dezenas_faixas = [(1, 10), (11, 20), (21, 30), (31, 40), (41, 49)]
-    
+
+    # Loop para calcular a maioria das estatísticas
     for idx, sorteio in enumerate(sorteios):
         numeros = sorted(sorteio.get('numeros', []))
         
@@ -71,17 +93,17 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
             continue
             
         # Frequência e Ausência
-        frequencia.update(numeros)
+        frequencia_total.update(numeros)
         for num in numeros:
             ultima_ocorrencia[num] = idx
             posicoes[num].append(idx)
 
         # Frequência por ano
         try:
-            ano = int(sorteio['data'].split('-')[-1])
+            ano = int(sorteio['data'].split('/')[-1])
             for num in numeros:
                 frequencia_por_ano[ano][num] += 1
-        except Exception:
+        except (KeyError, ValueError):
             pass
 
         # Padrões de composição (par/ímpar/primo)
@@ -92,7 +114,7 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
 
         # Somas
         somas.append(sum(numeros))
-        
+            
         # Distribuição por quadrantes
         num_quadrantes = 4
         max_numero = 49
@@ -110,16 +132,20 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
         for num in numeros:
             for i, (inf, sup) in enumerate(dezenas_faixas):
                 if inf <= num <= sup:
-                	contagem_dezenas[i] += 1
-                	break
+                    contagem_dezenas[i] += 1
+                    break
         distribuicoes_dezenas[tuple(contagem_dezenas)] += 1
 
         # Pares e trios frequentes
         pares_frequentes.update(combinations(numeros, 2))
         trios_frequentes.update(combinations(numeros, 3))
     
+    # Repetições de sorteios anteriores (calculado de forma diferente)
+    # A sua heurística repeticoes_sorteios_anteriores.py já tem a lógica para isso,
+    # por isso, não precisamos de a duplicar aqui, o que torna esta função mais limpa.
+
     # Calcular métricas finais que precisam do loop completo
-    ausencia_atual = {num: total_concursos - idx - 1 for num, idx in ultima_ocorrencia.items()}
+    ausencia_atual = {num: total_concursos - ultima_ocorrencia.get(num, -1) - 1 for num in all_numbers}
     gaps_medios = {}
     for num in all_numbers:
         concursos = posicoes.get(num, [])
@@ -129,15 +155,16 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
             diferencas = [j - i for i, j in zip(concursos[:-1], concursos[1:])]
             gaps_medios[num] = sum(diferencas) / len(diferencas)
     
+    # Corrigir o retorno para as chaves corretas e valores padrão
     return {
-        'frequencia_total': frequencia,
+        'frequencia_total': frequencia_total,
         'ausencia_atual': ausencia_atual,
         'gaps_medios': gaps_medios,
         'pares_frequentes': pares_frequentes,
         'trios_frequentes': trios_frequentes,
         'frequencia_por_ano': frequencia_por_ano,
-        'padrao_tipos_numeros': padroes_tipos_numeros.most_common(1)[0][0] if padroes_tipos_numeros else tuple([0]*3),
+        'padrao_tipos_numeros': padroes_tipos_numeros.most_common(1)[0][0] if padroes_tipos_numeros else (0, 0, 0),
         'soma_mais_comum': Counter(somas).most_common(1)[0][0] if somas else 0,
-        'distribuicao_quadrantes': distribuicoes_quadrantes.most_common(1)[0][0] if distribuicoes_quadrantes else tuple([0]*4),
-        'distribuicao_dezenas': distribuicoes_dezenas.most_common(1)[0][0] if distribuicoes_dezenas else tuple([0]*5)
+        'distribuicao_quadrantes': distribuicoes_quadrantes.most_common(1)[0][0] if distribuicoes_quadrantes else (0, 0, 0, 0),
+        'distribuicao_dezenas': distribuicoes_dezenas.most_common(1)[0][0] if distribuicoes_dezenas else (0, 0, 0, 0, 0)
     }
