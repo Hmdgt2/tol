@@ -16,7 +16,7 @@ from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_s
 from decisor.decisor_final import HeuristicDecisor
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
-PESOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
+PESOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.joblib')
 
 def carregar_heuristicas():
     """
