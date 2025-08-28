@@ -1,47 +1,62 @@
 # heuristicas/soma_provavel.py
-from lib.dados import calcular_somas_sorteios
 from collections import Counter
-from itertools import combinations
 
-def prever(sorteios, n=2):
-    analise_somas = calcular_somas_sorteios(sorteios)
-    soma_mais_comum = analise_somas['soma_mais_comum']
-    intervalo_inferior = analise_somas['intervalo_inferior']
-    intervalo_superior = analise_somas['intervalo_superior']
+def prever(estatisticas, n=2):
+    """
+    Prevê números com base na soma mais provável dos sorteios.
 
-    # Gerar números candidatos baseados na frequência geral
-    frequencia_geral = Counter()
-    for s in sorteios:
-        frequencia_geral.update(s.get('numeros', []))
+    Args:
+        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
+        n (int): O número de sugestões a retornar.
     
-    # Pegar nos 15-20 números mais frequentes como base para combinações
-    candidatos = [num for num, _ in frequencia_geral.most_common(20)] 
+    Returns:
+        dict: Um dicionário com o nome da heurística e os números sugeridos.
+    """
+    soma_mais_comum = estatisticas.get('soma_mais_comum', 0)
+    frequencia = estatisticas.get('frequencia_total', {})
+
+    if not frequencia or soma_mais_comum == 0:
+        return {
+            "nome": "soma_provavel",
+            "numeros": []
+        }
+
+    # A sua lógica de combinations é ótima para prever 5, mas é lenta para 2.
+    # Para n=2, vamos usar uma abordagem simplificada, mas que mantém a essência.
+    # Vamos pegar nos números mais frequentes e verificar se a sua soma
+    # está perto da soma mais comum, ajustada para 2 números.
+
+    # Proporção da soma mais comum para 2 números (5 números na loteria)
+    soma_ajustada = soma_mais_comum / 5 * 2
     
-    melhores_combinacoes_de_5 = []
+    # Define um pequeno intervalo em torno da soma ajustada
+    intervalo_inferior = soma_ajustada * 0.9
+    intervalo_superior = soma_ajustada * 1.1
+
+    candidatos = [num for num, _ in Counter(frequencia).most_common(20)]
+    melhores_combinacoes_de_2 = []
     
-    # Gerar todas as combinações possíveis de 5 números a partir dos candidatos
-    for comb in combinations(candidatos, 5):
-        current_sum = sum(comb)
-        # Se a soma da combinação estiver no intervalo provável, guarda-a
-        if intervalo_inferior <= current_sum <= intervalo_superior:
-            melhores_combinacoes_de_5.append(sorted(comb))
-            # Opcional: limitar o número de combinações para performance
-            if len(melhores_combinacoes_de_5) > 1000: # Limite arbitrário
-                break 
-    
-    # Se não houver combinações dentro do intervalo, volta aos números mais frequentes
-    if not melhores_combinacoes_de_5:
-        sugeridos = [num for num, _ in frequencia_geral.most_common(n)]
-    else:
-        # Contar a frequência dos números nas combinações que caíram no intervalo
-        contador_numeros_nestas_somas = Counter()
-        for comb in melhores_combinacoes_de_5:
-            contador_numeros_nestas_somas.update(comb)
+    # Gera combinações de 2 números e verifica se a soma está no intervalo
+    for comb in combinations(candidatos, 2):
+        if intervalo_inferior <= sum(comb) <= intervalo_superior:
+            melhores_combinacoes_de_2.append(comb)
+            if len(melhores_combinacoes_de_2) > 100: # Limita para performance
+                break
+
+    if melhores_combinacoes_de_2:
+        contador_numeros = Counter()
+        for comb in melhores_combinacoes_de_2:
+            contador_numeros.update(comb)
         
-        # Sugerir os 'n' números mais frequentes dentro dessas combinações
-        sugeridos = [num for num, _ in contador_numeros_nestas_somas.most_common(n)]
-
+        sugeridos = [num for num, _ in contador_numeros.most_common(n)]
+        
+        return {
+            "nome": "soma_provavel",
+            "numeros": sorted(sugeridos)
+        }
+    
+    # Se não houver combinações, volta aos números mais frequentes
     return {
         "nome": "soma_provavel",
-        "numeros": sugeridos
+        "numeros": sorted([num for num, _ in Counter(frequencia).most_common(n)])
     }
