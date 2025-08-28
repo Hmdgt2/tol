@@ -4,15 +4,15 @@ import importlib
 from collections import defaultdict, Counter
 from itertools import combinations
 import json
-import inspect # Importa o módulo inspect para inspecionar funções
+import inspect
 
 # Adiciona o diretório raiz ao caminho do sistema
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Adiciona a importação da nova função de estatísticas
-from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
+# Adiciona a importação das funções de dados
+from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios, get_incremental_stats
 from decisor.decisor_final import HeuristicDecisor
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
@@ -45,27 +45,33 @@ def treinar_decisor():
     y_treino = []
     
     heuristicas_ordenadas = [nome for nome, _ in heuristicas]
+    
+    # Prepara as estatísticas iniciais
+    if sorteios_historico:
+        stats_parciais = get_all_stats([sorteios_historico[0]])
+    else:
+        stats_parciais = {}
 
     for i in range(len(sorteios_historico) - 1):
+        # AQUI ESTÁ A OTIMIZAÇÃO: Apenas atualiza as estatísticas com o novo sorteio
+        stats_parciais = get_incremental_stats(stats_parciais, sorteios_historico[i])
+        
         historico_parcial = sorteios_historico[:i+1]
         sorteio_alvo = sorteios_historico[i+1]
         
-        estatisticas = get_all_stats(historico_parcial)
-        estatisticas['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(historico_parcial, num_sorteios=100)
+        # Recalcula a estatística de repetições, que é a mais complexa
+        stats_parciais['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(historico_parcial, num_sorteios=100)
 
         previsoes_sorteio_atual = {}
         
         for nome, funcao in heuristicas:
             try:
-                # Usa inspect para obter os parâmetros da função 'prever'
                 parametros = inspect.signature(funcao).parameters
                 
-                # Se a função espera o argumento 'sorteios_historico', passa-o
                 if 'sorteios_historico' in parametros:
-                    resultado = funcao(estatisticas, historico_parcial, n=5)
-                # Caso contrário, chama a função apenas com 'estatisticas'
+                    resultado = funcao(stats_parciais, historico_parcial, n=5)
                 else:
-                    resultado = funcao(estatisticas, n=5)
+                    resultado = funcao(stats_parciais, n=5)
                     
                 previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
             except Exception as e:
