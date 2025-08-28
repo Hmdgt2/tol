@@ -1,7 +1,7 @@
 # heuristicas/quentes_frios.py
 from collections import Counter
 
-def prever(estatisticas, sorteios_historico, n=2, janela_quentes=15):
+def prever(estatisticas, sorteios_historico, n=5, janela_quentes=15):
     """
     Prevê números com base nos números "quentes" (mais frequentes recentemente)
     e "frios" (mais ausentes).
