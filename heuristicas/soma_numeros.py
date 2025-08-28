@@ -1,11 +1,10 @@
 # heuristicas/soma_numeros.py
 import numpy as np
-from itertools import combinations
 from collections import Counter
 
-def prever(estatisticas, sorteios_historico, n=5):
+def prever(estatisticas, sorteios_historico, n=5, **kwargs):
     """
-    Prevê números com base na soma mais provável dos sorteios.
+    Prevê números com base na soma mais provável dos sorteios, usando uma abordagem mais eficiente.
 
     Args:
         estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
@@ -15,14 +14,14 @@ def prever(estatisticas, sorteios_historico, n=5):
     Returns:
         dict: Um dicionário com o nome da heurística e os números sugeridos.
     """
-
+    
     if not sorteios_historico:
         return {
             "nome": "soma_numeros",
             "numeros": []
         }
 
-    # 1. Calcular as somas de todos os sorteios
+    # 1. Calcular as somas de todos os sorteios e o intervalo mais comum
     somas = [sum(s['numeros']) for s in sorteios_historico if s.get('numeros')]
     
     if not somas:
@@ -31,7 +30,6 @@ def prever(estatisticas, sorteios_historico, n=5):
             "numeros": []
         }
 
-    # 2. Determinar a soma mais comum (intervalo)
     soma_media = np.mean(somas)
     soma_desvio = np.std(somas)
     soma_minima = int(soma_media - soma_desvio)
@@ -39,37 +37,24 @@ def prever(estatisticas, sorteios_historico, n=5):
     
     print(f"Soma mais provável: {soma_minima} a {soma_maxima}")
     
-    # 3. Gerar combinações de 6 números
-    numeros_possiveis = range(1, 50)
-    combinacoes_validas = []
+    # 2. Encontrar os sorteios no histórico que se encaixam no intervalo de soma
+    sorteios_dentro_intervalo = [s['numeros'] for s in sorteios_historico if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima]
 
-    # Otimização: A soma dos 6 menores números (1+2+3+4+5+6 = 21)
-    # A soma dos 6 maiores números (49+48+47+46+45+44 = 279)
-    # Podemos limitar as combinações para melhorar o desempenho
-    
-    # 4. Selecionar combinações com a soma no intervalo
-    # Esta parte do código pode ser computacionalmente intensiva.
-    # Usaremos uma amostra aleatória para evitar tempos de execução muito longos.
-    frequencia_combinacoes = Counter()
-    
-    # Limitar o número de combinações para um tempo de execução razoável
-    numero_combinacoes_a_testar = 50000 
-    
-    for i in range(numero_combinacoes_a_testar):
-        c = np.random.choice(numeros_possiveis, 6, replace=False)
-        c.sort()
-        soma_c = sum(c)
-        if soma_minima <= soma_c <= soma_maxima:
-            frequencia_combinacoes.update(c)
-
-    if not frequencia_combinacoes:
+    if not sorteios_dentro_intervalo:
+        # Fallback para os números quentes se nenhum sorteio se encaixar
+        numeros_quentes = estatisticas.get('numeros_quentes', [])
         return {
             "nome": "soma_numeros",
-            "numeros": []
+            "numeros": numeros_quentes[:n]
         }
 
-    # 5. Contar a frequência de cada número e selecionar os mais comuns
-    sugeridos = [num for num, _ in frequencia_combinacoes.most_common(n)]
+    # 3. Contar a frequência de cada número nesses sorteios
+    frequencia_intervalo = Counter()
+    for numeros in sorteios_dentro_intervalo:
+        frequencia_intervalo.update(numeros)
+
+    # 4. Sugerir os números mais frequentes
+    sugeridos = [num for num, _ in frequencia_intervalo.most_common(n)]
 
     return {
         "nome": "soma_numeros",
