@@ -25,13 +25,14 @@ def carregar_sorteios(pasta=PASTA_DADOS):
             try:
                 with open(caminho_completo, "r", encoding="utf-8") as f:
                     dados_carregados = json.load(f)
-                    # Verifica se o arquivo contém um dicionário com anos
+                    
                     if isinstance(dados_carregados, dict):
-                        for ano in dados_carregados.keys():
+                        # Se for um dicionário de anos, extrai as listas
+                        for ano in sorted(dados_carregados.keys()):
                             if isinstance(dados_carregados[ano], list):
                                 todos.extend(dados_carregados[ano])
-                    # Ou se contém uma lista direta de sorteios (para o caso de arquivos mais antigos)
                     elif isinstance(dados_carregados, list):
+                        # Se for uma lista direta, anexa
                         todos.extend(dados_carregados)
             except (json.JSONDecodeError, FileNotFoundError) as e:
                 print(f"Erro ao ler o arquivo {nome_arquivo}: {e}")
@@ -66,8 +67,7 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
             'padrao_tipos_numeros': (0, 0, 0),
             'soma_mais_comum': 0,
             'distribuicao_quadrantes': (0, 0, 0, 0),
-            'distribuicao_dezenas': (0, 0, 0, 0, 0),
-            'repeticoes_ultimos_sorteios': {}
+            'distribuicao_dezenas': (0, 0, 0, 0, 0)
         }
 
     frequencia_total = Counter()
@@ -80,47 +80,49 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
     distribuicoes_dezenas = Counter()
     pares_frequentes = Counter()
     trios_frequentes = Counter()
-    repeticoes_ultimos_sorteios = defaultdict(int)
 
     total_concursos = len(sorteios)
     dezenas_faixas = [(1, 10), (11, 20), (21, 30), (31, 40), (41, 49)]
 
     # Loop para calcular a maioria das estatísticas
     for idx, sorteio in enumerate(sorteios):
-        numeros = sorted(sorteio.get('numeros', []))
+        numeros = sorteio.get('numeros', [])
         
-        if not numeros:
+        # Garante que 'numeros' é uma lista antes de processar
+        if not isinstance(numeros, list) or not numeros:
             continue
             
+        numeros_ordenados = sorted(numeros)
+
         # Frequência e Ausência
-        frequencia_total.update(numeros)
-        for num in numeros:
+        frequencia_total.update(numeros_ordenados)
+        for num in numeros_ordenados:
             ultima_ocorrencia[num] = idx
             posicoes[num].append(idx)
 
         # Frequência por ano
         try:
-            ano = int(sorteio['data'].split('/')[-1])
-            for num in numeros:
+            ano = int(sorteio.get('data', '01-01-1900').split('/')[-1])
+            for num in numeros_ordenados:
                 frequencia_por_ano[ano][num] += 1
         except (KeyError, ValueError):
             pass
 
         # Padrões de composição (par/ímpar/primo)
-        pares = sum(1 for n in numeros if n % 2 == 0)
-        impares = len(numeros) - pares
-        primos = sum(1 for n in numeros if is_prime(n))
+        pares = sum(1 for n in numeros_ordenados if n % 2 == 0)
+        impares = len(numeros_ordenados) - pares
+        primos = sum(1 for n in numeros_ordenados if is_prime(n))
         padroes_tipos_numeros[(pares, impares, primos)] += 1
 
         # Somas
-        somas.append(sum(numeros))
+        somas.append(sum(numeros_ordenados))
             
         # Distribuição por quadrantes
         num_quadrantes = 4
         max_numero = 49
         tamanho_quadrante = max_numero // num_quadrantes
         contagem_quadrante = [0] * num_quadrantes
-        for num in numeros:
+        for num in numeros_ordenados:
             for i in range(num_quadrantes):
                 if (i * tamanho_quadrante + 1) <= num <= ((i + 1) * tamanho_quadrante):
                     contagem_quadrante[i] += 1
@@ -129,7 +131,7 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
 
         # Distribuição por dezenas
         contagem_dezenas = [0] * len(dezenas_faixas)
-        for num in numeros:
+        for num in numeros_ordenados:
             for i, (inf, sup) in enumerate(dezenas_faixas):
                 if inf <= num <= sup:
                     contagem_dezenas[i] += 1
@@ -137,13 +139,9 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
         distribuicoes_dezenas[tuple(contagem_dezenas)] += 1
 
         # Pares e trios frequentes
-        pares_frequentes.update(combinations(numeros, 2))
-        trios_frequentes.update(combinations(numeros, 3))
+        pares_frequentes.update(combinations(numeros_ordenados, 2))
+        trios_frequentes.update(combinations(numeros_ordenados, 3))
     
-    # Repetições de sorteios anteriores (calculado de forma diferente)
-    # A sua heurística repeticoes_sorteios_anteriores.py já tem a lógica para isso,
-    # por isso, não precisamos de a duplicar aqui, o que torna esta função mais limpa.
-
     # Calcular métricas finais que precisam do loop completo
     ausencia_atual = {num: total_concursos - ultima_ocorrencia.get(num, -1) - 1 for num in all_numbers}
     gaps_medios = {}
@@ -155,7 +153,6 @@ def get_all_stats(sorteios, all_numbers=range(1, 50)):
             diferencas = [j - i for i, j in zip(concursos[:-1], concursos[1:])]
             gaps_medios[num] = sum(diferencas) / len(diferencas)
     
-    # Corrigir o retorno para as chaves corretas e valores padrão
     return {
         'frequencia_total': frequencia_total,
         'ausencia_atual': ausencia_atual,
