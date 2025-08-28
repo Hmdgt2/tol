@@ -20,5 +20,4 @@ jobs:
       - name: Instalar dependências
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          python gerar_previsao.py
+          pip install -r requirements.txt        
