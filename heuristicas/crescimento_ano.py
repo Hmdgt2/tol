@@ -1,7 +1,7 @@
 # heuristicas/crescimento_ano.py
 from collections import Counter
 
-def prever(estatisticas, n=2):
+def prever(estatisticas, n=5):
     """
     Prevê números com base no crescimento da sua frequência ao longo dos anos.
     
