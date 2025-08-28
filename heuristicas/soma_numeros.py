@@ -34,9 +34,8 @@ def prever(estatisticas, sorteios_historico, n=5, **kwargs):
     soma_desvio = np.std(somas)
     soma_minima = int(soma_media - soma_desvio)
     soma_maxima = int(soma_media + soma_desvio)
-    
-    print(f"Soma mais provável: {soma_minima} a {soma_maxima}")
-    
+  
+  
     # 2. Encontrar os sorteios no histórico que se encaixam no intervalo de soma
     sorteios_dentro_intervalo = [s['numeros'] for s in sorteios_historico if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima]
 
