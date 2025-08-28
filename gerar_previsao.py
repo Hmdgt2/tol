@@ -1,4 +1,3 @@
-# gerar_previsao.py
 import importlib
 import os
 import json
@@ -6,15 +5,15 @@ import sys
 from collections import defaultdict, Counter
 from itertools import combinations
 
-# Assumimos que 'lib' e 'heuristicas' estão no mesmo nível.
+# Adicione a nova função aqui para que possa ser usada
+from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
+from decisor.decisor_final import HeuristicDecisor
+
+# Define o caminho para a pasta de heurísticas e previsões
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from lib.dados import carregar_sorteios, get_all_stats
-from decisor.decisor_final import HeuristicDecisor # Usa o novo decisor
-
-# Define o caminho para a pasta de heurísticas e previsões
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
 FICHEIRO_PREVISAO = os.path.join(PASTA_PREVISOES, 'previsao_atual.json')
@@ -50,6 +49,8 @@ def gerar_previsao():
 
     # Calcula todas as estatísticas uma única vez
     estatisticas = get_all_stats(sorteios_historico)
+    # Adição da chamada para a nova função de estatísticas de repetição
+    estatisticas['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(sorteios_historico, num_sorteios=100)
     
     print("\n--- Previsões das Heurísticas ---\n")
     detalhes_previsoes = []
