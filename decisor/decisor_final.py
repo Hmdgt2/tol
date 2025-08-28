@@ -13,7 +13,6 @@ class HeuristicDecisor:
         self.load_pesos()
 
     def load_pesos(self):
-        # A linha "if" deve ter 4 espaços de indentação para estar dentro da função.
         if os.path.exists(self.caminho_pesos) and os.path.getsize(self.caminho_pesos) > 0:
             try:
                 with open(self.caminho_pesos, 'r', encoding='utf-8') as f:
@@ -26,7 +25,6 @@ class HeuristicDecisor:
                         X_dummy = np.array([[0] * len(self.heuristicas_ordenadas), [1] * len(self.heuristicas_ordenadas)])
                         y_dummy = np.array([0, 1])
                         self.modelo_ml.fit(X_dummy, y_dummy)
-
             except (KeyError, json.JSONDecodeError) as e:
                 print(f"Aviso: Erro ao carregar o ficheiro de pesos: {e}. O modelo será treinado do zero.")
                 self.pesos = None
@@ -55,7 +53,8 @@ class HeuristicDecisor:
         self.save_pesos()
 
     def predict(self, previsoes_detalhes):
-        if not self.pesos or not self.heuristicas_ordenadas:
+        # A verificação foi alterada para evitar o ValueError
+        if self.pesos is None or not self.heuristicas_ordenadas:
             print("Modelo não treinado ou pesos não carregados. A usar pesos padrão.")
             return []
 
