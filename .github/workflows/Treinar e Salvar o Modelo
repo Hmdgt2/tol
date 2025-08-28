@@ -1,0 +1,37 @@
+name: Treinar e Salvar o Modelo
+
+on:
+  workflow_dispatch:  # Permite que você execute o workflow manualmente
+  push:
+    branches:
+      - main  # Ou a branch que você usa para as suas alterações
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13" # Usa a versão correta do Python
+
+      - name: Instalar Dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Executar o Treino do Modelo
+        run: |
+          python treinar_decisor.py
+
+      - name: Commitar e Enviar o Ficheiro de Pesos
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add decisor/pesos_atuais.json
+          git commit -m "feat(decisor): Atualiza ficheiro de pesos do modelo" || echo "Nenhuma alteração a commitar"
+          git push
