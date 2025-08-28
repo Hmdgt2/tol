@@ -28,7 +28,7 @@ def guardar_historico(historico, path):
 def pontuar_heuristicas(resultado_real, detalhes):
     pontuacoes = defaultdict(float)
     for item in detalhes:
-        heuristica = item["heuristica"]
+        heuristica = item["nome"]
         numeros = item["numeros"]
         score = 0
         num_acertos = 0
