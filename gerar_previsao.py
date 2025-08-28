@@ -47,16 +47,13 @@ def gerar_previsao():
         print("Erro: Nenhum sorteio histórico encontrado. Não é possível gerar uma previsão.")
         return
 
-    # Calcula todas as estatísticas uma única vez
     estatisticas = get_all_stats(sorteios_historico)
     
     print("\n--- Previsões das Heurísticas ---\n")
     detalhes_previsoes = []
 
-    # Executa todas as heurísticas e armazena os resultados
     for nome, funcao in heuristicas:
         try:
-            # Algumas heurísticas precisam do histórico completo
             if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
                 resultado_heuristica = funcao(estatisticas, sorteios_historico, n=5)
             else:
@@ -70,16 +67,12 @@ def gerar_previsao():
 
     # Usa o decisor final para combinar os resultados
     print("\n--- Sugestão Final ---")
-    
-    # O decisor precisa ser treinado com dados históricos para ser eficaz
-    # Mas para uma previsão única, usamos os pesos que ele já aprendeu
     decisor = HeuristicDecisor(caminho_pesos=PESOS_PATH)
     previsao_final = decisor.predict(detalhes_previsoes)
     
     print("Previsão Final (combinada):", sorted(previsao_final))
     print("---")
 
-    # Guardar a previsão e os detalhes
     guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
 
 def guardar_previsao_json(combinados, detalhes):
