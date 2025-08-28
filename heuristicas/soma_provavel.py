@@ -1,5 +1,6 @@
 # heuristicas/soma_provavel.py
 from collections import Counter
+from itertools import combinations
 
 def prever(estatisticas, n=2):
     """
