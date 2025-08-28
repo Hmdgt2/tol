@@ -13,29 +13,28 @@ class HeuristicDecisor:
         self.load_pesos()
 
     def load_pesos(self):
-    # As linhas dentro da função devem ter 4 espaços de indentação.
-    if os.path.exists(self.caminho_pesos) and os.path.getsize(self.caminho_pesos) > 0:
-        try:
-            with open(self.caminho_pesos, 'r', encoding='utf-8') as f:
-                dados = json.load(f)
-                self.pesos = np.array(dados['pesos'])
-                self.heuristicas_ordenadas = dados['heuristicas']
-                self.modelo_ml.coef_ = np.array([self.pesos])
-                
-                # A "chamada de faz de conta" agora usa as classes 0 e 1 para satisfazer o solver
-                if len(self.heuristicas_ordenadas) > 0:
-                    X_dummy = np.array([[0] * len(self.heuristicas_ordenadas), [1] * len(self.heuristicas_ordenadas)])
-                    y_dummy = np.array([0, 1])
-                    self.modelo_ml.fit(X_dummy, y_dummy)
+        # A linha "if" deve ter 4 espaços de indentação para estar dentro da função.
+        if os.path.exists(self.caminho_pesos) and os.path.getsize(self.caminho_pesos) > 0:
+            try:
+                with open(self.caminho_pesos, 'r', encoding='utf-8') as f:
+                    dados = json.load(f)
+                    self.pesos = np.array(dados['pesos'])
+                    self.heuristicas_ordenadas = dados['heuristicas']
+                    self.modelo_ml.coef_ = np.array([self.pesos])
+                    
+                    if len(self.heuristicas_ordenadas) > 0:
+                        X_dummy = np.array([[0] * len(self.heuristicas_ordenadas), [1] * len(self.heuristicas_ordenadas)])
+                        y_dummy = np.array([0, 1])
+                        self.modelo_ml.fit(X_dummy, y_dummy)
 
-        except (KeyError, json.JSONDecodeError) as e:
-            print(f"Aviso: Erro ao carregar o ficheiro de pesos: {e}. O modelo será treinado do zero.")
+            except (KeyError, json.JSONDecodeError) as e:
+                print(f"Aviso: Erro ao carregar o ficheiro de pesos: {e}. O modelo será treinado do zero.")
+                self.pesos = None
+                self.heuristicas_ordenadas = []
+        else:
+            print("Aviso: Ficheiro de pesos não encontrado. O modelo será treinado do zero.")
             self.pesos = None
             self.heuristicas_ordenadas = []
-    else:
-        print("Aviso: Ficheiro de pesos não encontrado. O modelo será treinado do zero.")
-        self.pesos = None
-        self.heuristicas_ordenadas = []
 
     def save_pesos(self):
         os.makedirs(os.path.dirname(self.caminho_pesos), exist_ok=True)
