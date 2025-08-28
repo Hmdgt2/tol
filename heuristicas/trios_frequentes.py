@@ -1,7 +1,7 @@
 # heuristicas/trios_frequentes.py
 from collections import Counter
 
-def prever(estatisticas, n=2):
+def prever(estatisticas, n=5):
     """
     Prevê números com base na frequência de trios de números.
 
