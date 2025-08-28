@@ -25,14 +25,17 @@ class HeuristicDecisor:
                         X_dummy = np.array([[0] * len(self.heuristicas_ordenadas), [1] * len(self.heuristicas_ordenadas)])
                         y_dummy = np.array([0, 1])
                         self.modelo_ml.fit(X_dummy, y_dummy)
+                    return True
             except (KeyError, json.JSONDecodeError) as e:
                 print(f"Aviso: Erro ao carregar o ficheiro de pesos: {e}. O modelo será treinado do zero.")
                 self.pesos = None
                 self.heuristicas_ordenadas = []
+                return False
         else:
             print("Aviso: Ficheiro de pesos não encontrado. O modelo será treinado do zero.")
             self.pesos = None
             self.heuristicas_ordenadas = []
+            return False
 
     def save_pesos(self):
         os.makedirs(os.path.dirname(self.caminho_pesos), exist_ok=True)
@@ -43,6 +46,11 @@ class HeuristicDecisor:
             }, f, indent=2, ensure_ascii=False)
 
     def fit(self, X_treino, y_treino, heuristicas_ordenadas):
+        # A nova verificação garante que o treino só acontece se for necessário
+        if self.pesos is not None and self.heuristicas_ordenadas:
+            print("Modelo já treinado. Apenas o usaremos para a previsão.")
+            return
+
         if not X_treino or not y_treino:
             print("Nenhum dado de treino fornecido.")
             return
@@ -51,9 +59,9 @@ class HeuristicDecisor:
         self.pesos = self.modelo_ml.coef_[0]
         self.heuristicas_ordenadas = heuristicas_ordenadas
         self.save_pesos()
+        print("Treino concluído. Pesos guardados em:", self.caminho_pesos)
 
     def predict(self, previsoes_detalhes):
-        # A verificação foi alterada para evitar o ValueError
         if self.pesos is None or not self.heuristicas_ordenadas:
             print("Modelo não treinado ou pesos não carregados. A usar pesos padrão.")
             return []
