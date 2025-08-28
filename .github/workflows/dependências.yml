@@ -15,11 +15,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"
+          # Especifique a versão exata do Python que o pip está a usar
+          # Com base no seu log, o pip está a usar 3.13.7
+          python-version: "3.13" 
 
-      - name: Instalar dependências
+      - name: Instalar dependências e executar scripts
         run: |
+          # Use o python configurado pela ação para garantir consistência
           python -m pip install --upgrade pip
-          pip install -r requirements.txt 
+          pip install -r requirements.txt  
           python treinar_decisor.py  
           python gerar_previsao.py
