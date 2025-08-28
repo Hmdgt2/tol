@@ -1,7 +1,7 @@
 # heuristicas/balanceamento_tipos.py
 from collections import Counter
 
-def prever(estatisticas, n=2):
+def prever(estatisticas, n=5):
     """
     Prevê números com base no padrão de balanceamento de pares, ímpares e primos.
     A heurística sugere os números mais frequentes que correspondem ao padrão mais comum.
