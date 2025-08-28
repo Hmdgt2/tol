@@ -1,116 +1,180 @@
 {
   "previsao": [
-    16,
-    44
+    4,
+    23,
+    26,
+    32,
+    33,
+    46
   ],
   "detalhes": [
     {
-      "heuristica": "pares_frequentes",
+      "nome": "distribuicao_grupos",
       "numeros": [
-        45,
-        22
+        4,
+        16,
+        26,
+        32,
+        46
       ]
     },
     {
-      "heuristica": "distribuicao_quadrantes",
+      "nome": "pares_frequentes",
       "numeros": [
-        7,
-        44
+        4,
+        21,
+        24,
+        39,
+        45
       ]
     },
     {
-      "heuristica": "quentes_frios",
+      "nome": "distribuicao_quadrantes",
       "numeros": [
-        3,
-        13
+        4,
+        23,
+        32,
+        33,
+        46
       ]
     },
     {
-      "heuristica": "soma_provavel",
+      "nome": "quentes_frios",
+      "numeros": [
+        2,
+        4,
+        13,
+        17,
+        18,
+        20,
+        27,
+        34,
+        37,
+        38
+      ]
+    },
+    {
+      "nome": "soma_provavel",
       "numeros": [
         16,
-        44
+        21,
+        23,
+        24,
+        32
       ]
     },
     {
-      "heuristica": "frequencia_terminacoes",
+      "nome": "frequencia_terminacoes",
       "numeros": [
-        16,
-        22
+        23,
+        26,
+        33,
+        38,
+        46
       ]
     },
     {
-      "heuristica": "frequencia_total",
+      "nome": "frequencia_total",
       "numeros": [
-        16,
-        19
+        32,
+        33,
+        26,
+        23,
+        46
       ]
     },
     {
-      "heuristica": "crescimento_ano",
+      "nome": "crescimento_ano",
+      "numeros": [
+        8,
+        23,
+        37,
+        39,
+        1
+      ]
+    },
+    {
+      "nome": "ausencia_superior_media",
+      "numeros": [
+        20,
+        37,
+        13,
+        2,
+        38
+      ]
+    },
+    {
+      "nome": "gap_medio",
+      "numeros": [
+        26,
+        32,
+        23,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "repeticoes_sorteios_anteriores",
       "numeros": []
     },
     {
-      "heuristica": "ausencia_superior_media",
-      "numeros": [
-        39,
-        3
-      ]
-    },
-    {
-      "heuristica": "gap_medio",
-      "numeros": [
-        16,
-        44
-      ]
-    },
-    {
-      "heuristica": "repeticoes_sorteios_anteriores",
-      "numeros": [
-        13,
-        35
-      ]
-    },
-    {
-      "heuristica": "trios_frequentes",
+      "nome": "trios_frequentes",
       "numeros": [
         6,
-        12
-      ]
-    },
-    {
-      "heuristica": "balanceamento_tipos",
-      "numeros": [
         16,
-        19
+        24,
+        34,
+        46
       ]
     },
     {
-      "heuristica": "pares_consecutivos",
+      "nome": "balanceamento_tipos",
       "numeros": [
-        15,
-        16
+        23,
+        26,
+        32,
+        33,
+        46
       ]
     },
     {
-      "heuristica": "padrao_finais",
+      "nome": "pares_consecutivos",
       "numeros": [
-        7,
-        19
+        32,
+        33,
+        36,
+        37,
+        47
       ]
     },
     {
-      "heuristica": "frequencia_soma",
+      "nome": "padrao_finais",
       "numeros": [
-        47,
+        4,
+        24,
+        34,
+        38,
         48
       ]
     },
     {
-      "heuristica": "tendencia_recentes",
+      "nome": "frequencia_soma",
       "numeros": [
-        13,
-        37
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "tendencia_recentes",
+      "numeros": [
+        4,
+        5,
+        11,
+        17,
+        33
       ]
     }
   ]
