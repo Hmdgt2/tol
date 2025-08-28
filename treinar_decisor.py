@@ -11,14 +11,17 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Adiciona a importação das funções de dados
-from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios, get_incremental_stats
+# Importa as funções de dados e o decisor
+from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 from decisor.decisor_final import HeuristicDecisor
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 PESOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
 
 def carregar_heuristicas():
+    """
+    Carrega dinamicamente todas as heurísticas do diretório 'heuristicas'.
+    """
     heuristicas = []
     for ficheiro in os.listdir(HEURISTICAS_DIR):
         if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
@@ -32,6 +35,10 @@ def carregar_heuristicas():
     return heuristicas
 
 def treinar_decisor():
+    """
+    Treina o modelo decisor usando dados históricos.
+    Otimizado para evitar recálculos excessivos.
+    """
     sorteios_historico = carregar_sorteios()
     heuristicas = carregar_heuristicas()
 
@@ -39,44 +46,50 @@ def treinar_decisor():
         print("Dados ou heurísticas insuficientes para treinar o decisor.")
         return
 
+    # --- ETAPA 1: PRÉ-CÁLCULO DAS PREVISÕES ---
+    # Esta parte do código é a mais lenta, mas é executada apenas uma vez.
     print("Simulando previsões de heurísticas para dados históricos...")
     
-    X_treino = []
-    y_treino = []
+    previsoes_por_sorteio = defaultdict(dict)
     
-    heuristicas_ordenadas = [nome for nome, _ in heuristicas]
-    
-    # Prepara as estatísticas iniciais
-    if sorteios_historico:
-        stats_parciais = get_all_stats([sorteios_historico[0]])
-    else:
-        stats_parciais = {}
-
+    # Loop para simular cada sorteio no histórico e gerar as previsões das heurísticas
     for i in range(len(sorteios_historico) - 1):
-        # AQUI ESTÁ A OTIMIZAÇÃO: Apenas atualiza as estatísticas com o novo sorteio
-        stats_parciais = get_incremental_stats(stats_parciais, sorteios_historico[i])
-        
         historico_parcial = sorteios_historico[:i+1]
-        sorteio_alvo = sorteios_historico[i+1]
         
-        # Recalcula a estatística de repetições, que é a mais complexa
-        stats_parciais['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(historico_parcial, num_sorteios=100)
+        # Calcula todas as estatísticas para o histórico parcial
+        estatisticas = get_all_stats(historico_parcial)
+        estatisticas['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(historico_parcial, num_sorteios=100)
 
-        previsoes_sorteio_atual = {}
-        
         for nome, funcao in heuristicas:
             try:
+                # Usa inspect para verificar a assinatura da função 'prever'
                 parametros = inspect.signature(funcao).parameters
                 
+                # Chamada condicional para passar os argumentos corretos
                 if 'sorteios_historico' in parametros:
-                    resultado = funcao(stats_parciais, historico_parcial, n=5)
+                    resultado = funcao(estatisticas, historico_parcial, n=5)
                 else:
-                    resultado = funcao(stats_parciais, n=5)
-                    
-                previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
+                    resultado = funcao(estatisticas, n=5)
+                
+                # Armazena o resultado da previsão
+                previsoes_por_sorteio[i][nome] = resultado.get("numeros", [])
             except Exception as e:
+                # Se uma heurística falhar, o treino não é interrompido
                 print(f"Erro inesperado na heurística {nome}: {e}")
-                previsoes_sorteio_atual[nome] = []
+                previsoes_por_sorteio[i][nome] = []
+
+    print("Pré-cálculo concluído. A criar os dados de treino para o modelo de ML...")
+    
+    # --- ETAPA 2: CRIAÇÃO DOS DADOS DE TREINO E TREINO DO MODELO ---
+    # Esta parte é extremamente rápida porque usa os dados pré-calculados.
+    X_treino = []
+    y_treino = []
+    heuristicas_ordenadas = [nome for nome, _ in heuristicas]
+
+    # Loop para gerar os vetores de treino a partir dos dados pré-calculados
+    for i in range(len(sorteios_historico) - 1):
+        sorteio_alvo = sorteios_historico[i+1]
+        previsoes_sorteio_atual = previsoes_por_sorteio[i]
         
         for num in range(1, 50):
             feature_vector = [1 if num in previsoes_sorteio_atual.get(nome, []) else 0 for nome in heuristicas_ordenadas]
