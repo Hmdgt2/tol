@@ -1,41 +1,62 @@
-from lib.dados import analisar_distribuicao_grupos
+# heuristicas/distribuicao_grupos.py
 from collections import Counter
-import random
 
-def prever(sorteios, n=2):
-    padrao_ideal_grupos = analisar_distribuicao_grupos(sorteios)
-    frequencia_geral = Counter()
-    for s in sorteios:
-        frequencia_geral.update(s.get('numeros', []))
+def prever(estatisticas, n=2):
+    """
+    Prevê números com base na distribuição mais frequente por grupos (dezenas).
 
+    Args:
+        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
+        n (int): O número de sugestões a retornar.
+    
+    Returns:
+        dict: Um dicionário com o nome da heurística e os números sugeridos.
+    """
+    # Acessa diretamente as estatísticas de distribuição de dezenas e frequência total
+    padrao_ideal = estatisticas.get('distribuicao_dezenas', (0, 0, 0, 0, 0))
+    frequencia = estatisticas.get('frequencia_total', {})
+    
+    if not frequencia:
+        return {
+            "nome": "distribuicao_grupos",
+            "numeros": []
+        }
+
+    # Ordena os grupos pela contagem ideal
     grupos_ordenados = sorted(
-        enumerate(padrao_ideal_grupos),
+        enumerate(padrao_ideal),
         key=lambda item: item[1],
         reverse=True
-    ) # (índice_grupo, contagem_ideal)
+    )
 
     sugeridos = []
-    # Define as faixas dos grupos (ex: 1-10, 11-20, etc.)
     faixas = [(1, 10), (11, 20), (21, 30), (31, 40), (41, 49)]
 
-    for idx_grupo, _ in grupos_ordenados[:min(2, len(grupos_ordenados))]:
+    # Itera sobre os grupos mais frequentes
+    for idx_grupo, _ in grupos_ordenados:
         limite_inferior, limite_superior = faixas[idx_grupo]
 
-        candidatos_no_grupo = [
-            num for num, _ in frequencia_geral.most_common(len(frequencia_geral))
-            if limite_inferior <= num <= limite_superior
-        ]
+        # Encontra os números mais frequentes nessa faixa
+        candidatos_na_faixa = sorted(
+            [num for num, _ in frequencia.items() if limite_inferior <= num <= limite_superior],
+            key=lambda num: frequencia[num],
+            reverse=True
+        )
         
-        if candidatos_no_grupo and len(sugeridos) < n:
-            sugeridos.append(candidatos_no_grupo[0])
+        # Adiciona o número mais frequente dessa faixa, se ele não estiver já na lista
+        if candidatos_na_faixa and candidatos_na_faixa[0] not in sugeridos:
+            sugeridos.append(candidatos_na_faixa[0])
+            if len(sugeridos) >= n:
+                break
 
+    # Se a lista ainda não tiver n números, preenche com os mais frequentes
     if len(sugeridos) < n:
-        todos_mais_frequentes = [num for num, _ in frequencia_geral.most_common(len(frequencia_geral))]
+        todos_mais_frequentes = [num for num, _ in Counter(frequencia).most_common(len(frequencia))]
         for num in todos_mais_frequentes:
             if num not in sugeridos and len(sugeridos) < n:
                 sugeridos.append(num)
-
+    
     return {
-        "heuristica": "distribuicao_grupos",
-        "numeros": sorted(list(set(sugeridos)))[:n]
+        "nome": "distribuicao_grupos",
+        "numeros": sorted(list(set(sugeridos)))
     }
