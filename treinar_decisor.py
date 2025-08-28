@@ -2,7 +2,9 @@
 import os
 import sys
 import importlib
-from collections import defaultdict
+from collections import defaultdict, Counter
+from itertools import combinations
+import json
 
 # Adiciona o diretório raiz ao caminho do sistema
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -29,10 +31,6 @@ def carregar_heuristicas():
     return heuristicas
 
 def treinar_decisor():
-    """
-    Carrega dados históricos, simula as previsões das heurísticas para cada sorteio
-    e treina o decisor final.
-    """
     sorteios_historico = carregar_sorteios()
     heuristicas = carregar_heuristicas()
 
@@ -40,25 +38,36 @@ def treinar_decisor():
         print("Dados ou heurísticas insuficientes para treinar o decisor.")
         return
 
-    todas_as_previsoes = []
-    
     # Gera as previsões das heurísticas para CADA sorteio histórico
     print("Simulando previsões de heurísticas para dados históricos...")
-    for sorteio in sorteios_historico:
-        stats = get_all_stats(sorteios_historico[:sorteios_historico.index(sorteio)])
+    
+    # Prepara os dados para o treino
+    X_treino = []
+    y_treino = []
+
+    # Iterar sobre cada sorteio no histórico, exceto o último, que não tem resultado para treinar
+    for i in range(len(sorteios_historico) - 1):
+        historico_parcial = sorteios_historico[:i+1]
+        sorteio_alvo = sorteios_historico[i+1]
+        
+        # Calcula estatísticas e previsões com base apenas no histórico anterior
+        estatisticas = get_all_stats(historico_parcial)
         previsoes_sorteio_atual = {}
         for nome, funcao in heuristicas:
-            # Assumindo que as heurísticas podem aceitar stats e histórico
-            if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
-                previsao = funcao(stats, sorteios_historico[:sorteios_historico.index(sorteio)], n=5)
-            else:
-                previsao = funcao(stats, n=5)
-            previsoes_sorteio_atual[nome] = previsao
-        todas_as_previsoes.append(previsoes_sorteio_atual)
+            previsoes_sorteio_atual[nome] = funcao(estatisticas, historico_parcial, n=5).get("numeros", [])
+        
+        # Cria o vetor de features (X) e o vetor de labels (y) para o treino
+        features_sorteio = []
+        for num in range(1, 50):
+            feature_vector = [1 if num in previsoes_sorteio_atual.get(nome, []) else 0 for nome, _ in heuristicas]
+            X_treino.append(feature_vector)
+            
+            # 1 se o número foi sorteado, 0 caso contrário
+            y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
 
     decisor = HeuristicDecisor(caminho_pesos=PESOS_PATH)
     print("A treinar o modelo de decisão...")
-    decisor.fit(sorteios_historico, todas_as_previsoes)
+    decisor.fit(X_treino, y_treino)
     print("Treino concluído. Pesos guardados em:", PESOS_PATH)
 
 if __name__ == '__main__':
