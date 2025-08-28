@@ -1,7 +1,7 @@
 # heuristicas/padrao_finais.py
 from collections import Counter
 
-def prever(estatisticas, sorteios_historico, n=2):
+def prever(estatisticas, sorteios_historico, n=5):
     """
     Prevê números com base na frequência das terminações que coincidiram
     com o último sorteio.
