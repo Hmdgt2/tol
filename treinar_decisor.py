@@ -42,27 +42,26 @@ def treinar_decisor():
     
     X_treino = []
     y_treino = []
+    
+    # Lista de todas as heurísticas que vamos usar para criar o vetor de features
+    heuristicas_ordenadas = [nome for nome, _ in heuristicas]
 
-    # Iterar sobre cada sorteio no histórico, exceto o último
+    # Iterar sobre cada sorteio no histórico, exceto o último, que não tem resultado para treinar
     for i in range(len(sorteios_historico) - 1):
         historico_parcial = sorteios_historico[:i+1]
         sorteio_alvo = sorteios_historico[i+1]
         
-        # Calcula estatísticas com base no histórico parcial
         estatisticas = get_all_stats(historico_parcial)
         previsoes_sorteio_atual = {}
         
         for nome, funcao in heuristicas:
-            # Chama a função 'prever' com os argumentos corretos para cada heurística
             try:
                 if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
                     resultado = funcao(estatisticas, historico_parcial, n=5)
                 else:
                     resultado = funcao(estatisticas, n=5)
                 previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
-            except TypeError as e:
-                # Trata o caso em que 'n' é um argumento duplicado.
-                # Remove o argumento nomeado 'n' e tenta novamente.
+            except TypeError:
                 try:
                     if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
                         resultado = funcao(estatisticas, historico_parcial)
@@ -71,19 +70,26 @@ def treinar_decisor():
                     previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
                 except Exception as inner_e:
                     print(f"Erro na heurística {nome} após tentativa de correção: {inner_e}")
+                    previsoes_sorteio_atual[nome] = []
             except Exception as e:
                 print(f"Erro inesperado na heurística {nome}: {e}")
-
+                previsoes_sorteio_atual[nome] = []
+        
         # Cria o vetor de features (X) e o vetor de labels (y) para o treino
         for num in range(1, 50):
-            feature_vector = [1 if num in previsoes_sorteio_atual.get(nome, []) else 0 for nome, _ in heuristicas]
+            feature_vector = [1 if num in previsoes_sorteio_atual.get(nome, []) else 0 for nome in heuristicas_ordenadas]
             X_treino.append(feature_vector)
             
             y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
 
+    if not X_treino:
+        print("Nenhum dado de treino gerado.")
+        return
+
     decisor = HeuristicDecisor(caminho_pesos=PESOS_PATH)
     print("A treinar o modelo de decisão...")
-    decisor.fit(X_treino, y_treino)
+    # Passa as listas de features (X) e labels (y) diretamente para o fit
+    decisor.fit(X_treino, y_treino, heuristicas_ordenadas)
     print("Treino concluído. Pesos guardados em:", PESOS_PATH)
 
 if __name__ == '__main__':
