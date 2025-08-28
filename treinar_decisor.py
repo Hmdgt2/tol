@@ -1,4 +1,3 @@
-# treinar_decisor.py
 import os
 import sys
 import importlib
@@ -11,7 +10,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from lib.dados import carregar_sorteios, get_all_stats
+# Adiciona a importação da nova função de estatísticas
+from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 from decisor.decisor_final import HeuristicDecisor
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
@@ -51,7 +51,10 @@ def treinar_decisor():
         historico_parcial = sorteios_historico[:i+1]
         sorteio_alvo = sorteios_historico[i+1]
         
+        # Calcula as estatísticas e as repetições para o histórico parcial
         estatisticas = get_all_stats(historico_parcial)
+        estatisticas['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(historico_parcial, num_sorteios=100)
+
         previsoes_sorteio_atual = {}
         
         for nome, funcao in heuristicas:
