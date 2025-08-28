@@ -1,4 +1,3 @@
-# lib/dados.py
 import os
 import json
 from collections import Counter, defaultdict
@@ -47,6 +46,37 @@ def carregar_sorteios(pasta=PASTA_DADOS):
         return sorteios_validos
     
     return []
+
+# Adição da função para calcular repetições
+def get_repeticoes_ultimos_sorteios(sorteios, num_sorteios=100):
+    """
+    Calcula a probabilidade de repetição de 0, 1, 2, ... números
+    nos últimos 'num_sorteios' sorteios.
+    """
+    if len(sorteios) < num_sorteios:
+        num_sorteios = len(sorteios)
+        
+    repeticoes_count = Counter()
+    
+    for i in range(len(sorteios) - 1, len(sorteios) - num_sorteios - 1, -1):
+        if i > 0:
+            sorteio_atual_numeros = set(sorteios[i].get('numeros', []))
+            sorteio_anterior_numeros = set(sorteios[i-1].get('numeros', []))
+            
+            numeros_repetidos = len(sorteio_atual_numeros.intersection(sorteio_anterior_numeros))
+            repeticoes_count[numeros_repetidos] += 1
+            
+    total_sorteios = sum(repeticoes_count.values())
+    
+    if total_sorteios == 0:
+      return {}
+
+    probabilidades = {
+        repeticoes: count / total_sorteios
+        for repeticoes, count in repeticoes_count.items()
+    }
+    
+    return probabilidades
 
 def is_prime(n):
     if n < 2:
