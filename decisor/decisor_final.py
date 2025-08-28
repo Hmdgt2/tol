@@ -1,119 +1,83 @@
 # decisor/decisor_final.py
-import os
 import json
-from collections import defaultdict
-from sklearn.linear_model import LogisticRegression
+import os
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 
 class HeuristicDecisor:
-    def __init__(self, caminho_pesos=None):
+    def __init__(self, caminho_pesos='decisor/pesos_atuais.json'):
         self.caminho_pesos = caminho_pesos
-        self.pesos = self.carregar_pesos()
-        self.modelo_ml = LogisticRegression()
+        self.modelo_ml = LogisticRegression(solver='liblinear')
+        self.pesos = None
+        self.heuristicas_ordenadas = []
+        self.load_pesos()
 
-    def carregar_pesos(self):
-        """Carrega os pesos do arquivo JSON se ele existir."""
-        if self.caminho_pesos and os.path.exists(self.caminho_pesos):
+    def load_pesos(self):
+        if os.path.exists(self.caminho_pesos):
             with open(self.caminho_pesos, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return {}
+                dados = json.load(f)
+                self.pesos = np.array(dados['pesos'])
+                self.heuristicas_ordenadas = dados['heuristicas']
+                self.modelo_ml.coef_ = np.array([self.pesos])
+                # Dummy call to make it "fitted"
+                self.modelo_ml.fit([[0] * len(self.heuristicas_ordenadas)], [0])
 
-    def guardar_pesos(self):
-        """Guarda os pesos do modelo em um arquivo JSON."""
-        if self.caminho_pesos and self.pesos:
-            with open(self.caminho_pesos, 'w', encoding='utf-8') as f:
-                json.dump(self.pesos, f, indent=4)
+    def save_pesos(self):
+        os.makedirs(os.path.dirname(self.caminho_pesos), exist_ok=True)
+        with open(self.caminho_pesos, 'w', encoding='utf-8') as f:
+            json.dump({
+                'heuristicas': self.heuristicas_ordenadas,
+                'pesos': self.pesos.tolist()
+            }, f, indent=2, ensure_ascii=False)
 
-    def fit(self, historico_resultados, previsoes_heuristica):
+    def fit(self, X_treino, y_treino, heuristicas_ordenadas):
         """
-        Treina o modelo de ML para aprender os pesos ideais.
-        """
-        X = []  # As features (entradas)
-        y = []  # Os rótulos (saídas, 1 se o número foi sorteado, 0 caso contrário)
+        Treina o modelo de regressão logística com base nas previsões históricas.
         
-        # Obter a lista de todas as heurísticas presentes nos dados
-        todas_as_heuristicas = []
-        if previsoes_heuristica:
-            todas_as_heuristicas = list(previsoes_heuristica[0].keys())
-
-        # Converte os dados em um formato que o modelo de ML entenda
-        for i, sorteio_real in enumerate(historico_resultados):
-            numeros_sorteados = set(sorteio_real.get('numeros', []))
-            
-            # Pega as previsões para este sorteio
-            previsoes_atuais = previsoes_heuristica[i]
-            
-            for num in range(1, 50):  # Para cada número possível
-                row = []
-                for heuristica_nome in todas_as_heuristicas:
-                    previsoes_num = previsoes_atuais.get(heuristica_nome, {}).get('numeros', [])
-                    # A feature é 1 se a heurística sugeriu o número, 0 caso contrário
-                    row.append(1 if num in previsoes_num else 0)
-                
-                X.append(row)
-                y.append(1 if num in numeros_sorteados else 0)
-        
-        # Se houver dados, treina o modelo
-        if X and y:
-            self.modelo_ml.fit(X, y)
-            
-            # Guarda os pesos aprendidos pelo modelo
-            self.pesos = {
-                heuristica: peso for heuristica, peso in zip(todas_as_heuristicas, self.modelo_ml.coef_[0])
-            }
-            self.guardar_pesos()
-            print("Modelo de decisor treinado com sucesso.")
-        else:
-            print("Dados insuficientes para treinar o modelo de decisor.")
-
-    def predict(self, previsoes_heuristica_atual):
+        :param X_treino: Matriz de features.
+        :param y_treino: Vetor de labels.
+        :param heuristicas_ordenadas: Lista com os nomes das heurísticas na ordem correta.
         """
-        Faz a previsão final usando o modelo treinado.
-        
-        Args:
-            previsoes_heuristica_atual (list): Lista de previsões de cada heurística para o próximo sorteio.
+        if not X_treino or not y_treino:
+            print("Nenhum dado de treino fornecido.")
+            return
+
+        self.modelo_ml.fit(X_treino, y_treino)
+        self.pesos = self.modelo_ml.coef_[0]
+        self.heuristicas_ordenadas = heuristicas_ordenadas
+        self.save_pesos()
+
+    def predict(self, previsoes_detalhes):
         """
-        todas_as_heuristicas = list(self.pesos.keys())
+        Faz uma previsão usando o modelo treinado.
+        
+        :param previsoes_detalhes: Lista de dicionários com as previsões das heurísticas.
+        :return: Lista de 6 números mais prováveis.
+        """
+        if not self.pesos or not self.heuristicas_ordenadas:
+            print("Modelo não treinado ou pesos não carregados. A usar pesos padrão.")
+            # Retorna uma previsão padrão se o modelo não estiver pronto
+            return []
+
+        # Mapeia as previsões para a ordem correta
+        previsoes_mapeadas = {d['nome']: d['numeros'] for d in previsoes_detalhes}
+        
+        # Cria a matriz de features para a previsão
         X_novo = []
-        
-        # Converte as previsões atuais para o formato de features
         for num in range(1, 50):
-            row = []
-            for heuristica_nome in todas_as_heuristicas:
-                # Encontra a lista de números para a heurística atual
-                numeros_previstos = []
-                for item in previsoes_heuristica_atual:
-                    if item['nome'] == heuristica_nome:
-                        numeros_previstos = item.get('numeros', [])
-                        break
-                row.append(1 if num in numeros_previstos else 0)
-            X_novo.append(row)
+            feature_vector = [1 if num in previsoes_mapeadas.get(nome, []) else 0 for nome in self.heuristicas_ordenadas]
+            X_novo.append(feature_vector)
+        
+        if not X_novo:
+            return []
 
-        if not hasattr(self.modelo_ml, 'predict_proba'):
-            print("Erro: O modelo de ML não foi treinado. Usando pontuação baseada em pesos.")
-            # Fallback para a lógica de pontuação simples se o modelo não foi treinado
-            pontuacoes = defaultdict(float)
-            for item in previsoes_heuristica_atual:
-                nome = item["nome"]
-                numeros = item["numeros"]
-                peso = self.pesos.get(nome, 1.0)
-                for num in numeros:
-                    pontuacoes[num] += peso
-            escolhidos = sorted(pontuacoes.items(), key=lambda x: x[1], reverse=True)
-            return [num for num, _ in escolhidos[:5]]
-
-        # Usa o modelo treinado para prever as probabilidades
+        # Faz a previsão e obtém as probabilidades
         probabilidades = self.modelo_ml.predict_proba(X_novo)[:, 1]
-        
-        # Associa cada número à sua probabilidade
-        pontuacoes = {i + 1: prob for i, prob in enumerate(probabilidades)}
-        
-        # Seleciona os 5 números com maior probabilidade
-        escolhidos = sorted(pontuacoes.items(), key=lambda x: x[1], reverse=True)
-        return [num for num, _ in escolhidos[:5]]
 
-# Esta função de conveniência não é mais necessária com a nova lógica do 'gerar_previsao.py'
-# Mas pode mantê-la se precisar dela para compatibilidade com outros scripts.
-def decidir_final(detalhes, caminho_pesos=None):
-    decisor = HeuristicDecisor(caminho_pesos)
-    return decisor.predict(detalhes)
+        # Combina números e probabilidades e ordena por probabilidade
+        numeros_com_prob = sorted(zip(range(1, 50), probabilidades), key=lambda x: x[1], reverse=True)
+        
+        # Seleciona os 6 números mais prováveis
+        previsao_final = [num for num, prob in numeros_com_prob[:6]]
+        
+        return previsao_final
