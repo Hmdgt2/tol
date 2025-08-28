@@ -1,7 +1,7 @@
 # heuristicas/tendencia_recentes.py
 from collections import Counter
 
-def prever(sorteios_historico, n=2, janela=10):
+def prever(sorteios_historico, n=5, janela=10):
     """
     Prevê números com base na sua frequência nos sorteios mais recentes.
 
