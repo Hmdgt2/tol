@@ -43,15 +43,12 @@ def treinar_decisor():
     X_treino = []
     y_treino = []
     
-    # Lista de todas as heurísticas que vamos usar para criar o vetor de features
     heuristicas_ordenadas = [nome for nome, _ in heuristicas]
 
-    # Iterar sobre cada sorteio no histórico, exceto o último, que não tem resultado para treinar
     for i in range(len(sorteios_historico) - 1):
         historico_parcial = sorteios_historico[:i+1]
         sorteio_alvo = sorteios_historico[i+1]
         
-        # Calcula as estatísticas e as repetições para o histórico parcial
         estatisticas = get_all_stats(historico_parcial)
         estatisticas['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(historico_parcial, num_sorteios=100)
 
@@ -59,16 +56,15 @@ def treinar_decisor():
         
         for nome, funcao in heuristicas:
             try:
-                # O CÓDIGO AQUI FOI CORRIGIDO
-                # Ele agora passa sempre ambos os argumentos, `estatisticas` e `historico_parcial`,
-                # e os valores padrão (`n=5`) são aplicados automaticamente.
-                resultado = funcao(estatisticas, historico_parcial, n=5)
+                # O CÓDIGO CORRIGIDO ESTÁ AQUI
+                # A chamada agora passa todos os argumentos possíveis para todas as heurísticas.
+                # A correção virá no passo 2, onde as heurísticas vão ignorar os argumentos extra.
+                resultado = funcao(estatisticas=estatisticas, sorteios_historico=historico_parcial, n=5)
                 previsoes_sorteio_atual[nome] = resultado.get("numeros", [])
             except Exception as e:
                 print(f"Erro inesperado na heurística {nome}: {e}")
                 previsoes_sorteio_atual[nome] = []
         
-        # Cria o vetor de features (X) e o vetor de labels (y) para o treino
         for num in range(1, 50):
             feature_vector = [1 if num in previsoes_sorteio_atual.get(nome, []) else 0 for nome in heuristicas_ordenadas]
             X_treino.append(feature_vector)
@@ -81,7 +77,6 @@ def treinar_decisor():
 
     decisor = HeuristicDecisor(caminho_pesos=PESOS_PATH)
     print("A treinar o modelo de decisão...")
-    # Passa as listas de features (X) e labels (y) diretamente para o fit
     decisor.fit(X_treino, y_treino, heuristicas_ordenadas)
     print("Treino concluído. Pesos guardados em:", PESOS_PATH)
 
