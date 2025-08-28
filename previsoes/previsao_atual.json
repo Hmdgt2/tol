@@ -1,12 +1,5 @@
 {
-  "previsao": [
-    4,
-    23,
-    26,
-    32,
-    33,
-    46
-  ],
+  "previsao": [],
   "detalhes": [
     {
       "nome": "distribuicao_grupos",
