@@ -2,35 +2,30 @@
 import importlib
 import os
 import json
-import sys # Importa o módulo sys
+import sys
+from collections import defaultdict
 
-# Adiciona o diretório raiz do projeto ao sys.path
-# Isso permite que as importações como 'from lib.dados import ...' funcionem corretamente
-# Assumimos que 'lib' e 'heuristicas' estão no mesmo nível do 'gerar_previsao.py'
+# Assumimos que 'lib' e 'heuristicas' estão no mesmo nível.
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from lib.dados import carregar_sorteios # Esta linha agora deve funcionar
+from lib.dados import carregar_sorteios, get_all_stats
+from decisor.decisor_final import HeuristicDecisor # Usa o novo decisor
 
-HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas') # Usa PROJECT_ROOT
-PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')   # Usa PROJECT_ROOT
+# Define o caminho para a pasta de heurísticas e previsões
+HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
+PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
 FICHEIRO_PREVISAO = os.path.join(PASTA_PREVISOES, 'previsao_atual.json')
-
+PESOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
 
 def carregar_heuristicas():
+    """Carrega dinamicamente todas as funções 'prever' do diretório de heurísticas."""
     heuristicas = []
-    # Cria um pacote Python temporário para importação dinâmica, se necessário
-    # ou garante que o diretório 'heuristicas' é um pacote.
-    # Neste cenário, a importação direta 'heuristicas.nome_modulo' funciona melhor
-    # se o diretório raiz do projeto estiver no sys.path.
-
     for ficheiro in os.listdir(HEURISTICAS_DIR):
         if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
             nome_modulo = ficheiro[:-3]
             try:
-                # O importlib.import_module espera um nome de módulo completo.
-                # Como adicionamos o PROJECT_ROOT ao sys.path, 'heuristicas' é agora um pacote.
                 modulo = importlib.import_module(f"heuristicas.{nome_modulo}")
                 if hasattr(modulo, 'prever'):
                     heuristicas.append((nome_modulo, modulo.prever))
@@ -40,17 +35,55 @@ def carregar_heuristicas():
                 print(f"Erro inesperado ao carregar heurística {nome_modulo}: {e}")
     return heuristicas
 
+def gerar_previsao():
+    """
+    Gera uma previsão de números com base em múltiplas heurísticas
+    e um decisor ponderado.
+    """
+    sorteios_historico = carregar_sorteios()
+    heuristicas = carregar_heuristicas()
 
-def combinar_resultados(sugestoes):
-    from collections import Counter
-    contador = Counter()
-    for lista_numeros in sugestoes:
-        contador.update(lista_numeros)
-    mais_comuns = [num for num, _ in contador.most_common(2)]
-    return sorted(mais_comuns)
+    if not sorteios_historico:
+        print("Erro: Nenhum sorteio histórico encontrado. Não é possível gerar uma previsão.")
+        return
 
+    # Calcula todas as estatísticas uma única vez
+    estatisticas = get_all_stats(sorteios_historico)
+    
+    print("\n--- Previsões das Heurísticas ---\n")
+    detalhes_previsoes = []
+
+    # Executa todas as heurísticas e armazena os resultados
+    for nome, funcao in heuristicas:
+        try:
+            # Algumas heurísticas precisam do histórico completo
+            if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
+                resultado_heuristica = funcao(estatisticas, sorteios_historico, n=5)
+            else:
+                resultado_heuristica = funcao(estatisticas, n=5)
+            
+            numeros = resultado_heuristica.get("numeros", [])
+            print(f"{nome:<35}: {numeros}")
+            detalhes_previsoes.append({"nome": nome, "numeros": numeros})
+        except Exception as e:
+            print(f"Erro na heurística {nome:<35}: {e}")
+
+    # Usa o decisor final para combinar os resultados
+    print("\n--- Sugestão Final ---")
+    
+    # O decisor precisa ser treinado com dados históricos para ser eficaz
+    # Mas para uma previsão única, usamos os pesos que ele já aprendeu
+    decisor = HeuristicDecisor(caminho_pesos=PESOS_PATH)
+    previsao_final = decisor.predict(detalhes_previsoes)
+    
+    print("Previsão Final (combinada):", sorted(previsao_final))
+    print("---")
+
+    # Guardar a previsão e os detalhes
+    guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
 
 def guardar_previsao_json(combinados, detalhes):
+    """Guarda a previsão final e os detalhes das heurísticas em um arquivo JSON."""
     os.makedirs(PASTA_PREVISOES, exist_ok=True)
     dados = {
         "previsao": combinados,
@@ -58,33 +91,6 @@ def guardar_previsao_json(combinados, detalhes):
     }
     with open(FICHEIRO_PREVISAO, 'w', encoding='utf-8') as f:
         json.dump(dados, f, indent=2, ensure_ascii=False)
-
-
-def gerar_previsao():
-    sorteios = carregar_sorteios()
-    heuristicas = carregar_heuristicas()
-
-    print("\nPrevisão com base em heurísticas:\n")
-    sugestoes = []
-    detalhes = []
-
-    for nome, funcao in heuristicas:
-        try:
-            resultado_heuristica = funcao(sorteios, n=2)
-            numeros = resultado_heuristica.get("numeros", [])
-            print(f"{nome:<35}: {numeros}")
-            sugestoes.append(numeros)
-            detalhes.append({"heuristica": nome, "numeros": numeros})
-        except Exception as e:
-            print(f"Erro na heurística {nome:<35}: {e}")
-
-    combinados = combinar_resultados(sugestoes)
-    print("\n---")
-    print("Sugestão final (combinada):", combinados)
-    print("---")
-
-    guardar_previsao_json(combinados, detalhes)
-
 
 if __name__ == '__main__':
     gerar_previsao()
