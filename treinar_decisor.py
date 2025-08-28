@@ -13,13 +13,18 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Importa as funções de dados e o decisor (apenas para a classe)
+# Importa as funções de dados
 from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
-from decisor.decisor_final import HeuristicDecisor
+# A classe HeuristicDecisor será ajustada para carregar este novo formato posteriormente
+from decisor.decisor_final import HeuristicDecisor 
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
-# Altere para o caminho JSON, se necessário, ou mantenha o que está no seu código original
-PESOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
+
+# Caminho para o ficheiro JSON de pesos (agora conterá metadados e o caminho para o modelo .joblib)
+PESOS_JSON_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
+# Caminho para o ficheiro Joblib que armazenará o modelo de ML real
+MODELO_JOBLIB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_ml.joblib')
+
 
 def carregar_heuristicas():
     """
@@ -96,23 +101,29 @@ def treinar_decisor():
         return
 
     print("A treinar o modelo de Gradient Boosting...")
-    # Use o modelo diretamente, sem a classe HeuristicDecisor
     modelo_ml = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
     modelo_ml.fit(X_treino, y_treino)
 
-    # --- NOVO: SALVA OS PESOS DIRETAMENTE NO JSON ---
-    pesos = {
-        'modelo_ml': joblib.dump(modelo_ml), # Serializa o modelo
-        'heuristicas': heuristicas_ordenadas
+    # --- NOVO: SALVA O MODELO EM .JOBLIB E METADADOS EM .JSON ---
+    # Garante que os diretórios existem
+    os.makedirs(os.path.dirname(MODELO_JOBLIB_PATH), exist_ok=True)
+    os.makedirs(os.path.dirname(PESOS_JSON_PATH), exist_ok=True)
+
+    # 1. Salva o modelo de ML como um ficheiro .joblib
+    joblib.dump(modelo_ml, MODELO_JOBLIB_PATH)
+
+    # 2. Salva os metadados (como a lista de heurísticas e o caminho para o modelo .joblib) no JSON
+    json_data = {
+        # Usamos o caminho relativo para melhor portabilidade entre ambientes
+        'caminho_modelo_joblib': os.path.relpath(MODELO_JOBLIB_PATH, PROJECT_ROOT), 
+        'heuristicas_ordenadas': heuristicas_ordenadas
     }
     
-    # Adicione este bloco para garantir que o diretório existe
-    os.makedirs(os.path.dirname(PESOS_PATH), exist_ok=True)
-    
-    with open(PESOS_PATH, 'w', encoding='utf-8') as f:
-        json.dump(pesos, f, indent=2)
+    with open(PESOS_JSON_PATH, 'w', encoding='utf-8') as f:
+        json.dump(json_data, f, indent=2, ensure_ascii=False)
 
-    print("Treino concluído. Pesos guardados em:", PESOS_PATH)
+    print("Treino concluído. Modelo Joblib guardado em:", MODELO_JOBLIB_PATH)
+    print("Metadados JSON guardados em:", PESOS_JSON_PATH)
 
 if __name__ == '__main__':
     treinar_decisor()
