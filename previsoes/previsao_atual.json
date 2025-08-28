@@ -1,44 +1,9 @@
 {
   "previsao": [
-    13,
-    16
+    16,
+    44
   ],
   "detalhes": [
-    {
-      "heuristica": "frequencia_soma",
-      "numeros": [
-        47,
-        48
-      ]
-    },
-    {
-      "heuristica": "pares_consecutivos",
-      "numeros": [
-        15,
-        16
-      ]
-    },
-    {
-      "heuristica": "tendencia_recentes",
-      "numeros": [
-        13,
-        37
-      ]
-    },
-    {
-      "heuristica": "ausencia_superior_media",
-      "numeros": [
-        39,
-        3
-      ]
-    },
-    {
-      "heuristica": "distribuicao_quadrantes",
-      "numeros": [
-        7,
-        44
-      ]
-    },
     {
       "heuristica": "pares_frequentes",
       "numeros": [
@@ -47,9 +12,9 @@
       ]
     },
     {
-      "heuristica": "soma_provavel",
+      "heuristica": "distribuicao_quadrantes",
       "numeros": [
-        16,
+        7,
         44
       ]
     },
@@ -61,14 +26,7 @@
       ]
     },
     {
-      "heuristica": "balanceamento_tipos",
-      "numeros": [
-        16,
-        19
-      ]
-    },
-    {
-      "heuristica": "gap_medio",
+      "heuristica": "soma_provavel",
       "numeros": [
         16,
         44
@@ -82,17 +40,28 @@
       ]
     },
     {
-      "heuristica": "trios_frequentes",
-      "numeros": [
-        6,
-        12
-      ]
-    },
-    {
       "heuristica": "frequencia_total",
       "numeros": [
         16,
         19
+      ]
+    },
+    {
+      "heuristica": "crescimento_ano",
+      "numeros": []
+    },
+    {
+      "heuristica": "ausencia_superior_media",
+      "numeros": [
+        39,
+        3
+      ]
+    },
+    {
+      "heuristica": "gap_medio",
+      "numeros": [
+        16,
+        44
       ]
     },
     {
@@ -103,14 +72,45 @@
       ]
     },
     {
-      "heuristica": "crescimento_ano",
-      "numeros": []
+      "heuristica": "trios_frequentes",
+      "numeros": [
+        6,
+        12
+      ]
+    },
+    {
+      "heuristica": "balanceamento_tipos",
+      "numeros": [
+        16,
+        19
+      ]
+    },
+    {
+      "heuristica": "pares_consecutivos",
+      "numeros": [
+        15,
+        16
+      ]
     },
     {
       "heuristica": "padrao_finais",
       "numeros": [
         7,
         19
+      ]
+    },
+    {
+      "heuristica": "frequencia_soma",
+      "numeros": [
+        47,
+        48
+      ]
+    },
+    {
+      "heuristica": "tendencia_recentes",
+      "numeros": [
+        13,
+        37
       ]
     }
   ]
