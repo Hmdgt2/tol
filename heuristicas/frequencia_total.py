@@ -1,5 +1,7 @@
 # heuristicas/frequencia_total.py
 
+from collections import Counter
+
 def prever(estatisticas, n=2):
     """
     Prevê números com base na frequência total.
