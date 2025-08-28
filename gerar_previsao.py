@@ -3,7 +3,8 @@ import importlib
 import os
 import json
 import sys
-from collections import defaultdict
+from collections import defaultdict, Counter
+from itertools import combinations
 
 # Assumimos que 'lib' e 'heuristicas' estão no mesmo nível.
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -47,13 +48,16 @@ def gerar_previsao():
         print("Erro: Nenhum sorteio histórico encontrado. Não é possível gerar uma previsão.")
         return
 
+    # Calcula todas as estatísticas uma única vez
     estatisticas = get_all_stats(sorteios_historico)
     
     print("\n--- Previsões das Heurísticas ---\n")
     detalhes_previsoes = []
 
+    # Executa todas as heurísticas e armazena os resultados
     for nome, funcao in heuristicas:
         try:
+            # Algumas heurísticas precisam do histórico completo
             if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
                 resultado_heuristica = funcao(estatisticas, sorteios_historico, n=5)
             else:
@@ -73,6 +77,7 @@ def gerar_previsao():
     print("Previsão Final (combinada):", sorted(previsao_final))
     print("---")
 
+    # Guardar a previsão e os detalhes
     guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
 
 def guardar_previsao_json(combinados, detalhes):
