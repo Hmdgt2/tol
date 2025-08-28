@@ -1,7 +1,7 @@
 # heuristicas/ausencia_superior_media.py
 from collections import Counter
 
-def prever(estatisticas, n=2):
+def prever(estatisticas, n=5):
     """
     Prevê números com base na ausência, favorecendo aqueles ausentes por mais tempo que a média.
 
