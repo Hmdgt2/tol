@@ -4,6 +4,7 @@ from collections import defaultdict, deque
 
 HISTORICO_PATH = "decisor/historico_performance.json"
 PESOS_PATH = "decisor/pesos_atuais.json"
+ULTIMO_SORTEIO_PATH = "decisor/sorteio_processado.json"
 N_MOVEL = 5  # Número de sorteios considerados na média móvel
 
 def carregar_resultados(caminho_resultados):
@@ -24,6 +25,20 @@ def carregar_historico(path):
 def guardar_historico(historico, path):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(historico, f, indent=2, ensure_ascii=False)
+
+# Funções adicionadas para a nova lógica de verificação
+def carregar_sorteio_processado():
+    """Carrega o identificador do último sorteio processado."""
+    if os.path.exists(ULTIMO_SORTEIO_PATH):
+        with open(ULTIMO_SORTEIO_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {"ultimo_concurso_processado": ""}
+
+def guardar_sorteio_processado(concurso):
+    """Guarda o identificador do sorteio que acabou de ser processado."""
+    with open(ULTIMO_SORTEIO_PATH, "w", encoding="utf-8") as f:
+        json.dump({"ultimo_concurso_processado": concurso}, f, indent=2, ensure_ascii=False)
+
 
 def pontuar_heuristicas(resultado_real, detalhes):
     pontuacoes = defaultdict(float)
@@ -76,6 +91,23 @@ def avaliar(caminho_resultado_real, caminho_previsoes, caminho_historico, caminh
     dados_reais = carregar_resultados(caminho_resultado_real)
     dados_prev = carregar_previsoes(caminho_previsoes)
 
+    concurso_atual = dados_reais.get("concurso", "")
+    
+    # Se a chave "concurso" não existir ou for vazia, não prosseguimos
+    if not concurso_atual:
+        print("A chave 'concurso' não foi encontrada. Nenhuma avaliação será feita.")
+        return
+
+    # Carrega o identificador do último concurso processado
+    estado_processamento = carregar_sorteio_processado()
+    ultimo_processado = estado_processamento.get("ultimo_concurso_processado", "")
+
+    # VERIFICAÇÃO PRINCIPAL: Se o sorteio já foi processado, sai.
+    if concurso_atual == ultimo_processado:
+        print(f"Sorteio '{concurso_atual}' já foi processado. Nenhuma ação necessária.")
+        return
+
+    # --- O RESTO DO SEU CÓDIGO SÓ SERÁ EXECUTADO SE O SORTEIO FOR NOVO ---
     resultado_real = dados_reais.get("numeros", [])
     detalhes = dados_prev.get("detalhes", [])
 
@@ -84,9 +116,12 @@ def avaliar(caminho_resultado_real, caminho_previsoes, caminho_historico, caminh
     historico = atualizar_historico(historico, pontuacoes)
     guardar_historico(historico, caminho_historico)
     pesos_calculados = calcular_pesos(historico)
-
+    
     with open(caminho_saida_pesos, 'w', encoding='utf-8') as f:
         json.dump(pesos_calculados, f, indent=2, ensure_ascii=False)
+
+    # NO FINAL, GUARDE O NOVO CONCURSO PARA QUE NÃO SEJA PROCESSADO NOVAMENTE
+    guardar_sorteio_processado(concurso_atual)
 
     print("Pesos atualizados (média móvel dos últimos {} sorteios):".format(N_MOVEL))
     for heuristica, peso in pesos_calculados.items():
