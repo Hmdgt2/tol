@@ -1,16 +1,16 @@
 name: Treinar e Salvar o Modelo
 
 on:
-  workflow_dispatch:  # Permite que você execute o workflow manualmente
+  workflow_dispatch:
   push:
     branches:
-      - main  # Ou a branch que você usa para as suas alterações
+      - main
 
 jobs:
   train:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Permite que o workflow escreva no repositório
+      contents: write
 
     steps:
       - name: Checkout do Repositório
@@ -19,7 +19,7 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.13" # Usa a versão correta do Python
+          python-version: "3.13"
 
       - name: Instalar Dependências
         run: |
@@ -35,6 +35,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add decisor/pesos_atuais.joblib
-          git add decisor/heuristicas.json
-          git commit -m "feat(decisor): Atualiza ficheiros de modelo e heurísticas" || echo "Nenhuma alteração a commitar"
+          git commit -m "feat(decisor): Atualiza ficheiro de pesos do modelo" || echo "Nenhuma alteração a commitar"
           git push
