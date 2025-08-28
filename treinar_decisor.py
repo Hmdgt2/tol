@@ -102,7 +102,7 @@ def treinar_decisor():
 
     # --- NOVO: SALVA OS PESOS DIRETAMENTE NO JSON ---
     pesos = {
-        'modelo_ml': joblib.dumps(modelo_ml), # Serializa o modelo
+        'modelo_ml': joblib.dump(modelo_ml), # Serializa o modelo
         'heuristicas': heuristicas_ordenadas
     }
     
