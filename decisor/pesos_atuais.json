@@ -1,0 +1,40 @@
+{
+  "heuristicas": [
+    "distribuicao_grupos",
+    "pares_frequentes",
+    "distribuicao_quadrantes",
+    "quentes_frios",
+    "soma_provavel",
+    "frequencia_terminacoes",
+    "frequencia_total",
+    "crescimento_ano",
+    "ausencia_superior_media",
+    "gap_medio",
+    "repeticoes_sorteios_anteriores",
+    "trios_frequentes",
+    "balanceamento_tipos",
+    "pares_consecutivos",
+    "padrao_finais",
+    "frequencia_soma",
+    "tendencia_recentes"
+  ],
+  "pesos": [
+    -0.07446420799782856,
+    -0.026563258453077443,
+    0.026601262687603607,
+    -0.0037508964125280595,
+    0.04378429199664453,
+    0.034489225370778656,
+    -0.027358082412043638,
+    -0.008560813740113546,
+    0.03851797979069475,
+    -0.02321182719327801,
+    0.0,
+    0.0024393431121444223,
+    -0.027358082412043638,
+    0.019776187886263525,
+    -0.0029751196260582513,
+    0.02125597115627403,
+    0.01683110859341564
+  ]
+}
