@@ -10,7 +10,8 @@ on:
   push:
     paths:
       - 'dados/**'
-      - 'js/estatisticas.js'
+      - 'js/**'
+      - '**/*.py'
 
 jobs:
   gerar-json:
@@ -20,6 +21,7 @@ jobs:
       - name: Clonar repositório
         uses: actions/checkout@v3
 
+      # Passo 1: Configura o ambiente Node.js e corre o script JavaScript
       - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
@@ -28,16 +30,29 @@ jobs:
       - name: Correr script estatísticas.js
         run: node js/estatisticas.js
 
-      - name: Listar ficheiros estatisticas (debug)
-        run: ls -l estatisticas/
+      # Passo 2: Configura o ambiente Python para correr os scripts de análise
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Instalar bibliotecas Python
+        run: |
+          python -m pip install --upgrade pip
+          
+      - name: Correr Avaliação Incremental (Python)
+        run: python avaliador_incremental.py
 
-      - name: Commit e Push do JSON gerado
+      - name: Correr Análise de Combinações (Python)
+        run: python analisador_combinacoes.py
+
+      - name: Commit e Push dos Relatórios gerados
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Atualiza a URL remota para usar o token de autenticação
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          git add estatisticas/estatisticas_stacasa.json
-          git diff --staged --quiet || (git commit -m "Atualizar estatísticas automaticamente" && git push)
+          # Adiciona todos os ficheiros modificados na pasta 'estatisticas/'
+          git add estatisticas/
+          git diff --staged --quiet || (git commit -m "Atualizar relatórios automaticamente" && git push)
