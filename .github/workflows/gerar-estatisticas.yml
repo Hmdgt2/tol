@@ -1,17 +1,12 @@
 name: Gerar Estatísticas
 
-# horario: verao
+# horário de verão
 
 on:
   schedule:
     - cron: "59 21 * * 3"   # quartas, 22:59 em Portugal (21:59 UTC)
     - cron: "59 21 * * 6"   # sábados, 22:59 em Portugal (21:59 UTC)
-  workflow_dispatch:  # permite executar manualmente no GitHub
-  push:
-    paths:
-      - 'dados/**'
-      - 'js/**'
-      - '**/*.py'
+  workflow_dispatch:  # permite executar manualmente
 
 jobs:
   gerar-json:
@@ -35,10 +30,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-          
+
       - name: Instalar bibliotecas Python
         run: |
           python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           
       - name: Correr Avaliação Incremental (Python)
         run: python avaliador_incremental.py
@@ -53,6 +49,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-          # Adiciona todos os ficheiros modificados na pasta 'estatisticas/'
           git add estatisticas/
           git diff --staged --quiet || (git commit -m "Atualizar relatórios automaticamente" && git push)
