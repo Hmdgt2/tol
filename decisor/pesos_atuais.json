@@ -1,5 +1,8 @@
 {
-  "caminho_modelo_joblib": "decisor/modelo_ml.joblib",
+  "modelos": {
+    "gradient_boosting": "decisor/modelo_gradient_boosting.joblib",
+    "random_forest": "decisor/modelo_random_forest.joblib"
+  },
   "heuristicas_ordenadas": [
     "distribuicao_grupos",
     "pares_frequentes",
