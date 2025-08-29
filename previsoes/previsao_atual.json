@@ -108,7 +108,13 @@
     },
     {
       "nome": "repeticoes_sorteios_anteriores",
-      "numeros": []
+      "numeros": [
+        23,
+        24,
+        26,
+        38,
+        46
+      ]
     },
     {
       "nome": "trios_frequentes",
