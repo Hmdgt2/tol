@@ -1,6 +1,8 @@
 # heuristicas/balanceamento_tipos.py
 from collections import Counter
 
+DESCRICAO = "Sugere números equilibrando pares, ímpares e primos conforme o padrão mais comum."
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base no padrão de balanceamento de pares, ímpares e primos.
