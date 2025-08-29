@@ -16,7 +16,7 @@ if PROJECT_ROOT not in sys.path:
 # Importa as funções de dados
 from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 # A classe HeuristicDecisor será ajustada para carregar este novo formato posteriormente
-from decisor.decisor_final import HeuristicDecisor 
+from decisor.decisor_final import HeuristicDecisor
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 
@@ -24,6 +24,8 @@ HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 PESOS_JSON_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
 # Caminho para o ficheiro Joblib que armazenará o modelo de ML real
 MODELO_JOBLIB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_ml.joblib')
+# NOVO: Caminho para o ficheiro de pesos das heurísticas
+PESOS_HEURISTICAS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_heuristicas.json')
 
 
 def carregar_heuristicas():
@@ -44,8 +46,7 @@ def carregar_heuristicas():
 
 def treinar_decisor():
     """
-    Treina o modelo decisor usando dados históricos.
-    Otimizado para evitar recálculos excessivos.
+    Treina o modelo decisor usando dados históricos e limpa o ficheiro de pesos das heurísticas.
     """
     sorteios_historico = carregar_sorteios()
     heuristicas = carregar_heuristicas()
@@ -104,18 +105,14 @@ def treinar_decisor():
     modelo_ml = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
     modelo_ml.fit(X_treino, y_treino)
 
-    # --- NOVO: SALVA O MODELO EM .JOBLIB E METADADOS EM .JSON ---
-    # Garante que os diretórios existem
+    # --- SALVA O MODELO DE ML E METADADOS ---
     os.makedirs(os.path.dirname(MODELO_JOBLIB_PATH), exist_ok=True)
     os.makedirs(os.path.dirname(PESOS_JSON_PATH), exist_ok=True)
 
-    # 1. Salva o modelo de ML como um ficheiro .joblib
     joblib.dump(modelo_ml, MODELO_JOBLIB_PATH)
 
-    # 2. Salva os metadados (como a lista de heurísticas e o caminho para o modelo .joblib) no JSON
     json_data = {
-        # Usamos o caminho relativo para melhor portabilidade entre ambientes
-        'caminho_modelo_joblib': os.path.relpath(MODELO_JOBLIB_PATH, PROJECT_ROOT), 
+        'caminho_modelo_joblib': os.path.relpath(MODELO_JOBLIB_PATH, PROJECT_ROOT),
         'heuristicas_ordenadas': heuristicas_ordenadas
     }
     
@@ -124,6 +121,12 @@ def treinar_decisor():
 
     print("Treino concluído. Modelo Joblib guardado em:", MODELO_JOBLIB_PATH)
     print("Metadados JSON guardados em:", PESOS_JSON_PATH)
+
+    # --- NOVO: REINICIA O FICHEIRO DE PESOS DAS HEURÍSTICAS ---
+    if os.path.exists(PESOS_HEURISTICAS_PATH):
+        os.remove(PESOS_HEURISTICAS_PATH)
+        print("Ficheiro de pesos das heurísticas reiniciado para o novo ciclo de treino.")
+
 
 if __name__ == '__main__':
     treinar_decisor()
