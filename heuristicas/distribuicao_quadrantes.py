@@ -1,6 +1,8 @@
 # heuristicas/distribuicao_quadrantes.py
 from collections import Counter
 
+DESCRICAO = "Sugere números de acordo com a distribuição mais comum por quadrantes.(# Quadrantes: divisão dos números em 4 faixas iguais)"
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na distribuição mais frequente por quadrantes.
