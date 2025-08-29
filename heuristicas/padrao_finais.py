@@ -1,6 +1,10 @@
 # heuristicas/padrao_finais.py
 from collections import Counter
 
+DESCRICAO = "Sugere números com terminações semelhantes ao último sorteio."
+
+# Nota: analisa quais últimos dígitos se repetem com mais frequência em sorteios anteriores.
+
 def prever(estatisticas, sorteios_historico, n=5):
     """
     Prevê números com base na frequência das terminações que coincidiram
