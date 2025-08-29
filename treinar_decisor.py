@@ -5,7 +5,7 @@ from collections import defaultdict, Counter
 from itertools import combinations
 import json
 import inspect
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier # NOVO: Importa RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 import joblib
 
 # Adiciona o diretório raiz ao caminho do sistema
@@ -22,7 +22,7 @@ HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 PESOS_JSON_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
 # Caminho para o ficheiro Joblib que armazenará o modelo Gradient Boosting
 MODELO_GB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_gradient_boosting.joblib')
-# NOVO: Caminho para o ficheiro Joblib que armazenará o modelo Random Forest
+# Caminho para o ficheiro Joblib que armazenará o modelo Random Forest
 MODELO_RF_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_random_forest.joblib')
 # Caminho para o ficheiro de pesos das heurísticas
 PESOS_HEURISTICAS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_heuristicas.json')
@@ -128,6 +128,25 @@ def treinar_decisor():
 
     print("Treino concluído. Modelos Joblib guardados.")
     print("Metadados JSON atualizados em:", PESOS_JSON_PATH)
+
+    # Adicione estas linhas para verificar a criação dos ficheiros
+    print("\n--- Verificação de Ficheiros ---")
+    if os.path.exists(MODELO_GB_PATH):
+        print(f"✅ Ficheiro de modelo Gradient Boosting encontrado em: {MODELO_GB_PATH}")
+    else:
+        print(f"❌ Erro: Ficheiro de modelo Gradient Boosting não encontrado em: {MODELO_GB_PATH}")
+    
+    if os.path.exists(MODELO_RF_PATH):
+        print(f"✅ Ficheiro de modelo Random Forest encontrado em: {MODELO_RF_PATH}")
+    else:
+        print(f"❌ Erro: Ficheiro de modelo Random Forest não encontrado em: {MODELO_RF_PATH}")
+        
+    if os.path.exists(PESOS_JSON_PATH):
+        print(f"✅ Ficheiro de pesos JSON encontrado em: {PESOS_JSON_PATH}")
+    else:
+        print(f"❌ Erro: Ficheiro de pesos JSON não encontrado em: {PESOS_JSON_PATH}")
+    print("--- Fim da Verificação ---")
+
 
     if os.path.exists(PESOS_HEURISTICAS_PATH):
         os.remove(PESOS_HEURISTICAS_PATH)
