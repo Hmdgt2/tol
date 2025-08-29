@@ -1,6 +1,8 @@
 # heuristicas/pares_consecutivos.py
 from collections import Counter
 
+DESCRICAO = "Sugere números que formam pares consecutivos frequentes."
+
 def prever(estatisticas, n=2):
     """
     Prevê números com base na frequência de pares de números consecutivos.
