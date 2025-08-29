@@ -1,5 +1,3 @@
-# gerar_relatorio_analise_completa.py
-
 import os
 import json
 import importlib
@@ -17,6 +15,7 @@ from lib.dados import carregar_sorteios, get_all_stats
 # Caminhos de ficheiro
 HEURISTICAS_DIR = "heuristicas"
 RELATORIOS_DIR = "estatisticas"
+ULTIMO_CONCURSO_PATH = os.path.join(RELATORIOS_DIR, "ultimo_concurso_analisado.json")
 
 def carregar_heuristicas():
     """Carrega dinamicamente todas as heurísticas e suas descrições."""
@@ -27,7 +26,6 @@ def carregar_heuristicas():
             try:
                 modulo = importlib.import_module(f"heuristicas.{nome_modulo}")
                 if hasattr(modulo, 'prever'):
-                    # Pega a descrição, se existir
                     descricao = getattr(modulo, 'DESCRICAO', 'Descrição não disponível.')
                     heuristicas.append({"nome": nome_modulo, "funcao": modulo.prever, "descricao": descricao})
             except ImportError as e:
@@ -63,7 +61,6 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, d
 
     sorteios_por_concurso = {s.get("concurso"): s.get("numeros", []) for s in sorteios_historicos if s.get("concurso")}
     
-    # Use items() para obter pares de chave-valor e depois indexar para o cálculo do "desempenho_pos_pico"
     lista_previsoes_ordenada = list(previsoes_por_sorteio.items())
 
     for idx_concurso, (concurso, previsao) in enumerate(lista_previsoes_ordenada):
@@ -87,7 +84,6 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, d
                     "indice_sorteio": idx_concurso
                 }
 
-    # Calcula a performance após a melhor ocorrência
     for nome, dados in relatorio.items():
         indice_pico = dados["melhor_previsao"]["indice_sorteio"]
         if indice_pico != -1:
@@ -108,14 +104,12 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, d
                 "media_acertos_apos": round(media_acertos, 2)
             }
         
-        # Recalcula as taxas de sucesso
         for i in range(1, 6):
             metrica = dados["metricas_acerto"][f"acerto_{i}"]
             total = dados["total_previsoes"]
             taxa = (metrica["total"] / total * 100) if total > 0 else 0
             metrica["taxa_sucesso"] = f"{taxa:.2f}%"
         
-        # Adiciona a descrição aqui
         dados["descricao"] = descricoes_heuristicas.get(nome, "Descrição não disponível.")
 
     return dict(relatorio)
@@ -154,16 +148,26 @@ def main():
     relatorio = analisar_performance_detalhada(sorteios, previsoes_por_sorteio, descricoes_heuristicas)
 
     os.makedirs(RELATORIOS_DIR, exist_ok=True)
+    
+    # Apaga ficheiros JSON existentes na pasta de relatórios, exceto o novo de ponto de controlo
     for ficheiro in os.listdir(RELATORIOS_DIR):
-        if ficheiro.endswith('.json'):
-            os.remove(os.path.join(RELATORIOS_DIR, ficheiro))
+        caminho_completo = os.path.join(RELATORIOS_DIR, ficheiro)
+        if ficheiro.endswith('.json') and caminho_completo != ULTIMO_CONCURSO_PATH:
+            os.remove(caminho_completo)
             
+    # Salva o relatório para cada heurística
     for nome_heuristica, dados in relatorio.items():
         caminho_ficheiro = os.path.join(RELATORIOS_DIR, f"{nome_heuristica}.json")
         with open(caminho_ficheiro, 'w', encoding='utf-8') as f:
             json.dump(dados, f, indent=2, ensure_ascii=False)
             
+    # Salva o número do último concurso analisado
+    ultimo_concurso = sorteios[-1]['concurso']
+    with open(ULTIMO_CONCURSO_PATH, 'w', encoding='utf-8') as f:
+        json.dump({"ultimo_concurso_analisado": ultimo_concurso}, f, indent=2)
+            
     print(f"Relatórios de análise completos gerados em: {RELATORIOS_DIR}")
+    print(f"Ponto de controlo guardado: '{ULTIMO_CONCURSO_PATH}' com o concurso {ultimo_concurso}")
 
 if __name__ == "__main__":
     main()
