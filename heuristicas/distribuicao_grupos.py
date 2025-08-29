@@ -1,6 +1,8 @@
 # heuristicas/distribuicao_grupos.py
 from collections import Counter
 
+DESCRICAO = "Sugere números seguindo a distribuição mais comum por grupos de dezenas."
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na distribuição mais frequente por grupos (dezenas).
