@@ -2,6 +2,8 @@
 
 from collections import Counter
 
+DESCRICAO = "Sugere os números mais frequentes no histórico."
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na frequência total.
