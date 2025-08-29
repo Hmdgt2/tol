@@ -2,15 +2,13 @@ import importlib
 import os
 import json
 import sys
-import inspect # Importa a biblioteca 'inspect'
+import inspect
 from collections import defaultdict, Counter
 from itertools import combinations
 
-# Adiciona a nova função aqui para que possa ser usada
 from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 from decisor.decisor_final import HeuristicDecisor
 
-# Define o caminho para a pasta de heurísticas e previsões
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -48,18 +46,14 @@ def gerar_previsao():
         print("Erro: Nenhum sorteio histórico encontrado. Não é possível gerar uma previsão.")
         return
 
-    # Calcula todas as estatísticas uma única vez
     estatisticas = get_all_stats(sorteios_historico)
-    # Adição da chamada para a nova função de estatísticas de repetição
     estatisticas['repeticoes_ultimos_sorteios'] = get_repeticoes_ultimos_sorteios(sorteios_historico, num_sorteios=100)
     
     print("\n--- Previsões das Heurísticas ---\n")
     detalhes_previsoes = []
 
-    # Executa todas as heurísticas e armazena os resultados
     for nome, funcao in heuristicas:
         try:
-            # Verifica dinamicamente se a função 'prever' precisa do histórico
             parametros = inspect.signature(funcao).parameters
             if 'sorteios_historico' in parametros:
                 resultado_heuristica = funcao(estatisticas, sorteios_historico, n=5)
@@ -72,7 +66,6 @@ def gerar_previsao():
         except Exception as e:
             print(f"Erro na heurística {nome:<35}: {e}")
 
-    # Usa o decisor final para combinar os resultados
     print("\n--- Sugestão Final ---")
     
     # --- BLOCO CORRIGIDO ---
@@ -87,7 +80,6 @@ def gerar_previsao():
 
         caminho_completo_modelo = os.path.join(PROJECT_ROOT, caminho_modelo)
         
-        # O novo formato do HeuristicDecisor precisa de ambos os caminhos
         decisor = HeuristicDecisor(
             caminho_pesos_json=PESOS_PATH, 
             caminho_modelo_joblib=caminho_completo_modelo
@@ -97,7 +89,6 @@ def gerar_previsao():
         print("Previsão Final (combinada):", sorted(previsao_final))
         print("---")
         
-        # Guardar a previsão e os detalhes
         guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
 
     except FileNotFoundError:
