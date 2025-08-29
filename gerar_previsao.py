@@ -5,10 +5,10 @@ import sys
 import inspect
 from collections import defaultdict, Counter
 from itertools import combinations
-
-from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 from decisor.decisor_final import HeuristicDecisor
+from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 
+# Define o caminho para a pasta de heurísticas e previsões
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -68,21 +68,25 @@ def gerar_previsao():
 
     print("\n--- Sugestão Final ---")
     
-    # --- BLOCO CORRIGIDO ---
+    # --- NOVO BLOCO CORRIGIDO ---
     try:
         with open(PESOS_PATH, 'r', encoding='utf-8') as f:
             pesos_json = json.load(f)
         
-        caminho_modelo = pesos_json.get('caminho_modelo_joblib')
-        if not caminho_modelo:
-            print("Erro: 'caminho_modelo_joblib' não encontrado no ficheiro de pesos. A sair.")
+        caminho_modelo_gb = pesos_json['modelos'].get('gradient_boosting')
+        caminho_modelo_rf = pesos_json['modelos'].get('random_forest')
+        
+        if not caminho_modelo_gb or not caminho_modelo_rf:
+            print("Erro: Caminhos dos modelos não encontrados no ficheiro de pesos. A sair.")
             return
 
-        caminho_completo_modelo = os.path.join(PROJECT_ROOT, caminho_modelo)
+        caminho_completo_gb = os.path.join(PROJECT_ROOT, caminho_modelo_gb)
+        caminho_completo_rf = os.path.join(PROJECT_ROOT, caminho_modelo_rf)
         
         decisor = HeuristicDecisor(
             caminho_pesos_json=PESOS_PATH, 
-            caminho_modelo_joblib=caminho_completo_modelo
+            caminho_modelo_joblib_gb=caminho_completo_gb,
+            caminho_modelo_joblib_rf=caminho_completo_rf
         )
         previsao_final = decisor.predict(detalhes_previsoes)
         
