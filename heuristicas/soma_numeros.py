@@ -2,6 +2,8 @@
 import numpy as np
 from collections import Counter
 
+DESCRICAO = "Sugere números dos sorteios cuja soma total é mais frequente."
+
 def prever(estatisticas, sorteios_historico, n=5, **kwargs):
     """
     Prevê números com base na soma mais provável dos sorteios, usando uma abordagem mais eficiente.
