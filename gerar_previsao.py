@@ -75,16 +75,34 @@ def gerar_previsao():
     # Usa o decisor final para combinar os resultados
     print("\n--- Sugestão Final ---")
     
-    # CORREÇÃO AQUI: Altera 'caminho_pesos' para 'caminho_pesos_json'
-    decisor = HeuristicDecisor(caminho_pesos_json=PESOS_PATH)
-    previsao_final = decisor.predict(detalhes_previsoes)
-    
-    print("Previsão Final (combinada):", sorted(previsao_final))
-    print("---")
+    # --- BLOCO CORRIGIDO ---
+    try:
+        with open(PESOS_PATH, 'r', encoding='utf-8') as f:
+            pesos_json = json.load(f)
+        
+        caminho_modelo = pesos_json.get('caminho_modelo_joblib')
+        if not caminho_modelo:
+            print("Erro: 'caminho_modelo_joblib' não encontrado no ficheiro de pesos. A sair.")
+            return
 
-    # Guardar a previsão e os detalhes
-    guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
+        caminho_completo_modelo = os.path.join(PROJECT_ROOT, caminho_modelo)
+        
+        # O novo formato do HeuristicDecisor precisa de ambos os caminhos
+        decisor = HeuristicDecisor(
+            caminho_pesos_json=PESOS_PATH, 
+            caminho_modelo_joblib=caminho_completo_modelo
+        )
+        previsao_final = decisor.predict(detalhes_previsoes)
+        
+        print("Previsão Final (combinada):", sorted(previsao_final))
+        print("---")
+        
+        # Guardar a previsão e os detalhes
+        guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
 
+    except FileNotFoundError:
+        print(f"Erro: O ficheiro de pesos '{PESOS_PATH}' não foi encontrado. Por favor, treine o decisor primeiro.")
+        
 def guardar_previsao_json(combinados, detalhes):
     """Guarda a previsão final e os detalhes das heurísticas em um arquivo JSON."""
     os.makedirs(PASTA_PREVISOES, exist_ok=True)
