@@ -32,6 +32,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add decisor/pesos_atuais.json
+          git add decisor/modelo_ml.joblib 
           git commit -m "feat(decisor): Atualiza ficheiro de pesos do modelo" || echo "Nenhuma alteração a commitar"
           git pull origin main --rebase
           git push
