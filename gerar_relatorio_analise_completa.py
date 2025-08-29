@@ -3,11 +3,9 @@
 import os
 import json
 import importlib
-from collections import defaultdict, Counter
-from itertools import combinations
-import re
+from collections import defaultdict
 import sys
-import inspect # Importa a biblioteca inspect
+import inspect
 
 # Adiciona o diretório raiz ao caminho do sistema para importar as heurísticas e os dados
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -18,10 +16,10 @@ from lib.dados import carregar_sorteios, get_all_stats
 
 # Caminhos de ficheiro
 HEURISTICAS_DIR = "heuristicas"
-RELATORIOS_DIR = "analise_heuristicas"
+RELATORIOS_DIR = "analise_heuristicas" # Pode ser alterado para "estatisticas" conforme discutido
 
 def carregar_heuristicas():
-    """Carrega dinamicamente todas as heurísticas."""
+    """Carrega dinamicamente todas as heurísticas e suas descrições."""
     heuristicas = []
     for ficheiro in os.listdir(HEURISTICAS_DIR):
         if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
@@ -29,12 +27,14 @@ def carregar_heuristicas():
             try:
                 modulo = importlib.import_module(f"heuristicas.{nome_modulo}")
                 if hasattr(modulo, 'prever'):
-                    heuristicas.append((nome_modulo, modulo.prever))
+                    # Pega a descrição, se existir
+                    descricao = getattr(modulo, 'DESCRICAO', 'Descrição não disponível.')
+                    heuristicas.append({"nome": nome_modulo, "funcao": modulo.prever, "descricao": descricao})
             except ImportError as e:
                 print(f"Erro ao importar heurística {nome_modulo}: {e}")
     return heuristicas
 
-def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio):
+def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, descricoes_heuristicas):
     """Gera um relatório detalhado de desempenho das heurísticas."""
     relatorio = defaultdict(lambda: {
         "nome_heuristica": "",
@@ -47,12 +47,26 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio):
             "acerto_4": {"total": 0, "taxa_sucesso": 0.0},
             "acerto_5": {"total": 0, "taxa_sucesso": 0.0}
         },
-        "melhor_previsao": {"concurso": None, "data": None, "numeros_acertados": -1, "numeros_previstos": []}
+        "melhor_previsao": {
+            "concurso": None, 
+            "data": None, 
+            "numeros_acertados": -1, 
+            "numeros_previstos_pico": [],
+            "numeros_reais_pico": [],
+            "indice_sorteio": -1
+        },
+        "desempenho_pos_pico": {
+            "sorteios_apos": 0,
+            "media_acertos_apos": 0.0
+        }
     })
 
     sorteios_por_concurso = {s.get("concurso"): s.get("numeros", []) for s in sorteios_historicos if s.get("concurso")}
     
-    for concurso, previsao in previsoes_por_sorteio.items():
+    # Use items() para obter pares de chave-valor e depois indexar para o cálculo do "desempenho_pos_pico"
+    lista_previsoes_ordenada = list(previsoes_por_sorteio.items())
+
+    for idx_concurso, (concurso, previsao) in enumerate(lista_previsoes_ordenada):
         resultado_real = set(sorteios_por_concurso.get(concurso, []))
         
         for nome_heuristica, numeros_previstos in previsao.items():
@@ -68,23 +82,51 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio):
                     "concurso": concurso,
                     "data": next((s['data'] for s in sorteios_historicos if s.get('concurso') == concurso), None),
                     "numeros_acertados": num_acertos,
-                    "numeros_previstos": numeros_previstos
+                    "numeros_previstos_pico": sorted(list(numeros_previstos)),
+                    "numeros_reais_pico": sorted(list(resultado_real)),
+                    "indice_sorteio": idx_concurso
                 }
 
+    # Calcula a performance após a melhor ocorrência
     for nome, dados in relatorio.items():
-        dados["nome_heuristica"] = nome
+        indice_pico = dados["melhor_previsao"]["indice_sorteio"]
+        if indice_pico != -1:
+            sorteios_apos = lista_previsoes_ordenada[indice_pico+1:]
+            total_acertos_apos = 0
+            
+            for concurso_apos, previsao_apos in sorteios_apos:
+                resultado_real_apos = set(sorteios_por_concurso.get(concurso_apos, []))
+                previsao_heuristica_apos = previsao_apos.get(nome, [])
+                num_acertos_apos = len(set(previsao_heuristica_apos).intersection(resultado_real_apos))
+                total_acertos_apos += num_acertos_apos
+                
+            num_sorteios_apos = len(sorteios_apos)
+            media_acertos = (total_acertos_apos / num_sorteios_apos) if num_sorteios_apos > 0 else 0.0
+            
+            dados["desempenho_pos_pico"] = {
+                "sorteios_apos": num_sorteios_apos,
+                "media_acertos_apos": round(media_acertos, 2)
+            }
+        
+        # Recalcula as taxas de sucesso
         for i in range(1, 6):
             metrica = dados["metricas_acerto"][f"acerto_{i}"]
             total = dados["total_previsoes"]
             taxa = (metrica["total"] / total * 100) if total > 0 else 0
             metrica["taxa_sucesso"] = f"{taxa:.2f}%"
+        
+        # Adiciona a descrição aqui
+        dados["descricao"] = descricoes_heuristicas.get(nome, "Descrição não disponível.")
 
     return dict(relatorio)
 
 def main():
     print("A carregar sorteios para gerar relatórios de análise completos...")
     sorteios = carregar_sorteios()
-    heuristicas = carregar_heuristicas()
+    
+    heuristicas_info = carregar_heuristicas()
+    heuristicas = [(h['nome'], h['funcao']) for h in heuristicas_info]
+    descricoes_heuristicas = {h['nome']: h['descricao'] for h in heuristicas_info}
 
     if not sorteios or not heuristicas:
         print("Dados ou heurísticas insuficientes para gerar relatórios.")
@@ -98,21 +140,18 @@ def main():
         estatisticas = get_all_stats(historico_parcial)
         
         for nome, funcao in heuristicas:
-            # Inspeção dinâmica da função para verificar se aceita 'sorteios_historico'
             parametros = inspect.signature(funcao).parameters
             
             if 'sorteios_historico' in parametros:
-                # Chamada para funções que aceitam 'sorteios_historico'
                 resultado = funcao(estatisticas, n=5, sorteios_historico=historico_parcial)
             else:
-                # Chamada para funções que não aceitam
                 resultado = funcao(estatisticas, n=5)
             
             if resultado and 'numeros' in resultado:
                 previsoes_por_sorteio[sorteios[i+1]['concurso']][nome] = resultado["numeros"]
 
     print("Pré-cálculo concluído. A gerar o relatório detalhado...")
-    relatorio = analisar_performance_detalhada(sorteios, previsoes_por_sorteio)
+    relatorio = analisar_performance_detalhada(sorteios, previsoes_por_sorteio, descricoes_heuristicas)
 
     os.makedirs(RELATORIOS_DIR, exist_ok=True)
     for ficheiro in os.listdir(RELATORIOS_DIR):
