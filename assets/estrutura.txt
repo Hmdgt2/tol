@@ -41,7 +41,6 @@
 ├── decisor
 │   ├── decisor_final.py
 │   ├── historico_performance.json
-│   ├── modelo_ml.joblib
 │   ├── pesos_atuais.json
 │   └── sorteio_processado.json
 ├── estatisticas
