@@ -92,18 +92,37 @@ def main():
     print("Simulando previsões de heurísticas para dados históricos...")
     previsoes_por_sorteio = defaultdict(dict)
     
+    # Iterate over all draws except the last one, to simulate the historical data
     for i in range(len(sorteios) - 1):
+        # Grab the partial history up to the previous draw
         historico_parcial = sorteios[:i+1]
+        
+        # Recalculate stats based on the partial history
         estatisticas = get_all_stats(historico_parcial)
         
+        # For each heuristic, use the "prever" function to generate a prediction
         for nome, funcao in heuristicas:
-            resultado = funcao(estatisticas, n=5)
-            if resultado and 'numeros' in resultado:
-                previsoes_por_sorteio[sorteios[i+1]['concurso']][nome] = resultado["numeros"]
+            # Pass the partial list of historical draws to the prever function
+            try:
+                # Try calling the prever function with the new argument
+                resultado = funcao(estatisticas, n=5, sorteios_historico=historico_parcial)
+                
+                if resultado and 'numeros' in resultado:
+                    previsoes_por_sorteio[sorteios[i+1]['concurso']][nome] = resultado["numeros"]
+            except TypeError as e:
+                # If the heuristic doesn't accept the new argument, try the original call
+                if "missing 1 required positional argument: 'sorteios_historico'" in str(e):
+                    print(f"Aviso: Heurística '{nome}' não aceita 'sorteios_historico'. A tentar chamada original.")
+                    resultado = funcao(estatisticas, n=5)
+                    if resultado and 'numeros' in resultado:
+                        previsoes_por_sorteio[sorteios[i+1]['concurso']][nome] = resultado["numeros"]
+                else:
+                    raise e
 
     print("Pré-cálculo concluído. A gerar o relatório detalhado...")
     relatorio = analisar_performance_detalhada(sorteios, previsoes_por_sorteio)
 
+    # ... (code to save the report) ...
     os.makedirs(RELATORIOS_DIR, exist_ok=True)
     for ficheiro in os.listdir(RELATORIOS_DIR):
         if ficheiro.endswith('.json'):
