@@ -1,5 +1,12 @@
 {
-  "previsao": [],
+  "previsao": [
+    11,
+    17,
+    20,
+    26,
+    32,
+    34
+  ],
   "detalhes": [
     {
       "nome": "distribuicao_grupos",
@@ -19,6 +26,26 @@
         24,
         39,
         45
+      ]
+    },
+    {
+      "nome": "comb_balanceadas",
+      "numeros": [
+        4,
+        26,
+        32,
+        38,
+        46
+      ]
+    },
+    {
+      "nome": "numeros_vizinhos",
+      "numeros": [
+        5,
+        22,
+        23,
+        27,
+        28
       ]
     },
     {
@@ -47,6 +74,16 @@
       ]
     },
     {
+      "nome": "pares_distantes",
+      "numeros": [
+        1,
+        10,
+        12,
+        13,
+        27
+      ]
+    },
+    {
       "nome": "soma_provavel",
       "numeros": [
         16,
@@ -67,6 +104,26 @@
       ]
     },
     {
+      "nome": "repeticao_por_posicao",
+      "numeros": [
+        2,
+        11,
+        24,
+        36,
+        48
+      ]
+    },
+    {
+      "nome": "ciclos_longos",
+      "numeros": [
+        2,
+        13,
+        20,
+        37,
+        38
+      ]
+    },
+    {
       "nome": "frequencia_total",
       "numeros": [
         32,
@@ -74,6 +131,16 @@
         26,
         23,
         46
+      ]
+    },
+    {
+      "nome": "clusters_recentes",
+      "numeros": [
+        4,
+        11,
+        15,
+        16,
+        17
       ]
     },
     {
@@ -97,6 +164,16 @@
       ]
     },
     {
+      "nome": "soma_numeros",
+      "numeros": [
+        23,
+        24,
+        26,
+        32,
+        33
+      ]
+    },
+    {
       "nome": "gap_medio",
       "numeros": [
         26,
@@ -117,12 +194,32 @@
       ]
     },
     {
+      "nome": "meta_avaliacao",
+      "numeros": [
+        23,
+        26,
+        33,
+        38,
+        46
+      ]
+    },
+    {
       "nome": "trios_frequentes",
       "numeros": [
         6,
         16,
         24,
         34,
+        46
+      ]
+    },
+    {
+      "nome": "distribuicao_uniforme_faixas",
+      "numeros": [
+        4,
+        16,
+        26,
+        32,
         46
       ]
     },
@@ -134,6 +231,16 @@
         32,
         33,
         46
+      ]
+    },
+    {
+      "nome": "numeros_retenção_longa",
+      "numeros": [
+        2,
+        13,
+        20,
+        37,
+        38
       ]
     },
     {
