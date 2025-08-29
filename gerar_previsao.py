@@ -2,10 +2,11 @@ import importlib
 import os
 import json
 import sys
+import inspect # Importa a biblioteca 'inspect'
 from collections import defaultdict, Counter
 from itertools import combinations
 
-# Adicione a nova função aqui para que possa ser usada
+# Adiciona a nova função aqui para que possa ser usada
 from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 from decisor.decisor_final import HeuristicDecisor
 
@@ -58,8 +59,9 @@ def gerar_previsao():
     # Executa todas as heurísticas e armazena os resultados
     for nome, funcao in heuristicas:
         try:
-            # Algumas heurísticas precisam do histórico completo
-            if nome in ['padrao_finais', 'quentes_frios', 'repeticoes_sorteios_anteriores', 'tendencia_recentes']:
+            # Verifica dinamicamente se a função 'prever' precisa do histórico
+            parametros = inspect.signature(funcao).parameters
+            if 'sorteios_historico' in parametros:
                 resultado_heuristica = funcao(estatisticas, sorteios_historico, n=5)
             else:
                 resultado_heuristica = funcao(estatisticas, n=5)
@@ -72,7 +74,9 @@ def gerar_previsao():
 
     # Usa o decisor final para combinar os resultados
     print("\n--- Sugestão Final ---")
-    decisor = HeuristicDecisor(caminho_pesos=PESOS_PATH)
+    
+    # CORREÇÃO AQUI: Altera 'caminho_pesos' para 'caminho_pesos_json'
+    decisor = HeuristicDecisor(caminho_pesos_json=PESOS_PATH)
     previsao_final = decisor.predict(detalhes_previsoes)
     
     print("Previsão Final (combinada):", sorted(previsao_final))
