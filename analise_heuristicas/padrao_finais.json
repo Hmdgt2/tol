@@ -1,0 +1,39 @@
+{
+  "nome_heuristica": "padrao_finais",
+  "descricao": "",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 631,
+      "taxa_sucesso": "41.84%"
+    },
+    "acerto_2": {
+      "total": 122,
+      "taxa_sucesso": "8.09%"
+    },
+    "acerto_3": {
+      "total": 10,
+      "taxa_sucesso": "0.66%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "036/2011",
+    "data": "08/06/2011",
+    "numeros_acertados": 3,
+    "numeros_previstos": [
+      14,
+      34,
+      38,
+      44,
+      48
+    ]
+  }
+}

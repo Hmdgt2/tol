@@ -1,0 +1,39 @@
+{
+  "nome_heuristica": "soma_numeros",
+  "descricao": "",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 650,
+      "taxa_sucesso": "43.10%"
+    },
+    "acerto_2": {
+      "total": 108,
+      "taxa_sucesso": "7.16%"
+    },
+    "acerto_3": {
+      "total": 7,
+      "taxa_sucesso": "0.46%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "049/2016",
+    "data": "18/06/2016",
+    "numeros_acertados": 3,
+    "numeros_previstos": [
+      7,
+      9,
+      19,
+      32,
+      34
+    ]
+  }
+}

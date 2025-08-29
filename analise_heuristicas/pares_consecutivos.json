@@ -1,0 +1,39 @@
+{
+  "nome_heuristica": "pares_consecutivos",
+  "descricao": "",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 649,
+      "taxa_sucesso": "43.04%"
+    },
+    "acerto_2": {
+      "total": 110,
+      "taxa_sucesso": "7.29%"
+    },
+    "acerto_3": {
+      "total": 7,
+      "taxa_sucesso": "0.46%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "019/2011",
+    "data": "09/04/2011",
+    "numeros_acertados": 3,
+    "numeros_previstos": [
+      43,
+      45,
+      46,
+      47,
+      48
+    ]
+  }
+}
