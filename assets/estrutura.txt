@@ -12,12 +12,14 @@
 │       ├── gerar_previsao.yml
 │       ├── gerar_teste.yml
 │       └── historivo_analise_manual.yml
+├── analisador_combinacoes.py
 ├── assets
 │   ├── estrutura.txt
 │   ├── gerar_estrutura.py
 │   └── toto.png
 ├── avaliador
 │   └── avaliador.py
+├── avaliador_incremental.py
 ├── dados
 │   ├── 2011.json
 │   ├── 2012.json
@@ -36,9 +38,6 @@
 │   ├── 2025.json
 │   ├── 2025.txt
 │   └── sorteio_atual.json
-├── dados_treino
-│   ├── 2011.json
-│   └── a.txt
 ├── decisor
 │   ├── decisor_final.py
 │   ├── historico_performance.json
@@ -46,27 +45,60 @@
 │   ├── pesos_atuais.json
 │   └── sorteio_processado.json
 ├── estatisticas
-│   ├── estatisticas_stacasa.json
-│   └── estatisticas_teste.json
+│   ├── ausencia_superior_media.json
+│   ├── balanceamento_tipos.json
+│   ├── ciclos_longos.json
+│   ├── clusters_recentes.json
+│   ├── comb_balanceadas.json
+│   ├── crescimento_ano.json
+│   ├── distribuicao_grupos.json
+│   ├── distribuicao_quadrantes.json
+│   ├── distribuicao_uniforme_faixas.json
+│   ├── frequencia_soma.json
+│   ├── frequencia_terminacoes.json
+│   ├── frequencia_total.json
+│   ├── gap_medio.json
+│   ├── meta_avaliacao.json
+│   ├── numeros_retenção_longa.json
+│   ├── numeros_vizinhos.json
+│   ├── padrao_finais.json
+│   ├── pares_consecutivos.json
+│   ├── pares_distantes.json
+│   ├── pares_frequentes.json
+│   ├── quentes_frios.json
+│   ├── repeticao_por_posicao.json
+│   ├── repeticoes_sorteios_anteriores.json
+│   ├── soma_numeros.json
+│   ├── soma_provavel.json
+│   ├── tendencia_recentes.json
+│   ├── trios_frequentes.json
+│   └── ultimo_concurso_analisado.json
 ├── estatisticas.html
 ├── gerar_previsao.py
 ├── gerar_relatorio_analise_completa.py
 ├── heuristicas
 │   ├── ausencia_superior_media.py
 │   ├── balanceamento_tipos.py
+│   ├── ciclos_longos.py
+│   ├── clusters_recentes.py
+│   ├── comb_balanceadas.py
 │   ├── crescimento_ano.py
 │   ├── distribuicao_grupos.py
 │   ├── distribuicao_quadrantes.py
+│   ├── distribuicao_uniforme_faixas.py
 │   ├── frequencia_soma.py
 │   ├── frequencia_terminacoes.py
 │   ├── frequencia_total.py
 │   ├── gap_medio.py
 │   ├── meta_avaliacao.py
+│   ├── numeros_retenção_longa.py
 │   ├── numeros_vizinhos.py
 │   ├── padrao_finais.py
 │   ├── pares_consecutivos.py
+│   ├── pares_distantes.py
 │   ├── pares_frequentes.py
 │   ├── quentes_frios.py
+│   ├── repeticao_por_posicao.py
 │   ├── repeticoes_sorteios_anteriores.py
 │   ├── soma_numeros.py
 │   ├── soma_provavel.py
