@@ -1,6 +1,8 @@
 # heuristicas/repeticoes_sorteios_anteriores.py
 from collections import Counter
 
+DESCRICAO = "Sugere números com base na repetição provável dos últimos sorteios."
+
 def prever(estatisticas, sorteios_historico, n=5, num_sorteios_anteriores=5):
     """
     Prevê números com base na probabilidade de repetição de números de sorteios anteriores.
