@@ -1,6 +1,8 @@
 # heuristicas/pares_frequentes.py
 from collections import Counter
 
+DESCRICAO = "Sugere números presentes nos pares mais frequentes."
+
 def prever(estatisticas, n=2):
     """
     Prevê números com base na frequência de pares de números.
