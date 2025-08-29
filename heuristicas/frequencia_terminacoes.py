@@ -1,6 +1,10 @@
 # heuristicas/frequencia_terminacoes.py
 from collections import Counter
 
+DESCRICAO = "Sugere números com terminações mais frequentes."
+
+# Nota: analisa o último dígito dos números sorteados e escolhe os mais comuns.
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na frequência das terminações (último dígito).
