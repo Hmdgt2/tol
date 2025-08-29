@@ -1,89 +1,82 @@
-# decisor/decisor_final.py
+import joblib
 import json
 import os
-import numpy as np
-from sklearn.ensemble import GradientBoostingClassifier
-import joblib
+import sys
+from collections import defaultdict, Counter
+
+# Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 class HeuristicDecisor:
-    def __init__(self, caminho_pesos_json, caminho_modelo_joblib):
+    def __init__(self, caminho_pesos_json, caminho_modelo_joblib_gb, caminho_modelo_joblib_rf):
+        """
+        Inicializa o decisor carregando o ficheiro de metadados e os modelos de ML.
+        
+        Args:
+            caminho_pesos_json (str): O caminho para o ficheiro JSON com a ordem das heurísticas.
+            caminho_modelo_joblib_gb (str): O caminho para o modelo Gradient Boosting.
+            caminho_modelo_joblib_rf (str): O caminho para o modelo Random Forest.
+        """
         self.caminho_pesos_json = caminho_pesos_json
-        self.caminho_modelo_joblib = caminho_modelo_joblib
-        self.modelo_ml = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
-        self.heuristicas_ordenadas = []
-
-    def load_model(self):
-        """
-        Carrega o modelo treinado e as heurísticas dos ficheiros.
-        """
+        
         try:
-            # 1. Carregar os metadados do JSON
-            with open(self.caminho_pesos_json, 'r', encoding='utf-8') as f:
-                dados_metadados = json.load(f)
-            
-            self.heuristicas_ordenadas = dados_metadados.get('heuristicas_ordenadas', [])
+            with open(caminho_pesos_json, 'r', encoding='utf-8') as f:
+                self.metadados = json.load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Ficheiro de pesos não encontrado em: {caminho_pesos_json}. Por favor, treine o modelo primeiro.")
 
-            # 2. Carregar o modelo do ficheiro .joblib
-            self.modelo_ml = joblib.load(self.caminho_modelo_joblib)
-            
-            return True
-
-        except (json.JSONDecodeError, FileNotFoundError, joblib.externals.loky.backend.exceptions.PicklingError) as e:
-            print(f"Aviso: Erro ao carregar os ficheiros do modelo: {e}. O modelo será treinado do zero se necessário.")
-            return False
-
-    def fit(self, X_treino, y_treino, heuristicas_ordenadas):
-        """Treina o modelo e guarda os dois ficheiros."""
-        if not X_treino or not y_treino:
-            print("Nenhum dado de treino fornecido.")
-            return
+        self.heuristicas_ordenadas = self.metadados.get('heuristicas_ordenadas', [])
         
-        print("A treinar o modelo de Gradient Boosting...")
-        self.modelo_ml.fit(X_treino, y_treino)
-        self.heuristicas_ordenadas = heuristicas_ordenadas
-
-        # Garante que os diretórios existem
-        os.makedirs(os.path.dirname(self.caminho_pesos_json), exist_ok=True)
-        os.makedirs(os.path.dirname(self.caminho_modelo_joblib), exist_ok=True)
-
-        # 1. Salva o modelo de ML como um ficheiro .joblib
-        joblib.dump(self.modelo_ml, self.caminho_modelo_joblib)
-
-        # 2. Salva os metadados no JSON
-        json_data = {
-            'caminho_modelo_joblib': os.path.relpath(self.caminho_modelo_joblib, os.path.dirname(self.caminho_pesos_json)),
-            'heuristicas_ordenadas': self.heuristicas_ordenadas
-        }
+        try:
+            self.modelo_gb = joblib.load(caminho_modelo_joblib_gb)
+            self.modelo_rf = joblib.load(caminho_modelo_joblib_rf)
+        except FileNotFoundError:
+            raise FileNotFoundError("Um dos modelos Joblib não foi encontrado. Por favor, treine o modelo novamente.")
         
-        with open(self.caminho_pesos_json, 'w', encoding='utf-8') as f:
-            json.dump(json_data, f, indent=2, ensure_ascii=False)
+        self.pesos_manuais = self.metadados.get('pesos_manuais', {})
 
-        print("Treino concluído. Modelo Joblib guardado em:", self.caminho_modelo_joblib)
-        print("Metadados JSON guardados em:", self.caminho_pesos_json)
-
-    def predict(self, previsoes_detalhes):
+    def _get_feature_vector(self, previsoes_atuais):
         """
-        Gera a previsão final combinando as previsões das heurísticas.
+        Cria um vetor de características (features) para um único sorteio.
         """
-        if not self.heuristicas_ordenadas or not hasattr(self.modelo_ml, 'n_estimators'):
-            if not self.load_model():
-                print("Modelo não treinado ou carregado. Não é possível gerar uma previsão.")
-                return []
+        previsoes_dict = {p['nome']: set(p['numeros']) for p in previsoes_atuais}
         
-        previsoes_mapeadas = {d['nome']: d['numeros'] for d in previsoes_detalhes}
-        
-        X_novo = []
+        feature_vectors = []
         for num in range(1, 50):
-            feature_vector = [1 if num in previsoes_mapeadas.get(nome, []) else 0 for nome in self.heuristicas_ordenadas]
-            X_novo.append(feature_vector)
-        
-        if not X_novo:
-            return []
+            vector = [1 if num in previsoes_dict.get(nome, set()) else 0 for nome in self.heuristicas_ordenadas]
+            feature_vectors.append(vector)
+            
+        return feature_vectors
 
-        probabilidades = self.modelo_ml.predict_proba(X_novo)[:, 1]
-
-        numeros_com_prob = sorted(zip(range(1, 50), probabilidades), key=lambda x: x[1], reverse=True)
+    def predict(self, detalhes_previsoes):
+        """
+        Combina as previsões das heurísticas usando os modelos de ML.
         
-        previsao_final = [num for num, prob in numeros_com_prob[:6]]
+        Args:
+            detalhes_previsoes (list): Lista de dicionários com as previsões de cada heurística.
+            
+        Returns:
+            list: Uma lista de 5 números previstos.
+        """
+        feature_vectors = self._get_feature_vector(detalhes_previsoes)
+        
+        # Obter as probabilidades de acerto de cada modelo
+        probabilidades_gb = self.modelo_gb.predict_proba(feature_vectors)[:, 1]
+        probabilidades_rf = self.modelo_rf.predict_proba(feature_vectors)[:, 1]
+        
+        # Combinar as probabilidades (neste caso, uma simples média)
+        probabilidades_combinadas = (probabilidades_gb + probabilidades_rf) / 2
+        
+        # Criar uma lista de tuplas (probabilidade, numero)
+        probabilidades_por_numero = []
+        for i, prob in enumerate(probabilidades_combinadas):
+            probabilidades_por_numero.append((prob, i + 1))
+            
+        # Ordenar e selecionar os 5 números com maior probabilidade
+        probabilidades_por_numero.sort(key=lambda x: x[0], reverse=True)
+        
+        previsao_final = [numero for prob, numero in probabilidades_por_numero[:5]]
         
         return previsao_final
