@@ -6,62 +6,67 @@ from sklearn.ensemble import GradientBoostingClassifier
 import joblib
 
 class HeuristicDecisor:
-    def __init__(self, caminho_pesos='decisor/pesos_atuais.joblib'):
-        self.caminho_pesos = caminho_pesos
+    def __init__(self, caminho_pesos_json, caminho_modelo_joblib):
+        self.caminho_pesos_json = caminho_pesos_json
+        self.caminho_modelo_joblib = caminho_modelo_joblib
         self.modelo_ml = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
         self.heuristicas_ordenadas = []
 
-    def load_pesos(self):
+    def load_model(self):
         """
-        Carrega o modelo e as heurísticas do ficheiro .joblib.
+        Carrega o modelo treinado e as heurísticas dos ficheiros.
         """
-        if os.path.exists(self.caminho_pesos):
-            try:
-                # Carrega o dicionário que contém o modelo e a lista de heurísticas
-                dados_carregados = joblib.load(self.caminho_pesos)
-                self.modelo_ml = dados_carregados['modelo']
-                self.heuristicas_ordenadas = dados_carregados['heuristica_nomes']
-                return True
-            except Exception as e:
-                print(f"Aviso: Erro ao carregar o modelo do ficheiro: {e}.")
-                return False
-        else:
-            print("Aviso: Ficheiro de pesos não encontrado. O modelo será treinado do zero se necessário.")
+        try:
+            # 1. Carregar os metadados do JSON
+            with open(self.caminho_pesos_json, 'r', encoding='utf-8') as f:
+                dados_metadados = json.load(f)
+            
+            self.heuristicas_ordenadas = dados_metadados.get('heuristicas_ordenadas', [])
+
+            # 2. Carregar o modelo do ficheiro .joblib
+            self.modelo_ml = joblib.load(self.caminho_modelo_joblib)
+            
+            return True
+
+        except (json.JSONDecodeError, FileNotFoundError, joblib.externals.loky.backend.exceptions.PicklingError) as e:
+            print(f"Aviso: Erro ao carregar os ficheiros do modelo: {e}. O modelo será treinado do zero se necessário.")
             return False
 
-    def save_pesos(self, heuristicas_ordenadas):
-        """Guarda o modelo e as heurísticas ordenadas no ficheiro .joblib."""
-        os.makedirs(os.path.dirname(self.caminho_pesos), exist_ok=True)
-        
-        # Cria um dicionário para guardar tudo
-        dados_a_guardar = {
-            'modelo': self.modelo_ml,
-            'heuristica_nomes': heuristicas_ordenadas
-        }
-        
-        # Guarda o dicionário no ficheiro .joblib
-        joblib.dump(dados_a_guardar, self.caminho_pesos)
-        print("Modelo e heurísticas guardados com sucesso.")
-
     def fit(self, X_treino, y_treino, heuristicas_ordenadas):
-        """Treina o modelo de ML com dados históricos e guarda o modelo."""
+        """Treina o modelo e guarda os dois ficheiros."""
         if not X_treino or not y_treino:
             print("Nenhum dado de treino fornecido.")
             return
-
+        
         print("A treinar o modelo de Gradient Boosting...")
         self.modelo_ml.fit(X_treino, y_treino)
         self.heuristicas_ordenadas = heuristicas_ordenadas
-        self.save_pesos(heuristicas_ordenadas) # Passa a lista de heurísticas para o método de salvamento
-        print("Treino concluído. Modelo guardado em:", self.caminho_pesos)
+
+        # Garante que os diretórios existem
+        os.makedirs(os.path.dirname(self.caminho_pesos_json), exist_ok=True)
+        os.makedirs(os.path.dirname(self.caminho_modelo_joblib), exist_ok=True)
+
+        # 1. Salva o modelo de ML como um ficheiro .joblib
+        joblib.dump(self.modelo_ml, self.caminho_modelo_joblib)
+
+        # 2. Salva os metadados no JSON
+        json_data = {
+            'caminho_modelo_joblib': os.path.relpath(self.caminho_modelo_joblib, os.path.dirname(self.caminho_pesos_json)),
+            'heuristicas_ordenadas': self.heuristicas_ordenadas
+        }
+        
+        with open(self.caminho_pesos_json, 'w', encoding='utf-8') as f:
+            json.dump(json_data, f, indent=2, ensure_ascii=False)
+
+        print("Treino concluído. Modelo Joblib guardado em:", self.caminho_modelo_joblib)
+        print("Metadados JSON guardados em:", self.caminho_pesos_json)
 
     def predict(self, previsoes_detalhes):
         """
         Gera a previsão final combinando as previsões das heurísticas.
-        Carrega o modelo se ainda não tiver sido carregado.
         """
         if not self.heuristicas_ordenadas or not hasattr(self.modelo_ml, 'n_estimators'):
-            if not self.load_pesos():
+            if not self.load_model():
                 print("Modelo não treinado ou carregado. Não é possível gerar uma previsão.")
                 return []
         
