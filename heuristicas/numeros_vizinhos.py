@@ -1,6 +1,10 @@
 # heuristicas/numeros_vizinhos.py
 from collections import defaultdict, Counter
 
+DESCRICAO = "Sugere números vizinhos de sorteios recentes mais frequentes."
+
+# Nota: verifica se um número aparece próximo (±1) de outro no sorteio seguinte.
+
 def prever(estatisticas, sorteios_historico, n=5):
     """
     Prevê números com base na frequência de vizinhos sorteados em sorteios recentes.
