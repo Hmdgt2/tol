@@ -2,6 +2,8 @@
 from collections import Counter
 from itertools import combinations
 
+DESCRICAO = "Sugere números cuja soma tende à soma mais frequente nos sorteios."
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na soma mais provável dos sorteios.
