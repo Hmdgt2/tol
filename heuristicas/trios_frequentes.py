@@ -1,6 +1,8 @@
 # heuristicas/trios_frequentes.py
 from collections import Counter
 
+DESCRICAO = "Sugere números que aparecem juntos em trios frequentes nos sorteios passados."
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na frequência de trios de números.
