@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números cuja soma tende à soma mais frequente nos sorteios.",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 647,
+      "taxa_sucesso": "42.90%"
+    },
+    "acerto_2": {
+      "total": 123,
+      "taxa_sucesso": "8.16%"
+    },
+    "acerto_3": {
+      "total": 11,
+      "taxa_sucesso": "0.73%"
+    },
+    "acerto_4": {
+      "total": 1,
+      "taxa_sucesso": "0.07%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "022/2024",
+    "data": "16/03/2024",
+    "numeros_acertados": 4,
+    "numeros_previstos_pico": [
+      16,
+      21,
+      23,
+      24,
+      32
+    ],
+    "numeros_reais_pico": [
+      16,
+      23,
+      24,
+      32,
+      35
+    ],
+    "indice_sorteio": 1356
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 151,
+    "media_acertos_apos": 0.52
+  }
+}

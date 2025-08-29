@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números com terminações semelhantes ao último sorteio.",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 631,
+      "taxa_sucesso": "41.84%"
+    },
+    "acerto_2": {
+      "total": 122,
+      "taxa_sucesso": "8.09%"
+    },
+    "acerto_3": {
+      "total": 10,
+      "taxa_sucesso": "0.66%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "036/2011",
+    "data": "08/06/2011",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      14,
+      34,
+      38,
+      44,
+      48
+    ],
+    "numeros_reais_pico": [
+      10,
+      14,
+      24,
+      34,
+      48
+    ],
+    "indice_sorteio": 23
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1484,
+    "media_acertos_apos": 0.51
+  }
+}

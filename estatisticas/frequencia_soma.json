@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números que ajudam a formar a soma mais frequente dos sorteios.",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 425,
+      "taxa_sucesso": "28.18%"
+    },
+    "acerto_2": {
+      "total": 57,
+      "taxa_sucesso": "3.78%"
+    },
+    "acerto_3": {
+      "total": 3,
+      "taxa_sucesso": "0.20%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "016/2014",
+    "data": "22/02/2014",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      2,
+      6,
+      16,
+      26,
+      40
+    ],
+    "numeros_reais_pico": [
+      6,
+      11,
+      16,
+      26,
+      43
+    ],
+    "indice_sorteio": 306
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1201,
+    "media_acertos_apos": 0.31
+  }
+}

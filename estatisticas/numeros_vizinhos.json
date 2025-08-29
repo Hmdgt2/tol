@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números vizinhos de sorteios recentes mais frequentes.",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 628,
+      "taxa_sucesso": "41.64%"
+    },
+    "acerto_2": {
+      "total": 134,
+      "taxa_sucesso": "8.89%"
+    },
+    "acerto_3": {
+      "total": 10,
+      "taxa_sucesso": "0.66%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "094/2011",
+    "data": "28/12/2011",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      6,
+      15,
+      16,
+      31,
+      35
+    ],
+    "numeros_reais_pico": [
+      16,
+      18,
+      31,
+      35,
+      37
+    ],
+    "indice_sorteio": 81
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1426,
+    "media_acertos_apos": 0.51
+  }
+}

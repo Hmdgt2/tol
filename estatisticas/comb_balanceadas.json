@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere combinações que equilibram números pares e ímpares, altos e baixos, com base em padrões históricos.",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 652,
+      "taxa_sucesso": "43.24%"
+    },
+    "acerto_2": {
+      "total": 106,
+      "taxa_sucesso": "7.03%"
+    },
+    "acerto_3": {
+      "total": 9,
+      "taxa_sucesso": "0.60%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "102/2012",
+    "data": "22/12/2012",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      2,
+      16,
+      18,
+      40,
+      48
+    ],
+    "numeros_reais_pico": [
+      2,
+      5,
+      25,
+      40,
+      48
+    ],
+    "indice_sorteio": 184
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1323,
+    "media_acertos_apos": 0.51
+  }
+}

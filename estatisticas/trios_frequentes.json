@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números que aparecem juntos em trios frequentes nos sorteios passados.",
+  "total_previsoes": 1508,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 652,
+      "taxa_sucesso": "43.24%"
+    },
+    "acerto_2": {
+      "total": 107,
+      "taxa_sucesso": "7.10%"
+    },
+    "acerto_3": {
+      "total": 9,
+      "taxa_sucesso": "0.60%"
+    },
+    "acerto_4": {
+      "total": 1,
+      "taxa_sucesso": "0.07%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "054/2024",
+    "data": "06/07/2024",
+    "numeros_acertados": 4,
+    "numeros_previstos_pico": [
+      6,
+      16,
+      24,
+      34,
+      47
+    ],
+    "numeros_reais_pico": [
+      6,
+      24,
+      34,
+      47,
+      48
+    ],
+    "indice_sorteio": 1388
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 119,
+    "media_acertos_apos": 0.43
+  }
+}
