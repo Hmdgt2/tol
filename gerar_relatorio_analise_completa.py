@@ -16,7 +16,7 @@ from lib.dados import carregar_sorteios, get_all_stats
 
 # Caminhos de ficheiro
 HEURISTICAS_DIR = "heuristicas"
-RELATORIOS_DIR = "analise_heuristicas" # Pode ser alterado para "estatisticas" conforme discutido
+RELATORIOS_DIR = "estatisticas"
 
 def carregar_heuristicas():
     """Carrega dinamicamente todas as heurísticas e suas descrições."""
