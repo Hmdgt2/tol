@@ -68,7 +68,6 @@ def gerar_previsao():
 
     print("\n--- Sugestão Final ---")
     
-    # --- NOVO BLOCO CORRIGIDO ---
     try:
         with open(PESOS_PATH, 'r', encoding='utf-8') as f:
             pesos_json = json.load(f)
