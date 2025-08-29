@@ -5,7 +5,7 @@ from collections import defaultdict, Counter
 from itertools import combinations
 import json
 import inspect
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier # NOVO: Importa RandomForestClassifier
 import joblib
 
 # Adiciona o diretório raiz ao caminho do sistema
@@ -13,18 +13,18 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Importa as funções de dados
 from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
-# A classe HeuristicDecisor será ajustada para carregar este novo formato posteriormente
 from decisor.decisor_final import HeuristicDecisor
 
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 
-# Caminho para o ficheiro JSON de pesos (agora conterá metadados e o caminho para o modelo .joblib)
+# Caminho para o ficheiro JSON de pesos (agora conterá metadados e os caminhos para os modelos)
 PESOS_JSON_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
-# Caminho para o ficheiro Joblib que armazenará o modelo de ML real
-MODELO_JOBLIB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_ml.joblib')
-# NOVO: Caminho para o ficheiro de pesos das heurísticas
+# Caminho para o ficheiro Joblib que armazenará o modelo Gradient Boosting
+MODELO_GB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_gradient_boosting.joblib')
+# NOVO: Caminho para o ficheiro Joblib que armazenará o modelo Random Forest
+MODELO_RF_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_random_forest.joblib')
+# Caminho para o ficheiro de pesos das heurísticas
 PESOS_HEURISTICAS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_heuristicas.json')
 
 
@@ -46,7 +46,7 @@ def carregar_heuristicas():
 
 def treinar_decisor():
     """
-    Treina o modelo decisor usando dados históricos e limpa o ficheiro de pesos das heurísticas.
+    Treina os modelos decisores usando dados históricos.
     """
     sorteios_historico = carregar_sorteios()
     heuristicas = carregar_heuristicas()
@@ -55,7 +55,6 @@ def treinar_decisor():
         print("Dados ou heurísticas insuficientes para treinar o decisor.")
         return
 
-    # --- ETAPA 1: PRÉ-CÁLCULO DAS PREVISÕES ---
     print("Simulando previsões de heurísticas para dados históricos...")
     
     previsoes_por_sorteio = defaultdict(dict)
@@ -80,9 +79,8 @@ def treinar_decisor():
                 print(f"Erro inesperado na heurística {nome}: {e}")
                 previsoes_por_sorteio[i][nome] = []
 
-    print("Pré-cálculo concluído. A criar os dados de treino para o modelo de ML...")
+    print("Pré-cálculo concluído. A criar os dados de treino para os modelos de ML...")
     
-    # --- ETAPA 2: CRIAÇÃO DOS DADOS DE TREINO E TREINO DO MODELO ---
     X_treino = []
     y_treino = []
     heuristicas_ordenadas = [nome for nome, _ in heuristicas]
@@ -101,32 +99,39 @@ def treinar_decisor():
         print("Nenhum dado de treino gerado.")
         return
 
+    # --- NOVO: TREINA E SALVA OS DOIS MODELOS ---
+    os.makedirs(os.path.dirname(MODELO_GB_PATH), exist_ok=True)
+    
     print("A treinar o modelo de Gradient Boosting...")
-    modelo_ml = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
-    modelo_ml.fit(X_treino, y_treino)
+    modelo_gb = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
+    modelo_gb.fit(X_treino, y_treino)
+    joblib.dump(modelo_gb, MODELO_GB_PATH)
 
-    # --- SALVA O MODELO DE ML E METADADOS ---
-    os.makedirs(os.path.dirname(MODELO_JOBLIB_PATH), exist_ok=True)
+    print("A treinar o modelo de Random Forest...")
+    modelo_rf = RandomForestClassifier(n_estimators=100, random_state=42)
+    modelo_rf.fit(X_treino, y_treino)
+    joblib.dump(modelo_rf, MODELO_RF_PATH)
+    
+    # --- SALVA OS METADADOS DOS DOIS MODELOS ---
     os.makedirs(os.path.dirname(PESOS_JSON_PATH), exist_ok=True)
 
-    joblib.dump(modelo_ml, MODELO_JOBLIB_PATH)
-
     json_data = {
-        'caminho_modelo_joblib': os.path.relpath(MODELO_JOBLIB_PATH, PROJECT_ROOT),
+        'modelos': {
+            'gradient_boosting': os.path.relpath(MODELO_GB_PATH, PROJECT_ROOT),
+            'random_forest': os.path.relpath(MODELO_RF_PATH, PROJECT_ROOT)
+        },
         'heuristicas_ordenadas': heuristicas_ordenadas
     }
     
     with open(PESOS_JSON_PATH, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, indent=2, ensure_ascii=False)
 
-    print("Treino concluído. Modelo Joblib guardado em:", MODELO_JOBLIB_PATH)
-    print("Metadados JSON guardados em:", PESOS_JSON_PATH)
+    print("Treino concluído. Modelos Joblib guardados.")
+    print("Metadados JSON atualizados em:", PESOS_JSON_PATH)
 
-    # --- NOVO: REINICIA O FICHEIRO DE PESOS DAS HEURÍSTICAS ---
     if os.path.exists(PESOS_HEURISTICAS_PATH):
         os.remove(PESOS_HEURISTICAS_PATH)
-        print("Ficheiro de pesos das heurísticas reiniciado para o novo ciclo de treino.")
-
+        print("Ficheiro de pesos das heurísticas reiniciado.")
 
 if __name__ == '__main__':
     treinar_decisor()
