@@ -1,4 +1,7 @@
 # heuristicas/gap_medio.py
+
+DESCRICAO = "Sugere números com menor intervalo médio entre saídas."
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base no seu gap médio (intervalo médio entre saídas),
