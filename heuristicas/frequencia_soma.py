@@ -2,6 +2,12 @@
 from collections import Counter
 from itertools import combinations
 
+DESCRICAO = "Sugere números que ajudam a formar a soma mais frequente dos sorteios."
+
+# Nota: analisa a soma total dos números sorteados e escolhe os que mais contribuem
+# para a soma considerada mais comum ao longo do histórico.
+
+
 def prever(estatisticas, n=5):
     """
     Prevê números com base na soma mais frequente dos sorteios.
