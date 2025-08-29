@@ -9,6 +9,7 @@ from decisor.decisor_final import HeuristicDecisor
 from lib.dados import carregar_sorteios, get_all_stats, get_repeticoes_ultimos_sorteios
 
 # Define o caminho para a pasta de heurísticas e previsões
+# Adicione esta linha para garantir que o caminho base está correto
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -16,6 +17,8 @@ if PROJECT_ROOT not in sys.path:
 HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
 PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
 FICHEIRO_PREVISAO = os.path.join(PASTA_PREVISOES, 'previsao_atual.json')
+
+# Corrija esta linha para usar o PROJECT_ROOT
 PESOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
 
 def carregar_heuristicas():
@@ -69,6 +72,7 @@ def gerar_previsao():
     print("\n--- Sugestão Final ---")
     
     try:
+        # Tenta carregar o ficheiro de pesos
         with open(PESOS_PATH, 'r', encoding='utf-8') as f:
             pesos_json = json.load(f)
         
@@ -79,6 +83,7 @@ def gerar_previsao():
             print("Erro: Caminhos dos modelos não encontrados no ficheiro de pesos. A sair.")
             return
 
+        # Corrija aqui também para usar PROJECT_ROOT
         caminho_completo_gb = os.path.join(PROJECT_ROOT, caminho_modelo_gb)
         caminho_completo_rf = os.path.join(PROJECT_ROOT, caminho_modelo_rf)
         
