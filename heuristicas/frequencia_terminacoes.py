@@ -1,28 +1,28 @@
 # heuristicas/frequencia_terminacoes.py
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Metadados da Heurística ---
+NOME = "frequencia_terminacoes"
 DESCRICAO = "Sugere números com terminações mais frequentes."
+# A heurística declara explicitamente que precisa da estatística 'frequencia_total'.
+DEPENDENCIAS = ["frequencia_total"]
 
-# Nota: analisa o último dígito dos números sorteados e escolhe os mais comuns.
-
-def prever(estatisticas, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base na frequência das terminações (último dígito).
 
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
-    
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
     frequencia_total = estatisticas.get('frequencia_total', {})
 
     if not frequencia_total:
-        return {
-            "nome": "frequencia_terminacoes",
-            "numeros": []
-        }
+        return []
     
     # Deriva a frequência das terminações a partir da frequência total pré-calculada
     contador_terminacoes = Counter()
@@ -44,7 +44,4 @@ def prever(estatisticas, n=5):
 
     sugeridos = candidatos[:n]
     
-    return {
-        "nome": "frequencia_terminacoes",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    return sorted(list(set(sugeridos)))
