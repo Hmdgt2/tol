@@ -1,5 +1,6 @@
 # heuristicas/clusters_recentes.py
 from typing import Dict, Any, List
+from collections import Counter  # Importação adicionada
 
 # --- Metadados da Heurística ---
 NOME = "clusters_recentes"
@@ -30,6 +31,7 @@ def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     pares_mais_frequentes = [par for par, _ in pares_recentes.most_common(10)]
     
     # Conta a frequência individual de cada número dentro desses pares.
+    # O Counter é usado aqui para uma lógica de previsão específica, por isso é mantido.
     contador_numeros = Counter()
     for par in pares_mais_frequentes:
         contador_numeros.update(par)
