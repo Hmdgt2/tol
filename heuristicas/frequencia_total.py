@@ -1,34 +1,34 @@
 # heuristicas/frequencia_total.py
-
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Heuristic Metadata ---
+# The new architecture uses a metadata pattern to define the heuristic.
+NOME = "frequencia_total"
 DESCRICAO = "Sugere os números mais frequentes no histórico."
+# This heuristic explicitly declares its dependency.
+DEPENDENCIAS = ["frequencia_total"]
 
-def prever(estatisticas, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
-    Prevê números com base na frequência total.
+    Predicts numbers based on their total historical frequency.
     
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        n (int): O número de sugestões a retornar.
+        estatisticas (dict): Dictionary with the pre-calculated statistics the heuristic depends on.
+        n (int): The number of suggestions to return.
         
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: A list of suggested numbers.
     """
-    # Acessa diretamente a estatística de frequência total
-    contador = estatisticas.get('frequencia_total', {})
+    # Access the pre-calculated 'frequencia_total' statistic.
+    frequencia = estatisticas.get('frequencia_total', {})
     
-    # Se o contador estiver vazio, retorna uma lista vazia
-    if not contador:
-        return {
-            "nome": "frequencia_total",
-            "numeros": []
-        }
-    
-    # Retorna os n números mais frequentes
-    sugeridos = [num for num, _ in Counter(contador).most_common(n)]
+    # If the statistic is empty, return an empty list.
+    if not frequencia:
+        return []
 
-    return {
-        "nome": "frequencia_total",
-        "numeros": sugeridos
-    }
+    # Return the 'n' most frequent numbers.
+    # The Counter is used here to get the most common items from the dict.
+    sugeridos = [num for num, _ in Counter(frequencia).most_common(n)]
+
+    return sorted(sugeridos)
