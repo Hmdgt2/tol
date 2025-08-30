@@ -1,22 +1,12 @@
 {
   "previsao": [
-    2,
     4,
-    11,
+    20,
     32,
-    33
+    37,
+    46
   ],
   "detalhes": [
-    {
-      "nome": "distribuicao_grupos",
-      "numeros": [
-        4,
-        16,
-        26,
-        32,
-        46
-      ]
-    },
     {
       "nome": "pares_frequentes",
       "numeros": [
@@ -28,16 +18,6 @@
       ]
     },
     {
-      "nome": "comb_balanceadas",
-      "numeros": [
-        4,
-        26,
-        32,
-        38,
-        46
-      ]
-    },
-    {
       "nome": "numeros_vizinhos",
       "numeros": [
         5,
@@ -45,16 +25,6 @@
         23,
         27,
         28
-      ]
-    },
-    {
-      "nome": "distribuicao_quadrantes",
-      "numeros": [
-        4,
-        23,
-        32,
-        33,
-        46
       ]
     },
     {
@@ -93,16 +63,6 @@
       ]
     },
     {
-      "nome": "frequencia_terminacoes",
-      "numeros": [
-        23,
-        26,
-        33,
-        38,
-        46
-      ]
-    },
-    {
       "nome": "repeticao_por_posicao",
       "numeros": [
         2,
@@ -110,56 +70,6 @@
         24,
         36,
         48
-      ]
-    },
-    {
-      "nome": "ciclos_longos",
-      "numeros": [
-        2,
-        13,
-        20,
-        37,
-        38
-      ]
-    },
-    {
-      "nome": "frequencia_total",
-      "numeros": [
-        32,
-        33,
-        26,
-        23,
-        46
-      ]
-    },
-    {
-      "nome": "clusters_recentes",
-      "numeros": [
-        4,
-        11,
-        15,
-        16,
-        17
-      ]
-    },
-    {
-      "nome": "crescimento_ano",
-      "numeros": [
-        8,
-        23,
-        37,
-        39,
-        1
-      ]
-    },
-    {
-      "nome": "ausencia_superior_media",
-      "numeros": [
-        20,
-        37,
-        13,
-        2,
-        38
       ]
     },
     {
@@ -193,42 +103,12 @@
       ]
     },
     {
-      "nome": "meta_avaliacao",
-      "numeros": [
-        23,
-        26,
-        33,
-        38,
-        46
-      ]
-    },
-    {
       "nome": "trios_frequentes",
       "numeros": [
         6,
         16,
         24,
         34,
-        46
-      ]
-    },
-    {
-      "nome": "distribuicao_uniforme_faixas",
-      "numeros": [
-        4,
-        16,
-        26,
-        32,
-        46
-      ]
-    },
-    {
-      "nome": "balanceamento_tipos",
-      "numeros": [
-        23,
-        26,
-        32,
-        33,
         46
       ]
     },
@@ -260,16 +140,6 @@
         34,
         38,
         48
-      ]
-    },
-    {
-      "nome": "frequencia_soma",
-      "numeros": [
-        23,
-        26,
-        32,
-        33,
-        46
       ]
     },
     {
