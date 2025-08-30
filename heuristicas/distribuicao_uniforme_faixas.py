@@ -1,16 +1,28 @@
 # heuristicas/distribuicao_uniforme_faixas.py
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Metadados da Heurística ---
+NOME = "distribuicao_uniforme_faixas"
 DESCRICAO = "Sugere números distribuídos de forma equilibrada entre as faixas do jogo, evitando concentrações."
+# Esta heurística precisa da estatística de frequência total.
+DEPENDENCIAS = ["frequencia_total"]
 
-def prever(estatisticas, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números garantindo distribuição uniforme entre as faixas do jogo.
+    
+    Args:
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
+        n (int): O número de sugestões a retornar.
+        
+    Returns:
+        list: Uma lista de números sugeridos.
     """
     frequencia_total = estatisticas.get('frequencia_total', {})
 
     if not frequencia_total:
-        return {"nome": "distribuicao_uniforme_faixas", "numeros": []}
+        return []
 
     # Definindo faixas
     faixas = [(1,10), (11,20), (21,30), (31,40), (41,49)]
@@ -32,7 +44,4 @@ def prever(estatisticas, n=5):
             if num not in numeros_sugeridos and len(numeros_sugeridos) < n:
                 numeros_sugeridos.append(num)
 
-    return {
-        "nome": "distribuicao_uniforme_faixas",
-        "numeros": sorted(numeros_sugeridos)
-    }
+    return sorted(numeros_sugeridos)
