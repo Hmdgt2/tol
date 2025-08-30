@@ -1,70 +1,42 @@
 name: Treinar e Salvar o Modelo
 
-
-
 on:
-
-  workflow_dispatch:
-
-
+  workflow_dispatch:
 
 jobs:
+  train:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
-  train:
+    steps:
+      - name: Checkout do Repositório
+        uses: actions/checkout@v4
 
-    runs-on: ubuntu-latest
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
 
-    permissions:
+      - name: Instalar Dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      contents: write
+      - name: Executar o Treino do Modelo
+        run: |
+          python treinar_decisor.py
 
-
-
-    steps:
-
-      - name: Checkout do Repositório
-
-        uses: actions/checkout@v4
-
-
-
-      - name: Configurar Python
-
-        uses: actions/setup-python@v4
-
-        with:
-
-          python-version: "3.13"
-
-
-
-      - name: Instalar Dependências
-
-        run: |
-
-          python -m pip install --upgrade pip
-
-          pip install -r requirements.txt
-
-
-
-      - name: Executar o Treino do Modelo
-
-        run: |
-
-          python treinar_decisor.py
-
-
-      - name: Commitar e Enviar os Ficheiros Corrigidos
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # Adiciona os novos ficheiros
-          git add decisor/pesos_atuais.json
-          git add decisor/modelo_gradient_boosting.joblib
-          git add decisor/modelo_random_forest.joblib
-          # Remove o ficheiro antigo, se existir
-          git rm --cached decisor/modelo_ml.joblib || true
-          git commit -m "feat(decisor): Atualiza ficheiro de pesos e modelos de ML" || echo "Nenhuma alteração a commitar"
-          git pull origin main --rebase
-          git push
+      - name: Commitar e Enviar os Ficheiros Corrigidos
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          # Adiciona os novos ficheiros
+          git add decisor/pesos_atuais.json
+          git add decisor/modelo_gradient_boosting.joblib
+          git add decisor/modelo_random_forest.joblib
+          # Remove o ficheiro antigo, se existir
+          git rm --cached decisor/modelo_ml.joblib || true
+          git commit -m "feat(decisor): Atualiza ficheiro de pesos e modelos de ML" || echo "Nenhuma alteração a commitar"
+          git pull origin main --rebase
+          git push
