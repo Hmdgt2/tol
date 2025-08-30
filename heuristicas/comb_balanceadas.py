@@ -1,49 +1,57 @@
 # heuristicas/comb_balanceadas.py
-from collections import Counter
+from typing import Dict, Any, List
 
+# --- Metadados da Heurística ---
+NOME = "comb_balanceadas"
 DESCRICAO = "Sugere combinações que equilibram números pares e ímpares, altos e baixos, com base em padrões históricos."
+# Esta heurística precisa da estatística de frequência total.
+DEPENDENCIAS = ["frequencia_total"]
 
-def prever(estatisticas, sorteios_historico, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base em combinações balanceadas de paridade e posição.
+    
+    Args:
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
+        n (int): O número de sugestões a retornar.
+        
+    Returns:
+        list: Uma lista de números sugeridos.
     """
-    if not sorteios_historico:
-        return {"nome": "comb_balanceadas", "numeros": []}
-
+    # Acessa diretamente a estatística de frequência total.
     frequencia_total = estatisticas.get('frequencia_total', {})
+    
     if not frequencia_total:
-        return {"nome": "comb_balanceadas", "numeros": []}
+        return []
 
     # Divide números em pares/ímpares
-    pares = [num for num in frequencia_total if num % 2 == 0]
-    impares = [num for num in frequencia_total if num % 2 != 0]
+    pares = sorted([num for num in frequencia_total if num % 2 == 0], key=lambda x: frequencia_total[x], reverse=True)
+    impares = sorted([num for num in frequencia_total if num % 2 != 0], key=lambda x: frequencia_total[x], reverse=True)
 
     # Divide números em altos/baixos (1-24 baixos, 25-49 altos)
-    baixos = [num for num in frequencia_total if num <= 24]
-    altos = [num for num in frequencia_total if num >= 25]
-
-    # Seleciona os mais frequentes de cada categoria
-    freq_ordenada = sorted(frequencia_total.items(), key=lambda x: x[1], reverse=True)
+    baixos = sorted([num for num in frequencia_total if num <= 24], key=lambda x: frequencia_total[x], reverse=True)
+    altos = sorted([num for num in frequencia_total if num >= 25], key=lambda x: frequencia_total[x], reverse=True)
     
+    # Seleciona os mais frequentes de cada categoria de forma equilibrada.
     sugeridos = []
-    for grupo in [pares, impares, baixos, altos]:
-        for num, _ in freq_ordenada:
-            if num in grupo and num not in sugeridos:
-                sugeridos.append(num)
-                if len(sugeridos) >= n:
-                    break
+    grupos = [pares, impares, baixos, altos]
+    
+    # A lógica aqui foi simplificada para pegar um número de cada grupo por vez,
+    # garantindo uma combinação mais balanceada desde o início.
+    num_por_grupo = n // len(grupos)
+    
+    # Preenche a lista com base na frequência e no balanceamento.
+    for grupo in grupos:
+        for _ in range(num_por_grupo):
+            if grupo:
+                sugeridos.append(grupo.pop(0))
+
+    # Se ainda faltarem números para atingir 'n', completa com os mais frequentes no geral.
+    frequencia_ordenada = sorted(frequencia_total.keys(), key=lambda x: frequencia_total[x], reverse=True)
+    for num in frequencia_ordenada:
         if len(sugeridos) >= n:
             break
+        if num not in sugeridos:
+            sugeridos.append(num)
 
-    # Se faltar algum número, completa com os mais frequentes restantes
-    if len(sugeridos) < n:
-        for num, _ in freq_ordenada:
-            if num not in sugeridos:
-                sugeridos.append(num)
-                if len(sugeridos) == n:
-                    break
-
-    return {
-        "nome": "comb_balanceadas",
-        "numeros": sorted(sugeridos)
-    }
+    return sorted(sugeridos)
