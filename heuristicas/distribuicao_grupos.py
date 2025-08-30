@@ -1,64 +1,64 @@
 # heuristicas/distribuicao_grupos.py
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Metadados da Heurística ---
+NOME = "distribuicao_grupos"
 DESCRICAO = "Sugere números seguindo a distribuição mais comum por grupos de dezenas."
+# Declara explicitamente as estatísticas necessárias.
+DEPENDENCIAS = ["distribuicao_dezenas", "frequencia_total"]
 
-def prever(estatisticas, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base na distribuição mais frequente por grupos (dezenas).
-
-    Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        n (int): O número de sugestões a retornar.
     
+    Args:
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
+        n (int): O número de sugestões a retornar.
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
-    # Acessa diretamente as estatísticas de distribuição de dezenas e frequência total
+    # Acessa diretamente as estatísticas.
     padrao_ideal = estatisticas.get('distribuicao_dezenas', (0, 0, 0, 0, 0))
     frequencia = estatisticas.get('frequencia_total', {})
     
     if not frequencia:
-        return {
-            "nome": "distribuicao_grupos",
-            "numeros": []
-        }
+        return []
 
-    # Ordena os grupos pela contagem ideal
-    grupos_ordenados = sorted(
-        enumerate(padrao_ideal),
-        key=lambda item: item[1],
-        reverse=True
-    )
+    # O ideal aqui é ter uma lista de números para cada grupo, ordenada por frequência.
+    grupos_por_frequencia = {
+        'grupo_1_10': sorted([num for num in range(1, 11)], key=lambda x: frequencia.get(x, 0), reverse=True),
+        'grupo_11_20': sorted([num for num in range(11, 21)], key=lambda x: frequencia.get(x, 0), reverse=True),
+        'grupo_21_30': sorted([num for num in range(21, 31)], key=lambda x: frequencia.get(x, 0), reverse=True),
+        'grupo_31_40': sorted([num for num in range(31, 41)], key=lambda x: frequencia.get(x, 0), reverse=True),
+        'grupo_41_49': sorted([num for num in range(41, 50)], key=lambda x: frequencia.get(x, 0), reverse=True)
+    }
 
     sugeridos = []
-    faixas = [(1, 10), (11, 20), (21, 30), (31, 40), (41, 49)]
-
-    # Itera sobre os grupos mais frequentes
-    for idx_grupo, _ in grupos_ordenados:
-        limite_inferior, limite_superior = faixas[idx_grupo]
-
-        # Encontra os números mais frequentes nessa faixa
-        candidatos_na_faixa = sorted(
-            [num for num, _ in frequencia.items() if limite_inferior <= num <= limite_superior],
-            key=lambda num: frequencia[num],
-            reverse=True
-        )
+    
+    # Itera sobre o padrão ideal para preencher a lista de sugeridos.
+    for i in range(len(padrao_ideal)):
+        num_a_pegar = padrao_ideal[i]
         
-        # Adiciona o número mais frequente dessa faixa, se ele não estiver já na lista
-        if candidatos_na_faixa and candidatos_na_faixa[0] not in sugeridos:
-            sugeridos.append(candidatos_na_faixa[0])
-            if len(sugeridos) >= n:
-                break
+        # Encontra o grupo correspondente ao índice.
+        grupo_chave = list(grupos_por_frequencia.keys())[i]
+        grupo_lista = grupos_por_frequencia[grupo_chave]
 
-    # Se a lista ainda não tiver n números, preenche com os mais frequentes
+        # Adiciona o número necessário de cada grupo.
+        for _ in range(num_a_pegar):
+            if grupo_lista:
+                num = grupo_lista.pop(0)
+                if num not in sugeridos:
+                    sugeridos.append(num)
+    
+    # Completa a lista se não houver 5 números.
     if len(sugeridos) < n:
         todos_mais_frequentes = [num for num, _ in Counter(frequencia).most_common(len(frequencia))]
         for num in todos_mais_frequentes:
-            if num not in sugeridos and len(sugeridos) < n:
+            if num not in sugeridos:
                 sugeridos.append(num)
+            if len(sugeridos) >= n:
+                break
     
-    return {
-        "nome": "distribuicao_grupos",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    return sorted(sugeridos)
