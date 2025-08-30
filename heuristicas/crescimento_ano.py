@@ -1,37 +1,36 @@
 # heuristicas/crescimento_ano.py
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Metadados da Heurística ---
+NOME = "crescimento_ano"
 DESCRICAO = "Sugere números cuja frequência tem aumentado de ano para ano."
+# Esta heurística precisa da estatística de frequência por ano.
+DEPENDENCIAS = ["frequencia_por_ano"]
 
-def prever(estatisticas, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base no crescimento da sua frequência ao longo dos anos.
     
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
         
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
     freq_ano = estatisticas.get('frequencia_por_ano', {})
     
     if not freq_ano:
-        return {
-            "nome": "crescimento_ano",
-            "numeros": []
-        }
+        return []
 
     anos = sorted(freq_ano.keys())
     pontos = Counter()
     
     # Se houver menos de 2 anos, não é possível calcular crescimento.
     if len(anos) < 2:
-        return {
-            "nome": "crescimento_ano",
-            "numeros": []
-        }
-        
+        return []
+    
     for num in range(1, 50):
         crescimentos = 0
         for i in range(1, len(anos)):
@@ -51,7 +50,4 @@ def prever(estatisticas, n=5):
     # Sugere os n números com mais pontos
     sugeridos = [num for num, _ in pontos.most_common(n)]
 
-    return {
-        "nome": "crescimento_ano",
-        "numeros": sugeridos
-    }
+    return sorted(sugeridos)
