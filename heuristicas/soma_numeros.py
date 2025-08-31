@@ -1,63 +1,43 @@
 # heuristicas/soma_numeros.py
-import numpy as np
-from collections import Counter
+from typing import Dict, Any, List
 
+# --- Metadados da Heurística ---
+NOME = "soma_numeros"
 DESCRICAO = "Sugere números dos sorteios cuja soma total é mais frequente."
+# Esta heurística precisa da estatística de números que mais saem nos sorteios com soma frequente.
+DEPENDENCIAS = ["numeros_soma_mais_frequente", "frequencia_total"]
 
-def prever(estatisticas, sorteios_historico, n=5, **kwargs):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
-    Prevê números com base na soma mais provável dos sorteios, usando uma abordagem mais eficiente.
-
+    Prevê números com base na soma mais provável dos sorteios.
+    
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        sorteios_historico (list): Lista dos sorteios históricos para análise.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
-    
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
+    # Acessa a estatística 'numeros_soma_mais_frequente' pré-calculada.
+    numeros_soma = estatisticas.get('numeros_soma_mais_frequente', [])
     
-    if not sorteios_historico:
-        return {
-            "nome": "soma_numeros",
-            "numeros": []
-        }
+    if not numeros_soma:
+        # Fallback para os números mais frequentes no geral se a estatística estiver vazia.
+        frequencia_total = estatisticas.get('frequencia_total', {})
+        if frequencia_total:
+            sugeridos = sorted(frequencia_total.keys(), key=lambda x: frequencia_total[x], reverse=True)[:n]
+            return sugeridos
+        return []
 
-    # 1. Calcular as somas de todos os sorteios e o intervalo mais comum
-    somas = [sum(s['numeros']) for s in sorteios_historico if s.get('numeros')]
+    sugeridos = numeros_soma[:n]
     
-    if not somas:
-        return {
-            "nome": "soma_numeros",
-            "numeros": []
-        }
+    # Se faltar números, completa com os mais frequentes no geral
+    if len(sugeridos) < n:
+        frequencia_total = estatisticas.get('frequencia_total', {})
+        numeros_gerais = sorted(frequencia_total.keys(), key=lambda x: frequencia_total[x], reverse=True)
+        
+        for num in numeros_gerais:
+            if num not in sugeridos and len(sugeridos) < n:
+                sugeridos.append(num)
 
-    soma_media = np.mean(somas)
-    soma_desvio = np.std(somas)
-    soma_minima = int(soma_media - soma_desvio)
-    soma_maxima = int(soma_media + soma_desvio)
-  
-  
-    # 2. Encontrar os sorteios no histórico que se encaixam no intervalo de soma
-    sorteios_dentro_intervalo = [s['numeros'] for s in sorteios_historico if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima]
-
-    if not sorteios_dentro_intervalo:
-        # Fallback para os números quentes se nenhum sorteio se encaixar
-        numeros_quentes = estatisticas.get('numeros_quentes', [])
-        return {
-            "nome": "soma_numeros",
-            "numeros": numeros_quentes[:n]
-        }
-
-    # 3. Contar a frequência de cada número nesses sorteios
-    frequencia_intervalo = Counter()
-    for numeros in sorteios_dentro_intervalo:
-        frequencia_intervalo.update(numeros)
-
-    # 4. Sugerir os números mais frequentes
-    sugeridos = [num for num, _ in frequencia_intervalo.most_common(n)]
-
-    return {
-        "nome": "soma_numeros",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    return sorted(sugeridos)
