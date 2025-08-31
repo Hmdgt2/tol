@@ -1,6 +1,7 @@
 import os
 import json
 from collections import defaultdict, deque, Counter
+from typing import Dict, Any, List
 
 # Caminhos de ficheiro
 HISTORICO_PATH = "decisor/historico_performance.json"
