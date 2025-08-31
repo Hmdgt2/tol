@@ -5,6 +5,7 @@ from collections import Counter, defaultdict
 from itertools import combinations
 import datetime
 import numpy as np
+from typing import Dict, Any, List
 
 # A pasta de dados principal
 PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados'))
