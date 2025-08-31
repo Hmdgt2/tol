@@ -1,57 +1,42 @@
 # heuristicas/numeros_vizinhos.py
-from collections import defaultdict, Counter
+from typing import Dict, Any, List
 
+# --- Metadados da Heurística ---
+NOME = "numeros_vizinhos"
 DESCRICAO = "Sugere números vizinhos de sorteios recentes mais frequentes."
+# Esta heurística precisa de uma nova estatística pré-calculada.
+DEPENDENCIAS = ["frequencia_vizinhos", "frequencia_total"]
 
-# Nota: verifica se um número aparece próximo (±1) de outro no sorteio seguinte.
-
-def prever(estatisticas, sorteios_historico, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
-    Prevê números com base na frequência de vizinhos sorteados em sorteios recentes.
+    Prevê números com base na frequência de vizinhos sorteados.
 
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        sorteios_historico (list): Lista dos sorteios históricos para análise.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
-    
-    Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
-    """
-    if not sorteios_historico or len(sorteios_historico) < 2:
-        return {
-            "nome": "numeros_vizinhos",
-            "numeros": []
-        }
-
-    frequencia_vizinhos = Counter()
-    
-    # Análise dos últimos 50 sorteios
-    periodo_analise = 50
-    historico_recente = sorteios_historico[-periodo_analise:]
-
-    for i in range(len(historico_recente) - 1):
-        sorteio_atual = set(historico_recente[i].get('numeros', []))
-        sorteio_seguinte = set(historico_recente[i+1].get('numeros', []))
         
-        for num_atual in sorteio_atual:
-            vizinho_esq = num_atual - 1
-            vizinho_dir = num_atual + 1
-            
-            # Conta se o vizinho apareceu no próximo sorteio
-            if vizinho_esq > 0 and vizinho_esq in sorteio_seguinte:
-                frequencia_vizinhos[vizinho_esq] += 1
-            if vizinho_dir < 50 and vizinho_dir in sorteio_seguinte:
-                frequencia_vizinhos[vizinho_dir] += 1
+    Returns:
+        list: Uma lista de números sugeridos.
+    """
+    # Acessa a estatística 'frequencia_vizinhos' pré-calculada.
+    frequencia_vizinhos = estatisticas.get('frequencia_vizinhos', {})
+    
+    sugeridos = []
 
-    # Sugere os números vizinhos mais frequentes
-    sugeridos = [num for num, _ in frequencia_vizinhos.most_common(n)]
-
-    # Se não houver vizinhos frequentes, voltar para a heurística de números quentes
-    if not sugeridos:
-        numeros_quentes = estatisticas.get('numeros_quentes', [])
-        sugeridos.extend(numeros_quentes[:n])
-
-    return {
-        "nome": "numeros_vizinhos",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    if frequencia_vizinhos:
+        # Sugere os números vizinhos mais frequentes
+        vizinhos_ordenados = sorted(frequencia_vizinhos.items(), key=lambda x: x[1], reverse=True)
+        sugeridos = [num for num, _ in vizinhos_ordenados[:n]]
+    
+    # Se ainda não tivermos 'n' números (por exemplo, se a estatística estiver vazia),
+    # usamos um fallback para os números mais frequentes no geral.
+    if len(sugeridos) < n:
+        frequencia_total = estatisticas.get('frequencia_total', {})
+        numeros_quentes = sorted(frequencia_total.keys(), key=lambda x: frequencia_total[x], reverse=True)
+        for num in numeros_quentes:
+            if num not in sugeridos:
+                sugeridos.append(num)
+            if len(sugeridos) >= n:
+                break
+                
+    return sorted(sugeridos)
