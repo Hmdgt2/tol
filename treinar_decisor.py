@@ -13,6 +13,9 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+# Importa a biblioteca de tipagem para resolver o erro
+from typing import Dict, Any, List
+
 from lib.dados import obter_estatisticas, _carregar_sorteios
 # Vamos usar o mapeamento de estatísticas diretamente para o treino incremental
 from lib.dados import MAP_ESTATISTICAS
@@ -67,7 +70,6 @@ def treinar_decisor():
     previsoes_por_sorteio = defaultdict(dict)
     
     # 1. Pré-calcula as estatísticas de forma incremental para cada sorteio
-    #    Isso é muito mais eficiente do que recalcular tudo do zero a cada vez.
     estatisticas_incrementais = defaultdict(dict)
     
     for i in range(len(sorteios_historico) - 1):
