@@ -1,55 +1,42 @@
 # heuristicas/repeticoes_sorteios_anteriores.py
+from typing import Dict, Any, List
 from collections import Counter
 
-DESCRICAO = "Sugere números com base na repetição provável dos últimos sorteios."
+# --- Metadados da Heurística ---
+NOME = "repeticoes_sorteios_anteriores"
+DESCRICAO = "Sugere números com base na probabilidade de repetição de números de sorteios anteriores."
+DEPENDENCIAS = ["probabilidades_repeticoes", "frequencia_recente", "frequencia_total"]
 
-def prever(estatisticas, sorteios_historico, n=5, num_sorteios_anteriores=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base na probabilidade de repetição de números de sorteios anteriores.
 
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        sorteios_historico (list): Lista dos sorteios históricos para análise.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
-        num_sorteios_anteriores (int): O número de sorteios anteriores a analisar.
-    
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
-    
-    # Esta estatística é gerada no gerar_previsao.py e no treinar_decisor.py
-    probabilidades_repeticoes = estatisticas.get('repeticoes_ultimos_sorteios', {})
+    probabilidades_repeticoes = estatisticas.get('probabilidades_repeticoes', {})
+    frequencia_recente = estatisticas.get('frequencia_recente', {})
     frequencia_geral = estatisticas.get('frequencia_total', {})
-    
-    if not probabilidades_repeticoes or not frequencia_geral or len(sorteios_historico) < num_sorteios_anteriores:
-        return {
-            "nome": "repeticoes_sorteios_anteriores",
-            "numeros": []
-        }
+
+    if not probabilidades_repeticoes or not frequencia_recente or not frequencia_geral:
+        return []
     
     # Identifica o número de repetições mais provável
-    # O valor padrão é 0 se o dicionário estiver vazio, o que significa que é improvável que haja repetições
     num_repeticoes_mais_provavel = max(probabilidades_repeticoes, key=probabilidades_repeticoes.get, default=0)
-    
-    # Obtém os números dos últimos sorteios
-    numeros_recentes = Counter()
-    # Pega os números dos últimos 'num_sorteios_anteriores'
-    indices_recentes = range(len(sorteios_historico) - 1, len(sorteios_historico) - 1 - num_sorteios_anteriores, -1)
-    
-    for i in indices_recentes:
-        numeros_do_sorteio = sorteios_historico[i].get('numeros', [])
-        numeros_recentes.update(numeros_do_sorteio)
 
     sugeridos = []
     
     if num_repeticoes_mais_provavel > 0:
         # Se é provável que haja repetições, sugere os números mais frequentes dos sorteios recentes
-        sugeridos.extend([num for num, _ in numeros_recentes.most_common(n)])
+        sugeridos.extend([num for num, _ in Counter(frequencia_recente).most_common(n)])
     else:
         # Se é provável que NÃO haja repetições, sugere os números que não saíram recentemente
-        todos_numeros = set(range(1, 50))
-        numeros_recentes_set = set(numeros_recentes.keys())
-        numeros_nao_recentes = list(todos_numeros - numeros_recentes_set)
+        numeros_recentes_set = set(frequencia_recente.keys())
+        numeros_nao_recentes = [num for num in frequencia_geral.keys() if num not in numeros_recentes_set]
         
         # Ordena os não recentes pela frequência geral
         numeros_nao_recentes.sort(key=lambda x: frequencia_geral.get(x, 0), reverse=True)
@@ -61,8 +48,5 @@ def prever(estatisticas, sorteios_historico, n=5, num_sorteios_anteriores=5):
         for num in todos_frequentes_geral:
             if num not in sugeridos and len(sugeridos) < n:
                 sugeridos.append(num)
-
-    return {
-        "nome": "repeticoes_sorteios_anteriores",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    
+    return sorted(list(set(sugeridos)))
