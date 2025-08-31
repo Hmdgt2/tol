@@ -1,238 +1,218 @@
+# dados.py
 import os
 import json
 from collections import Counter, defaultdict
 from itertools import combinations
 import datetime
+import numpy as np
 
-# Usar a pasta de dados principal, para evitar duplicação
+# A pasta de dados principal
 PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados'))
+ARQUIVO_CACHE_ESTATISTICAS = os.path.join(PASTA_DADOS, 'estatisticas_cache.json')
 
-def carregar_sorteios(pasta=PASTA_DADOS):
-    """
-    Carrega todos os sorteios de arquivos JSON em um diretório,
-    garantindo que o formato esteja correto.
-    """
+def _carregar_sorteios():
+    """Carrega todos os sorteios de arquivos JSON, ordenando-os por data."""
     todos = []
-    
-    if not os.path.exists(pasta):
-        print(f"Diretório '{pasta}' não encontrado.")
+    if not os.path.exists(PASTA_DADOS):
+        print(f"Diretório '{PASTA_DADOS}' não encontrado.")
         return []
 
-    for nome_arquivo in sorted(os.listdir(pasta)):
+    for nome_arquivo in sorted(os.listdir(PASTA_DADOS)):
         if nome_arquivo.endswith('.json'):
-            caminho_completo = os.path.join(pasta, nome_arquivo)
+            caminho_completo = os.path.join(PASTA_DADOS, nome_arquivo)
             try:
                 with open(caminho_completo, "r", encoding="utf-8") as f:
-                    dados_carregados = json.load(f)
-                    
-                    if isinstance(dados_carregados, dict):
-                        # Se for um dicionário de anos, extrai as listas
-                        for sorteios_do_ano in dados_carregados.values():
+                    dados = json.load(f)
+                    if isinstance(dados, dict):
+                        for sorteios_do_ano in dados.values():
                             if isinstance(sorteios_do_ano, list):
                                 todos.extend(sorteios_do_ano)
-                    elif isinstance(dados_carregados, list):
-                        # Se for uma lista direta, anexa
-                        todos.extend(dados_carregados)
+                    elif isinstance(dados, list):
+                        todos.extend(dados)
             except (json.JSONDecodeError, FileNotFoundError) as e:
                 print(f"Erro ao ler o arquivo {nome_arquivo}: {e}")
-    
+                
     if todos:
-        # Filtra os sorteios que são dicionários válidos antes de ordenar
-        sorteios_validos = [s for s in todos if isinstance(s, dict) and 'data' in s and isinstance(s.get('data'), str)]
-        
-        # Agora, ordena apenas a lista de sorteios válidos
+        sorteios_validos = [s for s in todos if isinstance(s, dict) and 'data' in s and 'numeros' in s]
         sorteios_validos.sort(key=lambda s: datetime.datetime.strptime(s.get('data'), '%d/%m/%Y'))
-        
         return sorteios_validos
-    
     return []
 
-# Adição da função para calcular repetições
-def get_repeticoes_ultimos_sorteios(sorteios, num_sorteios=100):
-    """
-    Calcula a probabilidade de repetição de 0, 1, 2, ... números
-    nos últimos 'num_sorteios' sorteios.
-    """
-    if len(sorteios) < num_sorteios:
-        num_sorteios = len(sorteios)
-        
-    repeticoes_count = Counter()
+def _calcular_frequencia_total(sorteios):
+    """Calcula a frequência total de todos os números."""
+    frequencia = Counter()
+    for sorteio in sorteios:
+        frequencia.update(sorteio['numeros'])
+    return frequencia
+
+def _calcular_ausencia_atual(sorteios):
+    """Calcula o tempo de ausência de cada número."""
+    ausencia = {}
+    todos_numeros = set(range(1, 50))
+    ultima_ocorrencia = {num: -1 for num in todos_numeros}
+    for i, sorteio in enumerate(sorteios):
+        for num in sorteio['numeros']:
+            ultima_ocorrencia[num] = i
     
-    for i in range(len(sorteios) - 1, len(sorteios) - num_sorteios - 1, -1):
-        if i > 0:
-            sorteio_atual_numeros = set(sorteios[i].get('numeros', []))
-            sorteio_anterior_numeros = set(sorteios[i-1].get('numeros', []))
-            
-            numeros_repetidos = len(sorteio_atual_numeros.intersection(sorteio_anterior_numeros))
-            repeticoes_count[numeros_repetidos] += 1
-            
-    total_sorteios = sum(repeticoes_count.values())
-    
-    if total_sorteios == 0:
-      return {}
-
-    probabilidades = {
-        repeticoes: count / total_sorteios
-        for repeticoes, count in repeticoes_count.items()
-    }
-    
-    return probabilidades
-
-def is_prime(n):
-    if n < 2:
-        return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
-
-def get_incremental_stats(stats_atuais, novo_sorteio):
-    """
-    Atualiza as estatísticas com os dados de um novo sorteio, de forma incremental.
-    """
-    if not stats_atuais:
-        stats_atuais = {
-            'frequencia_total': Counter(),
-            'frequencia_pares': Counter(),
-            'frequencia_trios': Counter(),
-            'numeros_recentes': [],
-            'ultimos_numeros': []
-        }
-
-    numeros_sorteio = novo_sorteio.get('numeros', [])
-    
-    # Atualiza a frequência total
-    stats_atuais['frequencia_total'].update(numeros_sorteio)
-    
-    # Atualiza a frequência de pares
-    pares = sorted(list(combinations(numeros_sorteio, 2)))
-    stats_atuais['frequencia_pares'].update(pares)
-    
-    # Atualiza a frequência de trios
-    trios = sorted(list(combinations(numeros_sorteio, 3)))
-    stats_atuais['frequencia_trios'].update(trios)
-
-    # Atualiza os números recentes
-    stats_atuais['numeros_recentes'].extend(numeros_sorteio)
-    # Mantém apenas os 500 mais recentes, por exemplo
-    stats_atuais['numeros_recentes'] = stats_atuais['numeros_recentes'][-500:] 
-
-    # Atualiza os últimos números
-    stats_atuais['ultimos_numeros'] = numeros_sorteio
-    
-    return stats_atuais
-
-def get_all_stats(sorteios, all_numbers=range(1, 50)):
-    """
-    Calcula todas as estatísticas e características de uma só vez para um conjunto de sorteios.
-    Retorna um dicionário com todas as estatísticas.
-    """
-    if not sorteios:
-        return {
-            'frequencia_total': {n: 0 for n in all_numbers},
-            'ausencia_atual': {n: 0 for n in all_numbers},
-            'gaps_medios': {n: float('inf') for n in all_numbers},
-            'pares_frequentes': {},
-            'trios_frequentes': {},
-            'frequencia_por_ano': {},
-            'padrao_tipos_numeros': (0, 0, 0),
-            'soma_mais_comum': 0,
-            'distribuicao_quadrantes': (0, 0, 0, 0),
-            'distribuicao_dezenas': (0, 0, 0, 0, 0)
-        }
-
-    frequencia_total = Counter()
-    ultima_ocorrencia = defaultdict(lambda: -1)
-    posicoes = defaultdict(list)
-    frequencia_por_ano = defaultdict(lambda: defaultdict(int))
-    padroes_tipos_numeros = Counter()
-    somas = []
-    distribuicoes_quadrantes = Counter()
-    distribuicoes_dezenas = Counter()
-    pares_frequentes = Counter()
-    trios_frequentes = Counter()
-
     total_concursos = len(sorteios)
-    dezenas_faixas = [(1, 10), (11, 20), (21, 30), (31, 40), (41, 49)]
+    for num in todos_numeros:
+        ausencia[num] = total_concursos - ultima_ocorrencia[num] - 1
+    return ausencia
 
-    # Loop para calcular a maioria das estatísticas
-    for idx, sorteio in enumerate(sorteios):
-        numeros = sorteio.get('numeros', [])
-        
-        # Garante que 'numeros' é uma lista antes de processar
-        if not isinstance(numeros, list) or not numeros:
-            continue
-            
-        numeros_ordenados = sorted(numeros)
-
-        # Frequência e Ausência
-        frequencia_total.update(numeros_ordenados)
-        for num in numeros_ordenados:
-            ultima_ocorrencia[num] = idx
-            posicoes[num].append(idx)
-
-        # Frequência por ano
-        try:
-            ano = int(sorteio.get('data', '01-01-1900').split('/')[-1])
-            for num in numeros_ordenados:
-                frequencia_por_ano[ano][num] += 1
-        except (KeyError, ValueError):
-            pass
-
-        # Padrões de composição (par/ímpar/primo)
-        pares = sum(1 for n in numeros_ordenados if n % 2 == 0)
-        impares = len(numeros_ordenados) - pares
-        primos = sum(1 for n in numeros_ordenados if is_prime(n))
-        padroes_tipos_numeros[(pares, impares, primos)] += 1
-
-        # Somas
-        somas.append(sum(numeros_ordenados))
-            
-        # Distribuição por quadrantes
-        num_quadrantes = 4
-        max_numero = 49
-        tamanho_quadrante = max_numero // num_quadrantes
-        contagem_quadrante = [0] * num_quadrantes
-        for num in numeros_ordenados:
-            for i in range(num_quadrantes):
-                if (i * tamanho_quadrante + 1) <= num <= ((i + 1) * tamanho_quadrante):
-                    contagem_quadrante[i] += 1
-                    break
-        distribuicoes_quadrantes[tuple(contagem_quadrante)] += 1
-
-        # Distribuição por dezenas
-        contagem_dezenas = [0] * len(dezenas_faixas)
-        for num in numeros_ordenados:
-            for i, (inf, sup) in enumerate(dezenas_faixas):
-                if inf <= num <= sup:
-                    contagem_dezenas[i] += 1
-                    break
-        distribuicoes_dezenas[tuple(contagem_dezenas)] += 1
-
-        # Pares e trios frequentes
-        pares_frequentes.update(combinations(numeros_ordenados, 2))
-        trios_frequentes.update(combinations(numeros_ordenados, 3))
-    
-    # Calcular métricas finais que precisam do loop completo
-    ausencia_atual = {num: total_concursos - ultima_ocorrencia.get(num, -1) - 1 for num in all_numbers}
+def _calcular_gaps_medios(sorteios):
+    """Calcula o gap médio entre as saídas de cada número."""
+    posicoes = defaultdict(list)
     gaps_medios = {}
-    for num in all_numbers:
+    todos_numeros = set(range(1, 50))
+    for i, sorteio in enumerate(sorteios):
+        for num in sorteio['numeros']:
+            posicoes[num].append(i)
+    
+    for num in todos_numeros:
         concursos = posicoes.get(num, [])
         if len(concursos) < 2:
             gaps_medios[num] = float('inf')
         else:
             diferencas = [j - i for i, j in zip(concursos[:-1], concursos[1:])]
             gaps_medios[num] = sum(diferencas) / len(diferencas)
+    return gaps_medios
+
+def _calcular_frequencia_pares(sorteios):
+    """Calcula a frequência de todos os pares de números."""
+    frequencia_pares = Counter()
+    for sorteio in sorteios:
+        pares = combinations(sorted(sorteio['numeros']), 2)
+        frequencia_pares.update(pares)
+    return frequencia_pares
+
+def _calcular_frequencia_trios(sorteios):
+    """Calcula a frequência de todos os trios de números."""
+    frequencia_trios = Counter()
+    for sorteio in sorteios:
+        trios = combinations(sorted(sorteio['numeros']), 3)
+        frequencia_trios.update(trios)
+    return frequencia_trios
+
+def _calcular_frequencia_recente(sorteios, janela=15):
+    """Calcula a frequência dos números numa janela de tempo recente."""
+    janela_sorteios = sorteios[-janela:]
+    frequencia = Counter()
+    for sorteio in janela_sorteios:
+        frequencia.update(sorteio['numeros'])
+    return frequencia
+
+def _calcular_frequencia_por_posicao(sorteios):
+    """Calcula a frequência de cada número por posição."""
+    frequencia_posicao = defaultdict(Counter)
+    if not sorteios or not sorteios[0]['numeros']:
+        return frequencia_posicao
     
-    return {
-        'frequencia_total': frequencia_total,
-        'ausencia_atual': ausencia_atual,
-        'gaps_medios': gaps_medios,
-        'pares_frequentes': pares_frequentes,
-        'trios_frequentes': trios_frequentes,
-        'frequencia_por_ano': frequencia_por_ano,
-        'padrao_tipos_numeros': padroes_tipos_numeros.most_common(1)[0][0] if padroes_tipos_numeros else (0, 0, 0),
-        'soma_mais_comum': Counter(somas).most_common(1)[0][0] if somas else 0,
-        'distribuicao_quadrantes': distribuicoes_quadrantes.most_common(1)[0][0] if distribuicoes_quadrantes else (0, 0, 0, 0),
-        'distribuicao_dezenas': distribuicoes_dezenas.most_common(1)[0][0] if distribuicoes_dezenas else (0, 0, 0, 0, 0)
-    }
+    num_posicoes = len(sorteios[0]['numeros'])
+    for sorteio in sorteios:
+        numeros = sorted(sorteio['numeros'])
+        for i, num in enumerate(numeros):
+            frequencia_posicao[i][num] += 1
+    return frequencia_posicao
+
+def _calcular_frequencia_terminacoes_padrao(sorteios):
+    """Calcula a frequência de terminações após um determinado final de sorteio."""
+    padrao = defaultdict(Counter)
+    if len(sorteios) < 2:
+        return padrao
+    
+    for i in range(len(sorteios) - 1):
+        numeros_atual = sorted(sorteios[i].get('numeros', []))
+        numeros_seguinte = sorted(sorteios[i+1].get('numeros', []))
+        terminacoes_atual = {num % 10 for num in numeros_atual}
+        terminacoes_seguinte = {num % 10 for num in numeros_seguinte}
+        
+        for term_atual in terminacoes_atual:
+            padrao[term_atual].update(terminacoes_seguinte)
+            
+    return padrao
+
+def _calcular_numeros_soma_mais_frequente(sorteios):
+    """
+    Calcula o intervalo de soma mais comum e retorna os números mais frequentes
+    que saíram dentro desse intervalo.
+    """
+    somas = [sum(s['numeros']) for s in sorteios if s.get('numeros')]
+    if not somas:
+        return []
+        
+    soma_media = np.mean(somas)
+    soma_desvio = np.std(somas)
+    soma_minima = int(soma_media - soma_desvio)
+    soma_maxima = int(soma_media + soma_desvio)
+    
+    frequencia_intervalo = Counter()
+    for s in sorteios:
+        if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima:
+            frequencia_intervalo.update(s['numeros'])
+            
+    return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
+
+
+# Mapeamento de estatísticas para as suas funções de cálculo
+# A chave é o nome da estatística (dependência), o valor é a função.
+MAP_ESTATISTICAS = {
+    'frequencia_total': _calcular_frequencia_total,
+    'ausencia_atual': _calcular_ausencia_atual,
+    'gaps_medios': _calcular_gaps_medios,
+    'pares_frequentes': _calcular_frequencia_pares,
+    'trios_frequentes': _calcular_frequencia_trios,
+    'frequencia_recente': _calcular_frequencia_recente,
+    'frequencia_por_posicao': _calcular_frequencia_por_posicao,
+    'frequencia_terminacoes_padrao': _calcular_frequencia_terminacoes_padrao,
+    'numeros_soma_mais_frequente': _calcular_numeros_soma_mais_frequente
+    # Outras estatísticas podem ser adicionadas aqui
+}
+
+def obter_estatisticas(dependencias: set, sorteios_historico: list) -> Dict[str, Any]:
+    """
+    Calcula e retorna apenas as estatísticas necessárias para um conjunto de heurísticas.
+    
+    Args:
+        dependencias (set): Um conjunto com os nomes das estatísticas necessárias.
+        sorteios_historico (list): A lista completa de sorteios.
+        
+    Returns:
+        dict: Um dicionário com as estatísticas calculadas.
+    """
+    estatisticas = {}
+    for dep in dependencias:
+        if dep in MAP_ESTATISTICAS:
+            try:
+                # Chama a função de cálculo correspondente à dependência
+                estatisticas[dep] = MAP_ESTATISTICAS[dep](sorteios_historico)
+            except Exception as e:
+                print(f"Erro ao calcular a estatística '{dep}': {e}")
+                estatisticas[dep] = {} # Retorna um dicionário vazio em caso de erro
+    
+    return estatisticas
+
+def salvar_estatisticas(estatisticas, caminho=ARQUIVO_CACHE_ESTATISTICAS):
+    """Salva as estatísticas calculadas em um arquivo JSON."""
+    try:
+        # Serializa os objetos Counter para dicionários
+        stats_serializaveis = {k: dict(v) if isinstance(v, Counter) else v for k, v in estatisticas.items()}
+        with open(caminho, 'w', encoding='utf-8') as f:
+            json.dump(stats_serializaveis, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Erro ao salvar as estatísticas: {e}")
+
+def carregar_estatisticas(caminho=ARQUIVO_CACHE_ESTATISTICAS):
+    """Carrega as estatísticas de um arquivo JSON."""
+    if not os.path.exists(caminho):
+        return None
+    try:
+        with open(caminho, 'r', encoding='utf-8') as f:
+            stats = json.load(f)
+            # Reverte os dicionários de volta para Counter, se necessário
+            for k, v in stats.items():
+                if isinstance(v, dict):
+                    stats[k] = Counter(v)
+            return stats
+    except (json.JSONDecodeError, FileNotFoundError) as e:
+        print(f"Erro ao carregar o arquivo de estatísticas: {e}")
+        return None
