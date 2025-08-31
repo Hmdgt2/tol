@@ -1,41 +1,49 @@
 # heuristicas/repeticao_por_posicao.py
-from collections import Counter
+from typing import Dict, Any, List
 
+# --- Metadados da Heurística ---
+NOME = "repeticao_por_posicao"
 DESCRICAO = "Sugere números com base na frequência em cada posição do sorteio, aproveitando padrões posicionais."
+# Esta heurística precisa da frequência de cada número por posição.
+DEPENDENCIAS = ["frequencia_por_posicao"]
 
-def prever(estatisticas, sorteios_historico, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base na repetição de números em posições específicas do sorteio.
+    
+    Args:
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
+        n (int): O número de sugestões a retornar.
+        
+    Returns:
+        list: Uma lista de números sugeridos.
     """
-    if not sorteios_historico:
-        return {"nome": "repeticao_por_posicao", "numeros": []}
-
-    posicoes = len(sorteios_historico[0].get('numeros', []))
-    contador_posicoes = [Counter() for _ in range(posicoes)]
-
-    for s in sorteios_historico:
-        numeros = s.get('numeros', [])
-        for i, num in enumerate(numeros):
-            contador_posicoes[i][num] += 1
+    # Acessa a estatística 'frequencia_por_posicao' pré-calculada.
+    # Esta estatística deve ser um dicionário onde a chave é a posição (0 a 4)
+    # e o valor é um Counter de números para essa posição.
+    frequencia_por_posicao = estatisticas.get('frequencia_por_posicao', {})
+    
+    if not frequencia_por_posicao:
+        return []
 
     sugeridos = []
-    for contador in contador_posicoes:
-        if contador:
-            num_mais_frequente = contador.most_common(1)[0][0]
+    # Itera sobre as posições para obter o número mais frequente em cada uma.
+    for pos in sorted(frequencia_por_posicao.keys()):
+        contador_pos = frequencia_por_posicao[pos]
+        if contador_pos:
+            num_mais_frequente = sorted(contador_pos.items(), key=lambda item: item[1], reverse=True)[0][0]
             if num_mais_frequente not in sugeridos:
                 sugeridos.append(num_mais_frequente)
         if len(sugeridos) >= n:
             break
-
-    # Se não houver números suficientes, completa com os mais frequentes no geral
+            
+    # Se não houver números suficientes, completa com os mais frequentes no geral.
     if len(sugeridos) < n:
         frequencia_total = estatisticas.get('frequencia_total', {})
-        para_completar = [num for num, _ in Counter(frequencia_total).most_common(n)]
-        for num in para_completar:
+        numeros_gerais = sorted(frequencia_total.keys(), key=lambda x: frequencia_total[x], reverse=True)
+        
+        for num in numeros_gerais:
             if num not in sugeridos and len(sugeridos) < n:
                 sugeridos.append(num)
 
-    return {
-        "nome": "repeticao_por_posicao",
-        "numeros": sorted(sugeridos)
-    }
+    return sorted(sugeridos)
