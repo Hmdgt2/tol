@@ -7,6 +7,7 @@ import json
 import inspect
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 import joblib
+from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
