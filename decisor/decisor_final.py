@@ -3,6 +3,7 @@ import json
 import os
 import sys
 from collections import defaultdict, Counter
+from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -10,7 +11,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 class HeuristicDecisor:
-    def __init__(self, caminho_pesos_json, caminho_modelo_joblib_gb, caminho_modelo_joblib_rf):
+    def __init__(self, caminho_pesos_json: str, caminho_modelo_joblib_gb: str, caminho_modelo_joblib_rf: str):
         """
         Inicializa o decisor carregando o ficheiro de metadados e os modelos de ML.
         
@@ -34,10 +35,8 @@ class HeuristicDecisor:
             self.modelo_rf = joblib.load(caminho_modelo_joblib_rf)
         except FileNotFoundError:
             raise FileNotFoundError("Um dos modelos Joblib não foi encontrado. Por favor, treine o modelo novamente.")
-        
-        self.pesos_manuais = self.metadados.get('pesos_manuais', {})
-
-    def _get_feature_vector(self, previsoes_atuais):
+    
+    def _get_feature_vector(self, previsoes_atuais: List[Dict[str, Any]]) -> List[List[int]]:
         """
         Cria um vetor de características (features) para um único sorteio.
         """
@@ -50,7 +49,7 @@ class HeuristicDecisor:
             
         return feature_vectors
 
-    def predict(self, detalhes_previsoes):
+    def predict(self, detalhes_previsoes: List[Dict[str, Any]]) -> List[int]:
         """
         Combina as previsões das heurísticas usando os modelos de ML.
         
