@@ -28,6 +28,10 @@ PESOS_JSON_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
 MODELO_GB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_gradient_boosting.joblib')
 MODELO_RF_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_random_forest.joblib')
 
+# NOVO CAMINHO PARA OS PESOS MANUAIS
+PESOS_HEURISTICAS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_heuristicas.json')
+
+
 def carregar_heuristicas_com_dependencias():
     """
     Carrega dinamicamente todas as heurísticas e suas dependências.
@@ -117,7 +121,7 @@ def treinar_decisor():
         print("Nenhum dado de treino gerado.")
         return
 
-    # --- NOVO: TREINA E SALVA OS DOIS MODELOS ---
+    # --- TREINA E SALVA OS DOIS MODELOS ---
     os.makedirs(os.path.dirname(MODELO_GB_PATH), exist_ok=True)
     
     print("A treinar o modelo de Gradient Boosting...")
@@ -146,6 +150,14 @@ def treinar_decisor():
 
     print("Treino concluído. Modelos Joblib guardados.")
     print("Metadados JSON atualizados em:", PESOS_JSON_PATH)
+
+    # --- NOVO: REINICIA OS PESOS MANUAIS ---
+    if os.path.exists(PESOS_HEURISTICAS_PATH):
+        os.remove(PESOS_HEURISTICAS_PATH)
+        print("✅ Ficheiro de pesos das heurísticas ('pesos_heuristicas.json') reiniciado para que o avaliador possa começar do zero.")
+    else:
+        print("✅ Ficheiro de pesos das heurísticas não existia. Nenhuma ação necessária.")
+
 
 if __name__ == '__main__':
     treinar_decisor()
