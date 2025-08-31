@@ -2,9 +2,9 @@
   "tendencia_recentes": [
     0,
     0,
-    0,
     1,
-    7.5
+    7.5,
+    0
   ],
   "ausencia_superior_media": [
     0,
@@ -23,16 +23,16 @@
   "pares_frequentes": [
     2,
     2,
-    2,
     0,
+    2,
     2
   ],
   "soma_provavel": [
     3,
     3,
-    3,
     1,
-    3
+    3,
+    1
   ],
   "balanceamento_tipos": [
     1,
@@ -44,15 +44,15 @@
   "gap_medio": [
     3,
     3,
-    3,
     1,
-    3
+    3,
+    0
   ],
   "trios_frequentes": [
     0,
     0,
-    0,
     2,
+    1,
     1
   ],
   "frequencia_total": [
@@ -65,9 +65,9 @@
   "repeticoes_sorteios_anteriores": [
     0,
     0,
-    0,
     1,
-    0
+    0,
+    1
   ],
   "crescimento_ano": [
     0,
@@ -80,7 +80,7 @@
     1,
     1,
     1,
-    1,
+    3,
     3
   ],
   "frequencia_soma": [
@@ -93,7 +93,8 @@
     0,
     0,
     2,
-    8.0
+    8.0,
+    5
   ],
   "frequencia_terminacoes": [
     2,
@@ -105,9 +106,25 @@
     0,
     0,
     1,
-    2
+    2,
+    0
   ],
   "distribuicao_grupos": [
     5.5
+  ],
+  "numeros_vizinhos": [
+    3
+  ],
+  "pares_distantes": [
+    3
+  ],
+  "repeticao_por_posicao": [
+    3
+  ],
+  "soma_numeros": [
+    0
+  ],
+  "numeros_retenção_longa": [
+    3
   ]
 }
