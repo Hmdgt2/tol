@@ -1,37 +1,37 @@
 # heuristicas/quentes_frios.py
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Metadados da Heurística ---
+NOME = "quentes_frios"
 DESCRICAO = "Sugere números quentes recentes e números frios ausentes."
+# Esta heurística precisa da frequência recente (quentes) e da ausência atual (frios).
+# A 'frequencia_recente' será um novo tipo de estatística calculada pelo 'dados.py'.
+DEPENDENCIAS = ["frequencia_recente", "ausencia_atual", "frequencia_total"]
 
-def prever(estatisticas, sorteios_historico, n=5, janela_quentes=15):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
     Prevê números com base nos números "quentes" (mais frequentes recentemente)
     e "frios" (mais ausentes).
-
+    
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        sorteios_historico (list): Lista dos sorteios históricos para análise
-                                  de números "quentes".
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
-        janela_quentes (int): O número de sorteios recentes para considerar.
-    
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
-    if len(sorteios_historico) < janela_quentes:
-        janela_quentes = len(sorteios_historico)
-
-    sorteios_recentes = sorteios_historico[-janela_quentes:]
-    
-    # Recalcula a frequência para a janela "quente"
-    contador_quentes = Counter()
-    for s in sorteios_recentes:
-        contador_quentes.update(s.get('numeros', []))
-
-    numeros_quentes = [num for num, _ in contador_quentes.most_common(n)]
-    
-    # Usa a ausência pré-calculada
+    # Acessa as estatísticas pré-calculadas
+    frequencia_recente = estatisticas.get('frequencia_recente', {})
     ausencia = estatisticas.get('ausencia_atual', {})
+    
+    if not frequencia_recente or not ausencia:
+        return []
+
+    # Seleciona os números quentes
+    numeros_quentes = [num for num, _ in Counter(frequencia_recente).most_common(n)]
+    
+    # Seleciona os números frios
     numeros_frios = sorted(ausencia, key=ausencia.get, reverse=True)[:n]
 
     # Combina os dois, garantindo que não haja duplicados
@@ -44,8 +44,5 @@ def prever(estatisticas, sorteios_historico, n=5, janela_quentes=15):
         for num in todos_frequentes:
             if num not in sugeridos and len(sugeridos) < n:
                 sugeridos.append(num)
-
-    return {
-        "nome": "quentes_frios",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    
+    return sorted(sugeridos)
