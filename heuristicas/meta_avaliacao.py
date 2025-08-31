@@ -1,111 +1,63 @@
 # heuristicas/meta_avaliacao.py
+from typing import Dict, Any, List
 import os
-import sys
-import importlib
+import json
 
-DESCRICAO = "Escolhe a heurística mais precisa dos últimos sorteios."
+# --- Metadados da Heurística ---
+# A meta-heurística precisa de um novo tipo de dependência: o histórico de desempenho.
+NOME = "meta_avaliacao"
+DESCRICAO = "Escolhe a heurística mais precisa dos últimos sorteios, com base nos resultados de treino."
+# Esta heurística depende dos resultados de performance pré-calculados.
+DEPENDENCIAS = ["precisao_posicional_historica", "frequencia_total", "ausencia_atual", "...todas as dependências das outras heurísticas"]
 
-# Adiciona o diretório raiz para importações
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
-
-HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, '..', 'heuristicas')
-
-def carregar_heuristicas_internas():
-    """Carrega dinamicamente todas as heurísticas exceto a meta_avaliacao."""
-    heuristicas = {}
-    for ficheiro in os.listdir(HEURISTICAS_DIR):
-        if ficheiro.endswith('.py') and not ficheiro.startswith('__') and ficheiro != 'meta_avaliacao.py':
-            nome_modulo = ficheiro[:-3]
-            try:
-                modulo = importlib.import_module(f"heuristicas.{nome_modulo}")
-                if hasattr(modulo, 'prever'):
-                    heuristicas[nome_modulo] = modulo.prever
-            except ImportError as e:
-                pass  # Ignora heurísticas com erros para não interromper a meta
-    return heuristicas
-
-# Cache para armazenar os resultados de precisão e evitar recálculos
-precisao_cache = {}
-
-def prever(estatisticas, sorteios_historico, n=5, periodo_analise=50, **kwargs):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
-    Prevê números com base na heurística mais precisa nos últimos sorteios.
-    Otimizado para não recalcular a precisão a cada chamada.
+    Prevê números com base na heurística mais precisa, conforme o histórico de treino.
     
     Args:
-        estatisticas (dict): Dicionário com as estatísticas do histórico.
-        sorteios_historico (list): Lista dos sorteios para análise.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende,
+                             incluindo os resultados do treino.
         n (int): O número de sugestões a retornar.
-        periodo_analise (int): O número de sorteios recentes para avaliar a precisão.
-
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos pela heurística vencedora.
     """
-    global precisao_cache
+    # A meta-heurística precisa de um novo tipo de dado: o histórico de performance.
+    # O 'treinar_decisor.py' será responsável por criar e atualizar este ficheiro.
+    performance_historica = estatisticas.get('precisao_posicional_historica', {})
+
+    if not performance_historica:
+        # Se não houver dados de treino, retorna os números mais frequentes como um fallback.
+        frequencia = estatisticas.get('frequencia_total', {})
+        return sorted([num for num in frequencia.keys()][:n])
+
+    # Encontra a heurística com a melhor pontuação global
+    melhor_heuristica = None
+    melhor_pontuacao = -1
     
-    # Se a heurística não for chamada com um histórico completo, não pode avaliar
-    if len(sorteios_historico) < periodo_analise + 1:
-        return {
-            "nome": "meta_avaliacao",
-            "numeros": []
-        }
-
-    # Verifica se o resultado já está no cache para evitar recálculo
-    hist_key = len(sorteios_historico)
-    if hist_key in precisao_cache:
-        return precisao_cache[hist_key]
-
-    heuristicas_internas = carregar_heuristicas_internas()
-    precisoes = {}
-
-    # Avalia a precisão de cada heurística nos últimos sorteios
-    for nome, funcao in heuristicas_internas.items():
-        acertos_totais = 0
-        sorteios_avaliados = sorteios_historico[-periodo_analise:]
-        
-        for i in range(len(sorteios_avaliados) - 1):
-            hist_parcial = sorteios_avaliados[:i+1]
-            sorteio_alvo = sorteios_avaliados[i+1]
+    for nome_heuristica, dados_heuristica in performance_historica.items():
+        # A pontuação pode ser a soma dos acertos ou uma métrica mais complexa.
+        # Por enquanto, vamos somar os acertos nas diferentes posições.
+        pontuacao_total = sum(dados_heuristica.values())
+        if pontuacao_total > melhor_pontuacao:
+            melhor_pontuacao = pontuacao_total
+            melhor_heuristica = nome_heuristica
             
-            # Garante que as heurísticas recebam os argumentos corretos
-            try:
-                if 'sorteios_historico' in funcao.__code__.co_varnames:
-                    previsao = funcao(estatisticas, hist_parcial, n=6)
-                else:
-                    previsao = funcao(estatisticas, n=6)
-            except:
-                previsao = {"numeros": []}
-                
-            acertos = set(previsao.get("numeros", [])).intersection(set(sorteio_alvo.get("numeros", [])))
-            acertos_totais += len(acertos)
-        
-        precisoes[nome] = acertos_totais / (periodo_analise * 6) if periodo_analise > 0 else 0
+    # Chama a heurística vencedora com os dados necessários
+    if melhor_heuristica:
+        try:
+            # Importa dinamicamente a heurística vencedora
+            modulo = __import__(f"heuristicas.{melhor_heuristica}")
+            funcao_prever = modulo.prever
+            
+            # Chama a função 'prever' da heurística vencedora
+            # O orquestrador tem que garantir que todas as dependências da heurística vencedora
+            # são fornecidas no dicionário 'estatisticas'.
+            previsao_final = funcao_prever(estatisticas, n=n)
+            return sorted(list(set(previsao_final)))
+        except (ImportError, AttributeError):
+            pass
 
-    if not precisoes or max(precisoes.values()) == 0:
-        return {
-            "nome": "meta_avaliacao",
-            "numeros": []
-        }
-
-    heuristica_vencedora = max(precisoes, key=precisoes.get)
-    funcao_vencedora = heuristicas_internas[heuristica_vencedora]
-
-    # Previsão final com a heurística vencedora
-    try:
-        if 'sorteios_historico' in funcao_vencedora.__code__.co_varnames:
-            resultado_final = funcao_vencedora(estatisticas, sorteios_historico, n=n)
-        else:
-            resultado_final = funcao_vencedora(estatisticas, n=n)
-    except:
-        resultado_final = {"numeros": []}
-
-    # Armazena e retorna a previsão
-    previsao_final = {
-        "nome": "meta_avaliacao",
-        "numeros": sorted(list(set(resultado_final.get("numeros", []))))
-    }
-    
-    precisao_cache[hist_key] = previsao_final
-    return previsao_final
+    # Fallback caso algo falhe
+    frequencia = estatisticas.get('frequencia_total', {})
+    return sorted([num for num in frequencia.keys()][:n])
