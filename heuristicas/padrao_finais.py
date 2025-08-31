@@ -1,48 +1,51 @@
 # heuristicas/padrao_finais.py
+from typing import Dict, Any, List
 from collections import Counter
 
+# --- Metadados da Heurística ---
+NOME = "padrao_finais"
 DESCRICAO = "Sugere números com terminações semelhantes ao último sorteio."
+# Esta heurística precisa de uma estatística que liga a terminação do último sorteio
+# com a frequência de terminações nos sorteios seguintes.
+DEPENDENCIAS = ["frequencia_terminacoes_padrao", "frequencia_total"]
 
-# Nota: analisa quais últimos dígitos se repetem com mais frequência em sorteios anteriores.
-
-def prever(estatisticas, sorteios_historico, n=5):
+def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
-    Prevê números com base na frequência das terminações que coincidiram
-    com o último sorteio.
+    Prevê números com base nas terminações mais prováveis após o último sorteio.
 
     Args:
-        estatisticas (dict): Dicionário com todas as estatísticas pré-calculadas.
-        sorteios_historico (list): Lista dos sorteios históricos para análise
-                                  do padrão.
+        estatisticas (dict): Dicionário com as estatísticas de que a heurística depende.
         n (int): O número de sugestões a retornar.
-    
+        
     Returns:
-        dict: Um dicionário com o nome da heurística e os números sugeridos.
+        list: Uma lista de números sugeridos.
     """
+    # Acede à estatística pré-calculada do padrão de terminações
+    frequencia_padrao = estatisticas.get('frequencia_terminacoes_padrao', {})
     frequencia_total = estatisticas.get('frequencia_total', {})
+    
+    if not frequencia_padrao or not frequencia_total:
+        return []
 
-    if len(sorteios_historico) < 2 or not frequencia_total:
-        return {
-            "nome": "padrao_finais",
-            "numeros": []
-        }
+    # A estatística 'frequencia_terminacoes_padrao' deve ter a forma:
+    # { term_do_ultimo_sorteio: { term_seguinte: frequencia, ... } }
+    
+    # Encontra a terminação mais provável para o próximo sorteio, com base
+    # nas terminações do último sorteio (que estão no 'estatisticas').
+    terminacoes_sorteio_atual = estatisticas.get('terminacoes_sorteio_atual', [])
+    if not terminacoes_sorteio_atual:
+        return []
 
-    ultimos_numeros = sorteios_historico[-1].get('numeros', [])
-    ultimas_terminacoes = {num % 10 for num in ultimos_numeros}
+    contador_terminacoes_sugeridas = Counter()
+    for term_atual in terminacoes_sorteio_atual:
+        if term_atual in frequencia_padrao:
+            contador_terminacoes_sugeridas.update(frequencia_padrao[term_atual])
     
-    contador_finais = Counter()
-    
-    # Este loop ainda é necessário, pois a lógica depende de um sorteio para o outro
-    for s in sorteios_historico[:-1]:
-        terminacoes_atuais = {num % 10 for num in s.get('numeros', [])}
-        for term in ultimas_terminacoes:
-            if term in terminacoes_atuais:
-                contador_finais[term] += 1
-    
-    terminacoes_comuns = [t for t, _ in contador_finais.most_common(2)]
+    # Se não houver padrão, a lista ficará vazia.
+    terminacoes_comuns = [t for t, _ in contador_terminacoes_sugeridas.most_common(2)]
     
     candidatos = []
-    # Usar a frequência total pré-calculada para a ordem de preferência
+    # Usar a frequência total para ordenar os candidatos com as terminações comuns
     frequencia_ordenada = sorted(frequencia_total.items(), key=lambda item: item[1], reverse=True)
     
     for num, _ in frequencia_ordenada:
@@ -51,12 +54,10 @@ def prever(estatisticas, sorteios_historico, n=5):
             if len(candidatos) >= n:
                 break
     
-    if len(candidatos) < n: # Fallback se não houver candidatos suficientes
+    # Fallback se não houver candidatos suficientes.
+    if len(candidatos) < n:
         sugeridos = [num for num, _ in frequencia_ordenada[:n]]
     else:
         sugeridos = candidatos
     
-    return {
-        "nome": "padrao_finais",
-        "numeros": sorted(list(set(sugeridos)))
-    }
+    return sorted(list(set(sugeridos)))
