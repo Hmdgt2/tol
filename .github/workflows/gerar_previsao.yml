@@ -30,7 +30,7 @@ jobs:
           echo "Gerando a nova previsão..."
           python gerar_previsao.py
         env:
-          PYTHONPATH: ${{ github.workspace }}y
+          PYTHONPATH: ${{ github.workspace }}
           
       - name: Fazer commit dos arquivos gerados
         run: |
