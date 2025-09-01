@@ -1,11 +1,14 @@
-# dados.py
+# lib/dados.py
+
 import os
+import sys # Importar sys
 import json
 from collections import Counter, defaultdict
 from itertools import combinations
 import datetime
 import numpy as np
-from typing import Dict, Any, List
+import inspect # Importar inspect
+from typing import Dict, Any, List, Tuple
 
 # A pasta de dados principal
 PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados'))
@@ -39,6 +42,7 @@ def _carregar_sorteios():
         return sorteios_validos
     return []
 
+# --- Funções de Cálculo (Mantidas do seu código original) ---
 def _calcular_frequencia_total(sorteios):
     """Calcula a frequência total de todos os números."""
     frequencia = Counter()
@@ -154,48 +158,44 @@ def _calcular_numeros_soma_mais_frequente(sorteios):
     return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
 
 
-# Mapeamento de estatísticas para as suas funções de cálculo
-# A chave é o nome da estatística (dependência), o valor é a função.
-MAP_ESTATISTICAS = {
-    'frequencia_total': _calcular_frequencia_total,
-    'ausencia_atual': _calcular_ausencia_atual,
-    'gaps_medios': _calcular_gaps_medios,
-    'pares_frequentes': _calcular_frequencia_pares,
-    'trios_frequentes': _calcular_frequencia_trios,
-    'frequencia_recente': _calcular_frequencia_recente,
-    'frequencia_por_posicao': _calcular_frequencia_por_posicao,
-    'frequencia_terminacoes_padrao': _calcular_frequencia_terminacoes_padrao,
-    'numeros_soma_mais_frequente': _calcular_numeros_soma_mais_frequente
-    # Outras estatísticas podem ser adicionadas aqui
-}
+# --- Nova Lógica de Mapeamento Automático e Tratamento de Erros ---
 
-def obter_estatisticas(dependencias: set, sorteios_historico: list) -> Dict[str, Any]:
+def _get_mapeamento_calculos():
     """
-    Calcula e retorna apenas as estatísticas necessárias para um conjunto de heurísticas.
-    
-    Args:
-        dependencias (set): Um conjunto com os nomes das estatísticas necessárias.
-        sorteios_historico (list): A lista completa de sorteios.
-        
-    Returns:
-        dict: Um dicionário com as estatísticas calculadas.
+    Mapeia automaticamente nomes de dependências para funções de cálculo.
+    Procura por todas as funções que começam com '_calcular_'.
+    """
+    mapeamento = {}
+    for name, obj in inspect.getmembers(sys.modules[__name__]):
+        if inspect.isfunction(obj) and name.startswith('_calcular_'):
+            estatistica_name = name.replace('_calcular_', '')
+            mapeamento[estatistica_name] = obj
+    return mapeamento
+
+MAP_ESTATISTICAS = _get_mapeamento_calculos()
+
+def obter_estatisticas(dependencias: set, sorteios_historico: list) -> Tuple[Dict[str, Any], List[str]]:
+    """
+    Calcula e retorna apenas as estatísticas necessárias, juntamente com uma lista de erros.
     """
     estatisticas = {}
+    erros = []
     for dep in dependencias:
         if dep in MAP_ESTATISTICAS:
             try:
-                # Chama a função de cálculo correspondente à dependência
                 estatisticas[dep] = MAP_ESTATISTICAS[dep](sorteios_historico)
             except Exception as e:
-                print(f"Erro ao calcular a estatística '{dep}': {e}")
-                estatisticas[dep] = {} # Retorna um dicionário vazio em caso de erro
-    
-    return estatisticas
+                erros.append(f"Erro ao calcular a estatística '{dep}': {e}")
+                estatisticas[dep] = {}
+        else:
+            erros.append(f"Função de cálculo para '{dep}' não encontrada.")
+            estatisticas[dep] = {}
+            
+    return estatisticas, erros
 
 def salvar_estatisticas(estatisticas, caminho=ARQUIVO_CACHE_ESTATISTICAS):
     """Salva as estatísticas calculadas em um arquivo JSON."""
     try:
-        # Serializa os objetos Counter para dicionários
         stats_serializaveis = {k: dict(v) if isinstance(v, Counter) else v for k, v in estatisticas.items()}
         with open(caminho, 'w', encoding='utf-8') as f:
             json.dump(stats_serializaveis, f, ensure_ascii=False, indent=4)
@@ -209,7 +209,6 @@ def carregar_estatisticas(caminho=ARQUIVO_CACHE_ESTATISTICAS):
     try:
         with open(caminho, 'r', encoding='utf-8') as f:
             stats = json.load(f)
-            # Reverte os dicionários de volta para Counter, se necessário
             for k, v in stats.items():
                 if isinstance(v, dict):
                     stats[k] = Counter(v)
