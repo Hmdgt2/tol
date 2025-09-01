@@ -3,6 +3,7 @@
 import os
 import sys
 import json
+import datetime
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
@@ -17,6 +18,8 @@ from decisor.decisor_final import HeuristicDecisor
 # --- Caminhos dos Ficheiros ---
 DADOS_ATUAL_PATH = os.path.join(PROJECT_ROOT, 'dados', 'sorteio_atual.json')
 CAMINHO_BASE_DECISOR = os.path.join(PROJECT_ROOT, 'decisor')
+PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
+os.makedirs(PASTA_PREVISOES, exist_ok=True)
 
 def gerar_previsao():
     """
@@ -51,15 +54,29 @@ def gerar_previsao():
 
         # 4. Instanciar o decisor de ML e obter a previsão final
         decisor_ml = HeuristicDecisor(caminho_base_decisor=CAMINHO_BASE_DECISOR)
-        previsao_final = decisor_ml.predict(detalhes_previsoes)
-
-        print("\n--- Previsão do Próximo Sorteio ---")
+        previsao_final_numeros = decisor_ml.predict(detalhes_previsoes)
+        
+        # 5. Organizar os resultados para salvar em um ficheiro
+        resultado_completo = {
+            "data_geracao": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "baseado_em_sorteio": sorteio_mais_recente.get("concurso"),
+            "previsao_modelo_ml": previsao_final_numeros,
+            "previsoes_heuristicas": detalhes_previsoes
+        }
+        
+        # 6. Salvar os resultados em um ficheiro JSON
+        nome_ficheiro = f"previsao_{sorteio_mais_recente.get('concurso').replace('/', '-')}.json"
+        caminho_ficheiro = os.path.join(PASTA_PREVISOES, nome_ficheiro)
+        
+        with open(caminho_ficheiro, 'w', encoding='utf-8') as f:
+            json.dump(resultado_completo, f, indent=2, ensure_ascii=False)
+            
+        print("\n--- Previsão Gerada ---")
         print(f"Baseada nos dados até ao sorteio: {sorteio_mais_recente.get('concurso')}")
-        print(f"Data do sorteio: {sorteio_mais_recente.get('data')}")
         print("-" * 35)
-        print("Números Sugeridos:", previsao_final)
+        print("Números Sugeridos pelo Modelo de ML:", previsao_final_numeros)
         print("-" * 35)
-        print("\nPrevisão concluída com sucesso.")
+        print(f"✅ Previsão completa salva em: {caminho_ficheiro}")
 
     except Exception as e:
         print(f"\n❌ ERRO: Ocorreu um erro ao gerar a previsão.")
