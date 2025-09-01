@@ -13,25 +13,39 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 class HeuristicDecisor:
-    def __init__(self, caminho_pipeline: str, caminho_metadados: str):
+    def __init__(self, caminho_base_decisor: str):
         """
-        Inicializa o decisor carregando o pipeline de ML e os metadados.
-        
+        Inicializa o decisor, selecionando e carregando o melhor modelo de ML.
+
         Args:
-            caminho_pipeline (str): O caminho para o ficheiro Joblib do pipeline completo.
-            caminho_metadados (str): O caminho para o ficheiro JSON com metadados do modelo.
+            caminho_base_decisor (str): O caminho para a pasta 'decisor'.
         """
+        modelos_dir = os.path.join(caminho_base_decisor, 'modelos_salvos')
+        performance_path = os.path.join(modelos_dir, 'performance_modelos.json')
+        metadados_path = os.path.join(caminho_base_decisor, 'metadados_modelo.json')
+
         try:
-            # Carregamos o pipeline completo, que inclui o scaler e o modelo
-            self.pipeline = joblib.load(caminho_pipeline)
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Pipeline de ML não encontrado em: {caminho_pipeline}. Por favor, treine o modelo primeiro.")
-        
+            # 1. Carrega o ficheiro de performance para encontrar o melhor modelo
+            with open(performance_path, 'r', encoding='utf-8') as f:
+                performance_data = json.load(f)
+            
+            # Encontra o modelo com o maior score
+            melhor_modelo_nome = max(performance_data, key=lambda nome: performance_data[nome]['score_treino'])
+            caminho_melhor_pipeline = performance_data[melhor_modelo_nome]['caminho']
+
+            print(f"Decisor: A carregar o melhor modelo encontrado: '{melhor_modelo_nome}'")
+
+            # 2. Carrega o pipeline completo do melhor modelo
+            self.pipeline = joblib.load(caminho_melhor_pipeline)
+        except (FileNotFoundError, json.JSONDecodeError, KeyError) as e:
+            raise RuntimeError(f"Erro ao carregar o melhor modelo. Verifique se o treino foi executado corretamente e se os ficheiros de performance e do modelo existem. Detalhes: {e}")
+
         try:
-            with open(caminho_metadados, 'r', encoding='utf-8') as f:
+            # 3. Carrega os metadados das heurísticas, que continuam a ser necessários
+            with open(metadados_path, 'r', encoding='utf-8') as f:
                 self.metadados = json.load(f)
         except FileNotFoundError:
-            raise FileNotFoundError(f"Ficheiro de metadados não encontrado em: {caminho_metadados}.")
+            raise FileNotFoundError(f"Ficheiro de metadados não encontrado em: {metadados_path}.")
 
         self.heuristicas_ordenadas = self.metadados.get('heuristicas_ordenadas', [])
         
