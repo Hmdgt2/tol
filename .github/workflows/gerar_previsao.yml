@@ -1,8 +1,8 @@
-name: Gerar Previsão Totoloto
+name: Gerar Previsão Completa do Totoloto
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 8 * * *'  # Exemplo: 8h00 UTC, ajuste conforme necessário
   workflow_dispatch:
 
 jobs:
@@ -12,10 +12,8 @@ jobs:
     steps:
       - name: Checkout do repositório
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false  # necessário para o commit manual
 
-      - name: Configurar Python
+      - name: Configurar Python e Dependências
         uses: actions/setup-python@v4
         with:
           python-version: '3.13'
@@ -25,25 +23,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Executar gerar_previsao.py
-        run: python gerar_previsao.py
-
-      - name: Mostrar previsão gerada
-        run: cat previsoes/previsao_atual.json
-
-      - name: Avaliar heurísticas e atualizar pesos
-        run: python avaliador/avaliador.py
-
-      - name: Fazer commit dos JSONs gerados
+      - name: Executar o avaliador e o gerador de previsão
+        run: |
+          echo "Executando o avaliador/incrementador..."
+          python avaliador.py
+          echo "Gerando a nova previsão..."
+          python gerar_previsao.py
+          
+      - name: Fazer commit dos arquivos gerados
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
 
           git add previsoes/previsao_atual.json
-          git add decisor/pesos_atuais.json
-          git add decisor/historico_performance.json
-          git diff --cached --quiet || git commit -m "Atualiza previsão/pesos automática"
+          git add decisor/modelo_previsor.joblib
+          git add decisor/metadados_modelo.json
+          git add decisor/sorteio_processado.json
+          
+          git diff --cached --quiet || git commit -m "Atualização automática de modelo e previsão"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
