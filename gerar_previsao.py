@@ -1,83 +1,70 @@
+# gerar_previsao.py
+
 import os
 import sys
 import json
 from typing import Dict, Any, List
 
-# Adiciona o diretório raiz para resolver importações
+# Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Importamos a nossa nova arquitetura
-from lib.dados import _carregar_sorteios, obter_estatisticas
 from lib.despachante import Despachante
+from lib.dados import _carregar_sorteios, obter_estatisticas
 from decisor.decisor_final import HeuristicDecisor
 
-# Define os caminhos dos ficheiros para a nova arquitetura
-PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
-FICHEIRO_PREVISAO = os.path.join(PASTA_PREVISOES, 'previsao_atual.json')
-MODELO_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_previsor.joblib')
-METADADOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'metadados_modelo.json')
-
-def guardar_previsao_json(previsao_final: List[int], detalhes: List[Dict[str, Any]]):
-    """Guarda a previsão final e os detalhes das heurísticas em um arquivo JSON."""
-    os.makedirs(PASTA_PREVISOES, exist_ok=True)
-    dados = {
-        "previsao": previsao_final,
-        "detalhes": detalhes
-    }
-    with open(FICHEIRO_PREVISAO, 'w', encoding='utf-8') as f:
-        json.dump(dados, f, indent=2, ensure_ascii=False)
+# --- Caminhos dos Ficheiros ---
+DADOS_ATUAL_PATH = os.path.join(PROJECT_ROOT, 'dados', 'sorteio_atual.json')
+CAMINHO_BASE_DECISOR = os.path.join(PROJECT_ROOT, 'decisor')
 
 def gerar_previsao():
     """
-    Gera uma previsão de números com base em múltiplas heurísticas
-    e um decisor ponderado, utilizando a nova arquitetura modular.
+    Gera a previsão final para o próximo sorteio usando o melhor modelo de ML.
     """
+    print("Iniciando a geração da previsão...")
+
     try:
-        # 1. Carrega o Despachante, que gerencia as heurísticas
-        despachante = Despachante()
-        
-        # 2. Carrega o histórico de sorteios e obtém as dependências
-        sorteios_historico = _carregar_sorteios()
-        if not sorteios_historico:
-            print("Erro: Nenhum sorteio histórico encontrado.")
+        # 1. Carregar os dados mais recentes para a previsão
+        if not os.path.exists(DADOS_ATUAL_PATH):
+            print(f"Ficheiro de dados mais recente não encontrado em: {DADOS_ATUAL_PATH}.")
+            print("Execute o script de scraping para obter os dados mais recentes.")
             return
 
+        with open(DADOS_ATUAL_PATH, 'r', encoding='utf-8') as f:
+            sorteio_mais_recente = json.load(f)
+        
+        # 2. Carregar as heurísticas e calcular as estatísticas necessárias
+        despachante = Despachante()
         todas_dependencias = despachante.get_todas_dependencias()
+        sorteios_historico = _carregar_sorteios()
+        estatisticas_completas = obter_estatisticas(todas_dependencias, sorteios_historico)
 
-        # 3. Obtém as estatísticas necessárias de forma otimizada
-        estatisticas = obter_estatisticas(todas_dependencias, sorteios_historico)
+        # 3. Obter as previsões de cada heurística para o sorteio mais recente
+        previsoes_heuristicas = despachante.get_previsoes(estatisticas_completas)
         
-        # 4. Executa cada heurística usando o Despachante
-        print("\n--- Previsões das Heurísticas ---\n")
-        detalhes_previsoes = []
-        previsoes_dict = despachante.get_previsoes(estatisticas)
-        
-        for nome, numeros in previsoes_dict.items():
-            print(f"{nome:<35}: {sorted(numeros)}")
-            detalhes_previsoes.append({"nome": nome, "numeros": sorted(numeros)})
+        # Formata as previsões para a entrada do decisor
+        detalhes_previsoes = [
+            {'nome': nome, 'numeros': numeros_previstos}
+            for nome, numeros_previstos in previsoes_heuristicas.items()
+        ]
 
-        # 5. Inicializa o decisor com o novo pipeline completo
-        print("\n--- Sugestão Final (Modelo de ML) ---")
-        decisor = HeuristicDecisor(
-            caminho_pipeline=MODELO_PATH,
-            caminho_metadados=METADADOS_PATH
-        )
-        
-        previsao_final = decisor.predict(detalhes_previsoes)
-        
-        print("Previsão Final (combinada):", sorted(previsao_final))
-        print("---")
-        
-        # 6. Salva a previsão final
-        guardar_previsao_json(sorted(previsao_final), detalhes_previsoes)
+        # 4. Instanciar o decisor de ML e obter a previsão final
+        decisor_ml = HeuristicDecisor(caminho_base_decisor=CAMINHO_BASE_DECISOR)
+        previsao_final = decisor_ml.predict(detalhes_previsoes)
 
-    except FileNotFoundError as e:
-        print(f"Erro: Um ficheiro necessário não foi encontrado. {e}")
-        print("Certifique-se de que treinou o modelo com 'treinar_decisor.py' primeiro.")
+        print("\n--- Previsão do Próximo Sorteio ---")
+        print(f"Baseada nos dados até ao sorteio: {sorteio_mais_recente.get('concurso')}")
+        print(f"Data do sorteio: {sorteio_mais_recente.get('data')}")
+        print("-" * 35)
+        print("Números Sugeridos:", previsao_final)
+        print("-" * 35)
+        print("\nPrevisão concluída com sucesso.")
+
     except Exception as e:
-        print(f"Ocorreu um erro inesperado: {e}")
+        print(f"\n❌ ERRO: Ocorreu um erro ao gerar a previsão.")
+        print(f"Detalhes: {e}")
+        sys.exit(1)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     gerar_previsao()
