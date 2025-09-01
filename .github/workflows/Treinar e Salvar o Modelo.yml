@@ -24,6 +24,10 @@ jobs:
           pip install -r requirements.txt
           
       - name: Executar o Treino do Modelo
+        # Define o PYTHONPATH para a raiz do repositório
+        # Isso garante que as importações 'from lib.dados...' funcionem
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           python treinar_decisor.py
       
@@ -32,12 +36,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Adiciona os novos ficheiros gerados pelo script `treinar_decisor.py`
           git add decisor/modelo_previsor.joblib
           git add decisor/metadados_modelo.json
           
-          # Tenta commitar. Se não houver alterações, o comando || echo evita que o workflow falhe.
-          git commit -m "feat(decisor): Atualiza modelo de ML e metadados" || echo "Nenhuma alteração a commitar"
+          git diff --cached --quiet || git commit -m "feat(decisor): Atualiza modelo de ML e metadados"
           
-          # Garante que o push é feito para o repositório principal
           git push
