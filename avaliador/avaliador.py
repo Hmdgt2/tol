@@ -7,29 +7,46 @@ import numpy as np
 import joblib
 from typing import Dict, Any, List
 
-# Adicione o diretório raiz ao caminho do sistema para resolver caminhos relativos
+# Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Importamos a nossa nova arquitetura
-from lib.dados import _carregar_sorteios, obter_estatisticas
-from lib.despachante import Despachante
-from sklearn.linear_model import LogisticRegression
+# Importa as funções e a lógica necessárias do treinar_decisor.py
+from treinar_decisor import (
+    carregar_modelos_ml, 
+    _carregar_sorteios, 
+    obter_estatisticas,
+    Despachante
+)
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score
 
 # --- Caminhos dos Ficheiros ---
-ULTIMO_SORTEIO_PROCESSADO_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'sorteio_processado.json')
-MODELO_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_previsor.joblib')
-METADADOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'metadados_modelo.json')
+# O caminho para o ficheiro de estado, que deve estar na mesma pasta do avaliador
+ULTIMO_SORTEIO_PROCESSADO_PATH = os.path.join(PROJECT_ROOT, 'sorteio_processado.json')
+# O caminho para os dados do sorteio atual
 DADOS_ATUAL_PATH = os.path.join(PROJECT_ROOT, 'dados', 'sorteio_atual.json')
+# Novos caminhos para os ficheiros
+MODELOS_DIR = os.path.join(PROJECT_ROOT, 'decisor', 'modelos_salvos')
+PERFORMANCE_PATH = os.path.join(MODELOS_DIR, 'performance_modelos.json')
+METADADOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'metadados_modelo.json')
+MODELOS_ML_DIR = os.path.join(PROJECT_ROOT, 'modelos_ml')
+
+if not os.path.exists(MODELOS_DIR):
+    os.makedirs(MODELOS_DIR)
 
 def carregar_sorteio_processado(path: str) -> Dict[str, str]:
     """Carrega o identificador do último sorteio processado."""
     if os.path.exists(path):
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except (IOError, json.JSONDecodeError):
+            print(f"Aviso: Erro ao carregar o estado do processamento em '{path}'. Começando do zero.")
+            return {"ultimo_concurso_processado": ""}
     return {"ultimo_concurso_processado": ""}
 
 def guardar_sorteio_processado(concurso: str, path: str):
@@ -39,7 +56,7 @@ def guardar_sorteio_processado(concurso: str, path: str):
 
 def avaliar_e_incrementar():
     """
-    Verifica se há um novo sorteio para processar, e se houver,
+    Verifica se há um novo sorteio para processar e, se houver,
     re-treina o modelo com o histórico completo.
     """
     print("Iniciando a avaliação e atualização do modelo...")
@@ -63,52 +80,87 @@ def avaliar_e_incrementar():
         print(f"Sorteio '{concurso_atual}' já foi processado. Nenhuma ação necessária.")
         return
 
-    print(f"Novo sorteio '{concurso_atual}' detectado. A re-treinar o modelo com todos os dados...")
+    print(f"Novo sorteio '{concurso_atual}' detectado. A re-treinar todos os modelos com os dados atualizados...")
 
-    # 2. Carrega todas as heurísticas e o histórico de sorteios
-    despachante = Despachante()
-    sorteios_historico = _carregar_sorteios()
-    if not sorteios_historico or len(sorteios_historico) < 2:
-        print("Histórico de sorteios insuficiente para treino.")
-        return
-    
-    todas_dependencias = despachante.get_todas_dependencias()
-    metadados_heuristicas = despachante.get_metadados()
-    heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
+    try:
+        # 2. Carrega todas as heurísticas e o histórico de sorteios
+        despachante = Despachante()
+        todas_dependencias = despachante.get_todas_dependencias()
+        sorteios_historico = _carregar_sorteios()
 
-    # 3. Recria o conjunto de treino com o histórico completo
-    X_treino = []
-    y_treino = []
+        if not todas_dependencias or not sorteios_historico or len(sorteios_historico) < 2:
+            print("Dados insuficientes para treino. O processo será encerrado.")
+            return
 
-    for i in range(len(sorteios_historico) - 1):
-        historico_parcial = sorteios_historico[:i+1]
-        sorteio_alvo = sorteios_historico[i+1]
-        
-        estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
-        previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
-        
-        for num in range(1, 50):
-            feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
-            X_treino.append(feature_vector)
-            y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
+        print("Simulando previsões de heurísticas para dados históricos...")
+        X_treino = []
+        y_treino = []
+        metadados_heuristicas = despachante.get_metadados()
+        heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
 
-    X_treino_np = np.array(X_treino)
-    y_treino_np = np.array(y_treino)
+        for i in range(len(sorteios_historico) - 1):
+            historico_parcial = sorteios_historico[:i+1]
+            sorteio_alvo = sorteios_historico[i+1]
+            estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
+            previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
+            for num in range(1, 50):
+                feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
+                X_treino.append(feature_vector)
+                y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
 
-    # 4. Re-treina o pipeline completo
-    print("A re-treinar o pipeline de ML...")
-    pipeline = Pipeline([
-        ('scaler', StandardScaler()),
-        ('model', LogisticRegression(solver='liblinear'))
-    ])
-    pipeline.fit(X_treino_np, y_treino_np)
+        X_treino_np = np.array(X_treino)
+        y_treino_np = np.array(y_treino)
 
-    # 5. Salva o pipeline atualizado e o estado
-    os.makedirs(os.path.dirname(MODELO_PATH), exist_ok=True)
-    joblib.dump(pipeline, MODELO_PATH)
-    guardar_sorteio_processado(concurso_atual, ULTIMO_SORTEIO_PROCESSADO_PATH)
+        # 3. Carrega os modelos dinamicamente (reutilizando a lógica do treinar_decisor.py)
+        modelos_disponiveis = carregar_modelos_ml()
+        if not modelos_disponiveis:
+            print("Nenhum modelo de ML encontrado na pasta 'modelos_ml'. O treino será encerrado.")
+            return
 
-    print(f"✅ Modelo atualizado com o sorteio '{concurso_atual}' e salvo em '{MODELO_PATH}'.")
+        resultados_treino = {}
+        # 4. Treina e salva cada modelo
+        print("\nConjunto de treino criado. Iniciando o treino dos modelos de ML...")
+        for nome_modelo, modelo in modelos_disponiveis.items():
+            print(f"Treinando o modelo: {nome_modelo}...")
+            pipeline = Pipeline([
+                ('scaler', StandardScaler()),
+                ('model', modelo)
+            ])
+            pipeline.fit(X_treino_np, y_treino_np)
+
+            # Avalia o modelo
+            score_treino = pipeline.score(X_treino_np, y_treino_np)
+
+            # Salva o pipeline
+            modelo_path = os.path.join(MODELOS_DIR, f"{nome_modelo}_pipeline.joblib")
+            joblib.dump(pipeline, modelo_path)
+
+            resultados_treino[nome_modelo] = {
+                'caminho': modelo_path,
+                'score_treino': score_treino,
+                'ultima_atualizacao': "AGORA"
+            }
+            print(f"✅ Modelo {nome_modelo} salvo com score: {score_treino:.4f}")
+
+        # 5. Salva o ficheiro de performance
+        with open(PERFORMANCE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(resultados_treino, f, indent=2, ensure_ascii=False)
+
+        # 6. Salva os metadados das heurísticas
+        json_data_metadados = {'heuristicas_ordenadas': heuristicas_ordenadas}
+        with open(METADADOS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(json_data_metadados, f, indent=2, ensure_ascii=False)
+
+        print("\n✅ Treino de todos os modelos concluído com sucesso.")
+        guardar_sorteio_processado(concurso_atual, ULTIMO_SORTEIO_PROCESSADO_PATH)
+        print(f"✅ O sistema foi atualizado com o sorteio '{concurso_atual}'.")
+
+    except Exception as e:
+        print(f"\n❌ ERRO FATAL: Ocorreu um erro durante o treino do modelo.")
+        print(f"Tipo do erro: {type(e).__name__}")
+        print(f"Detalhes: {e}")
+        sys.exit(1)
+
 
 if __name__ == "__main__":
     avaliar_e_incrementar()
