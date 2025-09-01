@@ -35,14 +35,15 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add decisor/modelo_previsor.joblib
+
+          # Adiciona a nova pasta e o ficheiro de metadados das heurísticas
+          git add decisor/modelos_salvos
           git add decisor/metadados_modelo.json
           
           # Verifica se há alterações antes de fazer o commit
           if git diff --staged --quiet; then
-          echo "Nenhuma alteração nos arquivos do modelo. Nenhuma ação necessária."
+            echo "Nenhuma alteração nos arquivos do modelo. Nenhuma ação necessária."
           else
-          git commit -m "feat(decisor): Atualiza modelo de ML e metadados"
-          git push
+            git commit -m "feat(decisor): Atualiza modelo de ML e metadados"
+            git push
           fi
