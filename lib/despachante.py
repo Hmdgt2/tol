@@ -1,88 +1,89 @@
-# despachante.py
+# lib/despachante.py
 
 import os
 import sys
-import importlib.util
-from typing import Dict, Any, List, Callable
+import importlib
+from typing import Dict, Any, List, Tuple, Set
 
 # Adiciona o diretório-pai (raiz do projeto) ao caminho
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from lib import dados
+
 class Despachante:
     """
-    Gerencia o carregamento dinâmico de todas as heurísticas e suas funções.
-    Fornece uma interface para obter previsões e metadados.
+    Gerencia o carregamento dinâmico de todas as heurísticas e orquestra
+    o cálculo de estatísticas e a geração de previsões.
     """
     def __init__(self, pasta_heuristicas: str = 'heuristicas'):
-        self.pasta_heuristias = os.path.join(PROJECT_ROOT, pasta_heuristicas)
-        self.heuristicas: Dict[str, Dict[str, Any]] = {}
+        self.pasta_heuristicas = os.path.join(PROJECT_ROOT, 'lib', pasta_heuristicas)
+        self.heuristics: Dict[str, Any] = {}
+        self.dependencias: Dict[str, Set[str]] = {}
         self._carregar_heuristicas()
 
     def _carregar_heuristicas(self):
         """
-        Carrega todas as heurísticas da pasta especificada, extraindo metadados
-        e a função de previsão 'prever'.
+        Carrega todas as classes de heurísticas da pasta especificada.
         """
-        if not os.path.exists(self.pasta_heuristias):
-            print(f"Erro: Pasta '{self.pasta_heuristias}' não encontrada.")
+        if not os.path.exists(self.pasta_heuristicas):
+            print(f"Erro: Pasta '{self.pasta_heuristicas}' não encontrada.")
             return
 
-        for nome_arquivo in os.listdir(self.pasta_heuristias):
-            if nome_arquivo.endswith('.py') and not nome_arquivo.startswith('__'):
-                nome_modulo = nome_arquivo[:-3]
-                caminho_completo = os.path.join(self.pasta_heuristias, nome_arquivo)
-                
+        for file_name in os.listdir(self.pasta_heuristicas):
+            if file_name.endswith('.py') and file_name != '__init__.py':
+                module_name = file_name[:-3]
                 try:
-                    spec = importlib.util.spec_from_file_location(nome_modulo, caminho_completo)
-                    modulo = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(modulo)
+                    module = importlib.import_module(f'lib.heuristicas.{module_name}')
+                    # Espera que a classe da heurística tenha o mesmo nome do ficheiro (com a primeira letra maiúscula)
+                    heuristic_class = getattr(module, module_name.capitalize())
+                    instance = heuristic_class()
+                    
+                    self.heuristics[module_name] = instance
+                    # Puxa as dependências diretamente do atributo de classe
+                    self.dependencias[module_name] = set(getattr(instance, 'DEPENDENCIAS', []))
+                except (AttributeError, ImportError) as e:
+                    print(f"Aviso: Não foi possível carregar a heurística '{module_name}'. Detalhes: {e}")
 
-                    # Verifica se o módulo tem as dependências necessárias
-                    if hasattr(modulo, 'NOME') and hasattr(modulo, 'prever') and hasattr(modulo, 'DEPENDENCIAS'):
-                        self.heuristicas[modulo.NOME] = {
-                            'funcao_prever': modulo.prever,
-                            'dependencias': set(modulo.DEPENDENCIAS),
-                            'descricao': getattr(modulo, 'DESCRICAO', 'N/A')
-                        }
-                    else:
-                        print(f"⚠️ Aviso: Arquivo '{nome_arquivo}' ignorado. Faltam atributos (NOME, prever, DEPENDENCIAS).")
-                except Exception as e:
-                    print(f"❌ Erro ao carregar a heurística '{nome_arquivo}': {e}")
-    
-    def get_previsoes(self, estatisticas: Dict[str, Any], n: int = 5) -> Dict[str, List[int]]:
+    def get_todas_dependencias(self) -> Set[str]:
+        """Retorna um conjunto com todas as dependências necessárias de todas as heurísticas carregadas."""
+        all_dependencies = set()
+        for deps in self.dependencias.values():
+            all_dependencies.update(deps)
+        return all_dependencies
+
+    def get_previsoes(self, sorteios_historico: list) -> Dict[str, Any]:
         """
-        Executa a função de previsão de cada heurística e retorna os resultados.
+        Calcula as estatísticas necessárias e gera as previsões para todas as heurísticas.
+        Retorna as previsões e os logs de erros.
         """
+        deps_necessarias = self.get_todas_dependencias()
+        estatisticas_completas, erros_estatisticas = dados.obter_estatisticas(deps_necessarias, sorteios_historico)
+
         previsoes = {}
-        for nome, dados in self.heuristicas.items():
-            previsoes[nome] = dados['funcao_prever'](estatisticas, n)
-        return previsoes
-        
-    def get_todas_dependencias(self) -> set:
-        """
-        Retorna um conjunto com todas as dependências necessárias para todas as heurísticas.
-        """
-        todas_dependencias = set()
-        for dados in self.heuristicas.values():
-            todas_dependencias.update(dados['dependencias'])
-        return todas_dependencias
+        erros_heuristicas = []
 
-    def get_metadados(self) -> Dict[str, Any]:
-        """
-        Retorna os metadados de todas as heurísticas.
-        """
-        return {nome: {'descricao': h['descricao'], 'dependencias': list(h['dependencias'])} 
-                for nome, h in self.heuristicas.items()}
+        for nome_heuristica, heuristica_obj in self.heuristics.items():
+            try:
+                deps = self.dependencias.get(nome_heuristica, set())
+                dados_para_heuristica = {key: estatisticas_completas[key] for key in deps if key in estatisticas_completas}
 
-if __name__ == '__main__':
-    # Exemplo de como usar o Despachante
-    despachante = Despachante()
-    
-    print("--- Heurísticas Carregadas ---")
-    for nome, meta in despachante.get_metadados().items():
-        print(f"📦 {nome}: {meta['descricao']} -> Dependências: {meta['dependencias']}")
+                if len(deps) != len(dados_para_heuristica):
+                    erros_heuristicas.append(f"Dependências incompletas para '{nome_heuristica}'. A retornar lista vazia.")
+                    previsoes[nome_heuristica] = []
+                    continue
+
+                previsao = heuristica_obj.prever(**dados_para_heuristica)
+                previsoes[nome_heuristica] = previsao
+            except Exception as e:
+                erros_heuristicas.append(f"Erro ao executar a heurística '{nome_heuristica}': {e}.")
+                previsoes[nome_heuristica] = []
         
-    todas_deps = despachante.get_todas_dependencias()
-    print(f"\n✅ Todas as dependências necessárias: {todas_deps}")
+        return {
+            "previsoes": previsoes,
+            "logs": {
+                "erros_estatisticas": erros_estatisticas,
+                "erros_heuristicas": erros_heuristicas
+            }
+        }
