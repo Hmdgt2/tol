@@ -40,6 +40,7 @@ jobs:
 
           # Adiciona os novos ficheiros e pastas da nova arquitetura
           git add previsoes/previsao_atual.json
+          git add previsoes/*.json
           git add decisor/modelos_salvos
           git add decisor/metadados_modelo.json
           git add decisor/sorteio_processado.json
