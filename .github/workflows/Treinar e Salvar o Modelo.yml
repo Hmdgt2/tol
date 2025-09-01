@@ -39,6 +39,10 @@ jobs:
           git add decisor/modelo_previsor.joblib
           git add decisor/metadados_modelo.json
           
-          git diff --cached --quiet || git commit -m "feat(decisor): Atualiza modelo de ML e metadados"
-          
+          # Verifica se há alterações antes de fazer o commit
+          if git diff --staged --quiet; then
+          echo "Nenhuma alteração nos arquivos do modelo. Nenhuma ação necessária."
+          else
+          git commit -m "feat(decisor): Atualiza modelo de ML e metadados"
           git push
+          fi
