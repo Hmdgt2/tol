@@ -10,7 +10,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from lib.despachante import Despachante
-from lib.dados import _carregar_sorteios, obter_estatisticas
+from lib.dados import _carregar_sorteios
 from decisor.decisor_final import HeuristicDecisor
 
 # --- Caminhos dos Ficheiros ---
@@ -35,26 +35,40 @@ def gerar_previsao():
         with open(DADOS_ATUAL_PATH, 'r', encoding='utf-8') as f:
             sorteio_mais_recente = json.load(f)
         
-        # 2. Carregar as heurísticas e calcular as estatísticas necessárias
-        despachante = Despachante()
-        todas_dependencias = despachante.get_todas_dependencias()
+        # 2. Carregar o histórico de sorteios
         sorteios_historico = _carregar_sorteios()
-        estatisticas_completas = obter_estatisticas(todas_dependencias, sorteios_historico)
 
-        # 3. Obter as previsões de cada heurística para o sorteio mais recente
-        previsoes_heuristicas = despachante.get_previsoes(estatisticas_completas)
+        # 3. Orquestrar a obtenção de previsões e logs de erro
+        despachante = Despachante()
+        # A nova chamada retorna um dicionário com 'previsoes' e 'logs'
+        resultados_processamento = despachante.get_previsoes(sorteios_historico)
         
-        # Formata as previsões para a entrada do decisor
+        previsoes_heuristicas = resultados_processamento['previsoes']
+        logs = resultados_processamento['logs']
+        
+        # Opcional: imprimir logs de erro aqui para o utilizador saber o que se passa
+        if logs['erros_estatisticas'] or logs['erros_heuristicas']:
+            print("\n--- Avisos durante o Processamento ---")
+            if logs['erros_estatisticas']:
+                print("❌ Erros no Cálculo de Estatísticas:")
+                for erro in logs['erros_estatisticas']:
+                    print(f"  - {erro}")
+            if logs['erros_heuristicas']:
+                print("\n⚠️ Erros na Execução das Heurísticas:")
+                for erro in logs['erros_heuristicas']:
+                    print(f"  - {erro}")
+        
+        # 4. Formatar as previsões para a entrada do decisor
         detalhes_previsoes = [
             {'nome': nome, 'numeros': numeros_previstos}
             for nome, numeros_previstos in previsoes_heuristicas.items()
         ]
 
-        # 4. Instanciar o decisor de ML e obter a previsão final
+        # 5. Instanciar o decisor de ML e obter a previsão final
         decisor_ml = HeuristicDecisor(caminho_base_decisor=CAMINHO_BASE_DECISOR)
         previsao_final_numeros = decisor_ml.predict(detalhes_previsoes)
         
-        # 5. Organizar os resultados para salvar em um ficheiro completo
+        # 6. Organizar e salvar os resultados em ficheiros
         resultado_completo = {
             "data_geracao": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "baseado_em_sorteio": sorteio_mais_recente.get("concurso"),
@@ -62,14 +76,12 @@ def gerar_previsao():
             "previsoes_heuristicas": detalhes_previsoes
         }
         
-        # 6. Salvar os resultados em um ficheiro JSON completo (com nome dinâmico)
         nome_ficheiro_completo = f"previsao_{sorteio_mais_recente.get('concurso').replace('/', '-')}.json"
         caminho_ficheiro_completo = os.path.join(PASTA_PREVISOES, nome_ficheiro_completo)
         
         with open(caminho_ficheiro_completo, 'w', encoding='utf-8') as f:
             json.dump(resultado_completo, f, indent=2, ensure_ascii=False)
 
-        # 7. Salvar apenas a previsão do modelo em previsao_atual.json (para compatibilidade)
         caminho_previsao_atual = os.path.join(PASTA_PREVISOES, "previsao_atual.json")
         with open(caminho_previsao_atual, 'w', encoding='utf-8') as f:
             json.dump({"previsao_modelo_ml": previsao_final_numeros}, f, indent=2, ensure_ascii=False)
