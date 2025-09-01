@@ -1,163 +1,109 @@
-# treinar_decisor.py
 import os
 import sys
-import importlib
-from collections import defaultdict, Counter
 import json
-import inspect
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
+import numpy as np
 import joblib
+from collections import defaultdict
 from typing import Dict, Any, List
 
-# Adiciona o diretório raiz ao caminho do sistema
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
+# Adicionamos os imports para a nova arquitetura
+from lib.dados import _carregar_sorteios, obter_estatisticas
+from lib.despachante import Despachante
 
-# Importa a biblioteca de tipagem para resolver o erro
-from typing import Dict, Any, List
-
-from lib.dados import obter_estatisticas, _carregar_sorteios
-# Vamos usar o mapeamento de estatísticas diretamente para o treino incremental
-from lib.dados import MAP_ESTATISTICAS
-
-HEURISTICAS_DIR = os.path.join(PROJECT_ROOT, 'heuristicas')
+# Adicionamos os imports para os modelos e o scaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
 
 # Caminhos para os ficheiros
-PESOS_JSON_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_atuais.json')
-MODELO_GB_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_gradient_boosting.joblib')
-MODELO_RF_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_random_forest.joblib')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODELO_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_previsor.joblib')
+METADADOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'metadados_modelo.json')
+DECISOR_DIR = os.path.join(PROJECT_ROOT, 'decisor')
+if not os.path.exists(DECISOR_DIR):
+    os.makedirs(DECISOR_DIR)
 
-# NOVO CAMINHO PARA OS PESOS MANUAIS
-PESOS_HEURISTICAS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'pesos_heuristicas.json')
-
-
-def carregar_heuristicas_com_dependencias():
+def treinar_decisor(modelo_ml):
     """
-    Carrega dinamicamente todas as heurísticas e suas dependências.
-    Retorna um dicionário { nome: { "funcao": funcao, "dependencias": set } }
+    Treina o modelo decisor usando dados históricos.
+    Args:
+        modelo_ml: O modelo de Machine Learning a ser treinado (ex: LogisticRegression()).
     """
-    heuristicas = {}
-    for ficheiro in os.listdir(HEURISTICAS_DIR):
-        if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
-            nome_modulo = ficheiro[:-3]
-            try:
-                modulo = importlib.import_module(f"heuristicas.{nome_modulo}")
-                if hasattr(modulo, 'prever') and hasattr(modulo, 'DEPENDENCIAS'):
-                    heuristicas[nome_modulo] = {
-                        "funcao": modulo.prever,
-                        "dependencias": set(modulo.DEPENDENCIAS)
-                    }
-            except ImportError as e:
-                print(f"Erro ao importar heurística {nome_modulo}: {e}")
-            except Exception as e:
-                print(f"Erro inesperado ao carregar heurística {nome_modulo}: {e}")
-    return heuristicas
-
-def treinar_decisor():
-    """
-    Treina os modelos decisores usando dados históricos de forma otimizada.
-    """
-    sorteios_historico = _carregar_sorteios()
-    heuristicas = carregar_heuristicas_com_dependencias()
-
-    if not sorteios_historico or not heuristicas:
-        print("Dados ou heurísticas insuficientes para treinar o decisor.")
+    # 1. Carrega o despachante para gerir as heurísticas
+    print("Iniciando o treino. Carregando heurísticas...")
+    despachante = Despachante()
+    
+    # 2. Obtém todas as dependências necessárias
+    todas_dependencias = despachante.get_todas_dependencias()
+    if not todas_dependencias:
+        print("Nenhuma dependência encontrada nas heurísticas. O treino não pode continuar.")
         return
-
-    print("Coletando dependências das heurísticas...")
-    todas_dependencias = set()
-    for h in heuristicas.values():
-        todas_dependencias.update(h["dependencias"])
-
+    
+    # 3. Carrega o histórico de sorteios
+    sorteios_historico = _carregar_sorteios()
+    if not sorteios_historico or len(sorteios_historico) < 2:
+        print("Histórico de sorteios insuficiente para treino.")
+        return
+    
     print("Simulando previsões de heurísticas para dados históricos...")
-    
-    previsoes_por_sorteio = defaultdict(dict)
-    
-    # 1. Pré-calcula as estatísticas de forma incremental para cada sorteio
-    estatisticas_incrementais = defaultdict(dict)
-    
-    for i in range(len(sorteios_historico) - 1):
-        historico_parcial = sorteios_historico[:i+1]
-        
-        # Calcula apenas as estatísticas necessárias para este passo
-        for dep in todas_dependencias:
-            if dep in MAP_ESTATISTICAS:
-                try:
-                    # Chame a função de cálculo correspondente
-                    estatisticas_incrementais[i][dep] = MAP_ESTATISTICAS[dep](historico_parcial)
-                except Exception as e:
-                    print(f"Erro ao calcular a estatística '{dep}' no passo {i}: {e}")
-                    estatisticas_incrementais[i][dep] = {}
-
-        # 2. Executa as heurísticas com as estatísticas do momento
-        for nome, dados_heuristica in heuristicas.items():
-            try:
-                funcao = dados_heuristica["funcao"]
-                # Passa apenas as estatísticas necessárias para a heurística
-                numeros = funcao(estatisticas_incrementais[i], n=5)
-                previsoes_por_sorteio[i][nome] = numeros
-            except Exception as e:
-                print(f"Erro inesperado na heurística {nome} no passo {i}: {e}")
-                previsoes_por_sorteio[i][nome] = []
-    
-    print("Pré-cálculo concluído. A criar os dados de treino para os modelos de ML...")
     
     X_treino = []
     y_treino = []
-    heuristicas_ordenadas = sorted(list(heuristicas.keys()))
+    
+    # Usamos o despachante para obter os metadados e garantir a ordem
+    metadados_heuristicas = despachante.get_metadados()
+    heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
 
+    # 4. Loop de simulação para construir o conjunto de treino
     for i in range(len(sorteios_historico) - 1):
+        historico_parcial = sorteios_historico[:i+1]
         sorteio_alvo = sorteios_historico[i+1]
-        previsoes_sorteio_atual = previsoes_por_sorteio[i]
         
+        # Obtém as estatísticas para o histórico parcial
+        estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
+        
+        # Obtém as previsões das heurísticas para este ponto no tempo
+        previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
+        
+        # Cria o vetor de features (X) para cada número
         for num in range(1, 50):
-            feature_vector = [1 if num in previsoes_sorteio_atual.get(nome, []) else 0 for nome in heuristicas_ordenadas]
+            # A feature é 1 se a heurística sugeriu o número, 0 caso contrário
+            feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
             X_treino.append(feature_vector)
             
+            # A label é 1 se o número saiu no sorteio real, 0 caso contrário
             y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
 
-    if not X_treino:
-        print("Nenhum dado de treino gerado.")
-        return
-
-    # --- TREINA E SALVA OS DOIS MODELOS ---
-    os.makedirs(os.path.dirname(MODELO_GB_PATH), exist_ok=True)
+    # 5. Treina o modelo usando um pipeline para normalizar os dados
+    print("\nConjunto de treino criado. Iniciando o treino do modelo de ML...")
+    pipeline = Pipeline([
+        ('scaler', StandardScaler()),
+        ('model', modelo_ml)
+    ])
     
-    print("A treinar o modelo de Gradient Boosting...")
-    modelo_gb = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3)
-    modelo_gb.fit(X_treino, y_treino)
-    joblib.dump(modelo_gb, MODELO_GB_PATH)
-
-    print("A treinar o modelo de Random Forest...")
-    modelo_rf = RandomForestClassifier(n_estimators=100, random_state=42)
-    modelo_rf.fit(X_treino, y_treino)
-    joblib.dump(modelo_rf, MODELO_RF_PATH)
+    X_treino_np = np.array(X_treino)
+    y_treino_np = np.array(y_treino)
     
-    # --- SALVA OS METADADOS DOS DOIS MODELOS ---
-    os.makedirs(os.path.dirname(PESOS_JSON_PATH), exist_ok=True)
-
+    pipeline.fit(X_treino_np, y_treino_np)
+    
+    # 6. Salva o pipeline completo (incluindo o scaler) e os metadados
+    joblib.dump(pipeline, MODELO_PATH)
+    
     json_data = {
-        'modelos': {
-            'gradient_boosting': os.path.relpath(MODELO_GB_PATH, PROJECT_ROOT),
-            'random_forest': os.path.relpath(MODELO_RF_PATH, PROJECT_ROOT)
-        },
+        'modelo_usado': str(modelo_ml),
         'heuristicas_ordenadas': heuristicas_ordenadas
     }
-    
-    with open(PESOS_JSON_PATH, 'w', encoding='utf-8') as f:
+    with open(METADADOS_PATH, 'w', encoding='utf-8') as f:
         json.dump(json_data, f, indent=2, ensure_ascii=False)
-
-    print("Treino concluído. Modelos Joblib guardados.")
-    print("Metadados JSON atualizados em:", PESOS_JSON_PATH)
-
-    # --- NOVO: REINICIA OS PESOS MANUAIS ---
-    if os.path.exists(PESOS_HEURISTICAS_PATH):
-        os.remove(PESOS_HEURISTICAS_PATH)
-        print("✅ Ficheiro de pesos das heurísticas ('pesos_heuristicas.json') reiniciado para que o avaliador possa começar do zero.")
-    else:
-        print("✅ Ficheiro de pesos das heurísticas não existia. Nenhuma ação necessária.")
-
+    
+    print(f"\n✅ Treino concluído. Pipeline salvo em '{MODELO_PATH}'.")
+    print(f"✅ Metadados salvos em '{METADADOS_PATH}'.")
 
 if __name__ == '__main__':
-    treinar_decisor()
+    # Exemplo de como usar com LogisticRegression
+    modelo_a_treinar = LogisticRegression(solver='liblinear')
+    treinar_decisor(modelo_a_treinar)
+
+    # Pode testar outros modelos, como:
+    # modelo_a_treinar = RandomForestClassifier(n_estimators=100, random_state=42)
+    # treinar_decisor(modelo_a_treinar)
