@@ -1,10 +1,10 @@
 {
   "previsao": [
-    4,
-    23,
-    26,
-    33,
-    40
+    19,
+    34,
+    38,
+    40,
+    46
   ],
   "detalhes": [
     {
@@ -215,7 +215,7 @@
       ]
     },
     {
-      "nome": "numeros_retenção_longa",
+      "nome": "numeros_retencao_longa",
       "numeros": [
         2,
         13,
@@ -230,13 +230,7 @@
     },
     {
       "nome": "padrao_finais",
-      "numeros": [
-        16,
-        23,
-        26,
-        33,
-        46
-      ]
+      "numeros": []
     },
     {
       "nome": "frequencia_soma",
