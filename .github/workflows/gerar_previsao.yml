@@ -26,7 +26,7 @@ jobs:
       - name: Executar o avaliador e o gerador de previsão
         run: |
           echo "Executando o avaliador/incrementador..."
-          python avaliador.py
+          python avaliador/avaliador.py
           echo "Gerando a nova previsão..."
           python gerar_previsao.py
           
