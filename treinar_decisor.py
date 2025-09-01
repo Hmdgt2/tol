@@ -7,7 +7,7 @@ from collections import defaultdict
 from typing import Dict, Any, List
 
 # Adicionamos o diretório raiz ao caminho do sistema para que as importações funcionem
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
