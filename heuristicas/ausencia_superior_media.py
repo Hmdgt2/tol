@@ -3,10 +3,10 @@ from typing import Dict, Any, List
 
 # --- Metadados da Heurística ---
 # A nova arquitetura usa um padrão de metadados para saber o que a heurística faz e o que precisa.
-NOME = "ausencia_superior_media"
-DESCRICAO = "Sugere números ausentes há mais tempo que a média."
-# A heurística declara explicitamente que precisa da estatística 'ausencia_atual'.
-DEPENDENCIAS = ["ausencia_atual"]
+class Ausencia_superior_media:
+    NOME = "ausencia_superior_media"
+    DESCRICAO = "Sugere números ausentes há mais tempo que a média."
+    DEPENDENCIAS = ["ausencia_atual"]
 
 def prever(estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
     """
