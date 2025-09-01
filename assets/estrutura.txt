@@ -11,7 +11,8 @@
 │       ├── gerar_estrutura.yml
 │       ├── gerar_previsao.yml
 │       ├── gerar_teste.yml
-│       └── historivo_analise_manual.yml
+│       ├── historivo_analise_manual.yml
+│       └── resumo_heuristicas.yml
 ├── analisador_combinacoes.py
 ├── assets
 │   ├── estrutura.txt
@@ -37,6 +38,7 @@
 │   ├── 2024.json
 │   ├── 2025.json
 │   ├── 2025.txt
+│   ├── resumo_heuristicas.json
 │   └── sorteio_atual.json
 ├── decisor
 │   ├── decisor_final.py
@@ -55,6 +57,7 @@
 │   ├── distribuicao_grupos.json
 │   ├── distribuicao_quadrantes.json
 │   ├── distribuicao_uniforme_faixas.json
+│   ├── estatisticas_teste.json
 │   ├── frequencia_soma.json
 │   ├── frequencia_terminacoes.json
 │   ├── frequencia_total.json
@@ -111,7 +114,8 @@
 │   ├── teste3.js
 │   └── update_estatisticas.js
 ├── lib
-│   └── dados.py
+│   ├── dados.py
+│   └── despachante.py
 ├── logs
 │   └── totoloto_log.txt
 ├── previsoes
@@ -122,7 +126,8 @@
 │   ├── atualiza_yml.py
 │   ├── atualizar_totoloto.py
 │   ├── atualizar_totoloto_sc.py
-│   └── enviar_email.py
+│   ├── enviar_email.py
+│   └── resumo_heuristicas.py
 ├── simulador
 │   ├── estilo.css
 │   ├── main.js
