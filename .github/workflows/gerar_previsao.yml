@@ -38,11 +38,13 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
 
+          # Adiciona os novos ficheiros e pastas da nova arquitetura
           git add previsoes/previsao_atual.json
-          git add decisor/modelo_previsor.joblib
+          git add decisor/modelos_salvos
           git add decisor/metadados_modelo.json
           git add decisor/sorteio_processado.json
           
+          # Verifica se há alterações antes de fazer o commit
           git diff --cached --quiet || git commit -m "Atualização automática de modelo e previsão"
           git push
         env:
