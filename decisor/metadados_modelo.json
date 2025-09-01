@@ -1,5 +1,4 @@
 {
-  "modelo_usado": "LogisticRegression(solver='liblinear')",
   "heuristicas_ordenadas": [
     "ausencia_superior_media",
     "balanceamento_tipos",
