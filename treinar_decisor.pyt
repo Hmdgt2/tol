@@ -5,105 +5,131 @@ import numpy as np
 import joblib
 from collections import defaultdict
 from typing import Dict, Any, List
+import importlib
+
+# Adiciona o diretório raiz para resolver importações
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
 
 # Adicionamos os imports para a nova arquitetura
 from lib.dados import _carregar_sorteios, obter_estatisticas
 from lib.despachante import Despachante
 
 # Adicionamos os imports para os modelos e o scaler
-from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score
 
-# Caminhos para os ficheiros
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MODELO_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'modelo_previsor.joblib')
+# Novos caminhos para os ficheiros
+MODELOS_DIR = os.path.join(PROJECT_ROOT, 'decisor', 'modelos_salvos')
+PERFORMANCE_PATH = os.path.join(MODELOS_DIR, 'performance_modelos.json')
 METADADOS_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'metadados_modelo.json')
-DECISOR_DIR = os.path.join(PROJECT_ROOT, 'decisor')
-if not os.path.exists(DECISOR_DIR):
-    os.makedirs(DECISOR_DIR)
+MODELOS_ML_DIR = os.path.join(PROJECT_ROOT, 'modelos_ml')
 
-def treinar_decisor(modelo_ml):
-    """
-    Treina o modelo decisor usando dados históricos.
-    Args:
-        modelo_ml: O modelo de Machine Learning a ser treinado (ex: LogisticRegression()).
-    """
-    # 1. Carrega o despachante para gerir as heurísticas
-    print("Iniciando o treino. Carregando heurísticas...")
-    despachante = Despachante()
-    
-    # 2. Obtém todas as dependências necessárias
-    todas_dependencias = despachante.get_todas_dependencias()
-    if not todas_dependencias:
-        print("Nenhuma dependência encontrada nas heurísticas. O treino não pode continuar.")
-        return
-    
-    # 3. Carrega o histórico de sorteios
-    sorteios_historico = _carregar_sorteios()
-    if not sorteios_historico or len(sorteios_historico) < 2:
-        print("Histórico de sorteios insuficiente para treino.")
-        return
-    
-    print("Simulando previsões de heurísticas para dados históricos...")
-    
-    X_treino = []
-    y_treino = []
-    
-    # Usamos o despachante para obter os metadados e garantir a ordem
-    metadados_heuristicas = despachante.get_metadados()
-    heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
+if not os.path.exists(MODELOS_DIR):
+    os.makedirs(MODELOS_DIR)
 
-    # 4. Loop de simulação para construir o conjunto de treino
-    for i in range(len(sorteios_historico) - 1):
-        historico_parcial = sorteios_historico[:i+1]
-        sorteio_alvo = sorteios_historico[i+1]
-        
-        # Obtém as estatísticas para o histórico parcial
-        estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
-        
-        # Obtém as previsões das heurísticas para este ponto no tempo
-        previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
-        
-        # Cria o vetor de features (X) para cada número
-        for num in range(1, 50):
-            # A feature é 1 se a heurística sugeriu o número, 0 caso contrário
-            feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
-            X_treino.append(feature_vector)
+def carregar_modelos_ml():
+    """
+    Carrega dinamicamente os modelos de machine learning da pasta 'modelos_ml'.
+    """
+    modelos_disponiveis = {}
+    sys.path.insert(0, MODELOS_ML_DIR)
+    for filename in os.listdir(MODELOS_ML_DIR):
+        if filename.endswith(".py") and filename != "__init__.py":
+            module_name = filename[:-3]
+            try:
+                module = importlib.import_module(module_name)
+                if hasattr(module, 'get_model'):
+                    modelos_disponiveis[module_name] = module.get_model()
+            except ImportError as e:
+                print(f"Aviso: Não foi possível importar o modelo '{module_name}'. Erro: {e}")
+    sys.path.pop(0)
+    return modelos_disponiveis
+
+def treinar_decisor():
+    """
+    Treina múltiplos modelos e salva o melhor.
+    """
+    try:
+        # 1. Carrega o despachante e dados
+        print("Iniciando o treino. Carregando heurísticas e dados...")
+        despachante = Despachante()
+        todas_dependencias = despachante.get_todas_dependencias()
+        sorteios_historico = _carregar_sorteios()
+
+        if not todas_dependencias or not sorteios_historico or len(sorteios_historico) < 2:
+            print("Dados insuficientes para treino. O processo será encerrado.")
+            return
+
+        print("Simulando previsões de heurísticas para dados históricos...")
+        X_treino = []
+        y_treino = []
+        metadados_heuristicas = despachante.get_metadados()
+        heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
+
+        for i in range(len(sorteios_historico) - 1):
+            historico_parcial = sorteios_historico[:i+1]
+            sorteio_alvo = sorteios_historico[i+1]
+            estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
+            previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
+            for num in range(1, 50):
+                feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
+                X_treino.append(feature_vector)
+                y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
+
+        X_treino_np = np.array(X_treino)
+        y_treino_np = np.array(y_treino)
+
+        # 2. Carrega os modelos dinamicamente
+        modelos_disponiveis = carregar_modelos_ml()
+        if not modelos_disponiveis:
+            print("Nenhum modelo de ML encontrado na pasta 'modelos_ml'. O treino será encerrado.")
+            return
             
-            # A label é 1 se o número saiu no sorteio real, 0 caso contrário
-            y_treino.append(1 if num in sorteio_alvo.get("numeros", []) else 0)
+        resultados_treino = {}
 
-    # 5. Treina o modelo usando um pipeline para normalizar os dados
-    print("\nConjunto de treino criado. Iniciando o treino do modelo de ML...")
-    pipeline = Pipeline([
-        ('scaler', StandardScaler()),
-        ('model', modelo_ml)
-    ])
-    
-    X_treino_np = np.array(X_treino)
-    y_treino_np = np.array(y_treino)
-    
-    pipeline.fit(X_treino_np, y_treino_np)
-    
-    # 6. Salva o pipeline completo (incluindo o scaler) e os metadados
-    joblib.dump(pipeline, MODELO_PATH)
-    
-    json_data = {
-        'modelo_usado': str(modelo_ml),
-        'heuristicas_ordenadas': heuristicas_ordenadas
-    }
-    with open(METADADOS_PATH, 'w', encoding='utf-8') as f:
-        json.dump(json_data, f, indent=2, ensure_ascii=False)
-    
-    print(f"\n✅ Treino concluído. Pipeline salvo em '{MODELO_PATH}'.")
-    print(f"✅ Metadados salvos em '{METADADOS_PATH}'.")
+        # 3. Treina e salva cada modelo
+        print("\nConjunto de treino criado. Iniciando o treino dos modelos de ML...")
+        for nome_modelo, modelo in modelos_disponiveis.items():
+            print(f"Treinando o modelo: {nome_modelo}...")
+            pipeline = Pipeline([
+                ('scaler', StandardScaler()),
+                ('model', modelo)
+            ])
+            pipeline.fit(X_treino_np, y_treino_np)
+            
+            # Avalia o modelo
+            score_treino = pipeline.score(X_treino_np, y_treino_np)
+            
+            # Salva o pipeline
+            modelo_path = os.path.join(MODELOS_DIR, f"{nome_modelo}_pipeline.joblib")
+            joblib.dump(pipeline, modelo_path)
+            
+            resultados_treino[nome_modelo] = {
+                'caminho': modelo_path,
+                'score_treino': score_treino,
+                'ultima_atualizacao': "AGORA"
+            }
+            print(f"✅ Modelo {nome_modelo} salvo com score: {score_treino:.4f}")
+
+        # 4. Salva o ficheiro de performance
+        with open(PERFORMANCE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(resultados_treino, f, indent=2, ensure_ascii=False)
+        
+        # 5. Salva os metadados das heurísticas
+        json_data_metadados = {'heuristicas_ordenadas': heuristicas_ordenadas}
+        with open(METADADOS_PATH, 'w', encoding='utf-8') as f:
+            json.dump(json_data_metadados, f, indent=2, ensure_ascii=False)
+            
+        print("\n✅ Treino de todos os modelos concluído com sucesso.")
+
+    except Exception as e:
+        print(f"\n❌ ERRO FATAL: Ocorreu um erro durante o treino do modelo.")
+        print(f"Tipo do erro: {type(e).__name__}")
+        print(f"Detalhes: {e}")
+        sys.exit(1)
 
 if __name__ == '__main__':
-    # Exemplo de como usar com LogisticRegression
-    modelo_a_treinar = LogisticRegression(solver='liblinear')
-    treinar_decisor(modelo_a_treinar)
-
-    # Pode testar outros modelos, como:
-    # modelo_a_treinar = RandomForestClassifier(n_estimators=100, random_state=42)
-    # treinar_decisor(modelo_a_treinar)
+    treinar_decisor()
