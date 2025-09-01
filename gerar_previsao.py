@@ -11,7 +11,7 @@ if PROJECT_ROOT not in sys.path:
 # Importamos a nossa nova arquitetura
 from lib.dados import _carregar_sorteios, obter_estatisticas
 from lib.despachante import Despachante
-from lib.decisor import HeuristicDecisor
+from decisor.decisor import HeuristicDecisor
 
 # Define os caminhos dos ficheiros para a nova arquitetura
 PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
