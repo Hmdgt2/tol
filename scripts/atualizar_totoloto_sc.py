@@ -1,3 +1,5 @@
+# atualizar_totoloto_sc.py
+
 import json
 import os
 import re
