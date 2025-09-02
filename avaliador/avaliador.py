@@ -13,7 +13,7 @@ if PROJECT_ROOT not in sys.path:
 
 # Importa as classes e funções corretas para a nova estrutura do projeto
 from lib.despachante import Despachante
-from lib.dados import Dados, get_all_stats
+from lib.dados import Dados
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
@@ -127,10 +127,8 @@ def avaliar_e_incrementar():
             historico_parcial = sorteios_historico[:i+1]
             sorteio_alvo = sorteios_historico[i+1]
             
-            # Usando a função get_all_stats para obter as estatísticas
-            estatisticas_parciais = get_all_stats(historico_parcial)
-            
-            # Usando o despachante para obter as previsões
+            # A chamada a 'get_all_stats' foi removida porque 'despachante.get_previsoes'
+            # já trata do cálculo das estatísticas internamente.
             previsoes_sorteio_atual = despachante.get_previsoes(historico_parcial)['previsoes']
 
             for num in range(1, 50):
