@@ -18,29 +18,28 @@ class PadraoFinais:
         if not frequencia_padrao or not frequencia_total:
             return []
 
-        terminacoes_sorteio_atual = estatisticas.get('terminacoes_sorteio_atual', [])
-        if not terminacoes_sorteio_atual:
-            return []
+        # Soma as frequências de todas as terminações futuras prováveis
+        terminacoes_futuras_comuns = Counter()
+        for terminacoes_seguintes in frequencia_padrao.values():
+            terminacoes_futuras_comuns.update(terminacoes_seguintes)
 
-        contador_terminacoes_sugeridas = Counter()
-        for term_atual in terminacoes_sorteio_atual:
-            if term_atual in frequencia_padrao:
-                contador_terminacoes_sugeridas.update(frequencia_padrao[term_atual])
-        
-        terminacoes_comuns = [t for t, _ in contador_terminacoes_sugeridas.most_common(2)]
+        # Seleciona as terminações mais comuns
+        finais_mais_comuns = [t for t, _ in terminacoes_futuras_comuns.most_common(2)]
         
         candidatos = []
         frequencia_ordenada = sorted(frequencia_total.items(), key=lambda item: item[1], reverse=True)
         
+        # Encontra os números mais frequentes que correspondem às terminações mais comuns
         for num, _ in frequencia_ordenada:
-            if (num % 10) in terminacoes_comuns:
+            if (num % 10) in finais_mais_comuns:
                 candidatos.append(num)
                 if len(candidatos) >= n:
                     break
         
+        # Fallback para os mais frequentes se não houver candidatos suficientes
         if len(candidatos) < n:
             sugeridos = [num for num, _ in frequencia_ordenada[:n]]
         else:
             sugeridos = candidatos
-        
+            
         return sorted(list(set(sugeridos)))
