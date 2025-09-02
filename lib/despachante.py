@@ -74,14 +74,22 @@ class Despachante:
             todas_dependencias.update(meta['dependencias'])
         return todas_dependencias
 
-    def get_previsoes(self, estatisticas: Dict[str, Any], n: int = 5) -> Dict[str, List[int]]:
-        """
-        Gera previsões para todas as heurísticas carregadas.
-        """
-        previsoes = {}
-        for nome, heuristica in self.heuristicas.items():
-            try:
-                previsoes[nome] = heuristica.prever(estatisticas, n)
-            except Exception as e:
-                print(f"❌ Erro ao gerar previsão para a heurística '{nome}': {e}")
-        return previsoes
+    def get_previsoes(self, estatisticas: Dict[str, Any], n: int = 5) -> Dict[str, Any]:
+    previsoes = {}
+    erros_heuristicas = []
+    
+    for nome, heuristica in self.heuristicas.items():
+        try:
+            previsoes[nome] = heuristica.prever(estatisticas, n)
+        except Exception as e:
+            erros_heuristicas.append(f"Heurística '{nome}': {e}")
+            print(f"❌ Erro ao gerar previsão para a heurística '{nome}': {e}")
+
+    # Retorna as previsões e os logs em uma única estrutura, conforme esperado pelo gerar_previsao.py
+    return {
+        'previsoes': previsoes,
+        'logs': {
+            'erros_estatisticas': [],
+            'erros_heuristicas': erros_heuristicas
+        }
+    }
