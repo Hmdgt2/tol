@@ -111,6 +111,19 @@ class Dados:
             trios = combinations(sorted(sorteio['numeros']), 3)
             frequencia_trios.update(trios)
         return frequencia_trios
+        
+    def _calcular_frequencia_grupos(self) -> Counter:
+        """
+        Calcula a frequência de grupos de 2, 3 e 4 números.
+        Isso é usado pela heurística de padrões de grupos.
+        """
+        frequencia_grupos = Counter()
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i in range(2, 5): # Grupos de tamanho 2, 3 e 4
+                grupos = combinations(numeros, i)
+                frequencia_grupos.update(grupos)
+        return frequencia_grupos
 
     def _calcular_frequencia_recente(self, janela=15) -> Counter:
         """Calcula a frequência dos números numa janela de tempo recente."""
