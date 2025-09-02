@@ -39,7 +39,8 @@ class Despachante:
                     
                     # Procura dinamicamente pela classe correta no módulo
                     for name, obj in module.__dict__.items():
-                        if isinstance(obj, type) and name != 'ABC' and name[0].isupper():
+                        # A CORREÇÃO: Garante que a classe é definida no próprio módulo e não é uma importação
+                        if isinstance(obj, type) and obj.__module__ == module.__name__ and name[0].isupper():
                             heuristica_classe = obj
                             instance = heuristica_classe()
                             nome_heuristica = getattr(instance, 'NOME', module_name)
@@ -52,10 +53,9 @@ class Despachante:
                             print(f"✅ Heurística '{nome_heuristica}' carregada com sucesso.")
                             break
                     
-                except (AttributeError, ImportError) as e:
-                    print(f"❌ Aviso: Não foi possível carregar a heurística '{module_name}'. Detalhes: {e}")
                 except Exception as e:
-                    print(f"❌ Ocorreu um erro inesperado ao carregar '{module_name}': {e}")
+                    # Mensagem de erro mais detalhada
+                    print(f"❌ Erro ao carregar a heurística '{module_name}'. Detalhes: {e}")
         
         sys.path.pop(0)
 
