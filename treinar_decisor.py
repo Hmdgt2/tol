@@ -1,3 +1,5 @@
+# treinar_decisor.py
+# Correção aplicada
 import os
 import sys
 import json
