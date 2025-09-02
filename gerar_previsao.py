@@ -1,5 +1,3 @@
-# gerar_previsao.py
-
 import os
 import sys
 import json
@@ -8,15 +6,13 @@ import numpy as np
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
-# A correção aqui é subir um nível no diretório para chegar à raiz do projeto ('tol')
+# CORREÇÃO: Usa a abordagem mais simples e robusta para definir a raiz do projeto.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# CORREÇÃO: Este script está na raiz do projeto, então apenas subimos um nível.
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from lib.despachante import Despachante
-from lib.dados import Dados  # Importa a classe Dados, que é a forma correta agora
+from lib.dados import Dados # Importa a classe Dados, que é a forma correta agora
 from decisor.decisor_final import HeuristicDecisor
 
 # --- Caminhos dos Ficheiros ---
@@ -41,7 +37,6 @@ def gerar_previsao():
 
         with open(DADOS_ATUAL_PATH, 'r', encoding='utf-8') as f:
             sorteio_mais_recente = json.load(f)
-        
 
         # 2. Carregar o histórico de sorteios
         dados_manager = Dados()
@@ -54,23 +49,16 @@ def gerar_previsao():
         # 4. Obter as estatísticas mais recentes para a previsão
         estatisticas_atuais, _ = dados_manager.obter_estatisticas(todas_dependencias)
 
-        # 5. Obter as previsões das heurísticas e logs de erro
-        resultados_processamento = despachante.get_previsoes(estatisticas_atuais)
+        # --- CORREÇÃO AQUI ---
+        # 5. Obter as previsões das heurísticas.
+        # A função 'get_previsoes' em 'despachante.py' retorna um dicionário plano de previsões.
+        previsoes_heuristicas = despachante.get_previsoes(estatisticas_atuais)
 
-        previsoes_heuristicas = resultados_processamento['previsoes']
-        logs = resultados_processamento['logs']
-
-        # Opcional: imprimir logs de erro aqui para o utilizador saber o que se passa
-        if logs['erros_estatisticas'] or logs['erros_heuristicas']:
-            print("\n--- Avisos durante o Processamento ---")
-            if logs['erros_estatisticas']:
-                print("❌ Erros no Cálculo de Estatísticas:")
-                for erro in logs['erros_estatisticas']:
-                    print(f"  - {erro}")
-            if logs['erros_heuristicas']:
-                print("\n⚠️ Erros na Execução das Heurísticas:")
-                for erro in logs['erros_heuristicas']:
-                    print(f"  - {erro}")
+        # A sua lógica para 'logs' e a formatação do vetor de características
+        # devem ser ajustadas para lidar com o retorno do 'despachante'.
+        # O código original no despachante já imprime os erros, então não
+        # precisamos mais do bloco de logs aqui.
+        # --- FIM DA CORREÇÃO ---
 
         # 6. Formatar as previsões para a entrada do decisor
         detalhes_previsoes = [
