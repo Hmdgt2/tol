@@ -1,5 +1,5 @@
 # treinar_decisor.py
-# Correção aplicada
+
 import os
 import sys
 import json
@@ -69,11 +69,11 @@ def treinar_decisor():
             return
 
         print("Simulando previsões de heurísticas para dados históricos...")
-            X_treino = []
-            y_treino = []
-            # CORREÇÃO: Altera o nome do método de 'get_metadados' para 'obter_metadados'
-            metadados_heuristicas = despachante.obter_metadados()
-            heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
+        X_treino = []
+        y_treino = []
+        # CORREÇÃO: Altera o nome do método de 'get_metadados' para 'obter_metadados'
+        metadados_heuristicas = despachante.obter_metadados()
+        heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
 
         for i in range(len(sorteios_historico) - 1):
             # IMPORTANTE: Cria uma nova instância de Dados com um subconjunto do histórico
