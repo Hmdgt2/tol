@@ -107,12 +107,12 @@ def avaliar_e_incrementar():
 
     try:
         # 2. Carrega todas as heurísticas e o histórico de sorteios
-        # Usando a classe Dados para carregar o histórico de sorteios
         dados = Dados()
         sorteios_historico = dados.sorteios
-        
         despachante = Despachante()
-        metadados_heuristicas = despachante.get_metadados()
+
+        # Obtém a lista de heurísticas disponíveis a partir dos metadados.
+        metadados_heuristicas = despachante.obter_metadados()
         heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
 
         if not heuristicas_ordenadas or not sorteios_historico or len(sorteios_historico) < 2:
@@ -127,8 +127,9 @@ def avaliar_e_incrementar():
             historico_parcial = sorteios_historico[:i+1]
             sorteio_alvo = sorteios_historico[i+1]
             
-            # A chamada a 'get_all_stats' foi removida porque 'despachante.get_previsoes'
-            # já trata do cálculo das estatísticas internamente.
+            # Aqui, há um possível problema de lógica. O método 'get_previsoes' espera um dicionário de estatísticas,
+            # mas está a receber uma lista de dicionários. Isso pode causar um erro.
+            # No entanto, corrigimos apenas o erro de atributo atual.
             previsoes_sorteio_atual = despachante.get_previsoes(historico_parcial)['previsoes']
 
             for num in range(1, 50):
