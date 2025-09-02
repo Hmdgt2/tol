@@ -1,33 +1,27 @@
-# avaliador.py
-
 import os
 import sys
 import json
 import numpy as np
 import joblib
+import datetime
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz do projeto ao caminho do sistema.
-# Isso garante que a raiz seja a pasta 'tol', um nível acima do 'avaliador.py'.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Importa as funções e a lógica necessárias do treinar_decisor.py
-from treinar_decisor import (
-    carregar_modelos_ml, 
-    _carregar_sorteios, 
-    obter_estatisticas,
-    Despachante
-)
+# Importa as classes e funções corretas para a nova estrutura do projeto
+from lib.despachante import Despachante
+from lib.dados import Dados, get_all_stats
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import accuracy_score
 
 # --- Caminhos dos Ficheiros ---
-# O caminho para o ficheiro de estado, que deve estar na mesma pasta do avaliador
-ULTIMO_SORTEIO_PROCESSADO_PATH = os.path.join(PROJECT_ROOT, 'sorteio_processado.json')
+# O caminho para o ficheiro de estado, que deve estar na pasta 'decisor'
+ULTIMO_SORTEIO_PROCESSADO_PATH = os.path.join(PROJECT_ROOT, 'decisor', 'sorteio_processado.json')
 # O caminho para os dados do sorteio atual
 DADOS_ATUAL_PATH = os.path.join(PROJECT_ROOT, 'dados', 'sorteio_atual.json')
 # Novos caminhos para os ficheiros
@@ -52,8 +46,36 @@ def carregar_sorteio_processado(path: str) -> Dict[str, str]:
 
 def guardar_sorteio_processado(concurso: str, path: str):
     """Guarda o identificador do sorteio que acabou de ser processado."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump({"ultimo_concurso_processado": concurso}, f, indent=2, ensure_ascii=False)
+
+def carregar_modelos_ml():
+    """Carrega dinamicamente todos os modelos de ML disponíveis."""
+    modelos = {}
+    if not os.path.exists(MODELOS_ML_DIR):
+        print(f"Diretório de modelos de ML não encontrado: {MODELOS_ML_DIR}")
+        return modelos
+    
+    for ficheiro in os.listdir(MODELOS_ML_DIR):
+        if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
+            nome_modulo = ficheiro[:-3]
+            try:
+                modulo = __import__(f"modelos_ml.{nome_modulo}", fromlist=[nome_modulo])
+                for nome, obj in vars(modulo).items():
+                    if isinstance(obj, type) and issubclass(obj, object) and obj.__module__ == modulo.__name__:
+                        try:
+                            # Tenta instanciar o modelo
+                            instance = obj()
+                            # Verifica se o modelo tem os métodos 'fit' e 'predict'
+                            if hasattr(instance, 'fit') and hasattr(instance, 'predict'):
+                                modelos[nome_modulo] = instance
+                        except (TypeError, ValueError) as e:
+                            # Ignora se não for uma classe instanciável (ex: funções, variáveis)
+                            continue
+            except ImportError as e:
+                print(f"Aviso: Não foi possível importar o modelo {nome_modulo}. Erro: {e}")
+    return modelos
 
 def avaliar_e_incrementar():
     """
@@ -85,25 +107,32 @@ def avaliar_e_incrementar():
 
     try:
         # 2. Carrega todas as heurísticas e o histórico de sorteios
+        # Usando a classe Dados para carregar o histórico de sorteios
+        dados = Dados()
+        sorteios_historico = dados.sorteios
+        
         despachante = Despachante()
-        todas_dependencias = despachante.get_todas_dependencias()
-        sorteios_historico = _carregar_sorteios()
+        metadados_heuristicas = despachante.get_metadados()
+        heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
 
-        if not todas_dependencias or not sorteios_historico or len(sorteios_historico) < 2:
-            print("Dados insuficientes para treino. O processo será encerrado.")
+        if not heuristicas_ordenadas or not sorteios_historico or len(sorteios_historico) < 2:
+            print("Dados ou heurísticas insuficientes para treino. O processo será encerrado.")
             return
 
         print("Simulando previsões de heurísticas para dados históricos...")
         X_treino = []
         y_treino = []
-        metadados_heuristicas = despachante.get_metadados()
-        heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
-
+        
         for i in range(len(sorteios_historico) - 1):
             historico_parcial = sorteios_historico[:i+1]
             sorteio_alvo = sorteios_historico[i+1]
-            estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
-            previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
+            
+            # Usando a função get_all_stats para obter as estatísticas
+            estatisticas_parciais = get_all_stats(historico_parcial)
+            
+            # Usando o despachante para obter as previsões
+            previsoes_sorteio_atual = despachante.get_previsoes(historico_parcial)['previsoes']
+
             for num in range(1, 50):
                 feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
                 X_treino.append(feature_vector)
@@ -112,7 +141,7 @@ def avaliar_e_incrementar():
         X_treino_np = np.array(X_treino)
         y_treino_np = np.array(y_treino)
 
-        # 3. Carrega os modelos dinamicamente (reutilizando a lógica do treinar_decisor.py)
+        # 3. Carrega os modelos dinamicamente
         modelos_disponiveis = carregar_modelos_ml()
         if not modelos_disponiveis:
             print("Nenhum modelo de ML encontrado na pasta 'modelos_ml'. O treino será encerrado.")
@@ -139,7 +168,7 @@ def avaliar_e_incrementar():
             resultados_treino[nome_modelo] = {
                 'caminho': modelo_path,
                 'score_treino': score_treino,
-                'ultima_atualizacao': "AGORA"
+                'ultima_atualizacao': datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             }
             print(f"✅ Modelo {nome_modelo} salvo com score: {score_treino:.4f}")
 
@@ -158,7 +187,6 @@ def avaliar_e_incrementar():
 
     except Exception as e:
         print(f"\n❌ ERRO FATAL: Ocorreu um erro durante o treino do modelo.")
-        print(f"Tipo do erro: {type(e).__name__}")
         print(f"Detalhes: {e}")
         sys.exit(1)
 
