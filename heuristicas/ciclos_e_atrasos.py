@@ -1,5 +1,3 @@
-# heuristicas/ciclos_e_atrasos.py
-
 from typing import Dict, Any, List
 from collections import Counter
 import numpy as np
@@ -26,15 +24,16 @@ class CiclosEAtrasos:
             List[int]: Uma lista de números inteiros sugeridos.
         """
         # Obter os dados de atraso de cada número a partir das estatísticas
-        frequencia_atrasos = estatisticas.get('frequencia_atrasos', {})
+        # O nome da chave foi alterado para 'ausencia_atual' para corresponder ao dados.py
+        ausencia_atual = estatisticas.get('ausencia_atual', {})
         
         # Se os dados de atraso não existirem, não há como prever
-        if not frequencia_atrasos:
+        if not ausencia_atual:
             return []
             
         # Ordenar os números com base no tempo de atraso, do maior para o menor
         # Usamos uma lista de tuplas para manter a relação entre o número e o atraso
-        numeros_por_atraso = sorted(frequencia_atrasos.items(), key=lambda item: item[1], reverse=True)
+        numeros_por_atraso = sorted(ausencia_atual.items(), key=lambda item: item[1], reverse=True)
         
         # Selecionar os 'n' números com o maior atraso
         sugeridos = [num for num, atraso in numeros_por_atraso[:n]]
