@@ -8,9 +8,11 @@ import joblib
 from collections import defaultdict
 from typing import Dict, Any, List
 import importlib
+import datetime
 
-# Adiciona o diretório raiz para resolver importações
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# CORREÇÃO 1: Adiciona o diretório raiz para resolver importações
+# Agora a lógica é a mesma que nos outros scripts, subindo um nível
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
@@ -104,6 +106,7 @@ def treinar_decisor():
             return
             
         resultados_treino = {}
+        data_atualizacao = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         # 3. Treina e salva cada modelo
         print("\nConjunto de treino criado. Iniciando o treino dos modelos de ML...")
@@ -125,7 +128,7 @@ def treinar_decisor():
             resultados_treino[nome_modelo] = {
                 'caminho': modelo_path,
                 'score_treino': score_treino,
-                'ultima_atualizacao': "AGORA"
+                'ultima_atualizacao': data_atualizacao # CORREÇÃO 2: Usa a data real
             }
             print(f"✅ Modelo {nome_modelo} salvo com score: {score_treino:.4f}")
 
