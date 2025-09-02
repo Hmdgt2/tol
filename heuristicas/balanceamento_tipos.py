@@ -1,5 +1,3 @@
-# heuristicas/balanceamento_tipos.py
-
 from typing import Dict, Any, List
 
 class BalanceamentoTipos:
@@ -21,6 +19,15 @@ class BalanceamentoTipos:
         Prevê números com base no padrão de balanceamento de pares, ímpares e primos.
         """
         padrao_ideal = estatisticas.get('padrao_tipos_numeros', (0, 0, 0))
+
+        # CORREÇÃO: Verifica se o valor recebido tem o formato correto antes de descompactar.
+        if not (isinstance(padrao_ideal, tuple) and len(padrao_ideal) == 3):
+            # Se não for uma tupla de 3 elementos, assume um padrão seguro para evitar o erro.
+            padrao_ideal = (0, 0, 0)
+            print("Aviso: Dados de 'padrao_tipos_numeros' inválidos. Usando padrão (0,0,0).")
+            
+        num_pares, num_impares, num_primos = padrao_ideal
+
         frequencia = estatisticas.get('frequencia_total', {})
 
         if not frequencia:
@@ -33,8 +40,7 @@ class BalanceamentoTipos:
         }
 
         sugeridos = []
-        num_pares, num_impares, num_primos = padrao_ideal
-
+        
         for _ in range(num_pares):
             if candidatos_por_tipo['par']:
                 sugeridos.append(candidatos_por_tipo['par'].pop(0))
