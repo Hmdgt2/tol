@@ -12,6 +12,7 @@ class Posicao:
     # --- Metadados da Heurística ---
     NOME = "posicao"
     DESCRICAO = "Sugere números com base na sua tendência de aparecerem em posições específicas do sorteio."
+    # Nome da dependência ajustado para corresponder ao dados.py
     DEPENDENCIAS = ["frequencia_por_posicao"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
@@ -25,16 +26,17 @@ class Posicao:
         Returns:
             List[int]: Uma lista de números inteiros sugeridos.
         """
-        frequencia_posicao = estatisticas.get('frequencia_posicao', {})
+        # Variável interna ajustada para corresponder à dependência
+        frequencia_por_posicao = estatisticas.get('frequencia_por_posicao', {})
         
-        if not frequencia_posicao:
+        if not frequencia_por_posicao:
             return []
             
         # Dicionário para somar as pontuações de cada número
         pontuacao_numeros = Counter()
         
         # Para cada posição no sorteio (de 0 a 4, ou seja, 1ª a 5ª posição)
-        for posicao, numeros_por_posicao in frequencia_posicao.items():
+        for posicao, numeros_por_posicao in frequencia_por_posicao.items():
             # Encontrar os 3 números mais comuns para essa posição
             numeros_comuns = Counter(numeros_por_posicao).most_common(3)
             for numero, contagem in numeros_comuns:
