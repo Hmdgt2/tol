@@ -12,8 +12,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Adicionamos os imports para a nova arquitetura
-from lib.dados import _carregar_sorteios, obter_estatisticas
+# IMPORTANTE: Agora importamos a classe 'Dados' em vez das funções
+from lib.dados import Dados 
 from lib.despachante import Despachante
 
 # Adicionamos os imports para os modelos e o scaler
@@ -57,7 +57,10 @@ def treinar_decisor():
         print("Iniciando o treino. Carregando heurísticas e dados...")
         despachante = Despachante()
         todas_dependencias = despachante.get_todas_dependencias()
-        sorteios_historico = _carregar_sorteios()
+        
+        # IMPORTANTE: Instancia a classe Dados para carregar os sorteios
+        dados_manager = Dados()
+        sorteios_historico = dados_manager.sorteios
 
         if not todas_dependencias or not sorteios_historico or len(sorteios_historico) < 2:
             print("Dados insuficientes para treino. O processo será encerrado.")
@@ -70,10 +73,19 @@ def treinar_decisor():
         heuristicas_ordenadas = sorted(list(metadados_heuristicas.keys()))
 
         for i in range(len(sorteios_historico) - 1):
+            # IMPORTANTE: Cria uma nova instância de Dados com um subconjunto do histórico
+            # Isso simula o conhecimento do sistema em cada ponto do tempo.
             historico_parcial = sorteios_historico[:i+1]
+            dados_parciais = Dados()
+            dados_parciais.sorteios = historico_parcial
+            
             sorteio_alvo = sorteios_historico[i+1]
-            estatisticas_parciais = obter_estatisticas(todas_dependencias, historico_parcial)
+            
+            # Chama o método da instância para obter as estatísticas
+            estatisticas_parciais, _ = dados_parciais.obter_estatisticas(todas_dependencias)
+            
             previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
+            
             for num in range(1, 50):
                 feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
                 X_treino.append(feature_vector)
@@ -117,7 +129,7 @@ def treinar_decisor():
         # 4. Salva o ficheiro de performance
         with open(PERFORMANCE_PATH, 'w', encoding='utf-8') as f:
             json.dump(resultados_treino, f, indent=2, ensure_ascii=False)
-        
+            
         # 5. Salva os metadados das heurísticas
         json_data_metadados = {'heuristicas_ordenadas': heuristicas_ordenadas}
         with open(METADADOS_PATH, 'w', encoding='utf-8') as f:
