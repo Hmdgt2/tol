@@ -3,14 +3,12 @@
 import os
 import sys
 import importlib
-from typing import Dict, Any, List, Tuple, Set
+from typing import Dict, Any, List, Set
 
-# Adiciona o diretório-pai (raiz do projeto) ao caminho
+# Adiciona o diretório-pai (raiz do projeto) ao caminho para garantir que as importações funcionem
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
-
-from lib import dados
 
 class Despachante:
     """
@@ -18,10 +16,9 @@ class Despachante:
     o cálculo de estatísticas e a geração de previsões.
     """
     def __init__(self, pasta_heuristicas: str = 'heuristicas'):
-        # Caminho da pasta de heurísticas corrigido
         self.pasta_heuristicas = os.path.join(PROJECT_ROOT, pasta_heuristicas)
-        self.heuristics: Dict[str, Any] = {}
-        self.dependencias: Dict[str, Set[str]] = {}
+        self.heuristicas: Dict[str, Any] = {}
+        self.metadados: Dict[str, Dict[str, Any]] = {}
         self._carregar_heuristicas()
 
     def _carregar_heuristicas(self):
@@ -32,29 +29,59 @@ class Despachante:
             print(f"Erro: Pasta '{self.pasta_heuristicas}' não encontrada.")
             return
 
-        # A CORREÇÃO PRINCIPAL: Adiciona a pasta de heurísticas ao sys.path
-        # para que o Python a reconheça como um local para procurar módulos.
         sys.path.insert(0, self.pasta_heuristicas)
 
         for file_name in os.listdir(self.pasta_heuristicas):
             if file_name.endswith('.py') and file_name != '__init__.py':
                 module_name = file_name[:-3]
                 try:
-                    # Altera a importação para usar apenas o nome do módulo.
-                    # O Python agora pode encontrá-lo porque o caminho da pasta
-                    # já foi adicionado ao sys.path.
                     module = importlib.import_module(module_name)
                     
-                    # Espera que a classe da heurística tenha o mesmo nome do ficheiro (com a primeira letra maiúscula)
-                    heuristic_class = getattr(module, module_name.capitalize())
-                    instance = heuristic_class()
+                    # Procura dinamicamente pela classe correta no módulo
+                    for name, obj in module.__dict__.items():
+                        if isinstance(obj, type) and name != 'ABC' and name[0].isupper():
+                            heuristica_classe = obj
+                            instance = heuristica_classe()
+                            nome_heuristica = getattr(instance, 'NOME', module_name)
+                            
+                            self.heuristicas[nome_heuristica] = instance
+                            self.metadados[nome_heuristica] = {
+                                'descricao': getattr(instance, 'DESCRICAO', 'N/A'),
+                                'dependencias': getattr(instance, 'DEPENDENCIAS', [])
+                            }
+                            print(f"✅ Heurística '{nome_heuristica}' carregada com sucesso.")
+                            break
                     
-                    self.heuristics[module_name] = instance
-                    self.dependencias[module_name] = set(getattr(instance, 'DEPENDENCIAS', []))
                 except (AttributeError, ImportError) as e:
-                    print(f"Aviso: Não foi possível carregar a heurística '{module_name}'. Detalhes: {e}")
+                    print(f"❌ Aviso: Não foi possível carregar a heurística '{module_name}'. Detalhes: {e}")
+                except Exception as e:
+                    print(f"❌ Ocorreu um erro inesperado ao carregar '{module_name}': {e}")
         
-        # É crucial remover o caminho temporário para evitar conflitos futuros
         sys.path.pop(0)
 
-# ... (resto do código) ...
+    def obter_metadados(self) -> Dict[str, Dict[str, Any]]:
+        """
+        Retorna os metadados de todas as heurísticas carregadas.
+        """
+        return self.metadados
+
+    def obter_todas_dependencias(self) -> Set[str]:
+        """
+        Retorna um conjunto com todas as dependências de todas as heurísticas.
+        """
+        todas_dependencias = set()
+        for meta in self.metadados.values():
+            todas_dependencias.update(meta['dependencias'])
+        return todas_dependencias
+
+    def get_previsoes(self, estatisticas: Dict[str, Any], n: int = 5) -> Dict[str, List[int]]:
+        """
+        Gera previsões para todas as heurísticas carregadas.
+        """
+        previsoes = {}
+        for nome, heuristica in self.heuristicas.items():
+            try:
+                previsoes[nome] = heuristica.prever(estatisticas, n)
+            except Exception as e:
+                print(f"❌ Erro ao gerar previsão para a heurística '{nome}': {e}")
+        return previsoes
