@@ -61,18 +61,16 @@ def carregar_modelos_ml():
         if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
             nome_modulo = ficheiro[:-3]
             try:
-                modulo = __import__(f"modelos_ml.{nome_modulo}", fromlist=[nome_modulo])
-                for nome, obj in vars(modulo).items():
-                    if isinstance(obj, type) and issubclass(obj, object) and obj.__module__ == modulo.__name__:
-                        try:
-                            # Tenta instanciar o modelo
-                            instance = obj()
-                            # Verifica se o modelo tem os métodos 'fit' e 'predict'
-                            if hasattr(instance, 'fit') and hasattr(instance, 'predict'):
-                                modelos[nome_modulo] = instance
-                        except (TypeError, ValueError) as e:
-                            # Ignora se não for uma classe instanciável (ex: funções, variáveis)
-                            continue
+                # Usa importlib para carregar o módulo
+                spec = importlib.util.spec_from_file_location(nome_modulo, os.path.join(MODELOS_ML_DIR, ficheiro))
+                modulo = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(modulo)
+                
+                # Procura por uma função get_model() no módulo
+                if hasattr(modulo, 'get_model') and callable(modulo.get_model):
+                    instance = modulo.get_model()
+                    if hasattr(instance, 'fit') and hasattr(instance, 'predict'):
+                        modelos[nome_modulo] = instance
             except ImportError as e:
                 print(f"Aviso: Não foi possível importar o modelo {nome_modulo}. Erro: {e}")
     return modelos
