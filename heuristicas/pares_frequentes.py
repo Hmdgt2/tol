@@ -5,13 +5,13 @@ from collections import Counter
 class ParesFrequentes:
     NOME = "pares_frequentes"
     DESCRICAO = "Sugere números presentes nos pares mais frequentes."
-    DEPENDENCIAS = ["pares_frequentes"]
+    DEPENDENCIAS = ["frequencia_pares"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
         """
         Prevê números com base na frequência de pares de números.
         """
-        pares_frequentes = estatisticas.get('pares_frequentes', {})
+        pares_frequentes = estatisticas.get('frequencia_pares', {})
         
         if not pares_frequentes:
             return []
