@@ -12,7 +12,7 @@ class Posicao:
     # --- Metadados da Heurística ---
     NOME = "posicao"
     DESCRICAO = "Sugere números com base na sua tendência de aparecerem em posições específicas do sorteio."
-    DEPENDENCIAS = ["frequencia_posicao"]
+    DEPENDENCIAS = ["frequencia_por_posicao"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
         """
