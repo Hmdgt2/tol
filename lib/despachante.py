@@ -46,7 +46,9 @@ class Despachante:
                             self.heuristicas[nome_heuristica] = instance
                             self.metadados[nome_heuristica] = {
                                 'descricao': getattr(instance, 'DESCRICAO', 'N/A'),
-                                'dependencias': getattr(instance, 'DEPENDENCIAS', [])
+                                'dependencias': getattr(instance, 'DEPENDENCIAS', []),
+                                'modulo': module_name, # CORREÇÃO: Adiciona o nome do módulo
+                                'funcao': 'prever' # CORREÇÃO: Adiciona o nome da função de previsão
                             }
                             print(f"✅ Heurística '{nome_heuristica}' carregada com sucesso.")
                             break
