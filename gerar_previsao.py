@@ -1,9 +1,8 @@
-#gerar_previsao.py
-
 import os
 import sys
 import json
 import datetime
+import numpy as np
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
@@ -13,7 +12,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from lib.despachante import Despachante
-from lib.dados import _carregar_sorteios
+from lib.dados import Dados  # Importa a classe Dados, que é a forma correta agora
 from decisor.decisor_final import HeuristicDecisor
 
 # --- Caminhos dos Ficheiros ---
@@ -39,12 +38,18 @@ def gerar_previsao():
             sorteio_mais_recente = json.load(f)
         
         # 2. Carregar o histórico de sorteios
-        sorteios_historico = _carregar_sorteios()
-
-        # 3. Orquestrar a obtenção de previsões e logs de erro
-        # O Despachante deve ser capaz de encontrar a pasta 'heuristicas' a partir da raiz do projeto
+        dados_manager = Dados()
+        sorteios_historico = dados_manager.sorteios
+        
+        # 3. Carregar o despachante e dependências
         despachante = Despachante()
-        resultados_processamento = despachante.get_previsoes(sorteios_historico)
+        todas_dependencias = despachante.obter_todas_dependencias()
+
+        # 4. Obter as estatísticas mais recentes para a previsão
+        estatisticas_atuais, _ = dados_manager.obter_estatisticas(todas_dependencias)
+
+        # 5. Obter as previsões das heurísticas e logs de erro
+        resultados_processamento = despachante.get_previsoes(estatisticas_atuais)
         
         previsoes_heuristicas = resultados_processamento['previsoes']
         logs = resultados_processamento['logs']
@@ -61,17 +66,17 @@ def gerar_previsao():
                 for erro in logs['erros_heuristicas']:
                     print(f"  - {erro}")
         
-        # 4. Formatar as previsões para a entrada do decisor
+        # 6. Formatar as previsões para a entrada do decisor
         detalhes_previsoes = [
             {'nome': nome, 'numeros': numeros_previstos}
             for nome, numeros_previstos in previsoes_heuristicas.items()
         ]
 
-        # 5. Instanciar o decisor de ML e obter a previsão final
+        # 7. Instanciar o decisor de ML e obter a previsão final
         decisor_ml = HeuristicDecisor(caminho_base_decisor=CAMINHO_BASE_DECISOR)
         previsao_final_numeros = decisor_ml.predict(detalhes_previsoes)
         
-        # 6. Organizar e salvar os resultados em ficheiros
+        # 8. Organizar e salvar os resultados em ficheiros
         resultado_completo = {
             "data_geracao": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "baseado_em_sorteio": sorteio_mais_recente.get("concurso"),
