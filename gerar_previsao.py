@@ -5,7 +5,8 @@ import datetime
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+# A correção aqui é subir um nível no diretório para chegar à raiz do projeto ('tol')
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
@@ -39,8 +40,8 @@ def gerar_previsao():
         sorteios_historico = _carregar_sorteios()
 
         # 3. Orquestrar a obtenção de previsões e logs de erro
+        # O Despachante deve ser capaz de encontrar a pasta 'heuristicas' a partir da raiz do projeto
         despachante = Despachante()
-        # A nova chamada retorna um dicionário com 'previsoes' e 'logs'
         resultados_processamento = despachante.get_previsoes(sorteios_historico)
         
         previsoes_heuristicas = resultados_processamento['previsoes']
