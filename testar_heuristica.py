@@ -2,7 +2,6 @@
 
 import os
 import sys
-import importlib
 import traceback
 import json
 from collections import Counter, defaultdict
@@ -27,8 +26,7 @@ def testar_heuristica():
         # Carrega o despachante para obter a lista de heurísticas
         despachante = Despachante()
         todas_dependencias = despachante.obter_todas_dependencias()
-        metadados_heuristicas = despachante.obter_metadados()
-
+        
         # Carrega os dados históricos, pois algumas heurísticas precisam deles
         dados_manager = Dados()
         estatisticas, erros_dados = dados_manager.obter_estatisticas(todas_dependencias)
@@ -39,23 +37,16 @@ def testar_heuristica():
                 print(f" - {erro}")
             print("-" * 50)
 
-        for nome_heuristica, metadados in metadados_heuristicas.items():
+        for nome_heuristica, heuristica_instance in despachante.heuristicas.items():
             print(f"Testando a heurística '{nome_heuristica}'...")
             
-            modulo_name = metadados.get('modulo')
-            funcao_name = metadados.get('funcao')
-            dependencias_necessarias = metadados.get('dependencias', [])
-            
             try:
-                # Importa dinamicamente a heurística
-                modulo = importlib.import_module(f"heuristicas.{modulo_name}")
-                funcao_calculo = getattr(modulo, funcao_name)
-                
                 # Prepara os dados de entrada
+                dependencias_necessarias = getattr(heuristica_instance, 'DEPENDENCIAS', [])
                 dados_de_entrada = {dep: estatisticas.get(dep) for dep in dependencias_necessarias}
                 
-                # Executa a função
-                previsao = funcao_calculo(dados_de_entrada)
+                # Executa a função 'prever' diretamente na instância
+                previsao = heuristica_instance.prever(dados_de_entrada)
                 
                 # Verifica a validade do resultado
                 if not isinstance(previsao, list):
