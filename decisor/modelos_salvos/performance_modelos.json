@@ -1,12 +1,12 @@
 {
   "random_forest": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/random_forest_pipeline.joblib",
-    "score_treino": 0.898229669601439,
-    "ultima_atualizacao": "2025-09-02 14:44:50"
+    "score_treino": 0.9005828971747745,
+    "ultima_atualizacao": "2025-09-02 15:25:32"
   },
   "regressao_logistica": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/regressao_logistica_pipeline.joblib",
     "score_treino": 0.8979591836734694,
-    "ultima_atualizacao": "2025-09-02 14:44:50"
+    "ultima_atualizacao": "2025-09-02 15:25:32"
   }
 }
