@@ -110,6 +110,7 @@ def avaliar_e_incrementar():
         dados = Dados()
         sorteios_historico = dados.sorteios
         despachante = Despachante()
+        todas_dependencias = despachante.obter_todas_dependencias()
 
         # Obtém a lista de heurísticas disponíveis a partir dos metadados.
         metadados_heuristicas = despachante.obter_metadados()
@@ -127,10 +128,17 @@ def avaliar_e_incrementar():
             historico_parcial = sorteios_historico[:i+1]
             sorteio_alvo = sorteios_historico[i+1]
             
-            # Aqui, há um possível problema de lógica. O método 'get_previsoes' espera um dicionário de estatísticas,
-            # mas está a receber uma lista de dicionários. Isso pode causar um erro.
-            # No entanto, corrigimos apenas o erro de atributo atual.
-            previsoes_sorteio_atual = despachante.get_previsoes(historico_parcial)['previsoes']
+            # CORREÇÃO CRUCIAL:
+            # O método 'get_previsoes' do despachante espera um dicionário de estatísticas,
+            # não uma lista de sorteios. Criamos uma instância temporária de Dados
+            # para calcular as estatísticas com base no histórico parcial.
+            dados_parciais = Dados()
+            dados_parciais.sorteios = historico_parcial
+            estatisticas_parciais, _ = dados_parciais.obter_estatisticas(todas_dependencias)
+
+            # Passa as estatísticas calculadas corretamente para o despachante.
+            # Também removemos o `['previsoes']` que não existe no retorno do método.
+            previsoes_sorteio_atual = despachante.get_previsoes(estatisticas_parciais)
 
             for num in range(1, 50):
                 feature_vector = [1 if num in previsoes_sorteio_atual.get(h, []) else 0 for h in heuristicas_ordenadas]
