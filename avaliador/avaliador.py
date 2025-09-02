@@ -7,10 +7,11 @@ import numpy as np
 import joblib
 from typing import Dict, Any, List
 
-# Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+# Adiciona o diretório raiz do projeto ao caminho do sistema.
+# Isso garante que a raiz seja a pasta 'tol', um nível acima do 'avaliador.py'.
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
-    sys.path.insert(0, PROJECT_ROOT)
+    sys.path.insert(0, PROJECT_ROOT))
 
 # Importa as funções e a lógica necessárias do treinar_decisor.py
 from treinar_decisor import (
