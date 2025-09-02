@@ -1,4 +1,3 @@
-# lib/dados.py
 import os
 import sys
 import json
@@ -169,7 +168,7 @@ class Dados:
         for s in self.sorteios:
             if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima:
                 frequencia_intervalo.update(s['numeros'])
-                
+            
         return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
 
     def _calcular_padrao_tipos_numeros(self) -> Tuple[int, int, int]:
@@ -192,6 +191,119 @@ class Dados:
             return (0, 0, 0)
             
         return padroes.most_common(1)[0][0]
+
+    # --- NOVAS FUNÇÕES DE CÁLCULO PARA AS DEPENDÊNCIAS FALTANTES ---
+    def _calcular_distribuicao_quadrantes(self) -> Dict[int, int]:
+        """Calcula a frequência de números por quadrante (1-12, 13-24, 25-36, 37-49)."""
+        distribuicao = defaultdict(int)
+        for sorteio in self.sorteios:
+            for num in sorteio['numeros']:
+                if 1 <= num <= 12:
+                    distribuicao[1] += 1
+                elif 13 <= num <= 24:
+                    distribuicao[2] += 1
+                elif 25 <= num <= 36:
+                    distribuicao[3] += 1
+                else: # 37 <= num <= 49
+                    distribuicao[4] += 1
+        return distribuicao
+
+    def _calcular_frequencia_vizinhos(self) -> Dict[int, int]:
+        """Calcula a frequência de cada número ter um de seus vizinhos sorteado."""
+        frequencia = defaultdict(int)
+        for sorteio in self.sorteios:
+            numeros_sorteados = set(sorteio['numeros'])
+            for num in numeros_sorteados:
+                if (num - 1) in numeros_sorteados or (num + 1) in numeros_sorteados:
+                    frequencia[num] += 1
+        return frequencia
+
+    def _calcular_pares_recentes(self) -> Counter:
+        """Calcula a frequência de pares de números nos últimos 20 sorteios."""
+        janela_sorteios = self.sorteios[-20:]
+        frequencia_pares = Counter()
+        for sorteio in janela_sorteios:
+            pares = combinations(sorted(sorteio['numeros']), 2)
+            frequencia_pares.update(pares)
+        return frequencia_pares
+
+    def _calcular_frequencia_pares_consecutivos(self) -> Counter:
+        """Calcula a frequência de pares de números consecutivos (ex: 5 e 6)."""
+        frequencia = Counter()
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i in range(len(numeros) - 1):
+                if numeros[i+1] == numeros[i] + 1:
+                    frequencia[(numeros[i], numeros[i+1])] += 1
+        return frequencia
+
+    def _calcular_precisao_posicional_historica(self) -> Dict[int, float]:
+        """Calcula a precisão média de cada posição do sorteio."""
+        precisao_por_posicao = defaultdict(list)
+        if not self.sorteios:
+            return {}
+
+        num_posicoes = len(self.sorteios[0]['numeros'])
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i in range(num_posicoes):
+                # A precisão aqui é uma medida de quão perto o número está da média histórica para aquela posição
+                media_posicao = sum(s['numeros'][i] for s in self.sorteios) / len(self.sorteios)
+                precisao = abs(numeros[i] - media_posicao)
+                precisao_por_posicao[i].append(precisao)
+
+        medias_precisao = {pos: np.mean(vals) for pos, vals in precisao_por_posicao.items()}
+        return medias_precisao
+
+    def _calcular_frequencia_por_ano(self) -> Dict[int, Counter]:
+        """Calcula a frequência de números por ano."""
+        frequencia_anual = defaultdict(Counter)
+        for sorteio in self.sorteios:
+            ano = datetime.datetime.strptime(sorteio['data'], '%d/%m/%Y').year
+            frequencia_anual[ano].update(sorteio['numeros'])
+        return frequencia_anual
+
+    def _calcular_distribuicao_dezenas(self) -> Dict[int, int]:
+        """Calcula a frequência de números por dezena (0-9, 10-19, etc.)."""
+        distribuicao = defaultdict(int)
+        for sorteio in self.sorteios:
+            for num in sorteio['numeros']:
+                dezena = num // 10
+                distribuicao[dezena] += 1
+        return distribuicao
+
+    def _calcular_trios_frequentes(self) -> Counter:
+        """Calcula a frequência de todos os trios de números (alternativa)."""
+        frequencia_trios = Counter()
+        for sorteio in self.sorteios:
+            trios = combinations(sorted(sorteio['numeros']), 3)
+            frequencia_trios.update(trios)
+        return frequencia_trios
+
+    def _calcular_probabilidades_repeticoes(self) -> Dict[int, float]:
+        """Calcula a probabilidade de um número se repetir do sorteio anterior."""
+        probabilidades = defaultdict(float)
+        if len(self.sorteios) < 2:
+            return {}
+
+        ocorrencias = defaultdict(int)
+        for i in range(1, len(self.sorteios)):
+            anterior = set(self.sorteios[i-1]['numeros'])
+            atual = set(self.sorteios[i]['numeros'])
+            repetidos = anterior.intersection(atual)
+            
+            for num in anterior:
+                if num in repetidos:
+                    ocorrencias[num] += 1
+        
+        # Calcula a probabilidade para cada número
+        for num in ocorrencias:
+            total_aparicoes = self._calcular_frequencia_total()[num]
+            if total_aparicoes > 0:
+                probabilidades[num] = ocorrencias[num] / total_aparicoes
+        
+        return probabilidades
+
 
     # --- Lógica de Mapeamento e Obtenção de Estatísticas ---
     def _get_mapeamento_calculos(self) -> Dict[str, callable]:
