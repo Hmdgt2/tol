@@ -1,9 +1,12 @@
+#tol/avaliador/avaliador.py
+
 import os
 import sys
 import json
 import numpy as np
 import joblib
 import datetime
+import importlib
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz do projeto ao caminho do sistema.
