@@ -1,5 +1,4 @@
 # lib/dados.py
-
 import os
 import sys
 import json
@@ -48,8 +47,17 @@ class Dados:
             sorteios_validos.sort(key=lambda s: datetime.datetime.strptime(s.get('data'), '%d/%m/%Y'))
             return sorteios_validos
         return []
+    
+    # Função auxiliar para verificar se um número é primo
+    def _is_prime(self, n: int) -> bool:
+        if n < 2:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
 
-    # --- Funções de Cálculo (Mantidas do seu código original) ---
+    # --- Funções de Cálculo ---
     def _calcular_frequencia_total(self) -> Counter:
         """Calcula a frequência total de todos os números."""
         frequencia = Counter()
@@ -65,7 +73,7 @@ class Dados:
         for i, sorteio in enumerate(self.sorteios):
             for num in sorteio['numeros']:
                 ultima_ocorrencia[num] = i
-        
+            
         total_concursos = len(self.sorteios)
         for num in todos_numeros:
             ausencia[num] = total_concursos - ultima_ocorrencia[num] - 1
@@ -79,7 +87,7 @@ class Dados:
         for i, sorteio in enumerate(self.sorteios):
             for num in sorteio['numeros']:
                 posicoes[num].append(i)
-        
+            
         for num in todos_numeros:
             concursos = posicoes.get(num, [])
             if len(concursos) < 2:
@@ -164,6 +172,27 @@ class Dados:
                 
         return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
 
+    def _calcular_padrao_tipos_numeros(self) -> Tuple[int, int, int]:
+        """
+        Calcula o padrão de balanceamento de pares, ímpares e primos mais frequente.
+        """
+        padroes = Counter()
+        for sorteio in self.sorteios:
+            if not sorteio.get('numeros'):
+                continue
+            
+            numeros = sorteio['numeros']
+            contagem_pares = sum(1 for n in numeros if n % 2 == 0)
+            contagem_impares = sum(1 for n in numeros if n % 2 != 0)
+            contagem_primos = sum(1 for n in numeros if self._is_prime(n))
+            
+            padroes.update([(contagem_pares, contagem_impares, contagem_primos)])
+            
+        if not padroes:
+            return (0, 0, 0)
+            
+        return padroes.most_common(1)[0][0]
+
     # --- Lógica de Mapeamento e Obtenção de Estatísticas ---
     def _get_mapeamento_calculos(self) -> Dict[str, callable]:
         """Mapeia automaticamente nomes de estatísticas para funções de cálculo internas."""
@@ -211,10 +240,10 @@ class Dados:
         try:
             with open(caminho, 'r', encoding='utf-8') as f:
                 stats = json.load(f)
-                for k, v in stats.items():
-                    if isinstance(v, dict):
-                        stats[k] = Counter(v)
-                return stats
+            for k, v in stats.items():
+                if isinstance(v, dict):
+                    stats[k] = Counter(v)
+            return stats
         except (json.JSONDecodeError, FileNotFoundError) as e:
             print(f"Erro ao carregar o arquivo de estatísticas: {e}")
             return None
