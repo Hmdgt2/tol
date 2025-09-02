@@ -56,7 +56,7 @@ def treinar_decisor():
         # 1. Carrega o despachante e dados
         print("Iniciando o treino. Carregando heurísticas e dados...")
         despachante = Despachante()
-        todas_dependencias = despachante.get_todas_dependencias()
+        todas_dependencias = despachante.obter_todas_dependencias()
         
         # IMPORTANTE: Instancia a classe Dados para carregar os sorteios
         dados_manager = Dados()
