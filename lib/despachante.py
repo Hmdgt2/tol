@@ -1,4 +1,4 @@
-# lib/despachante.py
+# /despachante.py
 
 import os
 import sys
@@ -18,7 +18,9 @@ class Despachante:
     o cálculo de estatísticas e a geração de previsões.
     """
     def __init__(self, pasta_heuristicas: str = 'heuristicas'):
-        self.pasta_heuristicas = os.path.join(PROJECT_ROOT, 'lib', pasta_heuristicas)
+        # AQUI ESTÁ A CORREÇÃO.
+        # Removemos 'lib' do caminho para que ele aponte diretamente para a raiz do projeto.
+        self.pasta_heuristicas = os.path.join(PROJECT_ROOT, pasta_heuristicas)
         self.heuristics: Dict[str, Any] = {}
         self.dependencias: Dict[str, Set[str]] = {}
         self._carregar_heuristicas()
