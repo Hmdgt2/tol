@@ -12,7 +12,7 @@ class CiclosEAtrasos:
     # --- Metadados da Heurística ---
     NOME = "ciclos_e_atrasos"
     DESCRICAO = "Sugere os números mais 'atrasados' ou que estão em um ciclo."
-    DEPENDENCIAS = ["frequencia_atrasos"]
+    DEPENDENCIAS = ["ausencia_atual"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
         """
