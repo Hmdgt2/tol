@@ -1,3 +1,5 @@
+# gerar_previsao.py
+
 import os
 import sys
 import json
@@ -5,9 +7,8 @@ import datetime
 import numpy as np
 from typing import Dict, Any, List
 
-# Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
-# A correção aqui é subir um nível no diretório para chegar à raiz do projeto ('tol')
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# CORREÇÃO: Este script está na raiz do projeto, então apenas subimos um nível.
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
@@ -20,6 +21,7 @@ DADOS_ATUAL_PATH = os.path.join(PROJECT_ROOT, 'dados', 'sorteio_atual.json')
 CAMINHO_BASE_DECISOR = os.path.join(PROJECT_ROOT, 'decisor')
 PASTA_PREVISOES = os.path.join(PROJECT_ROOT, 'previsoes')
 os.makedirs(PASTA_PREVISOES, exist_ok=True)
+
 
 def gerar_previsao():
     """
@@ -36,7 +38,7 @@ def gerar_previsao():
 
         with open(DADOS_ATUAL_PATH, 'r', encoding='utf-8') as f:
             sorteio_mais_recente = json.load(f)
-        
+
         # 2. Carregar o histórico de sorteios
         dados_manager = Dados()
         sorteios_historico = dados_manager.sorteios
