@@ -1,3 +1,5 @@
+# gerar_previsao.py
+
 import os
 import sys
 import json
@@ -6,12 +8,15 @@ import numpy as np
 from typing import Dict, Any, List
 
 # Adiciona o diretório raiz ao caminho do sistema para resolver caminhos relativos
+# A correção aqui é subir um nível no diretório para chegar à raiz do projeto ('tol')
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# CORREÇÃO: Este script está na raiz do projeto, então apenas subimos um nível.
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from lib.despachante import Despachante
-from lib.dados import Dados
+from lib.dados import Dados  # Importa a classe Dados, que é a forma correta agora
 from decisor.decisor_final import HeuristicDecisor
 
 # --- Caminhos dos Ficheiros ---
@@ -36,11 +41,12 @@ def gerar_previsao():
 
         with open(DADOS_ATUAL_PATH, 'r', encoding='utf-8') as f:
             sorteio_mais_recente = json.load(f)
+        
 
         # 2. Carregar o histórico de sorteios
         dados_manager = Dados()
         sorteios_historico = dados_manager.sorteios
-        
+
         # 3. Carregar o despachante e dependências
         despachante = Despachante()
         todas_dependencias = despachante.obter_todas_dependencias()
@@ -50,10 +56,11 @@ def gerar_previsao():
 
         # 5. Obter as previsões das heurísticas e logs de erro
         resultados_processamento = despachante.get_previsoes(estatisticas_atuais)
-        
-        previsoes_heuristicas = resultados_processamento.get('previsoes', {})
-        logs = resultados_processamento.get('logs', {'erros_estatisticas': [], 'erros_heuristicas': []})
-        
+
+        previsoes_heuristicas = resultados_processamento['previsoes']
+        logs = resultados_processamento['logs']
+
+        # Opcional: imprimir logs de erro aqui para o utilizador saber o que se passa
         if logs['erros_estatisticas'] or logs['erros_heuristicas']:
             print("\n--- Avisos durante o Processamento ---")
             if logs['erros_estatisticas']:
@@ -64,7 +71,7 @@ def gerar_previsao():
                 print("\n⚠️ Erros na Execução das Heurísticas:")
                 for erro in logs['erros_heuristicas']:
                     print(f"  - {erro}")
-        
+
         # 6. Formatar as previsões para a entrada do decisor
         detalhes_previsoes = [
             {'nome': nome, 'numeros': numeros_previstos}
@@ -74,7 +81,7 @@ def gerar_previsao():
         # 7. Instanciar o decisor de ML e obter a previsão final
         decisor_ml = HeuristicDecisor(caminho_base_decisor=CAMINHO_BASE_DECISOR)
         previsao_final_numeros = decisor_ml.predict(detalhes_previsoes)
-        
+
         # 8. Organizar e salvar os resultados em ficheiros
         resultado_completo = {
             "data_geracao": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -82,17 +89,17 @@ def gerar_previsao():
             "previsao_modelo_ml": previsao_final_numeros,
             "previsoes_heuristicas": detalhes_previsoes
         }
-        
+
         nome_ficheiro_completo = f"previsao_{sorteio_mais_recente.get('concurso').replace('/', '-')}.json"
         caminho_ficheiro_completo = os.path.join(PASTA_PREVISOES, nome_ficheiro_completo)
-        
+
         with open(caminho_ficheiro_completo, 'w', encoding='utf-8') as f:
             json.dump(resultado_completo, f, indent=2, ensure_ascii=False)
 
         caminho_previsao_atual = os.path.join(PASTA_PREVISOES, "previsao_atual.json")
         with open(caminho_previsao_atual, 'w', encoding='utf-8') as f:
             json.dump({"previsao_modelo_ml": previsao_final_numeros}, f, indent=2, ensure_ascii=False)
-            
+
         print("\n--- Previsão Gerada ---")
         print(f"Baseada nos dados até ao sorteio: {sorteio_mais_recente.get('concurso')}")
         print("-" * 35)
