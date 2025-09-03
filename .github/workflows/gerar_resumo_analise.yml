@@ -30,7 +30,6 @@ jobs:
 
       - name: 🧾 Executar Scripts de Resumo
         run: |
-          python scripts/resumo_heuristicas.py
           python scripts/gerar_resumo_analise.py
 
       - name: 💾 Fazer Commit dos Resumos
