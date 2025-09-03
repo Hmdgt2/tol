@@ -29,6 +29,9 @@ jobs:
       - name: Executar o script de resumo
         run: python scripts/resumo_heuristicas.py
 
+      - name: Executar o script de resumo
+        run: python scripts/gerar_resumo_funcoes_dados.py
+
       - name: Fazer commit do resumo gerado
         run: |
           git config --global user.name "github-actions[bot]"
