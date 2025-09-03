@@ -8,11 +8,19 @@ import numpy as np
 import inspect
 from typing import Dict, Any, List, Tuple
 
+# Adiciona o diretório-pai (raiz do projeto) ao caminho para garantir que as importações funcionem
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 # A pasta de dados principal
 PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados'))
 ARQUIVO_CACHE_ESTATISTICAS = os.path.join(PASTA_DADOS, 'estatisticas_cache.json')
 
 class Dados:
+    """
+    Gerencia o carregamento de dados históricos e o cálculo de estatísticas.
+    """
     def __init__(self, caminho_dados: str = PASTA_DADOS):
         self.caminho_dados = caminho_dados
         self.sorteios = self._carregar_sorteios()
@@ -47,8 +55,8 @@ class Dados:
             return sorteios_validos
         return []
     
-    # Função auxiliar para verificar se um número é primo
     def _is_prime(self, n: int) -> bool:
+        """Função auxiliar para verificar se um número é primo."""
         if n < 2:
             return False
         for i in range(2, int(n**0.5) + 1):
@@ -56,7 +64,24 @@ class Dados:
                 return False
         return True
 
-    # --- Funções de Cálculo ---
+    # --- Funções de Cálculo Consolidadas ---
+
+    def _calcular_frequencia_combinacoes(self, tamanho: int, janela: int = None) -> Counter:
+        """
+        Função genérica para calcular a frequência de combinações de um determinado tamanho.
+        Pode ser limitada a uma 'janela' de sorteios recentes.
+        """
+        sorteios_para_analisar = self.sorteios[-janela:] if janela else self.sorteios
+        
+        frequencia = Counter()
+        for sorteio in sorteios_para_analisar:
+            if sorteio.get('numeros'):
+                combinacoes = combinations(sorted(sorteio['numeros']), tamanho)
+                frequencia.update(combinacoes)
+        return frequencia
+
+    # --- Funções de Cálculo Específicas (Wrappers para a genérica) ---
+
     def _calcular_frequencia_total(self) -> Counter:
         """Calcula a frequência total de todos os números."""
         frequencia = Counter()
@@ -72,7 +97,7 @@ class Dados:
         for i, sorteio in enumerate(self.sorteios):
             for num in sorteio['numeros']:
                 ultima_ocorrencia[num] = i
-            
+                
         total_concursos = len(self.sorteios)
         for num in todos_numeros:
             ausencia[num] = total_concursos - ultima_ocorrencia[num] - 1
@@ -86,7 +111,7 @@ class Dados:
         for i, sorteio in enumerate(self.sorteios):
             for num in sorteio['numeros']:
                 posicoes[num].append(i)
-            
+                
         for num in todos_numeros:
             concursos = posicoes.get(num, [])
             if len(concursos) < 2:
@@ -96,33 +121,20 @@ class Dados:
                 gaps_medios[num] = sum(diferencas) / len(diferencas)
         return gaps_medios
 
+    # --- Funções que agora usam a lógica genérica ---
     def _calcular_frequencia_pares(self) -> Counter:
-        """Calcula a frequência de todos os pares de números."""
-        frequencia_pares = Counter()
-        for sorteio in self.sorteios:
-            pares = combinations(sorted(sorteio['numeros']), 2)
-            frequencia_pares.update(pares)
-        return frequencia_pares
+        """Calcula a frequência de todos os pares de números usando a função genérica."""
+        return self._calcular_frequencia_combinacoes(2)
 
     def _calcular_frequencia_trios(self) -> Counter:
-        """Calcula a frequência de todos os trios de números."""
-        frequencia_trios = Counter()
-        for sorteio in self.sorteios:
-            trios = combinations(sorted(sorteio['numeros']), 3)
-            frequencia_trios.update(trios)
-        return frequencia_trios
+        """Calcula a frequência de todos os trios de números usando a função genérica."""
+        return self._calcular_frequencia_combinacoes(3)
         
     def _calcular_frequencia_grupos(self) -> Counter:
-        """
-        Calcula a frequência de grupos de 2, 3 e 4 números.
-        Isso é usado pela heurística de padrões de grupos.
-        """
+        """Calcula a frequência de grupos de 2, 3 e 4 números usando a função genérica."""
         frequencia_grupos = Counter()
-        for sorteio in self.sorteios:
-            numeros = sorted(sorteio['numeros'])
-            for i in range(2, 5): # Grupos de tamanho 2, 3 e 4
-                grupos = combinations(numeros, i)
-                frequencia_grupos.update(grupos)
+        for i in range(2, 5): # Grupos de tamanho 2, 3 e 4
+            frequencia_grupos.update(self._calcular_frequencia_combinacoes(i))
         return frequencia_grupos
 
     def _calcular_frequencia_recente(self, janela=15) -> Counter:
@@ -233,12 +245,7 @@ class Dados:
 
     def _calcular_pares_recentes(self) -> Counter:
         """Calcula a frequência de pares de números nos últimos 20 sorteios."""
-        janela_sorteios = self.sorteios[-20:]
-        frequencia_pares = Counter()
-        for sorteio in janela_sorteios:
-            pares = combinations(sorted(sorteio['numeros']), 2)
-            frequencia_pares.update(pares)
-        return frequencia_pares
+        return self._calcular_frequencia_combinacoes(2, janela=20)
 
     def _calcular_frequencia_pares_consecutivos(self) -> Counter:
         """Calcula a frequência de pares de números consecutivos (ex: 5 e 6)."""
@@ -251,7 +258,11 @@ class Dados:
         return frequencia
 
     def _calcular_precisao_posicional_historica(self) -> Dict[int, float]:
-        """Calcula a precisão média de cada posição do sorteio."""
+        """
+        Calcula a precisão média de cada posição do sorteio.
+        Nota: Esta função foi identificada no relatório como de lógica complexa,
+        mas é mantida por enquanto para não quebrar a heurística.
+        """
         precisao_por_posicao = defaultdict(list)
         if not self.sorteios:
             return {}
@@ -260,7 +271,6 @@ class Dados:
         for sorteio in self.sorteios:
             numeros = sorted(sorteio['numeros'])
             for i in range(num_posicoes):
-                # A precisão aqui é uma medida de quão perto o número está da média histórica para aquela posição
                 media_posicao = sum(s['numeros'][i] for s in self.sorteios) / len(self.sorteios)
                 precisao = abs(numeros[i] - media_posicao)
                 precisao_por_posicao[i].append(precisao)
@@ -285,13 +295,7 @@ class Dados:
                 distribuicao[dezena] += 1
         return distribuicao
 
-    def _calcular_trios_frequentes(self) -> Counter:
-        """Calcula a frequência de todos os trios de números (alternativa)."""
-        frequencia_trios = Counter()
-        for sorteio in self.sorteios:
-            trios = combinations(sorted(sorteio['numeros']), 3)
-            frequencia_trios.update(trios)
-        return frequencia_trios
+    # REMOVIDO: _calcular_trios_frequentes foi consolidado em _calcular_frequencia_trios
 
     def _calcular_probabilidades_repeticoes(self) -> Dict[int, float]:
         """Calcula a probabilidade de um número se repetir do sorteio anterior."""
@@ -309,7 +313,6 @@ class Dados:
                 if num in repetidos:
                     ocorrencias[num] += 1
         
-        # Calcula a probabilidade para cada número
         for num in ocorrencias:
             total_aparicoes = self._calcular_frequencia_total()[num]
             if total_aparicoes > 0:
