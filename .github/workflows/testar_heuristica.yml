@@ -26,4 +26,4 @@ jobs:
       - name: 🧪 Executar Testes de Heurísticas
         env:
           PYTHONPATH: ${{ github.workspace }}
-        run: python script/testar_heuristica.py
+        run: python scripts/testar_heuristica.py
