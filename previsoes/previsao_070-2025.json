@@ -1,5 +1,5 @@
 {
-  "data_geracao": "2025-09-02 15:27:25",
+  "data_geracao": "2025-09-03 08:30:59",
   "baseado_em_sorteio": "070/2025",
   "previsao_modelo_ml": [
     4,
@@ -171,6 +171,16 @@
       ]
     },
     {
+      "nome": "posicao",
+      "numeros": [
+        2,
+        4,
+        46,
+        48,
+        49
+      ]
+    },
+    {
       "nome": "frequencia_terminacoes",
       "numeros": [
         23,
@@ -208,6 +218,16 @@
         32,
         33,
         46
+      ]
+    },
+    {
+      "nome": "padroes_de_grupos",
+      "numeros": [
+        4,
+        21,
+        24,
+        39,
+        45
       ]
     },
     {
@@ -328,6 +348,16 @@
         36,
         37,
         47
+      ]
+    },
+    {
+      "nome": "ciclos_e_atrasos",
+      "numeros": [
+        2,
+        13,
+        20,
+        38,
+        40
       ]
     },
     {
