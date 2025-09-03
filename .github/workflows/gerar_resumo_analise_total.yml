@@ -30,7 +30,7 @@ jobs:
         run: python scripts/resumo_heuristicas.py
 
       - name: Executar o script de resumo
-        run: python scripts/gerar_resumo_funcoes_dados.py
+        run: python scripts/gerar_resumo_analise.py
 
       - name: Fazer commit dos resumos gerados
         run: |
