@@ -1,0 +1,385 @@
+import os
+import sys
+import json
+from collections import Counter, defaultdict
+from itertools import combinations
+import datetime
+import numpy as np
+import inspect
+from typing import Dict, Any, List, Tuple
+
+# A pasta de dados principal
+PASTA_DADOS = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'dados'))
+ARQUIVO_CACHE_ESTATISTICAS = os.path.join(PASTA_DADOS, 'estatisticas_cache.json')
+
+class Dados:
+    def __init__(self, caminho_dados: str = PASTA_DADOS):
+        self.caminho_dados = caminho_dados
+        self.sorteios = self._carregar_sorteios()
+        self.mapeamento_calculos = self._get_mapeamento_calculos()
+        self._estatisticas_cache = {}
+
+    def _carregar_sorteios(self) -> List[Dict[str, Any]]:
+        """Carrega todos os sorteios de arquivos JSON, ordenando-os por data."""
+        todos = []
+        if not os.path.exists(self.caminho_dados):
+            print(f"Diretório '{self.caminho_dados}' não encontrado.")
+            return []
+
+        for nome_arquivo in sorted(os.listdir(self.caminho_dados)):
+            if nome_arquivo.endswith('.json'):
+                caminho_completo = os.path.join(self.caminho_dados, nome_arquivo)
+                try:
+                    with open(caminho_completo, "r", encoding="utf-8") as f:
+                        dados = json.load(f)
+                    if isinstance(dados, dict):
+                        for sorteios_do_ano in dados.values():
+                            if isinstance(sorteios_do_ano, list):
+                                todos.extend(sorteios_do_ano)
+                    elif isinstance(dados, list):
+                        todos.extend(dados)
+                except (json.JSONDecodeError, FileNotFoundError) as e:
+                    print(f"Erro ao ler o arquivo {nome_arquivo}: {e}")
+                    
+        if todos:
+            sorteios_validos = [s for s in todos if isinstance(s, dict) and 'data' in s and 'numeros' in s]
+            sorteios_validos.sort(key=lambda s: datetime.datetime.strptime(s.get('data'), '%d/%m/%Y'))
+            return sorteios_validos
+        return []
+    
+    # Função auxiliar para verificar se um número é primo
+    def _is_prime(self, n: int) -> bool:
+        if n < 2:
+            return False
+        for i in range(2, int(n**0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+    # --- Funções de Cálculo ---
+    def _calcular_frequencia_total(self) -> Counter:
+        """Calcula a frequência total de todos os números."""
+        frequencia = Counter()
+        for sorteio in self.sorteios:
+            frequencia.update(sorteio['numeros'])
+        return frequencia
+
+    def _calcular_ausencia_atual(self) -> Dict[int, int]:
+        """Calcula o tempo de ausência de cada número."""
+        ausencia = {}
+        todos_numeros = set(range(1, 50))
+        ultima_ocorrencia = {num: -1 for num in todos_numeros}
+        for i, sorteio in enumerate(self.sorteios):
+            for num in sorteio['numeros']:
+                ultima_ocorrencia[num] = i
+            
+        total_concursos = len(self.sorteios)
+        for num in todos_numeros:
+            ausencia[num] = total_concursos - ultima_ocorrencia[num] - 1
+        return ausencia
+
+    def _calcular_gaps_medios(self) -> Dict[int, float]:
+        """Calcula o gap médio entre as saídas de cada número."""
+        posicoes = defaultdict(list)
+        gaps_medios = {}
+        todos_numeros = set(range(1, 50))
+        for i, sorteio in enumerate(self.sorteios):
+            for num in sorteio['numeros']:
+                posicoes[num].append(i)
+            
+        for num in todos_numeros:
+            concursos = posicoes.get(num, [])
+            if len(concursos) < 2:
+                gaps_medios[num] = float('inf')
+            else:
+                diferencas = [j - i for i, j in zip(concursos[:-1], concursos[1:])]
+                gaps_medios[num] = sum(diferencas) / len(diferencas)
+        return gaps_medios
+
+    def _calcular_frequencia_pares(self) -> Counter:
+        """Calcula a frequência de todos os pares de números."""
+        frequencia_pares = Counter()
+        for sorteio in self.sorteios:
+            pares = combinations(sorted(sorteio['numeros']), 2)
+            frequencia_pares.update(pares)
+        return frequencia_pares
+
+    def _calcular_frequencia_trios(self) -> Counter:
+        """Calcula a frequência de todos os trios de números."""
+        frequencia_trios = Counter()
+        for sorteio in self.sorteios:
+            trios = combinations(sorted(sorteio['numeros']), 3)
+            frequencia_trios.update(trios)
+        return frequencia_trios
+        
+    def _calcular_frequencia_grupos(self) -> Counter:
+        """
+        Calcula a frequência de grupos de 2, 3 e 4 números.
+        Isso é usado pela heurística de padrões de grupos.
+        """
+        frequencia_grupos = Counter()
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i in range(2, 5): # Grupos de tamanho 2, 3 e 4
+                grupos = combinations(numeros, i)
+                frequencia_grupos.update(grupos)
+        return frequencia_grupos
+
+    def _calcular_frequencia_recente(self, janela=15) -> Counter:
+        """Calcula a frequência dos números numa janela de tempo recente."""
+        janela_sorteios = self.sorteios[-janela:]
+        frequencia = Counter()
+        for sorteio in janela_sorteios:
+            frequencia.update(sorteio['numeros'])
+        return frequencia
+
+    def _calcular_frequencia_por_posicao(self) -> Dict[int, Counter]:
+        """Calcula a frequência de cada número por posição."""
+        frequencia_posicao = defaultdict(Counter)
+        if not self.sorteios or not self.sorteios[0]['numeros']:
+            return frequencia_posicao
+            
+        num_posicoes = len(self.sorteios[0]['numeros'])
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i, num in enumerate(numeros):
+                frequencia_posicao[i][num] += 1
+        return frequencia_posicao
+
+    def _calcular_frequencia_terminacoes_padrao(self) -> Dict[int, Counter]:
+        """Calcula a frequência de terminações após um determinado final de sorteio."""
+        padrao = defaultdict(Counter)
+        if len(self.sorteios) < 2:
+            return padrao
+            
+        for i in range(len(self.sorteios) - 1):
+            numeros_atual = sorted(self.sorteios[i].get('numeros', []))
+            numeros_seguinte = sorted(self.sorteios[i+1].get('numeros', []))
+            terminacoes_atual = {num % 10 for num in numeros_atual}
+            terminacoes_seguinte = {num % 10 for num in numeros_seguinte}
+            
+            for term_atual in terminacoes_atual:
+                padrao[term_atual].update(terminacoes_seguinte)
+                
+        return padrao
+
+    def _calcular_numeros_soma_mais_frequente(self) -> List[int]:
+        """
+        Calcula o intervalo de soma mais comum e retorna os números mais frequentes
+        que saíram dentro desse intervalo.
+        """
+        somas = [sum(s['numeros']) for s in self.sorteios if s.get('numeros')]
+        if not somas:
+            return []
+            
+        soma_media = np.mean(somas)
+        soma_desvio = np.std(somas)
+        soma_minima = int(soma_media - soma_desvio)
+        soma_maxima = int(soma_media + soma_desvio)
+        
+        frequencia_intervalo = Counter()
+        for s in self.sorteios:
+            if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima:
+                frequencia_intervalo.update(s['numeros'])
+            
+        return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
+
+    def _calcular_padrao_tipos_numeros(self) -> Tuple[int, int, int]:
+        """
+        Calcula o padrão de balanceamento de pares, ímpares e primos mais frequente.
+        """
+        padroes = Counter()
+        for sorteio in self.sorteios:
+            if not sorteio.get('numeros'):
+                continue
+                
+            numeros = sorteio['numeros']
+            contagem_pares = sum(1 for n in numeros if n % 2 == 0)
+            contagem_impares = sum(1 for n in numeros if n % 2 != 0)
+            contagem_primos = sum(1 for n in numeros if self._is_prime(n))
+            
+            padroes.update([(contagem_pares, contagem_impares, contagem_primos)])
+            
+        if not padroes:
+            return (0, 0, 0)
+            
+        return padroes.most_common(1)[0][0]
+
+    # --- NOVAS FUNÇÕES DE CÁLCULO PARA AS DEPENDÊNCIAS FALTANTES ---
+    def _calcular_distribuicao_quadrantes(self) -> Dict[int, int]:
+        """Calcula a frequência de números por quadrante (1-12, 13-24, 25-36, 37-49)."""
+        distribuicao = defaultdict(int)
+        for sorteio in self.sorteios:
+            for num in sorteio['numeros']:
+                if 1 <= num <= 12:
+                    distribuicao[1] += 1
+                elif 13 <= num <= 24:
+                    distribuicao[2] += 1
+                elif 25 <= num <= 36:
+                    distribuicao[3] += 1
+                else: # 37 <= num <= 49
+                    distribuicao[4] += 1
+        return distribuicao
+
+    def _calcular_frequencia_vizinhos(self) -> Dict[int, int]:
+        """Calcula a frequência de cada número ter um de seus vizinhos sorteado."""
+        frequencia = defaultdict(int)
+        for sorteio in self.sorteios:
+            numeros_sorteados = set(sorteio['numeros'])
+            for num in numeros_sorteados:
+                if (num - 1) in numeros_sorteados or (num + 1) in numeros_sorteados:
+                    frequencia[num] += 1
+        return frequencia
+
+    def _calcular_pares_recentes(self) -> Counter:
+        """Calcula a frequência de pares de números nos últimos 20 sorteios."""
+        janela_sorteios = self.sorteios[-20:]
+        frequencia_pares = Counter()
+        for sorteio in janela_sorteios:
+            pares = combinations(sorted(sorteio['numeros']), 2)
+            frequencia_pares.update(pares)
+        return frequencia_pares
+
+    def _calcular_frequencia_pares_consecutivos(self) -> Counter:
+        """Calcula a frequência de pares de números consecutivos (ex: 5 e 6)."""
+        frequencia = Counter()
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i in range(len(numeros) - 1):
+                if numeros[i+1] == numeros[i] + 1:
+                    frequencia[(numeros[i], numeros[i+1])] += 1
+        return frequencia
+
+    def _calcular_precisao_posicional_historica(self) -> Dict[int, float]:
+        """Calcula a precisão média de cada posição do sorteio."""
+        precisao_por_posicao = defaultdict(list)
+        if not self.sorteios:
+            return {}
+
+        num_posicoes = len(self.sorteios[0]['numeros'])
+        for sorteio in self.sorteios:
+            numeros = sorted(sorteio['numeros'])
+            for i in range(num_posicoes):
+                # A precisão aqui é uma medida de quão perto o número está da média histórica para aquela posição
+                media_posicao = sum(s['numeros'][i] for s in self.sorteios) / len(self.sorteios)
+                precisao = abs(numeros[i] - media_posicao)
+                precisao_por_posicao[i].append(precisao)
+
+        medias_precisao = {pos: np.mean(vals) for pos, vals in precisao_por_posicao.items()}
+        return medias_precisao
+
+    def _calcular_frequencia_por_ano(self) -> Dict[int, Counter]:
+        """Calcula a frequência de números por ano."""
+        frequencia_anual = defaultdict(Counter)
+        for sorteio in self.sorteios:
+            ano = datetime.datetime.strptime(sorteio['data'], '%d/%m/%Y').year
+            frequencia_anual[ano].update(sorteio['numeros'])
+        return frequencia_anual
+
+    def _calcular_distribuicao_dezenas(self) -> Dict[int, int]:
+        """Calcula a frequência de números por dezena (0-9, 10-19, etc.)."""
+        distribuicao = defaultdict(int)
+        for sorteio in self.sorteios:
+            for num in sorteio['numeros']:
+                dezena = num // 10
+                distribuicao[dezena] += 1
+        return distribuicao
+
+    def _calcular_trios_frequentes(self) -> Counter:
+        """Calcula a frequência de todos os trios de números (alternativa)."""
+        frequencia_trios = Counter()
+        for sorteio in self.sorteios:
+            trios = combinations(sorted(sorteio['numeros']), 3)
+            frequencia_trios.update(trios)
+        return frequencia_trios
+
+    def _calcular_probabilidades_repeticoes(self) -> Dict[int, float]:
+        """Calcula a probabilidade de um número se repetir do sorteio anterior."""
+        probabilidades = defaultdict(float)
+        if len(self.sorteios) < 2:
+            return {}
+
+        ocorrencias = defaultdict(int)
+        for i in range(1, len(self.sorteios)):
+            anterior = set(self.sorteios[i-1]['numeros'])
+            atual = set(self.sorteios[i]['numeros'])
+            repetidos = anterior.intersection(atual)
+            
+            for num in anterior:
+                if num in repetidos:
+                    ocorrencias[num] += 1
+        
+        # Calcula a probabilidade para cada número
+        for num in ocorrencias:
+            total_aparicoes = self._calcular_frequencia_total()[num]
+            if total_aparicoes > 0:
+                probabilidades[num] = ocorrencias[num] / total_aparicoes
+        
+        return probabilidades
+
+
+    # --- Lógica de Mapeamento e Obtenção de Estatísticas ---
+    def _get_mapeamento_calculos(self) -> Dict[str, callable]:
+        """Mapeia automaticamente nomes de estatísticas para funções de cálculo internas."""
+        mapeamento = {}
+        for name, obj in inspect.getmembers(self, predicate=inspect.ismethod):
+            if name.startswith('_calcular_'):
+                estatistica_name = name.replace('_calcular_', '')
+                mapeamento[estatistica_name] = obj
+        return mapeamento
+
+    def obter_estatisticas(self, dependencias: set) -> Tuple[Dict[str, Any], List[str]]:
+        """
+        Calcula e retorna apenas as estatísticas necessárias, juntamente com uma lista de erros.
+        """
+        estatisticas = {}
+        erros = []
+        for dep in dependencias:
+            if dep in self.mapeamento_calculos:
+                try:
+                    # Chamada do método da classe
+                    estatisticas[dep] = self.mapeamento_calculos[dep]()
+                except Exception as e:
+                    erros.append(f"Erro ao calcular a estatística '{dep}': {e}")
+                    estatisticas[dep] = {}
+            else:
+                erros.append(f"Função de cálculo para '{dep}' não encontrada.")
+                estatisticas[dep] = {}
+        
+        return estatisticas, erros
+
+    def obter_resumo_calculos(self) -> Dict[str, str]:
+        """
+        Retorna um resumo de todas as funções de cálculo disponíveis.
+        """
+        resumo = {}
+        for name, obj in inspect.getmembers(self, predicate=inspect.ismethod):
+            if name.startswith('_calcular_'):
+                estatistica_name = name.replace('_calcular_', '')
+                resumo[estatistica_name] = inspect.getdoc(obj).strip()
+        return resumo
+
+    # --- Lógica de Cache (ajustada para a classe) ---
+    def salvar_cache(self, estatisticas: Dict[str, Any], caminho: str = ARQUIVO_CACHE_ESTATISTICAS):
+        """Salva as estatísticas calculadas em um arquivo JSON."""
+        try:
+            stats_serializaveis = {k: dict(v) if isinstance(v, Counter) else v for k, v in estatisticas.items()}
+            with open(caminho, 'w', encoding='utf-8') as f:
+                json.dump(stats_serializaveis, f, ensure_ascii=False, indent=4)
+        except Exception as e:
+            print(f"Erro ao salvar as estatísticas: {e}")
+
+    def carregar_cache(self, caminho: str = ARQUIVO_CACHE_ESTATISTICAS) -> Dict[str, Any]:
+        """Carrega as estatísticas de um arquivo JSON."""
+        if not os.path.exists(caminho):
+            return None
+        try:
+            with open(caminho, 'r', encoding='utf-8') as f:
+                stats = json.load(f)
+            for k, v in stats.items():
+                if isinstance(v, dict):
+                    stats[k] = Counter(v)
+            return stats
+        except (json.JSONDecodeError, FileNotFoundError) as e:
+            print(f"Erro ao carregar o arquivo de estatísticas: {e}")
+            return None
