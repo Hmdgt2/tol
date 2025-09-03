@@ -8,6 +8,9 @@ import joblib
 import datetime
 import importlib
 from typing import Dict, Any, List
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score
 
 # Adiciona o diretório raiz do projeto ao caminho do sistema.
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
