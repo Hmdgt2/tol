@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from lib.despachante import Despachante
+from lib.despachante import despachante as Despachante # Importa o nome real e atribui um alias para manter a consistência do código
 from lib.dados import Dados
 
 # Caminho de saída para o ficheiro de análise
