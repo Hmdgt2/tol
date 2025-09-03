@@ -17,6 +17,7 @@ class Despachante:
         self.pasta_heuristicas = os.path.join(PROJECT_ROOT, pasta_heuristicas)
         self.heuristicas: Dict[str, Any] = {}
         self.metadados: Dict[str, Dict[str, Any]] = {}
+        self._cache_previsoes: Dict[frozenset, Any] = {}
         self._carregar_heuristicas()
 
     def _carregar_heuristicas(self):
@@ -37,38 +38,31 @@ class Despachante:
                     
                     # Procura dinamicamente pela classe correta no módulo
                     for name, obj in module.__dict__.items():
-                        # A CORREÇÃO: Garante que a classe é definida no próprio módulo e não é uma importação
                         if isinstance(obj, type) and obj.__module__ == module.__name__ and name[0].isupper():
-                            heuristica_classe = obj
-                            instance = heuristica_classe()
+                            instance = obj()
                             nome_heuristica = getattr(instance, 'NOME', module_name)
                             
                             self.heuristicas[nome_heuristica] = instance
                             self.metadados[nome_heuristica] = {
                                 'descricao': getattr(instance, 'DESCRICAO', 'N/A'),
                                 'dependencias': getattr(instance, 'DEPENDENCIAS', []),
-                                'modulo': module_name, # CORREÇÃO: Adiciona o nome do módulo
-                                'funcao': 'prever' # CORREÇÃO: Adiciona o nome da função de previsão
+                                'modulo': module_name,
+                                'funcao': 'prever'
                             }
                             print(f"✅ Heurística '{nome_heuristica}' carregada com sucesso.")
                             break
-                    
                 except Exception as e:
-                    # Mensagem de erro mais detalhada
-                    print(f"❌ Erro ao carregar a heurística '{module_name}'. Detalhes: {e}")
+                    print(f"❌ Erro ao carregar a heurística '{module_name}': {e}")
         
         sys.path.pop(0)
+        print(f"✅ Total de heurísticas carregadas: {len(self.heuristicas)}")
 
     def obter_metadados(self) -> Dict[str, Dict[str, Any]]:
-        """
-        Retorna os metadados de todas as heurísticas carregadas.
-        """
+        """Retorna os metadados de todas as heurísticas carregadas."""
         return self.metadados
 
     def obter_todas_dependencias(self) -> Set[str]:
-        """
-        Retorna um conjunto com todas as dependências de todas as heurísticas.
-        """
+        """Retorna um conjunto com todas as dependências de todas as heurísticas."""
         todas_dependencias = set()
         for meta in self.metadados.values():
             todas_dependencias.update(meta['dependencias'])
@@ -77,11 +71,25 @@ class Despachante:
     def get_previsoes(self, estatisticas: Dict[str, Any], n: int = 5) -> Dict[str, List[int]]:
         """
         Gera previsões para todas as heurísticas carregadas.
+        Filtra automaticamente as estatísticas por dependência.
+        Utiliza cache interno para otimizar chamadas repetidas.
         """
         previsoes = {}
         for nome, heuristica in self.heuristicas.items():
+            deps = set(self.metadados[nome]['dependencias'])
+            stats_filtradas = {k: estatisticas[k] for k in deps if k in estatisticas}
+            key = frozenset(stats_filtradas.items())
+
+            if key in self._cache_previsoes:
+                previsoes[nome] = self._cache_previsoes[key]
+                continue
+
             try:
-                previsoes[nome] = heuristica.prever(estatisticas, n)
+                resultado = heuristica.prever(stats_filtradas, n)
+                previsoes[nome] = resultado
+                self._cache_previsoes[key] = resultado
             except Exception as e:
                 print(f"❌ Erro ao gerar previsão para a heurística '{nome}': {e}")
+                previsoes[nome] = []
+
         return previsoes
