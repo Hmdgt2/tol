@@ -359,6 +359,44 @@ class Dados:
                 resumo[estatistica_name] = inspect.getdoc(obj).strip()
         return resumo
 
+    def obter_resumo_calculos_com_metadados(self) -> Dict[str, Dict[str, Any]]:
+        """
+        Retorna um resumo de todas as funções de cálculo com metadados adicionais,
+        como palavras-chave para identificar a lógica principal.
+        """
+        mapeamento_logica = {
+            'frequencia_total': ['frequencia', 'geral', 'total'],
+            'ausencia_atual': ['ausencia', 'atraso', 'tempo'],
+            'gaps_medios': ['gaps', 'intervalo', 'distancia'],
+            'frequencia_pares': ['pares', 'duplas', 'frequencia'],
+            'frequencia_trios': ['trios', 'frequencia', 'grupos'],
+            'frequencia_grupos': ['grupos', 'padroes'],
+            'frequencia_recente': ['frequencia', 'recente', 'janela'],
+            'frequencia_por_posicao': ['frequencia', 'posicao'],
+            'frequencia_terminacoes_padrao': ['terminacoes', 'padrao', 'finais'],
+            'numeros_soma_mais_frequente': ['soma', 'frequencia'],
+            'padrao_tipos_numeros': ['pares', 'impares', 'primos', 'balanceamento'],
+            'distribuicao_quadrantes': ['distribuicao', 'quadrantes', 'grupos'],
+            'frequencia_vizinhos': ['vizinhos', 'proximidade'],
+            'pares_recentes': ['pares', 'recente', 'duplas'],
+            'frequencia_pares_consecutivos': ['consecutivos', 'pares', 'sequencia'],
+            'precisao_posicional_historica': ['precisao', 'posicao'],
+            'frequencia_por_ano': ['frequencia', 'anual', 'ano'],
+            'distribuicao_dezenas': ['distribuicao', 'dezenas'],
+            'trios_frequentes': ['trios', 'frequencia', 'grupos'],
+            'probabilidades_repeticoes': ['probabilidade', 'repeticoes']
+        }
+        
+        resumo = {}
+        for name, obj in inspect.getmembers(self, predicate=inspect.ismethod):
+            if name.startswith('_calcular_'):
+                estatistica_name = name.replace('_calcular_', '')
+                resumo[estatistica_name] = {
+                    'descricao': inspect.getdoc(obj).strip(),
+                    'logica_principais': mapeamento_logica.get(estatistica_name, [])
+                }
+        return resumo
+
     # --- Lógica de Cache (ajustada para a classe) ---
     def salvar_cache(self, estatisticas: Dict[str, Any], caminho: str = ARQUIVO_CACHE_ESTATISTICAS):
         """Salva as estatísticas calculadas em um arquivo JSON."""
