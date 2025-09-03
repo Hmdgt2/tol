@@ -259,7 +259,7 @@
   },
   "resumo_funcoes_de_calculo": {
     "ausencia_atual": {
-      "descricao": "Calcula o tempo de ausência de cada número.",
+      "descricao": "",
       "logica_principais": [
         "ausencia",
         "atraso",
@@ -267,29 +267,33 @@
       ]
     },
     "distribuicao_dezenas": {
-      "descricao": "Calcula a frequência de números por dezena (0-9, 10-19, etc.).",
+      "descricao": "",
       "logica_principais": [
         "distribuicao",
         "dezenas"
       ]
     },
     "distribuicao_quadrantes": {
-      "descricao": "Calcula a frequência de números por quadrante (1-12, 13-24, 25-36, 37-49).",
+      "descricao": "",
       "logica_principais": [
         "distribuicao",
         "quadrantes",
         "grupos"
       ]
     },
+    "frequencia_combinacoes": {
+      "descricao": "Calcula frequência de combinações de tamanho N, opcionalmente limitada a uma janela.",
+      "logica_principais": []
+    },
     "frequencia_grupos": {
-      "descricao": "Calcula a frequência de grupos de 2, 3 e 4 números.\nIsso é usado pela heurística de padrões de grupos.",
+      "descricao": "",
       "logica_principais": [
         "grupos",
         "padroes"
       ]
     },
     "frequencia_pares": {
-      "descricao": "Calcula a frequência de todos os pares de números.",
+      "descricao": "",
       "logica_principais": [
         "pares",
         "duplas",
@@ -297,7 +301,7 @@
       ]
     },
     "frequencia_pares_consecutivos": {
-      "descricao": "Calcula a frequência de pares de números consecutivos (ex: 5 e 6).",
+      "descricao": "",
       "logica_principais": [
         "consecutivos",
         "pares",
@@ -305,7 +309,7 @@
       ]
     },
     "frequencia_por_ano": {
-      "descricao": "Calcula a frequência de números por ano.",
+      "descricao": "",
       "logica_principais": [
         "frequencia",
         "anual",
@@ -313,14 +317,14 @@
       ]
     },
     "frequencia_por_posicao": {
-      "descricao": "Calcula a frequência de cada número por posição.",
+      "descricao": "",
       "logica_principais": [
         "frequencia",
         "posicao"
       ]
     },
     "frequencia_recente": {
-      "descricao": "Calcula a frequência dos números numa janela de tempo recente.",
+      "descricao": "",
       "logica_principais": [
         "frequencia",
         "recente",
@@ -328,7 +332,7 @@
       ]
     },
     "frequencia_terminacoes_padrao": {
-      "descricao": "Calcula a frequência de terminações após um determinado final de sorteio.",
+      "descricao": "",
       "logica_principais": [
         "terminacoes",
         "padrao",
@@ -336,7 +340,7 @@
       ]
     },
     "frequencia_total": {
-      "descricao": "Calcula a frequência total de todos os números.",
+      "descricao": "",
       "logica_principais": [
         "frequencia",
         "geral",
@@ -344,7 +348,7 @@
       ]
     },
     "frequencia_trios": {
-      "descricao": "Calcula a frequência de todos os trios de números.",
+      "descricao": "",
       "logica_principais": [
         "trios",
         "frequencia",
@@ -352,14 +356,14 @@
       ]
     },
     "frequencia_vizinhos": {
-      "descricao": "Calcula a frequência de cada número ter um de seus vizinhos sorteado.",
+      "descricao": "",
       "logica_principais": [
         "vizinhos",
         "proximidade"
       ]
     },
     "gaps_medios": {
-      "descricao": "Calcula o gap médio entre as saídas de cada número.",
+      "descricao": "",
       "logica_principais": [
         "gaps",
         "intervalo",
@@ -367,14 +371,14 @@
       ]
     },
     "numeros_soma_mais_frequente": {
-      "descricao": "Calcula o intervalo de soma mais comum e retorna os números mais frequentes\nque saíram dentro desse intervalo.",
+      "descricao": "",
       "logica_principais": [
         "soma",
         "frequencia"
       ]
     },
     "padrao_tipos_numeros": {
-      "descricao": "Calcula o padrão de balanceamento de pares, ímpares e primos mais frequente.",
+      "descricao": "",
       "logica_principais": [
         "pares",
         "impares",
@@ -383,7 +387,7 @@
       ]
     },
     "pares_recentes": {
-      "descricao": "Calcula a frequência de pares de números nos últimos 20 sorteios.",
+      "descricao": "",
       "logica_principais": [
         "pares",
         "recente",
@@ -391,29 +395,22 @@
       ]
     },
     "precisao_posicional_historica": {
-      "descricao": "Calcula a precisão média de cada posição do sorteio.",
+      "descricao": "",
       "logica_principais": [
         "precisao",
         "posicao"
       ]
     },
     "probabilidades_repeticoes": {
-      "descricao": "Calcula a probabilidade de um número se repetir do sorteio anterior.",
+      "descricao": "",
       "logica_principais": [
         "probabilidade",
         "repeticoes"
       ]
-    },
-    "trios_frequentes": {
-      "descricao": "Calcula a frequência de todos os trios de números (alternativa).",
-      "logica_principais": [
-        "trios",
-        "frequencia",
-        "grupos"
-      ]
     }
   },
   "dependencias_nao_usadas": [
+    "frequencia_combinacoes",
     "frequencia_trios"
   ],
   "potenciais_funcoes_duplicadas": {
@@ -424,8 +421,7 @@
     "grupos": [
       "distribuicao_quadrantes",
       "frequencia_grupos",
-      "frequencia_trios",
-      "trios_frequentes"
+      "frequencia_trios"
     ],
     "pares": [
       "frequencia_pares",
@@ -444,8 +440,7 @@
       "frequencia_recente",
       "frequencia_total",
       "frequencia_trios",
-      "numeros_soma_mais_frequente",
-      "trios_frequentes"
+      "numeros_soma_mais_frequente"
     ],
     "posicao": [
       "frequencia_por_posicao",
@@ -454,10 +449,6 @@
     "recente": [
       "frequencia_recente",
       "pares_recentes"
-    ],
-    "trios": [
-      "frequencia_trios",
-      "trios_frequentes"
     ]
   }
 }
