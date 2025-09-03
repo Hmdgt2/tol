@@ -9,6 +9,9 @@ from collections import defaultdict
 from typing import Dict, Any, List
 import importlib
 import datetime
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score
 
 # CORREÇÃO 1: Adiciona o diretório raiz para resolver importações
 # Agora a lógica é a mesma que nos outros scripts, subindo um nível
