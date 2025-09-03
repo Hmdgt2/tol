@@ -1,12 +1,12 @@
 {
-  "data_geracao": "2025-09-03 08:30:59",
+  "data_geracao": "2025-09-03 12:19:58",
   "baseado_em_sorteio": "070/2025",
   "previsao_modelo_ml": [
-    4,
     23,
+    41,
     32,
-    40,
-    26
+    47,
+    40
   ],
   "previsoes_heuristicas": [
     {
@@ -293,11 +293,11 @@
     {
       "nome": "meta_avaliacao",
       "numeros": [
-        48,
-        49,
         46,
+        48,
         47,
-        45
+        45,
+        41
       ]
     },
     {
