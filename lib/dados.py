@@ -143,7 +143,7 @@ class Dados:
         for sorteio in self.sorteios:
             numeros = sorted(sorteio['numeros'])
             for i, num in enumerate(numeros):
-                frequencia_posicao[i][num] += 1
+                frequencia_posicao[i].update([num])
         return frequencia_posicao
 
     def _calcular_frequencia_terminacoes_padrao(self) -> Dict[int, Counter]:
@@ -317,6 +317,25 @@ class Dados:
         
         return probabilidades
 
+    def _calcular_frequencia_por_ciclo(self) -> Dict[str, Any]:
+        """
+        Calcula a frequência de cada número num ciclo de sorteios recentes.
+        """
+        frequencia_por_ciclo = {}
+        if not self.sorteios:
+            return frequencia_por_ciclo
+
+        # Usa uma janela de 30 sorteios para o ciclo "recente"
+        janela = 30
+        sorteios_recentes = self.sorteios[-janela:]
+        
+        frequencia = Counter()
+        for sorteio in sorteios_recentes:
+            frequencia.update(sorteio.get('numeros', []))
+            
+        frequencia_por_ciclo['recentes'] = frequencia
+        
+        return frequencia_por_ciclo
 
     # --- Lógica de Mapeamento e Obtenção de Estatísticas ---
     def _get_mapeamento_calculos(self) -> Dict[str, callable]:
