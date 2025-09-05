@@ -1,5 +1,4 @@
 #tol/avaliador/avaliador.py
-
 import os
 import sys
 import json
