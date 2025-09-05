@@ -2,6 +2,7 @@
   "heuristicas_ordenadas": [
     "ausencia_superior_media",
     "balanceamento_tipos",
+    "ciclos_adaptativos",
     "ciclos_e_atrasos",
     "ciclos_longos",
     "clusters_recentes",
