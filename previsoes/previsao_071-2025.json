@@ -1,0 +1,394 @@
+{
+  "data_geracao": "2025-09-05 08:45:38",
+  "baseado_em_sorteio": "071/2025",
+  "previsao_modelo_ml": [
+    45,
+    32,
+    47,
+    23,
+    24
+  ],
+  "previsoes_heuristicas": [
+    {
+      "nome": "distribuicao_grupos",
+      "numeros": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "nome": "pares_frequentes",
+      "numeros": [
+        4,
+        21,
+        24,
+        39,
+        45
+      ]
+    },
+    {
+      "nome": "comb_balanceadas",
+      "numeros": [
+        23,
+        26,
+        32,
+        32,
+        33
+      ]
+    },
+    {
+      "nome": "numeros_vizinhos",
+      "numeros": [
+        6,
+        18,
+        24,
+        32,
+        47
+      ]
+    },
+    {
+      "nome": "distribuicao_quadrantes",
+      "numeros": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "nome": "quentes_frios",
+      "numeros": [
+        2,
+        4,
+        13,
+        15,
+        17,
+        18,
+        20,
+        27,
+        40,
+        45
+      ]
+    },
+    {
+      "nome": "pares_distantes",
+      "numeros": [
+        10,
+        12,
+        20,
+        27,
+        44
+      ]
+    },
+    {
+      "nome": "soma_provavel",
+      "numeros": [
+        23,
+        24,
+        26,
+        32,
+        33
+      ]
+    },
+    {
+      "nome": "posicao",
+      "numeros": [
+        2,
+        4,
+        46,
+        48,
+        49
+      ]
+    },
+    {
+      "nome": "frequencia_terminacoes",
+      "numeros": [
+        23,
+        26,
+        33,
+        38,
+        46
+      ]
+    },
+    {
+      "nome": "repeticao_por_posicao",
+      "numeros": [
+        2,
+        11,
+        24,
+        37,
+        48
+      ]
+    },
+    {
+      "nome": "ciclos_longos",
+      "numeros": [
+        2,
+        13,
+        20,
+        40,
+        45
+      ]
+    },
+    {
+      "nome": "frequencia_total",
+      "numeros": [
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "padroes_de_grupos",
+      "numeros": [
+        4,
+        21,
+        24,
+        39,
+        45
+      ]
+    },
+    {
+      "nome": "clusters_recentes",
+      "numeros": [
+        17,
+        18,
+        19,
+        21,
+        29
+      ]
+    },
+    {
+      "nome": "crescimento_ano",
+      "numeros": [
+        1,
+        8,
+        23,
+        37,
+        39
+      ]
+    },
+    {
+      "nome": "ausencia_superior_media",
+      "numeros": [
+        20,
+        13,
+        2,
+        40,
+        45
+      ]
+    },
+    {
+      "nome": "soma_numeros",
+      "numeros": [
+        23,
+        24,
+        26,
+        32,
+        33
+      ]
+    },
+    {
+      "nome": "gap_medio",
+      "numeros": [
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "repeticoes_sorteios_anteriores",
+      "numeros": [
+        4,
+        15,
+        17,
+        18,
+        27
+      ]
+    },
+    {
+      "nome": "meta_avaliacao",
+      "numeros": [
+        46,
+        48,
+        47,
+        45,
+        41
+      ]
+    },
+    {
+      "nome": "trios_frequentes",
+      "numeros": [
+        6,
+        16,
+        30,
+        34,
+        46
+      ]
+    },
+    {
+      "nome": "distribuicao_uniforme_faixas",
+      "numeros": [
+        4,
+        16,
+        26,
+        32,
+        46
+      ]
+    },
+    {
+      "nome": "balanceamento_tipos",
+      "numeros": [
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "numeros_retencao_longa",
+      "numeros": [
+        2,
+        13,
+        20,
+        40,
+        45
+      ]
+    },
+    {
+      "nome": "pares_consecutivos",
+      "numeros": [
+        32,
+        33,
+        36,
+        37,
+        47
+      ]
+    },
+    {
+      "nome": "ciclos_e_atrasos",
+      "numeros": [
+        2,
+        13,
+        20,
+        40,
+        45
+      ]
+    },
+    {
+      "nome": "padrao_finais",
+      "numeros": [
+        16,
+        23,
+        26,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "frequencia_soma",
+      "numeros": [
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "tendencia_recentes",
+      "numeros": [
+        4,
+        15,
+        17,
+        18,
+        27
+      ]
+    }
+  ]
+}
