@@ -367,6 +367,90 @@ class Dados:
         
         return estatisticas, erros
 
+    def obter_resumo_calculos_com_metadados(self) -> Dict[str, Dict[str, Any]]:
+        """
+        Retorna um resumo das funções de cálculo disponíveis, com descrições
+        e palavras-chave associadas. Serve para o gerar_resumo_analise.py.
+        """
+        return {
+            "frequencia_total": {
+                "descricao": "Frequência total de ocorrência de cada número ao longo de todos os sorteios.",
+                "logica_principais": ["frequencia", "global", "historico"]
+            },
+            "ausencia_atual": {
+                "descricao": "Número de concursos decorridos desde a última vez que cada número saiu.",
+                "logica_principais": ["ausencia", "atraso", "recencia"]
+            },
+            "gaps_medios": {
+                "descricao": "Intervalo médio de concursos entre aparições sucessivas de cada número.",
+                "logica_principais": ["gap", "periodicidade", "ritmo"]
+            },
+            "frequencia_pares": {
+                "descricao": "Contagem de todas as combinações de pares que já saíram nos sorteios.",
+                "logica_principais": ["pares", "combinacoes", "associacao"]
+            },
+            "frequencia_trios": {
+                "descricao": "Contagem de todas as combinações de trios que já saíram nos sorteios.",
+                "logica_principais": ["trios", "combinacoes", "associacao"]
+            },
+            "frequencia_recente": {
+                "descricao": "Frequência dos números considerando apenas uma janela dos últimos sorteios.",
+                "logica_principais": ["frequencia", "recente", "tendencia"]
+            },
+            "frequencia_por_posicao": {
+                "descricao": "Frequência de cada número por posição no sorteio.",
+                "logica_principais": ["posicao", "frequencia", "historico"]
+            },
+            "distribuicao_dezenas": {
+                "descricao": "Distribuição de frequência dos números por grupo de dezenas (0-9, 10-19, etc.).",
+                "logica_principais": ["distribuicao", "dezenas", "agrupamento"]
+            },
+            "distribuicao_quadrantes": {
+                "descricao": "Distribuição de frequência dos números pelos quadrantes (1-12, 13-24, 25-36, 37-49).",
+                "logica_principais": ["distribuicao", "quadrantes", "agrupamento"]
+            },
+            "frequencia_por_ciclo": {
+                "descricao": "Frequência de ocorrência dos números dentro de ciclos recentes de concursos.",
+                "logica_principais": ["ciclos", "recente", "frequencia"]
+            },
+            "frequencia_vizinhos": {
+                "descricao": "Número de vezes que cada número saiu acompanhado de um vizinho (n-1 ou n+1).",
+                "logica_principais": ["vizinhos", "pares", "proximidade"]
+            },
+            "pares_recentes": {
+                "descricao": "Frequência dos pares de números nos últimos concursos.",
+                "logica_principais": ["pares", "recente", "tendencia"]
+            },
+            "frequencia_pares_consecutivos": {
+                "descricao": "Frequência de pares consecutivos (ex: 5 e 6).",
+                "logica_principais": ["pares", "consecutivos", "sequencias"]
+            },
+            "frequencia_por_ano": {
+                "descricao": "Distribuição de frequência dos números em cada ano.",
+                "logica_principais": ["frequencia", "temporal", "ano"]
+            },
+            "probabilidades_repeticoes": {
+                "descricao": "Probabilidade de um número se repetir do sorteio anterior.",
+                "logica_principais": ["repeticao", "probabilidade", "historico"]
+            },
+            "padrao_tipos_numeros": {
+                "descricao": "Padrão mais frequente de pares, ímpares e primos dentro dos sorteios.",
+                "logica_principais": ["pares", "impares", "primos"]
+            },
+            "numeros_soma_mais_frequente": {
+                "descricao": "Números mais comuns em sorteios cuja soma total caiu no intervalo típico.",
+                "logica_principais": ["soma", "intervalo", "frequencia"]
+            },
+            "precisao_posicional_historica": {
+                "descricao": "Desvio médio entre os números sorteados e a média histórica da sua posição.",
+                "logica_principais": ["precisao", "posicao", "historico"]
+            },
+            "frequencia_grupos": {
+                "descricao": "Frequência de grupos de 2, 3 e 4 números que já saíram juntos.",
+                "logica_principais": ["grupos", "combinacoes", "frequencia"]
+            }
+        }
+
     # --- Lógica de Cache (ajustada para a classe) ---
     def salvar_cache(self, estatisticas: Dict[str, Any], caminho: str = ARQUIVO_CACHE_ESTATISTICAS):
         """Salva as estatísticas calculadas em um arquivo JSON."""
