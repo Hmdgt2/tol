@@ -1,4 +1,5 @@
 name: Testar Novas Funcoes
+
 on:
   workflow_dispatch:
 
@@ -15,8 +16,7 @@ jobs:
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v4
         with:
-          # Use a versão estável mais recente do Python
-          python-version: "3.12" 
+          python-version: "3.12"
 
       - name: 📦 Cache de Dependências
         uses: actions/cache@v3
@@ -33,6 +33,11 @@ jobs:
 
       - name: 🧪 Executar Engenharia Reversa
         env:
-          # Garante que o Python encontre os ficheiros 'lib' e 'scripts'
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/treinador_funcoes.py
+
+      - name: ⬆️ Carregar o Resultado da Análise
+        uses: actions/upload-artifact@v4
+        with:
+          name: analise-engenharia-reversa
+          path: engenharia_reversa_2011.json
