@@ -11,7 +11,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 # Importa a classe Dados do diretório 'lib'
-from tol.lib.dados import Dados
+from lib.dados import Dados
 # Importa as funções do gerador no mesmo diretório
 from gerador_logicas import gerar_logicas, calcular_variaveis
 
