@@ -1,0 +1,2679 @@
+{
+    "013/2011": {
+        "acertos": {
+            "diferenca_maior_menor_%_ultimo": [
+                27
+            ],
+            "maior_-_primeiro": [
+                27
+            ],
+            "ultimo_-_menor": [
+                27
+            ],
+            "diferenca_maior_menor_%_soma_pares": [
+                27
+            ],
+            "ultimo_-_primeiro": [
+                27
+            ],
+            "diferenca_maior_menor_%_media": [
+                27
+            ]
+        },
+        "numeros_previstos": [
+            27
+        ],
+        "numeros_em_falta": [
+            6,
+            12,
+            21,
+            41
+        ]
+    },
+    "014/2011": {
+        "acertos": {
+            "maior_%_soma": [
+                41,
+                41
+            ],
+            "soma_impares_//_menor": [
+                14
+            ]
+        },
+        "numeros_previstos": [
+            14,
+            41
+        ],
+        "numeros_em_falta": [
+            3,
+            33,
+            38
+        ]
+    },
+    "015/2011": {
+        "acertos": {
+            "media_-_primeiro": [
+                22
+            ],
+            "menor_+_soma_ultimos_digitos": [
+                22
+            ],
+            "menor_+_ultimo": [
+                44
+            ],
+            "maior_+_primeiro": [
+                44,
+                44
+            ]
+        },
+        "numeros_previstos": [
+            22,
+            44
+        ],
+        "numeros_em_falta": [
+            31,
+            39,
+            42
+        ]
+    },
+    "016/2011": {
+        "acertos": {
+            "ultimo_//_soma_ultimos_digitos": [
+                2
+            ],
+            "maior_//_soma_ultimos_digitos": [
+                2
+            ],
+            "ultimo_//_diferenca_maior_menor": [
+                2
+            ],
+            "media_%_maior": [
+                35
+            ],
+            "soma_impares_-_primeiro": [
+                48
+            ],
+            "media_%_ultimo": [
+                35
+            ],
+            "soma_%_diferenca_maior_menor": [
+                2
+            ]
+        },
+        "numeros_previstos": [
+            2,
+            35,
+            48
+        ],
+        "numeros_em_falta": [
+            29,
+            32
+        ]
+    },
+    "017/2011": {
+        "acertos": {
+            "diferenca_maior_menor_+_menor": [
+                48
+            ],
+            "diferenca_maior_menor_+_primeiro": [
+                48
+            ],
+            "ultimo_%_soma": [
+                48,
+                48
+            ],
+            "primeiro_+_diferenca_maior_menor": [
+                48
+            ]
+        },
+        "numeros_previstos": [
+            48
+        ],
+        "numeros_em_falta": [
+            30,
+            40,
+            43,
+            47
+        ]
+    },
+    "018/2011": {
+        "acertos": {
+            "soma_pares_//_media": [
+                2
+            ],
+            "soma_impares_//_media": [
+                2
+            ],
+            "soma_pares_//_maior": [
+                2
+            ],
+            "soma_//_soma_impares": [
+                2
+            ],
+            "ultimo_//_soma_ultimos_digitos": [
+                2
+            ]
+        },
+        "numeros_previstos": [
+            2
+        ],
+        "numeros_em_falta": [
+            20,
+            38,
+            43,
+            44
+        ]
+    },
+    "019/2011": {
+        "acertos": {
+            "diferenca_maior_menor_+_total_numeros": [
+                47
+            ],
+            "maior_+_menor": [
+                46,
+                46
+            ],
+            "soma_impares_%_maior": [
+                43
+            ],
+            "primeiro_+_maior": [
+                46,
+                46
+            ],
+            "soma_impares_%_ultimo": [
+                43
+            ],
+            "maior_-_total_numeros": [
+                39,
+                39
+            ],
+            "soma_ultimos_digitos_+_media": [
+                46
+            ],
+            "total_numeros_+_diferenca_maior_menor": [
+                47
+            ],
+            "soma_impares_%_soma": [
+                43
+            ]
+        },
+        "numeros_previstos": [
+            39,
+            43,
+            46,
+            47
+        ],
+        "numeros_em_falta": [
+            16
+        ]
+    },
+    "020/2011": {
+        "acertos": {
+            "media_%_soma": [
+                38
+            ],
+            "media_%_soma_pares": [
+                38
+            ]
+        },
+        "numeros_previstos": [
+            38
+        ],
+        "numeros_em_falta": [
+            17,
+            18,
+            42,
+            44
+        ]
+    },
+    "021/2011": {
+        "acertos": {
+            "primeiro_+_primeiro": [
+                34
+            ],
+            "ultimo_-_primeiro": [
+                27
+            ],
+            "diferenca_maior_menor_%_soma_pares": [
+                27,
+                27
+            ],
+            "diferenca_maior_menor_%_ultimo": [
+                27
+            ]
+        },
+        "numeros_previstos": [
+            27,
+            34
+        ],
+        "numeros_em_falta": [
+            38,
+            45,
+            47
+        ]
+    },
+    "022/2011": {
+        "acertos": {
+            "ultimo_-_menor": [
+                20
+            ],
+            "diferenca_maior_menor_%_soma_impares": [
+                20
+            ],
+            "diferenca_maior_menor_%_soma": [
+                20
+            ],
+            "total_numeros_%_diferenca_maior_menor": [
+                5
+            ],
+            "ultimo_-_media": [
+                9
+            ],
+            "diferenca_maior_menor_%_maior": [
+                20
+            ],
+            "total_numeros_%_soma": [
+                5
+            ],
+            "menor_//_total_numeros": [
+                5
+            ],
+            "total_numeros_%_soma_ultimos_digitos": [
+                5,
+                5
+            ],
+            "maior_//_total_numeros": [
+                9
+            ],
+            "ultimo_//_total_numeros": [
+                9
+            ],
+            "total_numeros_%_soma_pares": [
+                5
+            ],
+            "maior_%_menor": [
+                20
+            ],
+            "ultimo_%_menor": [
+                20
+            ]
+        },
+        "numeros_previstos": [
+            5,
+            9,
+            20
+        ],
+        "numeros_em_falta": [
+            28,
+            49
+        ]
+    },
+    "023/2011": {
+        "acertos": {
+            "diferenca_maior_menor_%_primeiro": [
+                4
+            ],
+            "maior_%_primeiro": [
+                4
+            ],
+            "ultimo_%_menor": [
+                4
+            ],
+            "diferenca_maior_menor_//_primeiro": [
+                8
+            ],
+            "media_//_primeiro": [
+                4
+            ],
+            "media_-_total_numeros": [
+                17
+            ],
+            "soma_pares_%_diferenca_maior_menor": [
+                4
+            ],
+            "diferenca_maior_menor_//_total_numeros": [
+                8
+            ],
+            "soma_pares_-_total_numeros": [
+                43
+            ],
+            "soma_pares_-_menor": [
+                43
+            ],
+            "diferenca_maior_menor_//_menor": [
+                8
+            ]
+        },
+        "numeros_previstos": [
+            4,
+            8,
+            17,
+            43
+        ],
+        "numeros_em_falta": [
+            42
+        ]
+    },
+    "024/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_//_soma_ultimos_digitos": [
+                1
+            ],
+            "total_numeros_//_primeiro": [
+                1,
+                1
+            ],
+            "soma_ultimos_digitos_%_soma": [
+                24
+            ],
+            "diferenca_maior_menor_-_media": [
+                17
+            ],
+            "soma_ultimos_digitos_%_maior": [
+                24
+            ],
+            "total_numeros_//_menor": [
+                1
+            ],
+            "diferenca_maior_menor_-_soma_ultimos_digitos": [
+                15
+            ],
+            "diferenca_maior_menor_//_media": [
+                1
+            ],
+            "soma_pares_//_ultimo": [
+                1
+            ],
+            "soma_impares_%_maior": [
+                17,
+                17
+            ],
+            "soma_ultimos_digitos_%_diferenca_maior_menor": [
+                24
+            ],
+            "soma_pares_%_diferenca_maior_menor": [
+                15
+            ],
+            "soma_impares_//_diferenca_maior_menor": [
+                1,
+                1
+            ],
+            "total_numeros_-_primeiro": [
+                1
+            ],
+            "diferenca_maior_menor_//_diferenca_maior_menor": [
+                1,
+                1
+            ],
+            "total_numeros_%_primeiro": [
+                1
+            ],
+            "diferenca_maior_menor_%_soma_ultimos_digitos": [
+                15
+            ]
+        },
+        "numeros_previstos": [
+            1,
+            15,
+            17,
+            24
+        ],
+        "numeros_em_falta": [
+            45
+        ]
+    },
+    "025/2011": {
+        "acertos": {
+            "menor_+_maior": [
+                46,
+                46
+            ],
+            "diferenca_maior_menor_%_total_numeros": [
+                4
+            ],
+            "media_%_maior": [
+                20
+            ],
+            "menor_*_media": [
+                20
+            ],
+            "soma_%_ultimo": [
+                12
+            ],
+            "soma_pares_+_soma_ultimos_digitos": [
+                46
+            ],
+            "media_//_menor": [
+                20
+            ],
+            "soma_//_soma_ultimos_digitos": [
+                4
+            ],
+            "total_numeros_-_primeiro": [
+                4
+            ],
+            "menor_+_ultimo": [
+                46
+            ],
+            "soma_pares_//_total_numeros": [
+                4
+            ],
+            "media_%_soma_ultimos_digitos": [
+                20
+            ]
+        },
+        "numeros_previstos": [
+            4,
+            12,
+            20,
+            46
+        ],
+        "numeros_em_falta": [
+            26
+        ]
+    },
+    "026/2011": {
+        "acertos": {
+            "maior_-_soma_ultimos_digitos": [
+                28
+            ],
+            "soma_//_primeiro": [
+                27
+            ],
+            "soma_//_menor": [
+                27
+            ],
+            "soma_pares_//_primeiro": [
+                27
+            ]
+        },
+        "numeros_previstos": [
+            27,
+            28
+        ],
+        "numeros_em_falta": [
+            7,
+            22,
+            44
+        ]
+    },
+    "027/2011": {
+        "acertos": {
+            "menor_%_media": [
+                7
+            ],
+            "maior_%_diferenca_maior_menor": [
+                7,
+                7
+            ],
+            "diferenca_maior_menor_%_soma_ultimos_digitos": [
+                9,
+                9
+            ],
+            "primeiro_%_maior": [
+                7
+            ]
+        },
+        "numeros_previstos": [
+            7,
+            9
+        ],
+        "numeros_em_falta": [
+            21,
+            27,
+            38
+        ]
+    },
+    "028/2011": {
+        "acertos": {
+            "soma_//_primeiro": [
+                14
+            ],
+            "soma_impares_%_maior": [
+                26
+            ],
+            "soma_impares_-_soma_pares": [
+                26
+            ],
+            "soma_impares_-_maior": [
+                26
+            ],
+            "soma_pares_-_media": [
+                18
+            ],
+            "soma_impares_-_ultimo": [
+                26
+            ]
+        },
+        "numeros_previstos": [
+            14,
+            18,
+            26
+        ],
+        "numeros_em_falta": [
+            16,
+            42
+        ]
+    },
+    "029/2011": {
+        "acertos": {
+            "media_+_soma_impares": [
+                23
+            ],
+            "total_numeros_+_diferenca_maior_menor": [
+                33
+            ],
+            "soma_%_ultimo": [
+                32,
+                32
+            ],
+            "soma_impares_+_media": [
+                23
+            ]
+        },
+        "numeros_previstos": [
+            23,
+            32,
+            33
+        ],
+        "numeros_em_falta": [
+            15,
+            20
+        ]
+    },
+    "030/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_%_menor": [
+                13
+            ],
+            "soma_ultimos_digitos_%_soma_impares": [
+                13
+            ],
+            "soma_pares_-_primeiro": [
+                37
+            ],
+            "media_+_soma_ultimos_digitos": [
+                37,
+                37
+            ]
+        },
+        "numeros_previstos": [
+            13,
+            37
+        ],
+        "numeros_em_falta": [
+            32,
+            34,
+            40
+        ]
+    },
+    "031/2011": {
+        "acertos": {
+            "media_%_menor": [
+                5
+            ],
+            "menor_+_soma_ultimos_digitos": [
+                29
+            ],
+            "total_numeros_%_soma": [
+                5
+            ],
+            "total_numeros_%_primeiro": [
+                5
+            ],
+            "total_numeros_%_maior": [
+                5,
+                5
+            ],
+            "primeiro_+_soma_ultimos_digitos": [
+                29
+            ],
+            "soma_impares_%_menor": [
+                11
+            ]
+        },
+        "numeros_previstos": [
+            5,
+            11,
+            29
+        ],
+        "numeros_em_falta": [
+            20,
+            41
+        ]
+    },
+    "032/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_%_diferenca_maior_menor": [
+                16
+            ],
+            "soma_ultimos_digitos_%_ultimo": [
+                16
+            ],
+            "media_-_total_numeros": [
+                16
+            ],
+            "soma_ultimos_digitos_%_media": [
+                16,
+                16
+            ],
+            "soma_ultimos_digitos_%_soma_pares": [
+                16
+            ],
+            "soma_ultimos_digitos_%_soma": [
+                16,
+                16
+            ]
+        },
+        "numeros_previstos": [
+            16
+        ],
+        "numeros_em_falta": [
+            19,
+            22,
+            33,
+            44
+        ]
+    },
+    "033/2011": {
+        "acertos": {
+            "soma_pares_%_maior": [
+                38,
+                38
+            ],
+            "ultimo_//_media": [
+                1,
+                1
+            ],
+            "soma_ultimos_digitos_%_media": [
+                24,
+                24
+            ],
+            "media_//_media": [
+                1
+            ],
+            "soma_pares_//_ultimo": [
+                1
+            ],
+            "soma_ultimos_digitos_//_soma_ultimos_digitos": [
+                1
+            ],
+            "maior_//_diferenca_maior_menor": [
+                1
+            ],
+            "menor_//_menor": [
+                1
+            ],
+            "primeiro_+_menor": [
+                32
+            ],
+            "menor_+_primeiro": [
+                32
+            ],
+            "total_numeros_//_total_numeros": [
+                1
+            ],
+            "soma_ultimos_digitos_%_maior": [
+                24
+            ]
+        },
+        "numeros_previstos": [
+            1,
+            24,
+            32,
+            38
+        ],
+        "numeros_em_falta": [
+            13
+        ]
+    },
+    "034/2011": {
+        "acertos": {
+            "total_numeros_+_primeiro": [
+                6
+            ],
+            "total_numeros_+_menor": [
+                6,
+                6
+            ],
+            "media_+_soma_impares": [
+                35
+            ],
+            "soma_impares_+_media": [
+                35
+            ],
+            "soma_//_soma_ultimos_digitos": [
+                6
+            ],
+            "total_numeros_*_total_numeros": [
+                25
+            ],
+            "total_numeros_+_soma_impares": [
+                19,
+                19
+            ]
+        },
+        "numeros_previstos": [
+            6,
+            19,
+            25,
+            35
+        ],
+        "numeros_em_falta": [
+            40
+        ]
+    },
+    "035/2011": {
+        "acertos": {
+            "total_numeros_+_media": [
+                30
+            ]
+        },
+        "numeros_previstos": [
+            30
+        ],
+        "numeros_em_falta": [
+            29,
+            42,
+            44,
+            48
+        ]
+    },
+    "036/2011": {
+        "acertos": {
+            "ultimo_%_diferenca_maior_menor": [
+                10
+            ],
+            "total_numeros_+_soma_impares": [
+                34,
+                34
+            ],
+            "menor_-_diferenca_maior_menor": [
+                10
+            ],
+            "diferenca_maior_menor_+_primeiro": [
+                48
+            ],
+            "total_numeros_+_menor": [
+                34
+            ],
+            "soma_//_diferenca_maior_menor": [
+                10
+            ],
+            "total_numeros_+_primeiro": [
+                34
+            ],
+            "diferenca_maior_menor_+_menor": [
+                48
+            ],
+            "soma_impares_+_total_numeros": [
+                34
+            ],
+            "maior_%_soma_pares": [
+                48
+            ],
+            "soma_impares_-_total_numeros": [
+                24,
+                24
+            ],
+            "ultimo_%_media": [
+                10
+            ],
+            "menor_+_diferenca_maior_menor": [
+                48,
+                48
+            ],
+            "primeiro_%_diferenca_maior_menor": [
+                10
+            ],
+            "primeiro_-_total_numeros": [
+                24
+            ]
+        },
+        "numeros_previstos": [
+            10,
+            24,
+            34,
+            48
+        ],
+        "numeros_em_falta": [
+            14
+        ]
+    },
+    "037/2011": {
+        "acertos": {
+            "total_numeros_+_media": [
+                31
+            ]
+        },
+        "numeros_previstos": [
+            31
+        ],
+        "numeros_em_falta": [
+            6,
+            14,
+            43,
+            47
+        ]
+    },
+    "038/2011": {
+        "acertos": {
+            "diferenca_maior_menor_+_menor": [
+                47
+            ],
+            "ultimo_-_total_numeros": [
+                42
+            ],
+            "ultimo_-_media": [
+                19
+            ],
+            "maior_%_media": [
+                19
+            ],
+            "primeiro_+_diferenca_maior_menor": [
+                47
+            ],
+            "maior_-_media": [
+                19
+            ]
+        },
+        "numeros_previstos": [
+            19,
+            42,
+            47
+        ],
+        "numeros_em_falta": [
+            9,
+            48
+        ]
+    },
+    "039/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_+_primeiro": [
+                44,
+                44
+            ],
+            "soma_ultimos_digitos_+_total_numeros": [
+                40,
+                40
+            ],
+            "diferenca_maior_menor_+_total_numeros": [
+                44
+            ],
+            "total_numeros_+_soma_ultimos_digitos": [
+                40
+            ]
+        },
+        "numeros_previstos": [
+            40,
+            44
+        ],
+        "numeros_em_falta": [
+            29,
+            36,
+            46
+        ]
+    },
+    "040/2011": {
+        "acertos": {
+            "diferenca_maior_menor_%_soma_pares": [
+                17
+            ],
+            "diferenca_maior_menor_%_menor": [
+                17,
+                17
+            ],
+            "maior_-_media": [
+                7
+            ],
+            "ultimo_%_media": [
+                7,
+                7
+            ],
+            "media_-_diferenca_maior_menor": [
+                22
+            ],
+            "diferenca_maior_menor_%_maior": [
+                17
+            ],
+            "media_%_soma_pares": [
+                39
+            ],
+            "diferenca_maior_menor_%_ultimo": [
+                17
+            ],
+            "media_%_soma": [
+                39
+            ],
+            "total_numeros_+_diferenca_maior_menor": [
+                22
+            ],
+            "ultimo_-_media": [
+                7
+            ],
+            "soma_//_total_numeros": [
+                39
+            ],
+            "soma_//_soma_ultimos_digitos": [
+                7
+            ],
+            "maior_-_soma_impares": [
+                17
+            ]
+        },
+        "numeros_previstos": [
+            7,
+            17,
+            22,
+            39
+        ],
+        "numeros_em_falta": [
+            36
+        ]
+    },
+    "041/2011": {
+        "acertos": {
+            "menor_*_total_numeros": [
+                35
+            ],
+            "media_-_total_numeros": [
+                19,
+                19
+            ],
+            "soma_pares_%_diferenca_maior_menor": [
+                26
+            ],
+            "soma_pares_-_diferenca_maior_menor": [
+                26
+            ],
+            "soma_pares_%_ultimo": [
+                19,
+                19
+            ]
+        },
+        "numeros_previstos": [
+            19,
+            26,
+            35
+        ],
+        "numeros_em_falta": [
+            22,
+            33
+        ]
+    },
+    "042/2011": {
+        "acertos": {
+            "total_numeros_%_media": [
+                5,
+                5
+            ],
+            "total_numeros_%_ultimo": [
+                5
+            ],
+            "ultimo_//_total_numeros": [
+                7
+            ],
+            "total_numeros_%_primeiro": [
+                5
+            ],
+            "soma_impares_//_diferenca_maior_menor": [
+                5
+            ],
+            "total_numeros_%_maior": [
+                5
+            ],
+            "soma_//_menor": [
+                7
+            ]
+        },
+        "numeros_previstos": [
+            5,
+            7
+        ],
+        "numeros_em_falta": [
+            15,
+            24,
+            31
+        ]
+    },
+    "043/2011": {
+        "acertos": {
+            "menor_+_diferenca_maior_menor": [
+                31
+            ],
+            "soma_impares_//_total_numeros": [
+                11
+            ],
+            "ultimo_%_soma_impares": [
+                31
+            ],
+            "primeiro_+_diferenca_maior_menor": [
+                31
+            ],
+            "soma_pares_-_menor": [
+                19
+            ]
+        },
+        "numeros_previstos": [
+            11,
+            19,
+            31
+        ],
+        "numeros_em_falta": [
+            38,
+            49
+        ]
+    },
+    "044/2011": {
+        "acertos": {
+            "soma_//_soma_ultimos_digitos": [
+                5
+            ],
+            "ultimo_//_total_numeros": [
+                9
+            ],
+            "soma_pares_%_menor": [
+                5,
+                5
+            ],
+            "total_numeros_%_soma_impares": [
+                5
+            ],
+            "soma_%_menor": [
+                5
+            ],
+            "soma_ultimos_digitos_//_primeiro": [
+                2
+            ],
+            "soma_ultimos_digitos_//_menor": [
+                2
+            ],
+            "total_numeros_%_ultimo": [
+                5
+            ],
+            "soma_impares_//_diferenca_maior_menor": [
+                2
+            ],
+            "soma_impares_//_ultimo": [
+                2
+            ]
+        },
+        "numeros_previstos": [
+            2,
+            5,
+            9
+        ],
+        "numeros_em_falta": [
+            42,
+            49
+        ]
+    },
+    "045/2011": {
+        "acertos": {
+            "maior_%_soma_ultimos_digitos": [
+                22,
+                22
+            ],
+            "soma_pares_%_diferenca_maior_menor": [
+                44
+            ],
+            "soma_pares_//_menor": [
+                22
+            ],
+            "soma_impares_%_total_numeros": [
+                3
+            ],
+            "soma_ultimos_digitos_-_total_numeros": [
+                22
+            ],
+            "soma_impares_//_media": [
+                3,
+                3
+            ],
+            "maior_-_total_numeros": [
+                44
+            ],
+            "soma_pares_%_soma": [
+                44
+            ],
+            "soma_pares_%_soma_impares": [
+                44
+            ]
+        },
+        "numeros_previstos": [
+            3,
+            22,
+            44
+        ],
+        "numeros_em_falta": [
+            32,
+            33
+        ]
+    },
+    "046/2011": {
+        "acertos": {
+            "soma_impares_-_total_numeros": [
+                31
+            ],
+            "media_+_total_numeros": [
+                31
+            ]
+        },
+        "numeros_previstos": [
+            31
+        ],
+        "numeros_em_falta": [
+            11,
+            19,
+            23,
+            30
+        ]
+    },
+    "047/2011": {
+        "acertos": {
+            "ultimo_-_soma_ultimos_digitos": [
+                17
+            ],
+            "menor_+_total_numeros": [
+                16
+            ],
+            "diferenca_maior_menor_+_diferenca_maior_menor": [
+                40
+            ],
+            "maior_-_soma_ultimos_digitos": [
+                17
+            ],
+            "media_-_total_numeros": [
+                17
+            ],
+            "primeiro_+_total_numeros": [
+                16
+            ]
+        },
+        "numeros_previstos": [
+            16,
+            17,
+            40
+        ],
+        "numeros_em_falta": [
+            32,
+            47
+        ]
+    },
+    "048/2011": {
+        "acertos": {
+            "primeiro_+_primeiro": [
+                32
+            ],
+            "diferenca_maior_menor_+_total_numeros": [
+                36
+            ],
+            "primeiro_+_menor": [
+                32
+            ],
+            "ultimo_-_total_numeros": [
+                42
+            ],
+            "soma_impares_-_soma_ultimos_digitos": [
+                42
+            ]
+        },
+        "numeros_previstos": [
+            32,
+            36,
+            42
+        ],
+        "numeros_em_falta": [
+            21,
+            27
+        ]
+    },
+    "049/2011": {
+        "acertos": {
+            "total_numeros_+_diferenca_maior_menor": [
+                26,
+                26
+            ],
+            "soma_pares_%_ultimo": [
+                26,
+                26
+            ],
+            "menor_+_total_numeros": [
+                26
+            ],
+            "diferenca_maior_menor_+_total_numeros": [
+                26
+            ],
+            "total_numeros_+_primeiro": [
+                26
+            ],
+            "media_-_total_numeros": [
+                26
+            ],
+            "primeiro_-_soma_ultimos_digitos": [
+                3
+            ],
+            "soma_pares_//_media": [
+                3
+            ],
+            "menor_%_soma_ultimos_digitos": [
+                3
+            ],
+            "diferenca_maior_menor_%_soma_ultimos_digitos": [
+                3
+            ],
+            "soma_pares_%_maior": [
+                26
+            ],
+            "soma_//_primeiro": [
+                7
+            ]
+        },
+        "numeros_previstos": [
+            3,
+            7,
+            26
+        ],
+        "numeros_em_falta": [
+            30,
+            45
+        ]
+    },
+    "050/2011": {
+        "acertos": {
+            "primeiro_+_menor": [
+                6
+            ],
+            "total_numeros_%_soma": [
+                5
+            ],
+            "total_numeros_%_soma_pares": [
+                5
+            ],
+            "soma_//_media": [
+                5
+            ],
+            "total_numeros_%_maior": [
+                5
+            ]
+        },
+        "numeros_previstos": [
+            5,
+            6
+        ],
+        "numeros_em_falta": [
+            11,
+            17,
+            36
+        ]
+    },
+    "051/2011": {
+        "acertos": {
+            "soma_//_soma_ultimos_digitos": [
+                3,
+                3
+            ],
+            "ultimo_-_soma_impares": [
+                3
+            ],
+            "maior_%_soma_impares": [
+                3
+            ],
+            "media_%_soma_pares": [
+                15
+            ],
+            "soma_impares_%_primeiro": [
+                3
+            ],
+            "soma_ultimos_digitos_+_media": [
+                40
+            ],
+            "media_%_diferenca_maior_menor": [
+                15
+            ]
+        },
+        "numeros_previstos": [
+            3,
+            15,
+            40
+        ],
+        "numeros_em_falta": [
+            26,
+            42
+        ]
+    },
+    "052/2011": {
+        "acertos": {
+            "menor_+_soma_ultimos_digitos": [
+                19,
+                19
+            ],
+            "maior_-_soma_impares": [
+                24,
+                24
+            ],
+            "maior_-_total_numeros": [
+                37,
+                37
+            ],
+            "soma_ultimos_digitos_+_soma_impares": [
+                34
+            ]
+        },
+        "numeros_previstos": [
+            19,
+            24,
+            34,
+            37
+        ],
+        "numeros_em_falta": [
+            10
+        ]
+    },
+    "053/2011": {
+        "acertos": {
+            "total_numeros_*_total_numeros": [
+                25
+            ],
+            "diferenca_maior_menor_-_total_numeros": [
+                22
+            ]
+        },
+        "numeros_previstos": [
+            22,
+            25
+        ],
+        "numeros_em_falta": [
+            17,
+            33,
+            46
+        ]
+    },
+    "054/2011": {
+        "acertos": {
+            "primeiro_-_total_numeros": [
+                12
+            ],
+            "soma_ultimos_digitos_+_primeiro": [
+                40
+            ],
+            "ultimo_%_menor": [
+                12
+            ],
+            "menor_-_total_numeros": [
+                12,
+                12
+            ],
+            "diferenca_maior_menor_-_primeiro": [
+                12
+            ],
+            "maior_%_menor": [
+                12
+            ]
+        },
+        "numeros_previstos": [
+            12,
+            40
+        ],
+        "numeros_em_falta": [
+            15,
+            16,
+            26
+        ]
+    },
+    "055/2011": {
+        "acertos": {
+            "diferenca_maior_menor_-_menor": [
+                16,
+                16
+            ],
+            "diferenca_maior_menor_%_media": [
+                7
+            ],
+            "soma_pares_%_primeiro": [
+                10
+            ],
+            "total_numeros_+_total_numeros": [
+                10
+            ],
+            "soma_ultimos_digitos_+_diferenca_maior_menor": [
+                47
+            ],
+            "soma_ultimos_digitos_-_menor": [
+                7
+            ],
+            "media_-_total_numeros": [
+                16
+            ],
+            "soma_ultimos_digitos_-_primeiro": [
+                7
+            ]
+        },
+        "numeros_previstos": [
+            7,
+            10,
+            16,
+            47
+        ],
+        "numeros_em_falta": [
+            39
+        ]
+    },
+    "056/2011": {
+        "acertos": {
+            "media_-_primeiro": [
+                16
+            ],
+            "media_-_menor": [
+                16
+            ]
+        },
+        "numeros_previstos": [
+            16
+        ],
+        "numeros_em_falta": [
+            12,
+            15,
+            28,
+            31
+        ]
+    },
+    "057/2011": {
+        "acertos": {
+            "soma_impares_%_maior": [
+                15,
+                15
+            ],
+            "media_-_total_numeros": [
+                15
+            ],
+            "diferenca_maior_menor_+_diferenca_maior_menor": [
+                38
+            ]
+        },
+        "numeros_previstos": [
+            15,
+            38
+        ],
+        "numeros_em_falta": [
+            32,
+            36,
+            45
+        ]
+    },
+    "058/2011": {
+        "acertos": {
+            "maior_%_soma_impares": [
+                45
+            ],
+            "maior_%_soma": [
+                45
+            ],
+            "menor_+_diferenca_maior_menor": [
+                45
+            ]
+        },
+        "numeros_previstos": [
+            45
+        ],
+        "numeros_em_falta": [
+            18,
+            22,
+            32,
+            35
+        ]
+    },
+    "059/2011": {
+        "acertos": {},
+        "numeros_previstos": [],
+        "numeros_em_falta": [
+            3,
+            7,
+            11,
+            16,
+            41
+        ]
+    },
+    "060/2011": {
+        "acertos": {
+            "media_+_media": [
+                30
+            ]
+        },
+        "numeros_previstos": [
+            30
+        ],
+        "numeros_em_falta": [
+            11,
+            21,
+            27,
+            49
+        ]
+    },
+    "061/2011": {
+        "acertos": {
+            "maior_%_soma_pares": [
+                19,
+                19
+            ],
+            "maior_%_media": [
+                22
+            ],
+            "menor_+_total_numeros": [
+                16
+            ],
+            "ultimo_-_media": [
+                22
+            ],
+            "total_numeros_+_primeiro": [
+                16
+            ],
+            "media_-_primeiro": [
+                16
+            ],
+            "menor_+_primeiro": [
+                22
+            ],
+            "menor_+_menor": [
+                22
+            ]
+        },
+        "numeros_previstos": [
+            16,
+            19,
+            22
+        ],
+        "numeros_em_falta": [
+            20,
+            31
+        ]
+    },
+    "062/2011": {
+        "acertos": {
+            "soma_pares_-_media": [
+                37,
+                37
+            ],
+            "total_numeros_+_ultimo": [
+                36
+            ],
+            "media_+_diferenca_maior_menor": [
+                36
+            ]
+        },
+        "numeros_previstos": [
+            36,
+            37
+        ],
+        "numeros_em_falta": [
+            6,
+            17,
+            43
+        ]
+    },
+    "063/2011": {
+        "acertos": {
+            "ultimo_+_primeiro": [
+                49,
+                49
+            ],
+            "maior_+_menor": [
+                49
+            ],
+            "soma_ultimos_digitos_%_diferenca_maior_menor": [
+                29
+            ],
+            "menor_+_ultimo": [
+                49
+            ],
+            "primeiro_%_media": [
+                6
+            ],
+            "primeiro_%_soma": [
+                6
+            ],
+            "ultimo_-_diferenca_maior_menor": [
+                6,
+                6,
+                6
+            ],
+            "soma_ultimos_digitos_%_soma_impares": [
+                29
+            ],
+            "soma_ultimos_digitos_%_ultimo": [
+                29
+            ],
+            "primeiro_+_maior": [
+                49
+            ],
+            "menor_%_ultimo": [
+                6
+            ],
+            "menor_%_soma": [
+                6
+            ]
+        },
+        "numeros_previstos": [
+            6,
+            29,
+            49
+        ],
+        "numeros_em_falta": [
+            22,
+            25
+        ]
+    },
+    "064/2011": {
+        "acertos": {
+            "soma_%_diferenca_maior_menor": [
+                2,
+                2
+            ],
+            "soma_ultimos_digitos_%_diferenca_maior_menor": [
+                31
+            ],
+            "media_%_primeiro": [
+                2
+            ]
+        },
+        "numeros_previstos": [
+            2,
+            31
+        ],
+        "numeros_em_falta": [
+            11,
+            29,
+            44
+        ]
+    },
+    "065/2011": {
+        "acertos": {
+            "menor_%_diferenca_maior_menor": [
+                2
+            ],
+            "maior_%_total_numeros": [
+                4
+            ],
+            "maior_-_diferenca_maior_menor": [
+                2
+            ],
+            "menor_%_soma_ultimos_digitos": [
+                2
+            ],
+            "ultimo_%_total_numeros": [
+                4
+            ],
+            "diferenca_maior_menor_%_total_numeros": [
+                2
+            ],
+            "primeiro_+_primeiro": [
+                4
+            ],
+            "maior_//_soma_ultimos_digitos": [
+                2
+            ],
+            "menor_%_soma": [
+                2
+            ],
+            "soma_pares_%_diferenca_maior_menor": [
+                4,
+                4
+            ],
+            "primeiro_%_soma_pares": [
+                2
+            ],
+            "primeiro_*_primeiro": [
+                4
+            ],
+            "soma_impares_%_media": [
+                2
+            ],
+            "soma_impares_//_soma_ultimos_digitos": [
+                4
+            ],
+            "menor_*_primeiro": [
+                4
+            ],
+            "menor_%_media": [
+                2
+            ],
+            "diferenca_maior_menor_-_primeiro": [
+                40
+            ]
+        },
+        "numeros_previstos": [
+            2,
+            4,
+            40
+        ],
+        "numeros_em_falta": [
+            9,
+            45
+        ]
+    },
+    "066/2011": {
+        "acertos": {
+            "total_numeros_%_soma_ultimos_digitos": [
+                5
+            ],
+            "soma_impares_-_soma_pares": [
+                8,
+                8
+            ],
+            "soma_impares_//_media": [
+                2
+            ],
+            "total_numeros_%_soma": [
+                5
+            ],
+            "soma_//_maior": [
+                2
+            ],
+            "soma_impares_%_soma_pares": [
+                8,
+                8
+            ],
+            "menor_%_total_numeros": [
+                2
+            ],
+            "soma_pares_-_menor": [
+                44
+            ],
+            "ultimo_%_soma_ultimos_digitos": [
+                5,
+                5
+            ],
+            "maior_//_soma_ultimos_digitos": [
+                2
+            ],
+            "primeiro_%_maior": [
+                2,
+                2
+            ],
+            "maior_//_media": [
+                2
+            ],
+            "menor_%_soma_pares": [
+                2
+            ],
+            "diferenca_maior_menor_//_total_numeros": [
+                8
+            ],
+            "total_numeros_%_soma_pares": [
+                5
+            ],
+            "primeiro_%_diferenca_maior_menor": [
+                2
+            ],
+            "primeiro_%_soma_ultimos_digitos": [
+                2
+            ]
+        },
+        "numeros_previstos": [
+            2,
+            5,
+            8,
+            44
+        ],
+        "numeros_em_falta": [
+            35
+        ]
+    },
+    "067/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_%_soma_impares": [
+                24
+            ],
+            "soma_ultimos_digitos_%_soma": [
+                24,
+                24
+            ],
+            "soma_pares_%_soma_ultimos_digitos": [
+                6
+            ],
+            "soma_impares_%_soma": [
+                40
+            ],
+            "soma_ultimos_digitos_-_media": [
+                6
+            ],
+            "soma_%_ultimo": [
+                6
+            ],
+            "soma_impares_-_soma_ultimos_digitos": [
+                16
+            ],
+            "soma_-_soma_pares": [
+                40
+            ]
+        },
+        "numeros_previstos": [
+            6,
+            16,
+            24,
+            40
+        ],
+        "numeros_em_falta": [
+            15
+        ]
+    },
+    "068/2011": {
+        "acertos": {
+            "soma_impares_+_media": [
+                35
+            ],
+            "soma_impares_%_ultimo": [
+                15
+            ],
+            "soma_impares_%_media": [
+                15
+            ],
+            "maior_-_total_numeros": [
+                35
+            ],
+            "media_+_soma_impares": [
+                35
+            ],
+            "media_-_total_numeros": [
+                15
+            ],
+            "soma_impares_%_diferenca_maior_menor": [
+                15
+            ],
+            "soma_impares_%_soma_pares": [
+                15
+            ],
+            "soma_impares_%_soma": [
+                15
+            ]
+        },
+        "numeros_previstos": [
+            15,
+            35
+        ],
+        "numeros_em_falta": [
+            7,
+            22,
+            26
+        ]
+    },
+    "069/2011": {
+        "acertos": {
+            "ultimo_//_primeiro": [
+                5,
+                5
+            ],
+            "total_numeros_%_menor": [
+                5
+            ],
+            "soma_//_primeiro": [
+                15
+            ]
+        },
+        "numeros_previstos": [
+            5,
+            15
+        ],
+        "numeros_em_falta": [
+            16,
+            37,
+            47
+        ]
+    },
+    "070/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_-_primeiro": [
+                25
+            ],
+            "menor_*_total_numeros": [
+                25
+            ],
+            "media_%_soma_ultimos_digitos": [
+                24
+            ],
+            "soma_pares_+_soma_pares": [
+                32
+            ],
+            "primeiro_*_primeiro": [
+                25
+            ]
+        },
+        "numeros_previstos": [
+            24,
+            25,
+            32
+        ],
+        "numeros_em_falta": [
+            28,
+            33
+        ]
+    },
+    "071/2011": {
+        "acertos": {
+            "total_numeros_%_soma": [
+                5
+            ],
+            "total_numeros_%_soma_pares": [
+                5,
+                5
+            ],
+            "soma_impares_-_diferenca_maior_menor": [
+                49
+            ],
+            "media_%_soma_pares": [
+                28
+            ],
+            "media_//_total_numeros": [
+                5
+            ],
+            "maior_-_total_numeros": [
+                28
+            ]
+        },
+        "numeros_previstos": [
+            5,
+            28,
+            49
+        ],
+        "numeros_em_falta": [
+            30,
+            40
+        ]
+    },
+    "072/2011": {
+        "acertos": {},
+        "numeros_previstos": [],
+        "numeros_em_falta": [
+            6,
+            12,
+            18,
+            21,
+            34
+        ]
+    },
+    "073/2011": {
+        "acertos": {},
+        "numeros_previstos": [],
+        "numeros_em_falta": [
+            9,
+            17,
+            31,
+            47,
+            48
+        ]
+    },
+    "074/2011": {
+        "acertos": {
+            "soma_impares_//_ultimo": [
+                2
+            ],
+            "soma_impares_//_diferenca_maior_menor": [
+                2,
+                2
+            ],
+            "soma_-_soma_impares": [
+                48
+            ],
+            "menor_+_soma_ultimos_digitos": [
+                41
+            ],
+            "ultimo_%_soma_impares": [
+                48
+            ],
+            "soma_%_media": [
+                2
+            ],
+            "diferenca_maior_menor_+_primeiro": [
+                48
+            ],
+            "soma_ultimos_digitos_%_media": [
+                2
+            ]
+        },
+        "numeros_previstos": [
+            2,
+            41,
+            48
+        ],
+        "numeros_em_falta": [
+            27,
+            33
+        ]
+    },
+    "075/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_-_menor": [
+                19,
+                19
+            ]
+        },
+        "numeros_previstos": [
+            19
+        ],
+        "numeros_em_falta": [
+            9,
+            14,
+            18,
+            41
+        ]
+    },
+    "076/2011": {
+        "acertos": {
+            "soma_impares_//_menor": [
+                7
+            ],
+            "soma_impares_%_primeiro": [
+                6,
+                6
+            ],
+            "soma_%_soma_impares": [
+                32,
+                32
+            ],
+            "soma_impares_%_menor": [
+                6
+            ],
+            "diferenca_maior_menor_%_maior": [
+                32
+            ],
+            "soma_ultimos_digitos_//_total_numeros": [
+                6,
+                6
+            ],
+            "soma_pares_//_total_numeros": [
+                6
+            ],
+            "soma_pares_%_soma_impares": [
+                32
+            ],
+            "diferenca_maior_menor_%_soma": [
+                32
+            ]
+        },
+        "numeros_previstos": [
+            6,
+            7,
+            32
+        ],
+        "numeros_em_falta": [
+            44,
+            48
+        ]
+    },
+    "077/2011": {
+        "acertos": {
+            "diferenca_maior_menor_%_soma_pares": [
+                42
+            ],
+            "menor_*_total_numeros": [
+                30
+            ]
+        },
+        "numeros_previstos": [
+            30,
+            42
+        ],
+        "numeros_em_falta": [
+            24,
+            28,
+            44
+        ]
+    },
+    "078/2011": {
+        "acertos": {},
+        "numeros_previstos": [],
+        "numeros_em_falta": [
+            7,
+            10,
+            34,
+            41,
+            45
+        ]
+    },
+    "079/2011": {
+        "acertos": {
+            "soma_%_diferenca_maior_menor": [
+                23
+            ],
+            "soma_impares_-_ultimo": [
+                48,
+                48
+            ],
+            "primeiro_*_primeiro": [
+                49
+            ]
+        },
+        "numeros_previstos": [
+            23,
+            48,
+            49
+        ],
+        "numeros_em_falta": [
+            9,
+            16
+        ]
+    },
+    "080/2011": {
+        "acertos": {
+            "primeiro_%_maior": [
+                9
+            ],
+            "soma_pares_-_maior": [
+                15,
+                15,
+                15
+            ],
+            "menor_%_soma_ultimos_digitos": [
+                9
+            ],
+            "ultimo_//_total_numeros": [
+                9
+            ],
+            "primeiro_*_total_numeros": [
+                45
+            ],
+            "menor_%_soma_impares": [
+                9,
+                9
+            ],
+            "ultimo_-_diferenca_maior_menor": [
+                9
+            ],
+            "primeiro_%_soma": [
+                9,
+                9
+            ],
+            "soma_pares_%_maior": [
+                15
+            ],
+            "diferenca_maior_menor_+_total_numeros": [
+                45
+            ],
+            "maior_%_diferenca_maior_menor": [
+                9
+            ],
+            "soma_impares_//_primeiro": [
+                9,
+                9
+            ]
+        },
+        "numeros_previstos": [
+            9,
+            15,
+            45
+        ],
+        "numeros_em_falta": [
+            7,
+            46
+        ]
+    },
+    "081/2011": {
+        "acertos": {
+            "soma_%_ultimo": [
+                30
+            ],
+            "soma_impares_%_maior": [
+                30
+            ],
+            "soma_pares_-_media": [
+                22
+            ],
+            "soma_ultimos_digitos_%_media": [
+                8
+            ],
+            "soma_%_maior": [
+                30
+            ],
+            "soma_%_soma_pares": [
+                30
+            ]
+        },
+        "numeros_previstos": [
+            8,
+            22,
+            30
+        ],
+        "numeros_em_falta": [
+            10,
+            16
+        ]
+    },
+    "082/2011": {
+        "acertos": {
+            "soma_%_diferenca_maior_menor": [
+                20
+            ],
+            "diferenca_maior_menor_+_diferenca_maior_menor": [
+                44
+            ],
+            "soma_//_total_numeros": [
+                17,
+                17
+            ],
+            "soma_pares_%_diferenca_maior_menor": [
+                20
+            ]
+        },
+        "numeros_previstos": [
+            17,
+            20,
+            44
+        ],
+        "numeros_em_falta": [
+            23,
+            31
+        ]
+    },
+    "083/2011": {
+        "acertos": {},
+        "numeros_previstos": [],
+        "numeros_em_falta": [
+            19,
+            26,
+            28,
+            36,
+            47
+        ]
+    },
+    "084/2011": {
+        "acertos": {
+            "soma_pares_//_primeiro": [
+                4,
+                4
+            ],
+            "soma_ultimos_digitos_%_primeiro": [
+                17,
+                17
+            ],
+            "diferenca_maior_menor_%_soma": [
+                28
+            ],
+            "soma_pares_%_media": [
+                28
+            ],
+            "diferenca_maior_menor_%_soma_impares": [
+                28
+            ],
+            "primeiro_%_total_numeros": [
+                4,
+                4
+            ],
+            "soma_ultimos_digitos_%_menor": [
+                17
+            ]
+        },
+        "numeros_previstos": [
+            4,
+            17,
+            28
+        ],
+        "numeros_em_falta": [
+            18,
+            34
+        ]
+    },
+    "085/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_+_menor": [
+                35
+            ],
+            "total_numeros_+_diferenca_maior_menor": [
+                35
+            ],
+            "soma_ultimos_digitos_+_primeiro": [
+                35,
+                35
+            ],
+            "media_-_total_numeros": [
+                15
+            ]
+        },
+        "numeros_previstos": [
+            15,
+            35
+        ],
+        "numeros_em_falta": [
+            23,
+            48,
+            49
+        ]
+    },
+    "086/2011": {
+        "acertos": {
+            "total_numeros_%_primeiro": [
+                5
+            ],
+            "soma_%_menor": [
+                5
+            ],
+            "total_numeros_%_maior": [
+                5
+            ]
+        },
+        "numeros_previstos": [
+            5
+        ],
+        "numeros_em_falta": [
+            6,
+            12,
+            21,
+            27
+        ]
+    },
+    "087/2011": {
+        "acertos": {
+            "maior_%_soma_ultimos_digitos": [
+                6
+            ],
+            "primeiro_//_total_numeros": [
+                1
+            ],
+            "diferenca_maior_menor_//_media": [
+                1
+            ],
+            "soma_ultimos_digitos_//_media": [
+                1
+            ],
+            "soma_ultimos_digitos_//_soma_ultimos_digitos": [
+                1,
+                1,
+                1
+            ],
+            "soma_%_total_numeros": [
+                1
+            ],
+            "primeiro_//_menor": [
+                1,
+                1
+            ],
+            "ultimo_%_media": [
+                13
+            ],
+            "media_//_media": [
+                1
+            ],
+            "ultimo_//_soma_pares": [
+                1
+            ],
+            "ultimo_//_diferenca_maior_menor": [
+                1
+            ],
+            "diferenca_maior_menor_+_media": [
+                36,
+                36
+            ],
+            "total_numeros_//_menor": [
+                1
+            ]
+        },
+        "numeros_previstos": [
+            1,
+            6,
+            13,
+            36
+        ],
+        "numeros_em_falta": [
+            24
+        ]
+    },
+    "088/2011": {
+        "acertos": {
+            "menor_+_maior": [
+                37
+            ],
+            "primeiro_+_ultimo": [
+                37
+            ],
+            "soma_pares_//_media": [
+                4,
+                4
+            ],
+            "ultimo_+_menor": [
+                37
+            ],
+            "total_numeros_-_primeiro": [
+                4
+            ],
+            "soma_pares_//_total_numeros": [
+                13,
+                13
+            ],
+            "primeiro_+_maior": [
+                37
+            ],
+            "soma_//_soma_ultimos_digitos": [
+                4
+            ]
+        },
+        "numeros_previstos": [
+            4,
+            13,
+            37
+        ],
+        "numeros_em_falta": [
+            11,
+            22
+        ]
+    },
+    "089/2011": {
+        "acertos": {
+            "diferenca_maior_menor_%_media": [
+                16,
+                16
+            ],
+            "diferenca_maior_menor_%_maior": [
+                33
+            ],
+            "ultimo_-_primeiro": [
+                33
+            ],
+            "diferenca_maior_menor_%_ultimo": [
+                33
+            ],
+            "diferenca_maior_menor_-_media": [
+                16
+            ],
+            "total_numeros_+_diferenca_maior_menor": [
+                38
+            ],
+            "diferenca_maior_menor_+_total_numeros": [
+                38
+            ],
+            "diferenca_maior_menor_%_soma": [
+                33
+            ],
+            "soma_pares_+_menor": [
+                30,
+                30
+            ],
+            "ultimo_-_menor": [
+                33
+            ]
+        },
+        "numeros_previstos": [
+            16,
+            30,
+            33,
+            38
+        ],
+        "numeros_em_falta": [
+            45
+        ]
+    },
+    "090/2011": {
+        "acertos": {
+            "ultimo_%_menor": [
+                13
+            ],
+            "maior_-_soma_ultimos_digitos": [
+                23
+            ],
+            "maior_-_media": [
+                13,
+                13
+            ],
+            "maior_%_media": [
+                13
+            ],
+            "maior_%_primeiro": [
+                13
+            ]
+        },
+        "numeros_previstos": [
+            13,
+            23
+        ],
+        "numeros_em_falta": [
+            37,
+            40,
+            42
+        ]
+    },
+    "091/2011": {
+        "acertos": {
+            "soma_impares_%_menor": [
+                8,
+                8
+            ],
+            "maior_-_total_numeros": [
+                37
+            ],
+            "ultimo_%_media": [
+                11
+            ],
+            "maior_//_total_numeros": [
+                8
+            ]
+        },
+        "numeros_previstos": [
+            8,
+            11,
+            37
+        ],
+        "numeros_em_falta": [
+            43,
+            48
+        ]
+    },
+    "092/2011": {
+        "acertos": {
+            "soma_ultimos_digitos_-_primeiro": [
+                19
+            ],
+            "maior_-_media": [
+                19
+            ],
+            "diferenca_maior_menor_%_soma_ultimos_digitos": [
+                13
+            ],
+            "soma_%_soma_pares": [
+                35
+            ]
+        },
+        "numeros_previstos": [
+            13,
+            19,
+            35
+        ],
+        "numeros_em_falta": [
+            18,
+            36
+        ]
+    },
+    "093/2011": {
+        "acertos": {
+            "menor_+_diferenca_maior_menor": [
+                36,
+                36
+            ],
+            "ultimo_%_soma_impares": [
+                36
+            ],
+            "ultimo_%_soma_pares": [
+                36
+            ],
+            "media_-_primeiro": [
+                11,
+                11
+            ],
+            "media_%_menor": [
+                11
+            ],
+            "diferenca_maior_menor_+_menor": [
+                36
+            ],
+            "primeiro_+_diferenca_maior_menor": [
+                36
+            ]
+        },
+        "numeros_previstos": [
+            11,
+            36
+        ],
+        "numeros_em_falta": [
+            9,
+            15,
+            35
+        ]
+    },
+    "094/2011": {
+        "acertos": {
+            "maior_-_total_numeros": [
+                31
+            ],
+            "media_-_total_numeros": [
+                16
+            ],
+            "soma_ultimos_digitos_+_menor": [
+                35
+            ],
+            "menor_+_soma_ultimos_digitos": [
+                35
+            ],
+            "diferenca_maior_menor_-_menor": [
+                18
+            ],
+            "menor_+_menor": [
+                18
+            ],
+            "primeiro_+_soma_ultimos_digitos": [
+                35
+            ],
+            "soma_impares_%_diferenca_maior_menor": [
+                16
+            ]
+        },
+        "numeros_previstos": [
+            16,
+            18,
+            31,
+            35
+        ],
+        "numeros_em_falta": [
+            37
+        ]
+    },
+    "095/2011": {
+        "acertos": {
+            "soma_pares_%_diferenca_maior_menor": [
+                13,
+                13
+            ],
+            "soma_pares_-_diferenca_maior_menor": [
+                13
+            ],
+            "soma_pares_%_media": [
+                7
+            ]
+        },
+        "numeros_previstos": [
+            7,
+            13
+        ],
+        "numeros_em_falta": [
+            19,
+            20,
+            31
+        ]
+    }
+}
