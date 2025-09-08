@@ -1,16 +1,18 @@
-treinador.py# treinador.py
+# tol/scripts/treinador_funcoes.py
 import json
 import os
 import sys
 from collections import defaultdict
 from typing import Dict, List, Any
 
-# Adiciona o diretório-pai para importar as classes
+# Adiciona os diretórios-pai ao caminho para importar as classes
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from core.dados import Dados
+# Importa a classe Dados do diretório 'lib'
+from tol.lib.dados import Dados
+# Importa as funções do gerador no mesmo diretório
 from gerador_logicas import gerar_logicas, calcular_variaveis
 
 def treinar_e_encontrar_logica(ano_alvo: int):
@@ -37,6 +39,8 @@ def treinar_e_encontrar_logica(ano_alvo: int):
         print(f"\nAnalisando o sorteio {concurso_alvo}...")
 
         # 2. Gera as variáveis do sorteio anterior
+        if not historico_incremental:
+            continue
         variaveis_anteriores = calcular_variaveis(historico_incremental[-1]['numeros'])
         if not variaveis_anteriores:
             print("  ❌ Não há variáveis suficientes para gerar lógicas.")
@@ -55,7 +59,6 @@ def treinar_e_encontrar_logica(ano_alvo: int):
                 if previsao in numeros_alvo:
                     acertos_da_logica[logica['nome']].append(previsao)
             except Exception as e:
-                # Ignoramos lógicas que falham (por exemplo, erro de divisão)
                 continue
         
         numeros_acertados = set()
@@ -67,16 +70,16 @@ def treinar_e_encontrar_logica(ano_alvo: int):
             logicas_encontradas[concurso_alvo]['acertos'] = {
                 l: a for l, a in acertos_da_logica.items()
             }
-            logicas_encontradas[concurso_alvo]['numeros_previstos'] = list(numeros_acertados)
-            logicas_encontradas[concurso_alvo]['numeros_em_falta'] = list(numeros_alvo - numeros_acertados)
+            logicas_encontradas[concurso_alvo]['numeros_previstos'] = sorted(list(numeros_acertados))
+            logicas_encontradas[concurso_alvo]['numeros_em_falta'] = sorted(list(numeros_alvo - numeros_acertados))
             
-            print(f"  ✅ Acertos encontrados: {len(numeros_acertados)} de 5. Números: {sorted(list(numeros_acertados))}")
+            print(f"  ✅ Acertos encontrados: {len(numeros_acertados)} de 5. Números: {logicas_encontradas[concurso_alvo]['numeros_previstos']}")
             if logicas_encontradas[concurso_alvo]['numeros_em_falta']:
                 print(f"  ⚠️ Números em falta: {logicas_encontradas[concurso_alvo]['numeros_em_falta']}")
         else:
             logicas_encontradas[concurso_alvo]['acertos'] = {}
             logicas_encontradas[concurso_alvo]['numeros_previstos'] = []
-            logicas_encontradas[concurso_alvo]['numeros_em_falta'] = list(numeros_alvo)
+            logicas_encontradas[concurso_alvo]['numeros_em_falta'] = sorted(list(numeros_alvo))
             print("  ❌ Nenhuma lógica gerada encontrou acertos.")
     
     # 6. Salva o resultado final em um ficheiro JSON
@@ -87,4 +90,5 @@ def treinar_e_encontrar_logica(ano_alvo: int):
     print(f"\nEngenharia reversa para o ano {ano_alvo} concluída. Análise salva em '{nome_arquivo}'.")
 
 if __name__ == '__main__':
+    # O seu json é uma lista de sorteios, não um dicionário aninhado
     treinar_e_encontrar_logica(2011)
