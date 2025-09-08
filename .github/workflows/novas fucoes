@@ -1,0 +1,38 @@
+name: Testar e criar nova funçoes
+on:
+  workflow_dispatch:
+
+jobs:
+  test_heuristics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          # Use a versão estável mais recente do Python
+          python-version: "3.12" 
+
+      - name: 📦 Cache de Dependências
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-
+
+      - name: 🚀 Instalar Dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🧪 Executar Engenharia Reversa
+        env:
+          # Garante que o Python encontre os ficheiros 'lib' e 'scripts'
+          PYTHONPATH: ${{ github.workspace }}
+        run: python tol/scripts/treinador_funcoes.py
