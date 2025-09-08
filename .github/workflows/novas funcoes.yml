@@ -7,7 +7,8 @@ jobs:
   test_heuristics:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      # MUITO IMPORTANTE: Mudar de 'read' para 'write' para permitir commits
+      contents: write
 
     steps:
       - name: 📥 Checkout do Repositório
@@ -35,6 +36,14 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/treinador_funcoes.py
+
+      - name: 💾 Guardar Resultados via Commit
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add dados/engenharia_reversa_2011.json
+          git commit -m "Automatização: Adicionar ficheiro de análise de engenharia reversa" || echo "Nenhum ficheiro para commit"
+          git push
 
       - name: ⬆️ Carregar o Resultado da Análise
         uses: actions/upload-artifact@v4
