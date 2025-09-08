@@ -5,13 +5,13 @@ import sys
 from collections import defaultdict
 from typing import Dict, List, Any
 
-# Adiciona os diretórios-pai ao caminho para importar as classes
+# Adiciona o diretório-pai ao caminho para importar as classes
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 # Importa a classe Dados do diretório 'lib'
-from lib.dados import Dados
+from tol.lib.dados import Dados
 # Importa as funções do gerador no mesmo diretório
 from gerador_logicas import gerar_logicas, calcular_variaveis
 
@@ -20,7 +20,7 @@ def treinar_e_encontrar_logica(ano_alvo: int):
     
     # 1. Carrega todos os dados
     dados_manager = Dados()
-    sorteios_do_ano = [s for s in dados_manager.sorteios if int(s['concurso'].split('/')[1]) == ano_alvo]
+    sorteios_do_ano = [s for s in dados_manager.sorteios if s and s.get('concurso') and int(s['concurso'].split('/')[1]) == ano_alvo]
     
     if not sorteios_do_ano:
         print(f"Nenhum sorteio encontrado para o ano {ano_alvo}. Abortando.")
@@ -38,7 +38,6 @@ def treinar_e_encontrar_logica(ano_alvo: int):
 
         print(f"\nAnalisando o sorteio {concurso_alvo}...")
 
-        # 2. Gera as variáveis do sorteio anterior
         if not historico_incremental:
             continue
         variaveis_anteriores = calcular_variaveis(historico_incremental[-1]['numeros'])
@@ -46,12 +45,10 @@ def treinar_e_encontrar_logica(ano_alvo: int):
             print("  ❌ Não há variáveis suficientes para gerar lógicas.")
             continue
 
-        # 3. Gera as lógicas (as fórmulas)
         logicas_candidatas = gerar_logicas(variaveis_anteriores)
         
         acertos_da_logica = defaultdict(list)
 
-        # 4. Testa cada lógica candidata
         for logica in logicas_candidatas:
             try:
                 previsao = logica['func'](variaveis_anteriores)
@@ -65,7 +62,6 @@ def treinar_e_encontrar_logica(ano_alvo: int):
         for acertos in acertos_da_logica.values():
             numeros_acertados.update(acertos)
 
-        # 5. Análise de acertos e falhas (a sua lógica de engenharia reversa)
         if acertos_da_logica:
             logicas_encontradas[concurso_alvo]['acertos'] = {
                 l: a for l, a in acertos_da_logica.items()
@@ -82,13 +78,17 @@ def treinar_e_encontrar_logica(ano_alvo: int):
             logicas_encontradas[concurso_alvo]['numeros_em_falta'] = sorted(list(numeros_alvo))
             print("  ❌ Nenhuma lógica gerada encontrou acertos.")
     
-    # 6. Salva o resultado final em um ficheiro JSON
+    # NOVO: Define a pasta onde o ficheiro será gravado
+    pasta_resultados = os.path.join(PROJECT_ROOT, 'dados')
+    
+    # NOVO: Constrói o caminho completo do ficheiro
     nome_arquivo = f'engenharia_reversa_{ano_alvo}.json'
-    with open(nome_arquivo, 'w', encoding='utf-8') as f:
+    caminho_completo_arquivo = os.path.join(pasta_resultados, nome_arquivo)
+    
+    with open(caminho_completo_arquivo, 'w', encoding='utf-8') as f:
         json.dump(logicas_encontradas, f, indent=4)
         
-    print(f"\nEngenharia reversa para o ano {ano_alvo} concluída. Análise salva em '{nome_arquivo}'.")
+    print(f"\nEngenharia reversa para o ano {ano_alvo} concluída. Análise salva em '{caminho_completo_arquivo}'.")
 
 if __name__ == '__main__':
-    # O seu json é uma lista de sorteios, não um dicionário aninhado
     treinar_e_encontrar_logica(2011)
