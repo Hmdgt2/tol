@@ -1,4 +1,5 @@
-name: Testar e criar nova funçoes
+name: Testar Heurísticas
+
 on:
   workflow_dispatch:
 
@@ -35,4 +36,4 @@ jobs:
         env:
           # Garante que o Python encontre os ficheiros 'lib' e 'scripts'
           PYTHONPATH: ${{ github.workspace }}
-        run: python tol/scripts/treinador_funcoes.py
+        run: python scripts/treinador_funcoes.py
