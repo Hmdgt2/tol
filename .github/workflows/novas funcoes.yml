@@ -1,5 +1,4 @@
-name: Testar Heurísticas
-
+name: Testar Novas Funcoes
 on:
   workflow_dispatch:
 
