@@ -2,7 +2,7 @@ name: Gerar Previsão Completa do Totoloto
 
 on:
   schedule:
-    - cron: '0 8 * * *'  # Exemplo: 8h00 UTC, ajuste conforme necessário
+    - cron: '30 8 * * *'  # Exemplo: 8h00 UTC, ajuste conforme necessário
   workflow_dispatch:
 
 jobs:
