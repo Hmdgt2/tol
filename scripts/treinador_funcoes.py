@@ -44,8 +44,6 @@ def treinar_e_encontrar_logica(ano_alvo: int):
         numeros_alvo = set(sorteio_alvo.get('numeros', []))
         concurso_alvo = sorteio_alvo.get('concurso')
 
-        # print(f"\nAnalisando o sorteio {concurso_alvo}...")
-
         if not historico_incremental:
             continue
 
@@ -79,15 +77,15 @@ def treinar_e_encontrar_logica(ano_alvo: int):
             dados_parciais = Dados()
             dados_parciais.sorteios = historico_incremental
             
-            # ATUALIZADO: Ignora a lista de erros e foca-se apenas nas estatísticas
             estatisticas_completas, _ = dados_parciais.obter_estatisticas(todas_dependencias)
             
             for num_falta in numeros_em_falta:
                 for estat_nome, estat_dict in estatisticas_completas.items():
-                    # Lida com casos onde o valor é um dicionário ou um valor único
-                    valor = estat_dict.get(num_falta) if isinstance(estat_dict, dict) else estat_dict
-                    if valor is not None:
-                        dados_numeros_em_falta[estat_nome].append(valor)
+                    # ATUALIZADO: Filtra apenas os valores que podem ser somados
+                    if isinstance(estat_dict, dict):
+                        valor = estat_dict.get(num_falta)
+                        if isinstance(valor, (int, float)):
+                            dados_numeros_em_falta[estat_nome].append(valor)
 
     # 2. Gera o relatório simplificado
     
@@ -109,12 +107,10 @@ def treinar_e_encontrar_logica(ano_alvo: int):
 
     for estat_nome, estat_dict in estatisticas_completas_finais.items():
         if isinstance(estat_dict, dict):
+            # ATUALIZADO: Filtra valores não-numéricos ao calcular a média geral
             valores = [v for v in estat_dict.values() if isinstance(v, (int, float))]
             if valores:
                 estatisticas_medias_dict[estat_nome] = np.mean(valores)
-        # Opcional: Adicionar lógica para lidar com estatísticas que não são dicionários
-        elif isinstance(estat_dict, (int, float)):
-            estatisticas_medias_dict[estat_nome] = estat_dict
 
     # Calcula o diagnóstico de lacunas
     diagnostico_lacunas = {}
@@ -130,6 +126,10 @@ def treinar_e_encontrar_logica(ano_alvo: int):
                     "media_geral": round(media_geral, 2),
                     "conclusao": f"Os números em falta tinham consistentemente um valor {conclusao} da média geral."
                 }
+    
+    # Se houver estatísticas que não geraram dados de lacunas, mas têm uma média geral
+    # Podes querer lidar com elas aqui, mas por agora, a abordagem é focada
+    # nas que apareceram nos "números em falta".
 
     relatorio_final = {
         "ano": ano_alvo,
