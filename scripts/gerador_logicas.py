@@ -1,4 +1,4 @@
-# gerador_logicas.py
+# script/gerador_logicas.py
 import random
 import operator
 from typing import List, Dict, Any, Callable
