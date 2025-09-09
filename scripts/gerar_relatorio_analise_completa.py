@@ -16,8 +16,8 @@ from lib.dados import Dados
 from lib.despachante import Despachante
 
 # Caminhos de ficheiro
-RELATORIOS_DIR = os.path.join(PROJECT_ROOT, "estatisticas")
-ULTIMO_CONCURSO_PATH = os.path.join(RELATORIOS_DIR, "ultimo_concurso_analisado.json")
+RELATORIOS_DIR = os.path.join(PROJECT_ROOT, "relatorios")
+ULTIMO_CONCURSO_PATH = os.path.join(RELATORIOS_DIR, "relatorio_analise_completa.json")
 
 def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, descricoes_heuristicas):
     """Gera um relatório detalhado de desempenho das heurísticas."""
