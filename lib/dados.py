@@ -224,16 +224,20 @@ class Dados:
                     distribuicao[4] += 1
         return distribuicao
 
-    def _calcular_frequencia_vizinhos(self) -> Dict[int, int]:
-        """Calcula a frequência de cada número ter um de seus vizinhos sorteado."""
-        frequencia = defaultdict(int)
+    def _calcular_frequencia_vizinhos(self) -> Dict[int, Counter]:
+        """
+        Calcula a frequência de cada número ter um de seus vizinhos sorteado,
+        distinguindo o vizinho (-1 ou +1).
+        """
+        frequencia_vizinhos = defaultdict(Counter)
         for sorteio in self.sorteios:
             numeros_sorteados = set(sorteio.get('numeros', []))
             for num in numeros_sorteados:
-                # Verifica se um dos vizinhos diretos (anterior ou seguinte) foi sorteado
-                if (num - 1) in numeros_sorteados or (num + 1) in numeros_sorteados:
-                    frequencia[num] += 1
-        return frequencia
+                if (num - 1) in numeros_sorteados:
+                    frequencia_vizinhos[num][num - 1] += 1
+                if (num + 1) in numeros_sorteados:
+                    frequencia_vizinhos[num][num + 1] += 1
+        return frequencia_vizinhos
 
     def _calcular_pares_recentes(self) -> Counter:
         """Calcula a frequência de pares de números nos últimos 20 sorteios."""
@@ -259,36 +263,40 @@ class Dados:
         if not self.sorteios:
             return {}
 
-        num_posicoes = len(self.sorteios[0]['numeros'])
+        num_posicoes = len(self.sorteios[0].get('numeros', []))
+        if num_posicoes == 0:
+            return {}
         
-        # PASSO 1: Pré-calcular a média de cada posição uma única vez.
         somas_por_posicao = defaultdict(int)
-        for sorteio in self.sorteios:
-            numeros_sorteio = sorted(sorteio['numeros'])
-            if len(numeros_sorteio) != num_posicoes: # Adicionando validação para sorteios incompletos
-                continue
-            for i, num in enumerate(numeros_sorteio):
-                if i < num_posicoes:
-                    somas_por_posicao[i] += num
+        # Adiciona um contador para os sorteios válidos
+        contagem_sorteios_validos = 0
         
+        for sorteio in self.sorteios:
+            numeros_sorteio = sorted(sorteio.get('numeros', []))
+            if len(numeros_sorteio) != num_posicoes:
+                continue
+            
+            contagem_sorteios_validos += 1
+            for i, num in enumerate(numeros_sorteio):
+                somas_por_posicao[i] += num
+        
+        if contagem_sorteios_validos == 0:
+            return {}
+            
         media_posicoes = {
-            i: somas_por_posicao[i] / len(self.sorteios)
+            i: somas_por_posicao[i] / contagem_sorteios_validos
             for i in range(num_posicoes)
         }
         
-        # PASSO 2: Calcular o desvio de cada número em relação à sua média de posição.
         precisao_por_posicao = defaultdict(list)
         for sorteio in self.sorteios:
-            numeros = sorted(sorteio['numeros'])
-            if len(numeros) != num_posicoes: # Adicionando validação
+            numeros = sorted(sorteio.get('numeros', []))
+            if len(numeros) != num_posicoes:
                 continue
             for i, num in enumerate(numeros):
-                if i < num_posicoes:
-                    # Usamos a média pré-calculada, não a recalculamos a cada iteração
-                    precisao = abs(num - media_posicoes[i])
-                    precisao_por_posicao[i].append(precisao)
+                precisao = abs(num - media_posicoes[i])
+                precisao_por_posicao[i].append(precisao)
 
-        # PASSO 3: Calcular a média desses desvios.
         medias_precisao = {pos: np.mean(vals) for pos, vals in precisao_por_posicao.items()}
         
         return medias_precisao
@@ -479,26 +487,41 @@ class Dados:
         }
 
     # --- Lógica de Cache (ajustada para a classe) ---
+    def _preparar_para_salvar(self, obj):
+        if isinstance(obj, Counter):
+            return {"__counter__": dict(obj)}
+        if isinstance(obj, dict):
+            return {k: self._preparar_para_salvar(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [self._preparar_para_salvar(item) for item in obj]
+        return obj
+
+    def _reconstruir_de_cache(self, obj):
+        if isinstance(obj, dict):
+            if "__counter__" in obj:
+                return Counter(obj["__counter__"])
+            return {k: self._reconstruir_de_cache(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [self._reconstruir_de_cache(item) for item in obj]
+        return obj
+
     def salvar_cache(self, estatisticas: Dict[str, Any], caminho: str = ARQUIVO_CACHE_ESTATISTICAS):
-        """Salva as estatísticas calculadas em um arquivo JSON."""
+        """Salva as estatísticas calculadas em um arquivo JSON com suporte para estruturas aninhadas."""
         try:
-            stats_serializaveis = {k: dict(v) if isinstance(v, Counter) else v for k, v in estatisticas.items()}
+            stats_serializaveis = self._preparar_para_salvar(estatisticas)
             with open(caminho, 'w', encoding='utf-8') as f:
                 json.dump(stats_serializaveis, f, ensure_ascii=False, indent=4)
         except Exception as e:
             print(f"Erro ao salvar as estatísticas: {e}")
 
     def carregar_cache(self, caminho: str = ARQUIVO_CACHE_ESTATISTICAS) -> Dict[str, Any]:
-        """Carrega as estatísticas de um arquivo JSON."""
+        """Carrega as estatísticas de um arquivo JSON com suporte para estruturas aninhadas."""
         if not os.path.exists(caminho):
             return None
         try:
             with open(caminho, 'r', encoding='utf-8') as f:
                 stats = json.load(f)
-            for k, v in stats.items():
-                if isinstance(v, dict):
-                    stats[k] = Counter(v)
-            return stats
+            return self._reconstruir_de_cache(stats)
         except (json.JSONDecodeError, FileNotFoundError) as e:
             print(f"Erro ao carregar o arquivo de estatísticas: {e}")
             return None
