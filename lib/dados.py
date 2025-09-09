@@ -186,9 +186,10 @@ class Dados:
             
         return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
 
-    def _calcular_padrao_tipos_numeros(self) -> Tuple[int, int, int]:
+    def _calcular_padrao_tipos_numeros(self) -> Counter:
         """
-        Calcula o padrão de balanceamento de pares, ímpares e primos mais frequente.
+        Calcula a distribuição de frequência de padrões de pares, ímpares e primos.
+        Retorna o Counter completo, com todos os padrões encontrados.
         """
         padroes = Counter()
         for sorteio in self.sorteios:
@@ -202,10 +203,7 @@ class Dados:
             
             padroes.update([(contagem_pares, contagem_impares, contagem_primos)])
             
-        if not padroes:
-            return (0, 0, 0)
-            
-        return padroes.most_common(1)[0][0]
+        return padroes
 
     # --- NOVAS FUNÇÕES DE CÁLCULO PARA AS DEPENDÊNCIAS FALTANTES ---
     def _calcular_distribuicao_quadrantes(self) -> Dict[int, int]:
@@ -339,22 +337,21 @@ class Dados:
 
     def _calcular_frequencia_por_ciclo(self) -> Dict[str, Any]:
         """
-        Calcula a frequência de cada número num ciclo de sorteios recentes.
+        Calcula a frequência de cada número em múltiplos ciclos de sorteios.
+        Retorna a frequência para ciclos de 10, 20 e 30 sorteios.
         """
         frequencia_por_ciclo = {}
         if not self.sorteios:
             return frequencia_por_ciclo
 
-        # Usa uma janela de 30 sorteios para o ciclo "recente"
-        janela = 30
-        sorteios_recentes = self.sorteios[-janela:]
-        
-        frequencia = Counter()
-        for sorteio in sorteios_recentes:
-            frequencia.update(sorteio.get('numeros', []))
+        janelas = [10, 20, 30]
+        for janela in janelas:
+            sorteios_do_ciclo = self.sorteios[-janela:]
+            frequencia = Counter()
+            for sorteio in sorteios_do_ciclo:
+                frequencia.update(sorteio.get('numeros', []))
+            frequencia_por_ciclo[f'ultimos_{janela}'] = frequencia
             
-        frequencia_por_ciclo['recentes'] = frequencia
-        
         return frequencia_por_ciclo
 
     # --- Lógica de Mapeamento e Obtenção de Estatísticas ---
