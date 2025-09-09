@@ -1,4 +1,5 @@
-#/scripts/gerar_inventario_heuristico.py
+# /scripts/gerar_inventario_heuristico.py
+
 import os
 import sys
 import json
@@ -26,8 +27,9 @@ def gerar_inventario_heuristico():
         # Constrói a entrada no inventário
         inventario[nome_heuristica] = {
             "descricao": dados_metadados.get('descricao', 'Descrição não disponível.'),
-            "dependencias": [dep['nome'] for dep in dados_metadados.get('dependencias', [])],
-            "funcao_principal": dados_metadados.get('funcao_principal', 'Não disponível')
+            # CORREÇÃO: A lista de dependências já contém os nomes como strings
+            "dependencias": dados_metadados.get('dependencias', []),
+            "funcao_principal": dados_metadados.get('funcao', 'Não disponível') # Note a correção de 'funcao_principal' para 'funcao'
         }
 
     # Define o caminho para o ficheiro de relatório
