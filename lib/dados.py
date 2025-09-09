@@ -140,7 +140,7 @@ class Dados:
         frequencia_posicao = defaultdict(Counter)
         if not self.sorteios or not self.sorteios[0]['numeros']:
             return frequencia_posicao
-        
+            
         num_posicoes = len(self.sorteios[0]['numeros'])
         for sorteio in self.sorteios:
             numeros = sorted(sorteio['numeros'])
@@ -153,7 +153,7 @@ class Dados:
         padrao = defaultdict(Counter)
         if len(self.sorteios) < 2:
             return padrao
-        
+            
         for i in range(len(self.sorteios) - 1):
             numeros_atual = sorted(self.sorteios[i].get('numeros', []))
             numeros_seguinte = sorted(self.sorteios[i+1].get('numeros', []))
@@ -253,21 +253,38 @@ class Dados:
         return frequencia
 
     def _calcular_precisao_posicional_historica(self) -> Dict[int, float]:
-        """Calcula a precisão média de cada posição do sorteio."""
-        precisao_por_posicao = defaultdict(list)
+        """Calcula a precisão média de cada posição do sorteio, de forma otimizada."""
         if not self.sorteios:
             return {}
 
         num_posicoes = len(self.sorteios[0]['numeros'])
+        
+        # PASSO 1: Pré-calcular a média de cada posição uma única vez.
+        somas_por_posicao = defaultdict(int)
+        for sorteio in self.sorteios:
+            numeros_sorteio = sorted(sorteio['numeros'])
+            for i, num in enumerate(numeros_sorteio):
+                if i < num_posicoes:
+                    somas_por_posicao[i] += num
+        
+        media_posicoes = {
+            i: somas_por_posicao[i] / len(self.sorteios)
+            for i in range(num_posicoes)
+        }
+        
+        # PASSO 2: Calcular o desvio de cada número em relação à sua média de posição.
+        precisao_por_posicao = defaultdict(list)
         for sorteio in self.sorteios:
             numeros = sorted(sorteio['numeros'])
-            for i in range(num_posicoes):
-                # A precisão aqui é uma medida de quão perto o número está da média histórica para aquela posição
-                media_posicao = sum(s['numeros'][i] for s in self.sorteios) / len(self.sorteios)
-                precisao = abs(numeros[i] - media_posicao)
-                precisao_por_posicao[i].append(precisao)
+            for i, num in enumerate(numeros):
+                if i < num_posicoes:
+                    # Usamos a média pré-calculada, não a recalculamos a cada iteração
+                    precisao = abs(num - media_posicoes[i])
+                    precisao_por_posicao[i].append(precisao)
 
+        # PASSO 3: Calcular a média desses desvios.
         medias_precisao = {pos: np.mean(vals) for pos, vals in precisao_por_posicao.items()}
+        
         return medias_precisao
 
     def _calcular_frequencia_por_ano(self) -> Dict[int, Counter]:
@@ -366,7 +383,7 @@ class Dados:
             else:
                 erros.append(f"Função de cálculo para '{dep}' não encontrada.")
                 estatisticas[dep] = {}
-        
+            
         return estatisticas, erros
 
     def obter_resumo_calculos_com_metadados(self) -> Dict[str, Dict[str, Any]]:
