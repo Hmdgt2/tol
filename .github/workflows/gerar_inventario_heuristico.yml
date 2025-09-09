@@ -1,1 +1,52 @@
+name: Gerar Inventário de Heurísticas
 
+on:
+  workflow_dispatch:
+
+jobs:
+  gerar_inventario:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: 📦 Cache de Dependências
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-python-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-python-
+
+      - name: 🚀 Instalar Dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 📜 Executar Geração do Inventário
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/gerar_inventario_heuristico.py
+
+      - name: 💾 Guardar Resultados via Commit
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          # Adiciona o novo ficheiro de inventário
+          git add relatorios/inventario_heuristico.json
+          git commit -m "Automatização: Adicionar ficheiro de inventário de heurísticas" || echo "Nenhum ficheiro para commit"
+          git push
+
+      - name: ⬆️ Carregar o Resultado do Inventário
+        uses: actions/upload-artifact@v4
+        with:
+          name: inventario-heuristico
+          path: relatorios/inventario_heuristico.json
