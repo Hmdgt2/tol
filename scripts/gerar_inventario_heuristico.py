@@ -1,11 +1,10 @@
 #/scripts/gerar_inventario_heuristico.py
-
 import os
 import sys
 import json
+import inspect
 
 # Adiciona o diretório-pai (raiz do projeto) ao caminho do sistema
-# Isso permite importar módulos de 'lib' e 'heuristicas'
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -22,22 +21,13 @@ def gerar_inventario_heuristico():
     despachante = Despachante()
     metadados = despachante.obter_metadados()
     
-    # Obtém as dependências para cada heurística
-    dependencias_completas = despachante.obter_todas_dependencias()
-    
     inventario = {}
     for nome_heuristica, dados_metadados in metadados.items():
-        # Encontra a função principal da heurística, se houver
-        funcao_principal = next(
-            (item for item in dependencias_completas if item['nome'] == nome_heuristica),
-            None
-        )
-        
         # Constrói a entrada no inventário
         inventario[nome_heuristica] = {
             "descricao": dados_metadados.get('descricao', 'Descrição não disponível.'),
             "dependencias": [dep['nome'] for dep in dados_metadados.get('dependencias', [])],
-            "funcao_principal": funcao_principal.get('funcao') if funcao_principal else 'Não encontrada'
+            "funcao_principal": dados_metadados.get('funcao_principal', 'Não disponível')
         }
 
     # Define o caminho para o ficheiro de relatório
