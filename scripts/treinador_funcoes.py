@@ -4,6 +4,7 @@ import os
 import sys
 from collections import defaultdict
 from typing import Dict, List, Any
+import numpy as np
 
 # Adiciona o diretório-pai ao caminho para importar as classes
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,7 +44,7 @@ def treinar_e_encontrar_logica(ano_alvo: int):
         numeros_alvo = set(sorteio_alvo.get('numeros', []))
         concurso_alvo = sorteio_alvo.get('concurso')
 
-        print(f"\nAnalisando o sorteio {concurso_alvo}...")
+        # print(f"\nAnalisando o sorteio {concurso_alvo}...")
 
         if not historico_incremental:
             continue
@@ -77,12 +78,16 @@ def treinar_e_encontrar_logica(ano_alvo: int):
         if numeros_em_falta:
             dados_parciais = Dados()
             dados_parciais.sorteios = historico_incremental
-            estatisticas_completas, estatisticas_medias = dados_parciais.obter_estatisticas(todas_dependencias)
+            
+            # ATUALIZADO: Ignora a lista de erros e foca-se apenas nas estatísticas
+            estatisticas_completas, _ = dados_parciais.obter_estatisticas(todas_dependencias)
             
             for num_falta in numeros_em_falta:
                 for estat_nome, estat_dict in estatisticas_completas.items():
-                    if isinstance(estat_dict, dict) and num_falta in estat_dict:
-                        dados_numeros_em_falta[estat_nome].append(estat_dict[num_falta])
+                    # Lida com casos onde o valor é um dicionário ou um valor único
+                    valor = estat_dict.get(num_falta) if isinstance(estat_dict, dict) else estat_dict
+                    if valor is not None:
+                        dados_numeros_em_falta[estat_nome].append(valor)
 
     # 2. Gera o relatório simplificado
     
@@ -97,12 +102,26 @@ def treinar_e_encontrar_logica(ano_alvo: int):
             "taxa_acerto_percentual": f"{taxa_acerto:.2f}%"
         })
 
+    # ATUALIZADO: Calcula as médias gerais das estatísticas
+    dados_manager_completo = Dados()
+    estatisticas_completas_finais, _ = dados_manager_completo.obter_estatisticas(todas_dependencias)
+    estatisticas_medias_dict = {}
+
+    for estat_nome, estat_dict in estatisticas_completas_finais.items():
+        if isinstance(estat_dict, dict):
+            valores = [v for v in estat_dict.values() if isinstance(v, (int, float))]
+            if valores:
+                estatisticas_medias_dict[estat_nome] = np.mean(valores)
+        # Opcional: Adicionar lógica para lidar com estatísticas que não são dicionários
+        elif isinstance(estat_dict, (int, float)):
+            estatisticas_medias_dict[estat_nome] = estat_dict
+
     # Calcula o diagnóstico de lacunas
     diagnostico_lacunas = {}
     for estat_nome, valores in dados_numeros_em_falta.items():
         if valores:
             media_em_falta = sum(valores) / len(valores)
-            media_geral = estatisticas_medias.get(estat_nome, 'N/A')
+            media_geral = estatisticas_medias_dict.get(estat_nome, 'N/A')
             
             if isinstance(media_geral, (int, float)):
                 conclusao = "acima" if media_em_falta > media_geral else "abaixo"
