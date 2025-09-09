@@ -144,6 +144,8 @@ class Dados:
         num_posicoes = len(self.sorteios[0]['numeros'])
         for sorteio in self.sorteios:
             numeros = sorted(sorteio['numeros'])
+            if len(numeros) != num_posicoes: # Adicionando validação para sorteios incompletos
+                continue
             for i, num in enumerate(numeros):
                 frequencia_posicao[i].update([num])
         return frequencia_posicao
@@ -261,6 +263,8 @@ class Dados:
         somas_por_posicao = defaultdict(int)
         for sorteio in self.sorteios:
             numeros_sorteio = sorted(sorteio['numeros'])
+            if len(numeros_sorteio) != num_posicoes: # Adicionando validação para sorteios incompletos
+                continue
             for i, num in enumerate(numeros_sorteio):
                 if i < num_posicoes:
                     somas_por_posicao[i] += num
@@ -274,6 +278,8 @@ class Dados:
         precisao_por_posicao = defaultdict(list)
         for sorteio in self.sorteios:
             numeros = sorted(sorteio['numeros'])
+            if len(numeros) != num_posicoes: # Adicionando validação
+                continue
             for i, num in enumerate(numeros):
                 if i < num_posicoes:
                     # Usamos a média pré-calculada, não a recalculamos a cada iteração
@@ -294,11 +300,13 @@ class Dados:
         return frequencia_anual
 
     def _calcular_distribuicao_dezenas(self) -> Dict[int, int]:
-        """Calcula a frequência de números por dezena (0-9, 10-19, etc.)."""
+        """Calcula a frequência de números por dezena (1-10, 11-20, etc.)."""
         distribuicao = defaultdict(int)
         for sorteio in self.sorteios:
             for num in sorteio['numeros']:
-                dezena = num // 10
+                if num == 0:
+                    continue
+                dezena = (num - 1) // 10 + 1
                 distribuicao[dezena] += 1
         return distribuicao
 
