@@ -228,8 +228,9 @@ class Dados:
         """Calcula a frequência de cada número ter um de seus vizinhos sorteado."""
         frequencia = defaultdict(int)
         for sorteio in self.sorteios:
-            numeros_sorteados = set(sorteio['numeros'])
+            numeros_sorteados = set(sorteio.get('numeros', []))
             for num in numeros_sorteados:
+                # Verifica se um dos vizinhos diretos (anterior ou seguinte) foi sorteado
                 if (num - 1) in numeros_sorteados or (num + 1) in numeros_sorteados:
                     frequencia[num] += 1
         return frequencia
