@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números com base na probabilidade de repetição de números de sorteios anteriores.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 648,
+      "taxa_sucesso": "42.89%"
+    },
+    "acerto_2": {
+      "total": 112,
+      "taxa_sucesso": "7.41%"
+    },
+    "acerto_3": {
+      "total": 8,
+      "taxa_sucesso": "0.53%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "011/2014",
+    "data": "05/02/2014",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      4,
+      11,
+      19,
+      40,
+      49
+    ],
+    "numeros_reais_pico": [
+      1,
+      4,
+      19,
+      24,
+      40
+    ],
+    "indice_sorteio": 301
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1209,
+    "media_acertos_apos": 0.5
+  }
+}

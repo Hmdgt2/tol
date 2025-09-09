@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números que estão atrasados em relação ao seu ciclo histórico, com base no intervalo médio entre aparições.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 649,
+      "taxa_sucesso": "42.95%"
+    },
+    "acerto_2": {
+      "total": 103,
+      "taxa_sucesso": "6.82%"
+    },
+    "acerto_3": {
+      "total": 9,
+      "taxa_sucesso": "0.60%"
+    },
+    "acerto_4": {
+      "total": 1,
+      "taxa_sucesso": "0.07%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "025/2014",
+    "data": "26/03/2014",
+    "numeros_acertados": 4,
+    "numeros_previstos_pico": [
+      15,
+      35,
+      36,
+      37,
+      42
+    ],
+    "numeros_reais_pico": [
+      2,
+      15,
+      36,
+      37,
+      42
+    ],
+    "indice_sorteio": 315
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1195,
+    "media_acertos_apos": 0.5
+  }
+}

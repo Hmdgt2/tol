@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números dos sorteios cuja soma total é mais frequente.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 651,
+      "taxa_sucesso": "43.08%"
+    },
+    "acerto_2": {
+      "total": 108,
+      "taxa_sucesso": "7.15%"
+    },
+    "acerto_3": {
+      "total": 7,
+      "taxa_sucesso": "0.46%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "049/2016",
+    "data": "18/06/2016",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      7,
+      9,
+      19,
+      32,
+      34
+    ],
+    "numeros_reais_pico": [
+      2,
+      9,
+      32,
+      34,
+      37
+    ],
+    "indice_sorteio": 548
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 962,
+    "media_acertos_apos": 0.51
+  }
+}

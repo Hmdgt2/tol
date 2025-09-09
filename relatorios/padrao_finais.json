@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números com terminações semelhantes ao último sorteio.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 674,
+      "taxa_sucesso": "44.61%"
+    },
+    "acerto_2": {
+      "total": 107,
+      "taxa_sucesso": "7.08%"
+    },
+    "acerto_3": {
+      "total": 10,
+      "taxa_sucesso": "0.66%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "074/2012",
+    "data": "15/09/2012",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      7,
+      17,
+      18,
+      47,
+      48
+    ],
+    "numeros_reais_pico": [
+      7,
+      26,
+      39,
+      47,
+      48
+    ],
+    "indice_sorteio": 156
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1354,
+    "media_acertos_apos": 0.52
+  }
+}

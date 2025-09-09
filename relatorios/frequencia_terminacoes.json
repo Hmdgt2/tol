@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números com terminações mais frequentes.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 642,
+      "taxa_sucesso": "42.49%"
+    },
+    "acerto_2": {
+      "total": 114,
+      "taxa_sucesso": "7.54%"
+    },
+    "acerto_3": {
+      "total": 6,
+      "taxa_sucesso": "0.40%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "048/2013",
+    "data": "15/06/2013",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      6,
+      16,
+      26,
+      35,
+      47
+    ],
+    "numeros_reais_pico": [
+      26,
+      35,
+      36,
+      37,
+      47
+    ],
+    "indice_sorteio": 234
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1276,
+    "media_acertos_apos": 0.51
+  }
+}

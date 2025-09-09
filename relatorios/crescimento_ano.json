@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números cuja frequência tem aumentado de ano para ano.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 597,
+      "taxa_sucesso": "39.51%"
+    },
+    "acerto_2": {
+      "total": 98,
+      "taxa_sucesso": "6.49%"
+    },
+    "acerto_3": {
+      "total": 11,
+      "taxa_sucesso": "0.73%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "096/2012",
+    "data": "01/12/2012",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      1,
+      2,
+      3,
+      4,
+      8
+    ],
+    "numeros_reais_pico": [
+      2,
+      3,
+      8,
+      22,
+      44
+    ],
+    "indice_sorteio": 178
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1332,
+    "media_acertos_apos": 0.51
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números distribuídos de forma equilibrada entre as faixas do jogo, evitando concentrações.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 626,
+      "taxa_sucesso": "41.43%"
+    },
+    "acerto_2": {
+      "total": 100,
+      "taxa_sucesso": "6.62%"
+    },
+    "acerto_3": {
+      "total": 9,
+      "taxa_sucesso": "0.60%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "016/2013",
+    "data": "23/02/2013",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      2,
+      16,
+      26,
+      40,
+      48
+    ],
+    "numeros_reais_pico": [
+      2,
+      4,
+      9,
+      16,
+      40
+    ],
+    "indice_sorteio": 202
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1308,
+    "media_acertos_apos": 0.49
+  }
+}

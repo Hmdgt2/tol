@@ -1,0 +1,83 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números de acordo com a distribuição mais comum por quadrantes.(# Quadrantes: divisão dos números em 4 faixas iguais)",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 1505,
+      "taxa_sucesso": "99.60%"
+    },
+    "acerto_2": {
+      "total": 1495,
+      "taxa_sucesso": "98.94%"
+    },
+    "acerto_3": {
+      "total": 1375,
+      "taxa_sucesso": "91.00%"
+    },
+    "acerto_4": {
+      "total": 991,
+      "taxa_sucesso": "65.59%"
+    },
+    "acerto_5": {
+      "total": 364,
+      "taxa_sucesso": "24.09%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "028/2011",
+    "data": "11/05/2011",
+    "numeros_acertados": 5,
+    "numeros_previstos_pico": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "numeros_reais_pico": [
+      14,
+      16,
+      18,
+      26,
+      42
+    ],
+    "indice_sorteio": 15
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1495,
+    "media_acertos_apos": 3.81
+  }
+}

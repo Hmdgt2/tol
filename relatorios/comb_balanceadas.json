@@ -1,0 +1,51 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere combinações que equilibram números pares e ímpares, altos e baixos, com base em padrões históricos.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 491,
+      "taxa_sucesso": "32.50%"
+    },
+    "acerto_2": {
+      "total": 58,
+      "taxa_sucesso": "3.84%"
+    },
+    "acerto_3": {
+      "total": 1,
+      "taxa_sucesso": "0.07%"
+    },
+    "acerto_4": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "010/2020",
+    "data": "01/02/2020",
+    "numeros_acertados": 3,
+    "numeros_previstos_pico": [
+      6,
+      6,
+      32,
+      38,
+      47
+    ],
+    "numeros_reais_pico": [
+      6,
+      22,
+      26,
+      32,
+      47
+    ],
+    "indice_sorteio": 926
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 584,
+    "media_acertos_apos": 0.37
+  }
+}

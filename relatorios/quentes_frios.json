@@ -1,0 +1,56 @@
+{
+  "nome_heuristica": "",
+  "descricao": "Sugere números quentes recentes e números frios ausentes.",
+  "total_previsoes": 1511,
+  "metricas_acerto": {
+    "acerto_1": {
+      "total": 1069,
+      "taxa_sucesso": "70.75%"
+    },
+    "acerto_2": {
+      "total": 406,
+      "taxa_sucesso": "26.87%"
+    },
+    "acerto_3": {
+      "total": 77,
+      "taxa_sucesso": "5.10%"
+    },
+    "acerto_4": {
+      "total": 10,
+      "taxa_sucesso": "0.66%"
+    },
+    "acerto_5": {
+      "total": 0,
+      "taxa_sucesso": "0.00%"
+    }
+  },
+  "melhor_previsao": {
+    "concurso": "024/2012",
+    "data": "24/03/2012",
+    "numeros_acertados": 4,
+    "numeros_previstos_pico": [
+      1,
+      7,
+      9,
+      10,
+      16,
+      18,
+      23,
+      32,
+      35,
+      48
+    ],
+    "numeros_reais_pico": [
+      1,
+      4,
+      7,
+      18,
+      32
+    ],
+    "indice_sorteio": 106
+  },
+  "desempenho_pos_pico": {
+    "sorteios_apos": 1404,
+    "media_acertos_apos": 1.03
+  }
+}
