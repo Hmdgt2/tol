@@ -1,3 +1,5 @@
+#/heuristicas/balanceamento_tipos.py
+
 from typing import Dict, Any, List
 
 class BalanceamentoTipos:
