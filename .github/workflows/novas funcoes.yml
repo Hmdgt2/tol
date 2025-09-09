@@ -7,7 +7,6 @@ jobs:
   test_heuristics:
     runs-on: ubuntu-latest
     permissions:
-      # MUITO IMPORTANTE: Mudar de 'read' para 'write' para permitir commits
       contents: write
 
     steps:
@@ -41,12 +40,12 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add dados/engenharia_reversa_2011.json
-          git commit -m "Automatização: Adicionar ficheiro de análise de engenharia reversa" || echo "Nenhum ficheiro para commit"
+          git add dados/sumario_anual_engenharia_reversa_2011.json
+          git commit -m "Automatização: Adicionar ficheiro de análise de engenharia reversa simplificada" || echo "Nenhum ficheiro para commit"
           git push
 
       - name: ⬆️ Carregar o Resultado da Análise
         uses: actions/upload-artifact@v4
         with:
-          name: analise-engenharia-reversa
-          path: dados/engenharia_reversa_2011.json
+          name: sumario-anual-engenharia-reversa
+          path: dados/sumario_anual_engenharia_reversa_2011.json
