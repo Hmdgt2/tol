@@ -6,31 +6,16 @@ import sys
 import inspect
 
 # Adiciona o diretório raiz ao caminho do sistema para importar as heurísticas e os dados
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from lib.dados import carregar_sorteios, get_all_stats
+from lib.dados import Dados
+from lib.despachante import Despachante
 
 # Caminhos de ficheiro
-HEURISTICAS_DIR = "heuristicas"
-RELATORIOS_DIR = "estatisticas"
+RELATORIOS_DIR = os.path.join(PROJECT_ROOT, "estatisticas")
 ULTIMO_CONCURSO_PATH = os.path.join(RELATORIOS_DIR, "ultimo_concurso_analisado.json")
-
-def carregar_heuristicas():
-    """Carrega dinamicamente todas as heurísticas e suas descrições."""
-    heuristicas = []
-    for ficheiro in os.listdir(HEURISTICAS_DIR):
-        if ficheiro.endswith('.py') and not ficheiro.startswith('__'):
-            nome_modulo = ficheiro[:-3]
-            try:
-                modulo = importlib.import_module(f"heuristicas.{nome_modulo}")
-                if hasattr(modulo, 'prever'):
-                    descricao = getattr(modulo, 'DESCRICAO', 'Descrição não disponível.')
-                    heuristicas.append({"nome": nome_modulo, "funcao": modulo.prever, "descricao": descricao})
-            except ImportError as e:
-                print(f"Erro ao importar heurística {nome_modulo}: {e}")
-    return heuristicas
 
 def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, descricoes_heuristicas):
     """Gera um relatório detalhado de desempenho das heurísticas."""
@@ -67,6 +52,9 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, d
         resultado_real = set(sorteios_por_concurso.get(concurso, []))
         
         for nome_heuristica, numeros_previstos in previsao.items():
+            if not isinstance(numeros_previstos, list):
+                continue
+                
             relatorio[nome_heuristica]["total_previsoes"] += 1
             num_acertos = len(set(numeros_previstos).intersection(resultado_real))
             
@@ -116,33 +104,42 @@ def analisar_performance_detalhada(sorteios_historicos, previsoes_por_sorteio, d
 
 def main():
     print("A carregar sorteios para gerar relatórios de análise completos...")
-    sorteios = carregar_sorteios()
     
-    heuristicas_info = carregar_heuristicas()
-    heuristicas = [(h['nome'], h['funcao']) for h in heuristicas_info]
-    descricoes_heuristicas = {h['nome']: h['descricao'] for h in heuristicas_info}
+    # Usa a nova classe Dados para obter os sorteios
+    dados_manager = Dados()
+    sorteios = dados_manager.sorteios
 
-    if not sorteios or not heuristicas:
-        print("Dados ou heurísticas insuficientes para gerar relatórios.")
+    if not sorteios:
+        print("Dados insuficientes para gerar relatórios. O processo será encerrado.")
         return
+
+    # Usa a nova classe Despachante para carregar as heurísticas
+    despachante = Despachante()
+    metadados_heuristicas = despachante.obter_metadados()
+    todas_dependencias = despachante.obter_todas_dependencias()
+    
+    if not metadados_heuristicas:
+        print("Nenhuma heurística encontrada. O processo será encerrado.")
+        return
+        
+    descricoes_heuristicas = {h: d['descricao'] for h, d in metadados_heuristicas.items()}
 
     print("Simulando previsões de heurísticas para dados históricos...")
     previsoes_por_sorteio = defaultdict(dict)
     
     for i in range(len(sorteios) - 1):
         historico_parcial = sorteios[:i+1]
-        estatisticas = get_all_stats(historico_parcial)
         
-        for nome, funcao in heuristicas:
-            parametros = inspect.signature(funcao).parameters
-            
-            if 'sorteios_historico' in parametros:
-                resultado = funcao(estatisticas, n=5, sorteios_historico=historico_parcial)
-            else:
-                resultado = funcao(estatisticas, n=5)
-            
-            if resultado and 'numeros' in resultado:
-                previsoes_por_sorteio[sorteios[i+1]['concurso']][nome] = resultado["numeros"]
+        # Cria uma instância temporária de Dados para calcular estatísticas com o histórico parcial
+        dados_parciais = Dados()
+        dados_parciais.sorteios = historico_parcial
+        estatisticas, _ = dados_parciais.obter_estatisticas(todas_dependencias)
+        
+        # Obtém as previsões do despachante para o próximo sorteio
+        previsoes_sorteio_atual = despachante.get_previsoes(estatisticas)
+        
+        for nome_heuristica, numeros_previstos in previsoes_sorteio_atual.items():
+            previsoes_por_sorteio[sorteios[i+1]['concurso']][nome_heuristica] = numeros_previstos
 
     print("Pré-cálculo concluído. A gerar o relatório detalhado...")
     relatorio = analisar_performance_detalhada(sorteios, previsoes_por_sorteio, descricoes_heuristicas)
