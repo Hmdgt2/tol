@@ -313,26 +313,27 @@ class Dados:
         return frequencia_trios
 
     def _calcular_probabilidades_repeticoes(self) -> Dict[int, float]:
-        """Calcula a probabilidade de um número se repetir do sorteio anterior."""
+        """Calcula a probabilidade de um número se repetir no sorteio seguinte, dado que saiu no anterior."""
         probabilidades = defaultdict(float)
         if len(self.sorteios) < 2:
             return {}
 
         ocorrencias = defaultdict(int)
+        saidas_anteriores = defaultdict(int)
+
         for i in range(1, len(self.sorteios)):
-            anterior = set(self.sorteios[i-1]['numeros'])
-            atual = set(self.sorteios[i]['numeros'])
-            repetidos = anterior.intersection(atual)
-            
-            for num in anterior:
-                if num in repetidos:
+            numeros_anteriores = set(self.sorteios[i-1]['numeros'])
+            numeros_atuais = set(self.sorteios[i]['numeros'])
+
+            for num in numeros_anteriores:
+                saidas_anteriores[num] += 1
+                if num in numeros_atuais:
                     ocorrencias[num] += 1
         
         # Calcula a probabilidade para cada número
-        for num in ocorrencias:
-            total_aparicoes = self._calcular_frequencia_total()[num]
-            if total_aparicoes > 0:
-                probabilidades[num] = ocorrencias[num] / total_aparicoes
+        for num in saidas_anteriores:
+            if saidas_anteriores[num] > 0:
+                probabilidades[num] = ocorrencias[num] / saidas_anteriores[num]
         
         return probabilidades
 
