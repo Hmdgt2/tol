@@ -169,21 +169,21 @@ class Dados:
 
     def _calcular_numeros_soma_mais_frequente(self) -> List[int]:
         """
-        Calcula o intervalo de soma mais comum e retorna os números mais frequentes
+        Calcula o intervalo de soma mais comum (usando percentis) e retorna os números mais frequentes
         que saíram dentro desse intervalo.
         """
         somas = [sum(s['numeros']) for s in self.sorteios if s.get('numeros')]
         if not somas:
             return []
             
-        soma_media = np.mean(somas)
-        soma_desvio = np.std(somas)
-        soma_minima = int(soma_media - soma_desvio)
-        soma_maxima = int(soma_media + soma_desvio)
+        # Usa percentis para encontrar um intervalo mais robusto
+        soma_25_percentil = np.percentile(somas, 25)
+        soma_75_percentil = np.percentile(somas, 75)
         
         frequencia_intervalo = Counter()
         for s in self.sorteios:
-            if soma_minima <= sum(s.get('numeros', [])) <= soma_maxima:
+            soma_sorteio = sum(s.get('numeros', []))
+            if soma_25_percentil <= soma_sorteio <= soma_75_percentil:
                 frequencia_intervalo.update(s['numeros'])
             
         return sorted(frequencia_intervalo.keys(), key=lambda k: frequencia_intervalo[k], reverse=True)
