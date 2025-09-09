@@ -136,15 +136,16 @@ class Dados:
         return frequencia
 
     def _calcular_frequencia_por_posicao(self) -> Dict[int, Counter]:
-        """Calcula a frequência de cada número por posição."""
+        """Calcula a frequência de cada número por posição, com validação de dados."""
         frequencia_posicao = defaultdict(Counter)
-        if not self.sorteios or not self.sorteios[0]['numeros']:
+        if not self.sorteios or not self.sorteios[0].get('numeros'):
             return frequencia_posicao
             
         num_posicoes = len(self.sorteios[0]['numeros'])
         for sorteio in self.sorteios:
-            numeros = sorted(sorteio['numeros'])
-            if len(numeros) != num_posicoes: # Adicionando validação para sorteios incompletos
+            numeros = sorted(sorteio.get('numeros', []))
+            # Adicionando a validação para ignorar sorteios com número de números diferente do padrão
+            if len(numeros) != num_posicoes:
                 continue
             for i, num in enumerate(numeros):
                 frequencia_posicao[i].update([num])
