@@ -28,7 +28,7 @@ jobs:
 
       - name: Executar Script de Análise Completa
         run: |
-          python gerar_relatorio_analise_completa.py
+          python scripts/gerar_relatorio_analise_completa.py
       
       - name: Commit e Enviar Relatórios
         run: |
