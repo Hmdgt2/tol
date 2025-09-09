@@ -9,7 +9,7 @@ on:
         default: 'Execução manual via GitHub Actions'
 
 jobs:
-  run_analysis:
+  run_gerar_relatorio:
     runs-on: ubuntu-latest
 
     steps:
