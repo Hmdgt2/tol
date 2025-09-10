@@ -354,23 +354,32 @@ class Dados:
         return probabilidades
 
     def _calcular_frequencia_por_ciclo(self) -> Dict[str, Any]:
-        """
-        Calcula a frequência de cada número em múltiplos ciclos de sorteios.
-        Retorna a frequência para ciclos de 10, 20 e 30 sorteios.
-        """
-        frequencia_por_ciclo = {}
-        if not self.sorteios:
-            return frequencia_por_ciclo
-
-        janelas = [10, 20, 30]
-        for janela in janelas:
-            sorteios_do_ciclo = self.sorteios[-janela:]
-            frequencia = Counter()
-            for sorteio in sorteios_do_ciclo:
-                frequencia.update(sorteio.get('numeros', []))
-            frequencia_por_ciclo[f'ultimos_{janela}'] = frequencia
-            
+    """
+    Calcula a frequência de cada número em blocos de 10 sorteios.
+    Retorna uma lista de Counters, um para cada bloco de 10.
+    """
+    frequencia_por_ciclo = {}
+    if not self.sorteios:
         return frequencia_por_ciclo
+
+    tamanho_bloco = 10
+    blocos_de_frequencia = []
+    
+    # Itera sobre os sorteios em blocos de 10
+    for i in range(0, len(self.sorteios), tamanho_bloco):
+        bloco = self.sorteios[i:i + tamanho_bloco]
+        if not bloco:
+            continue
+        
+        frequencia_bloco = Counter()
+        for sorteio in bloco:
+            frequencia_bloco.update(sorteio.get('numeros', []))
+        
+        blocos_de_frequencia.append(frequencia_bloco)
+    
+    frequencia_por_ciclo['blocos_de_10'] = blocos_de_frequencia
+    
+    return frequencia_por_ciclo
 
     # --- Lógica de Mapeamento e Obtenção de Estatísticas ---
     def _get_mapeamento_calculos(self) -> Dict[str, callable]:
