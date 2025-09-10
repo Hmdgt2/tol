@@ -1,42 +1,43 @@
+# heuristicas/ciclos_e_atrasos.py
 from typing import Dict, Any, List
-from collections import Counter
-import numpy as np
 
 class CiclosEAtrasos:
-    """
-    Heurística de Ciclos e Atrasos.
-    Sugere números com base na sua frequência e no tempo que não são sorteados.
-    """
     # --- Metadados da Heurística ---
     NOME = "ciclos_e_atrasos"
-    DESCRICAO = "Sugere os números mais 'atrasados' ou que estão em um ciclo."
-    DEPENDENCIAS = ["ausencia_atual"]
+    DESCRICAO = "Sugere números cuja ausência atual é um múltiplo do seu intervalo médio histórico."
+    DEPENDENCIAS = ["ausencia_atual", "gaps_medios"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
         """
-        Prevê números com base nos que estão mais atrasados (não foram sorteados por mais tempo).
-
-        Args:
-            estatisticas (Dict[str, Any]): Dicionário de estatísticas dos sorteios.
-            n (int): O número de sugestões a serem retornadas.
-
-        Returns:
-            List[int]: Uma lista de números inteiros sugeridos.
+        Prevê números que estão no final do seu ciclo histórico, ou seja,
+        a sua ausência atual é um múltiplo próximo do seu gap médio.
         """
-        # Obter os dados de atraso de cada número a partir das estatísticas
-        # O nome da chave foi alterado para 'ausencia_atual' para corresponder ao dados.py
-        ausencia_atual = estatisticas.get('ausencia_atual', {})
-        
-        # Se os dados de atraso não existirem, não há como prever
-        if not ausencia_atual:
+        ausencia = estatisticas.get('ausencia_atual', {})
+        gaps_medios = estatisticas.get('gaps_medios', {})
+
+        if not ausencia or not gaps_medios:
             return []
-            
-        # Ordenar os números com base no tempo de atraso, do maior para o menor
-        # Usamos uma lista de tuplas para manter a relação entre o número e o atraso
-        numeros_por_atraso = sorted(ausencia_atual.items(), key=lambda item: item[1], reverse=True)
-        
-        # Selecionar os 'n' números com o maior atraso
-        sugeridos = [num for num, atraso in numeros_por_atraso[:n]]
-        
-        # Retornar a lista de números sugeridos, ordenada em ordem crescente
+
+        pontuacoes = {}
+        for num, atraso in ausencia.items():
+            gap = gaps_medios.get(num, 0)
+            if gap > 0 and atraso > gap:
+                # Calcula a distância do atraso para o múltiplo mais próximo do gap.
+                # Um valor próximo de 0 indica que o número está "no final do seu ciclo".
+                proximidade = atraso % gap
+                # Usamos o inverso para que a ordem seja do mais próximo para o mais distante.
+                pontuacoes[num] = 1 / (proximidade + 1) # Adicionamos 1 para evitar divisão por 0
+
+        sugeridos = sorted(pontuacoes, key=pontuacoes.get, reverse=True)[:n]
+
+        # Fallback para o caso de não haver números suficientes.
+        if len(sugeridos) < n:
+            frequencia_total = estatisticas.get('frequencia_total', {})
+            freq_ordenada = sorted(frequencia_total.items(), key=lambda x: x[1], reverse=True)
+            for num, _ in freq_ordenada:
+                if len(sugeridos) == n:
+                    break
+                if num not in sugeridos:
+                    sugeridos.append(num)
+
         return sorted(sugeridos)
