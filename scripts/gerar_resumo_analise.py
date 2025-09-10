@@ -12,7 +12,7 @@ from lib.despachante import Despachante # Importa o nome da classe 'Despachante'
 from lib.dados import Dados
 
 # Caminho de saída para o ficheiro de análise
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'dados')
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'relatorios')
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'relatorio_analise.json')
 
 def main():
