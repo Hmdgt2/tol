@@ -11,12 +11,12 @@ class DistribuicaoGrupos:
         """
         Prevê números com base na distribuição mais frequente por grupos (dezenas).
         """
-        padrao_ideal = estatisticas.get('distribuicao_dezenas', (0, 0, 0, 0, 0))
         frequencia = estatisticas.get('frequencia_total', {})
         
         if not frequencia:
             return []
 
+        # Agrupamos os números por frequência
         grupos_por_frequencia = {
             'grupo_1_10': sorted([num for num in range(1, 11)], key=lambda x: frequencia.get(x, 0), reverse=True),
             'grupo_11_20': sorted([num for num in range(11, 21)], key=lambda x: frequencia.get(x, 0), reverse=True),
@@ -27,24 +27,20 @@ class DistribuicaoGrupos:
 
         sugeridos = []
         
-        for i in range(len(padrao_ideal)):
-            num_a_pegar = padrao_ideal[i]
-            
-            grupo_chave = list(grupos_por_frequencia.keys())[i]
-            grupo_lista = grupos_por_frequencia[grupo_chave]
-
-            for _ in range(num_a_pegar):
-                if grupo_lista:
-                    num = grupo_lista.pop(0)
-                    if num not in sugeridos:
-                        sugeridos.append(num)
+        # Itera sobre os grupos, adicionando o número mais frequente de cada um
+        # até que a lista de sugeridos atinja o tamanho n.
         
-        if len(sugeridos) < n:
-            todos_mais_frequentes = [num for num, _ in Counter(frequencia).most_common(len(frequencia))]
-            for num in todos_mais_frequentes:
+        lista_de_grupos = list(grupos_por_frequencia.values())
+        
+        # Itera sobre os grupos, pegando um número de cada, até atingir o total desejado.
+        grupo_idx = 0
+        while len(sugeridos) < n and grupo_idx < 50: # Evita loop infinito por segurança
+            grupo_atual = lista_de_grupos[grupo_idx % len(lista_de_grupos)]
+            if grupo_atual:
+                num = grupo_atual.pop(0)
                 if num not in sugeridos:
                     sugeridos.append(num)
-                if len(sugeridos) >= n:
-                    break
-        
+            
+            grupo_idx += 1
+            
         return sorted(sugeridos)
