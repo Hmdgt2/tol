@@ -124,8 +124,8 @@
         "detalhes": "Previsão gerada com sucesso: [16, 23, 26, 33, 46]"
     },
     "frequencia_soma": {
-        "status": "SUCESSO",
-        "detalhes": "Previsão gerada com sucesso: [23, 26, 32, 33, 46]"
+        "status": "FALHOU",
+        "detalhes": "A lista de previsão está vazia."
     },
     "tendencia_recentes": {
         "status": "SUCESSO",
