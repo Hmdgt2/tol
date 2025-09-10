@@ -4,46 +4,42 @@ from collections import Counter
 
 class DistribuicaoQuadrantes:
     NOME = "distribuicao_quadrantes"
-    DESCRICAO = "Sugere números de acordo com a distribuição mais comum por quadrantes.(# Quadrantes: divisão dos números em 4 faixas iguais)"
+    DESCRICAO = "Sugere números de acordo com a distribuição mais comum por quadrantes."
     DEPENDENCIAS = ["distribuicao_quadrantes", "frequencia_total"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
         """
         Prevê números com base na distribuição mais frequente por quadrantes.
         """
-        padrao_ideal = estatisticas.get('distribuicao_quadrantes', (0, 0, 0, 0))
         frequencia = estatisticas.get('frequencia_total', {})
-        
-        if not frequencia:
+        distribuicao = estatisticas.get('distribuicao_quadrantes', {})
+
+        if not frequencia or not distribuicao:
             return []
 
+        # 1. Encontrar o quadrante mais frequente
+        quadrante_mais_frequente = max(distribuicao, key=distribuicao.get)
+
+        # 2. Definir as faixas de números para cada quadrante
         tamanho_quadrante = 49 // 4
-        quadrantes = {
-            0: sorted([num for num in range(1, tamanho_quadrante + 1)], key=lambda x: frequencia.get(x, 0), reverse=True),
-            1: sorted([num for num in range(tamanho_quadrante + 1, (tamanho_quadrante * 2) + 1)], key=lambda x: frequencia.get(x, 0), reverse=True),
-            2: sorted([num for num in range((tamanho_quadrante * 2) + 1, (tamanho_quadrante * 3) + 1)], key=lambda x: frequencia.get(x, 0), reverse=True),
-            3: sorted([num for num in range((tamanho_quadrante * 3) + 1, 50)], key=lambda x: frequencia.get(x, 0), reverse=True),
+        faixas_quadrantes = {
+            1: range(1, tamanho_quadrante + 1),
+            2: range(tamanho_quadrante + 1, (tamanho_quadrante * 2) + 1),
+            3: range((tamanho_quadrante * 2) + 1, (tamanho_quadrante * 3) + 1),
+            4: range((tamanho_quadrante * 3) + 1, 50)
         }
 
-        sugeridos = []
-        
-        for i in range(len(padrao_ideal)):
-            num_a_pegar = padrao_ideal[i]
-            
-            grupo_lista = quadrantes[i]
-            
-            for _ in range(num_a_pegar):
-                if grupo_lista:
-                    num = grupo_lista.pop(0)
-                    if num not in sugeridos:
-                        sugeridos.append(num)
-        
-        if len(sugeridos) < n:
-            todos_mais_frequentes = sorted(frequencia.keys(), key=lambda x: frequencia[x], reverse=True)
-            for num in todos_mais_frequentes:
-                if num not in sugeridos:
-                    sugeridos.append(num)
-                if len(sugeridos) >= n:
-                    break
-        
+        # 3. Filtrar os números do quadrante mais frequente
+        numeros_do_quadrante = [
+            num for num in faixas_quadrantes[quadrante_mais_frequente]
+            if num in frequencia
+        ]
+
+        # 4. Ordenar por frequência e pegar os top 'n'
+        sugeridos = sorted(
+            numeros_do_quadrante,
+            key=lambda num: frequencia.get(num, 0),
+            reverse=True
+        )[:n]
+
         return sorted(sugeridos)
