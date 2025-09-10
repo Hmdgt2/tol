@@ -1,0 +1,76 @@
+{
+    "ano": 2011,
+    "resumo_geral": {
+        "total_sorteios_analisados": 83,
+        "total_acertos_unicos": 200,
+        "melhores_logicas_do_ano": [
+            {
+                "nome": "ultimo_-_media",
+                "acertos_totais": 7,
+                "taxa_acerto_percentual": "0.08%"
+            },
+            {
+                "nome": "diferenca_maior_menor_%_media",
+                "acertos_totais": 6,
+                "taxa_acerto_percentual": "0.07%"
+            },
+            {
+                "nome": "soma_pares_-_menor",
+                "acertos_totais": 6,
+                "taxa_acerto_percentual": "0.07%"
+            },
+            {
+                "nome": "ultimo_%_soma",
+                "acertos_totais": 5,
+                "taxa_acerto_percentual": "0.06%"
+            },
+            {
+                "nome": "soma_ultimos_digitos_+_menor",
+                "acertos_totais": 5,
+                "taxa_acerto_percentual": "0.06%"
+            }
+        ]
+    },
+    "diagnostico_lacunas": {
+        "gaps_medios": {
+            "media_em_falta": Infinity,
+            "media_geral": 9.8,
+            "conclusao": "Os números em falta tinham consistentemente um valor acima da média geral."
+        },
+        "ausencia_atual": {
+            "media_em_falta": 7.64,
+            "media_geral": 9.41,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "frequencia_total": {
+            "media_em_falta": 5.02,
+            "media_geral": 154.29,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "probabilidades_repeticoes": {
+            "media_em_falta": 0.09,
+            "media_geral": 0.1,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "frequencia_recente": {
+            "media_em_falta": 1.91,
+            "media_geral": 2.03,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "distribuicao_quadrantes": {
+            "media_em_falta": 4.0,
+            "media_geral": 1890.0,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "distribuicao_dezenas": {
+            "media_em_falta": 3.0,
+            "media_geral": 1512.0,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "precisao_posicional_historica": {
+            "media_em_falta": 5.67,
+            "media_geral": 6.4,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        }
+    }
+}
