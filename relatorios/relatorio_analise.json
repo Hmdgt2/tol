@@ -153,7 +153,7 @@
       "funcao": "prever"
     },
     "soma_numeros": {
-      "descricao": "Sugere números dos sorteios cuja soma total é mais frequente.",
+      "descricao": "Sugere os números menos frequentes que saíram em sorteios com a soma mais comum, promovendo uma maior diversidade.",
       "dependencias": [
         "numeros_soma_mais_frequente",
         "frequencia_total"
@@ -162,10 +162,9 @@
       "funcao": "prever"
     },
     "gap_medio": {
-      "descricao": "Sugere números 'em atraso' com base na sua ausência atual comparada ao seu intervalo médio de saídas.",
+      "descricao": "Sugere números que historicamente têm os maiores intervalos médios entre saídas.",
       "dependencias": [
-        "gaps_medios",
-        "ausencia_atual"
+        "gaps_medios"
       ],
       "modulo": "gap_medio",
       "funcao": "prever"
@@ -206,7 +205,7 @@
       "funcao": "prever"
     },
     "balanceamento_tipos": {
-      "descricao": "Sugere números equilibrando pares, ímpares e primos conforme o padrão mais comum.",
+      "descricao": "Sugere uma combinação balanceada de pares, ímpares e primos, preenchendo a lista com os números menos frequentes para garantir diversidade.",
       "dependencias": [
         "padrao_tipos_numeros",
         "frequencia_total"
@@ -266,10 +265,9 @@
       "funcao": "prever"
     },
     "frequencia_soma": {
-      "descricao": "Sugere números que ajudam a formar a soma mais frequente dos sorteios.",
+      "descricao": "Sugere os números mais frequentes que saíram em sorteios com a soma mais comum, preenchendo a lista com os menos frequentes desse subconjunto para garantir uma previsão completa.",
       "dependencias": [
-        "numeros_soma_mais_frequente",
-        "frequencia_total"
+        "numeros_soma_mais_frequente"
       ],
       "modulo": "frequencia_soma",
       "funcao": "prever"
