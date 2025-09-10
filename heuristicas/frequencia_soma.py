@@ -5,37 +5,43 @@ from collections import Counter
 
 class FrequenciaSoma:
     NOME = "frequencia_soma"
-    DESCRICAO = "Sugere os números que mais contribuem para as somas mais comuns."
-    DEPENDENCIAS = ["soma_numero_individual", "soma_frequencia"]
+    DESCRICAO = "Sugere os números mais frequentes que saíram em sorteios com a soma mais comum."
+    DEPENDENCIAS = ["numeros_soma_mais_frequente"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
-        soma_frequencia = estatisticas.get('soma_frequencia', {})
-        soma_numero_individual = estatisticas.get('soma_numero_individual', {})
-
-        if not soma_frequencia or not soma_numero_individual:
+        """
+        Prevê números com base na sua frequência dentro do subconjunto de números que
+        historicamente contribuem para a soma mais frequente dos sorteios.
+        
+        Args:
+            estatisticas (dict): Dicionário com as estatísticas. Espera 'numeros_soma_mais_frequente'.
+            n (int): O número de sugestões a retornar.
+            
+        Returns:
+            list: Uma lista de números sugeridos.
+        """
+        numeros_soma = estatisticas.get('numeros_soma_mais_frequente', [])
+        
+        if not numeros_soma:
+            # Se a lista estiver vazia, significa que os dados são insuficientes.
             return []
-
-        # Encontra a soma mais frequente
-        soma_mais_frequente = Counter(soma_frequencia).most_common(1)[0][0]
+            
+        # Conta a frequência dos números no subconjunto de 'numeros_soma_mais_frequente'
+        frequencia_subconjunto = Counter(numeros_soma)
         
-        # Filtra os números que têm uma frequência alta na soma mais comum
-        candidatos = {
-            num: freq for num, freq in soma_numero_individual.items()
-            if freq.get(str(soma_mais_frequente), 0) > 0
-        }
+        # Seleciona os 'n' números mais comuns desse subconjunto
+        sugeridos_brutos = frequencia_subconjunto.most_common(n)
+        sugeridos = [num for num, _ in sugeridos_brutos]
         
-        if not candidatos:
-            # Fallback seguro para evitar erro, usando os mais frequentes
-            frequencia_total = estatisticas.get('frequencia_total', {})
-            return sorted(Counter(frequencia_total).most_common(n))[:n]
-
-        # Ordena os candidatos pela sua frequência na soma mais comum
-        melhores_candidatos = sorted(
-            candidatos.items(),
-            key=lambda item: item[1].get(str(soma_mais_frequente), 0),
-            reverse=True
-        )
-
-        sugeridos = [num for num, freq in melhores_candidatos[:n]]
+        # A lista final deve ter exatamente 'n' números
+        if len(sugeridos) < n:
+            # Se houver menos de 'n' números, preenche com os números menos frequentes do subconjunto
+            # (que ainda não foram sugeridos) para garantir 5 sugestões.
+            candidatos_restantes = [num for num, _ in sorted(frequencia_subconjunto.items(), key=lambda item: item[1])]
+            for num in candidatos_restantes:
+                if len(sugeridos) >= n:
+                    break
+                if num not in sugeridos:
+                    sugeridos.append(num)
 
         return sorted(sugeridos)
