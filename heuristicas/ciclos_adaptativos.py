@@ -1,3 +1,5 @@
+# heuristicas/ciclos_adaptativos.py
+
 import importlib
 from typing import Dict, Any, List
 from collections import Counter
