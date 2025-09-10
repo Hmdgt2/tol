@@ -4,8 +4,8 @@ from typing import Dict, Any, List
 from collections import Counter
 
 # Importa as heurísticas que serão combinadas
-from .numeros_quentes import NumerosQuentes
-from .numeros_frios import NumerosFrios
+from heuristicas.numeros_quentes import NumerosQuentes
+from heuristicas.numeros_frios import NumerosFrios
 
 class CombinadorQuentesFrios:
     # --- Metadados do Combinador ---
