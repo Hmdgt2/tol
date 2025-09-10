@@ -45,7 +45,7 @@
     },
     "ciclos_longos": {
         "status": "SUCESSO",
-        "detalhes": "Previsão gerada com sucesso: [2, 13, 20, 40, 45]"
+        "detalhes": "Previsão gerada com sucesso: [20, 13, 2, 45, 40]"
     },
     "frequencia_total": {
         "status": "SUCESSO",
@@ -69,7 +69,7 @@
     },
     "ausencia_superior_media": {
         "status": "SUCESSO",
-        "detalhes": "Previsão gerada com sucesso: [20, 13, 2, 40, 45]"
+        "detalhes": "Previsão gerada com sucesso: [20, 13, 2, 40]"
     },
     "soma_numeros": {
         "status": "SUCESSO",
@@ -105,7 +105,7 @@
     },
     "numeros_retencao_longa": {
         "status": "SUCESSO",
-        "detalhes": "Previsão gerada com sucesso: [2, 13, 20, 40, 45]"
+        "detalhes": "Previsão gerada com sucesso: [20, 13, 2, 40, 45]"
     },
     "pares_consecutivos": {
         "status": "SUCESSO",
