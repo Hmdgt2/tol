@@ -27,3 +27,17 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/testar_heuristica.py
+
+      - name: 💾 Guardar Relatório via Commit
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add relatorios/resultado_testes_heuristicas.json
+          git commit -m "Automatização: Adicionar relatório de testes de heurísticas" || echo "Nenhum ficheiro para commit"
+          git push
+
+      - name: ⬆️ Carregar Relatório como Artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultado-testes-heuristicas
+          path: relatorios/resultado_testes_heuristicas.json
