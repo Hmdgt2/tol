@@ -97,7 +97,7 @@
     },
     "balanceamento_tipos": {
         "status": "SUCESSO",
-        "detalhes": "Previsão gerada com sucesso: [23, 26, 32, 33, 46]"
+        "detalhes": "Previsão gerada com sucesso: [1, 12, 14, 27, 29]"
     },
     "ciclos_adaptativos": {
         "status": "SUCESSO",
@@ -124,8 +124,8 @@
         "detalhes": "Previsão gerada com sucesso: [16, 23, 26, 33, 46]"
     },
     "frequencia_soma": {
-        "status": "FALHOU",
-        "detalhes": "A lista de previsão está vazia."
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [19, 20, 23, 32, 33]"
     },
     "tendencia_recentes": {
         "status": "SUCESSO",
