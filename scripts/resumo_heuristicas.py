@@ -12,7 +12,7 @@ if PROJECT_ROOT not in sys.path:
 from lib.despachante import Despachante
 
 # Caminho de saída do arquivo de resumo
-OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'dados')
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, 'relatorios')
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, 'resumo_heuristicas.json')
 
 def main():
