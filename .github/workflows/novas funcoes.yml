@@ -40,7 +40,7 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add dados/sumario_anual_engenharia_reversa_2011.json
+          git add relatorios/sumario_anual_engenharia_reversa_2011.json
           git commit -m "Automatização: Adicionar ficheiro de análise de engenharia reversa simplificada" || echo "Nenhum ficheiro para commit"
           git push
 
@@ -48,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sumario-anual-engenharia-reversa
-          path: dados/sumario_anual_engenharia_reversa_2011.json
+          path: relatorios/sumario_anual_engenharia_reversa_2011.json
