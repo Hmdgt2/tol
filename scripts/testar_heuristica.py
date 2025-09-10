@@ -100,6 +100,17 @@ def imprimir_relatorio(resultados):
         print(f" - {nome}: {resultado['detalhes']}")
         
     print("\n" + "="*50)
+
+    # Salva os resultados em um arquivo JSON na pasta 'relatorios'
+    pasta_relatorios = os.path.join(PROJECT_ROOT, 'relatorios')
+    os.makedirs(pasta_relatorios, exist_ok=True)
+    caminho_arquivo = os.path.join(pasta_relatorios, 'resultado_testes_heuristicas.json')
+
+    with open(caminho_arquivo, 'w', encoding='utf-8') as f:
+        json.dump(resultados, f, indent=4, ensure_ascii=False)
+
+    print(f"\n📄 Relatório salvo em: {caminho_arquivo}")
+
     
 if __name__ == "__main__":
     resultados_teste = testar_heuristica()
