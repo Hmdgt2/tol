@@ -354,10 +354,10 @@ class Dados:
         return probabilidades
 
     def _calcular_frequencia_por_ciclo(self) -> Dict[str, Any]:
-    """
+        """
     Calcula a frequência de cada número em blocos de 10 sorteios.
     Retorna uma lista de Counters, um para cada bloco de 10.
-    """
+        """
     frequencia_por_ciclo = {}
     if not self.sorteios:
         return frequencia_por_ciclo
