@@ -31,6 +31,10 @@ class CombBalanceadas:
                 if grupo:
                     sugeridos.append(grupo.pop(0))
 
+        # CORREÇÃO: Remove duplicados da lista inicial de sugestões
+        sugeridos = list(set(sugeridos))
+
+        # O resto do código (fallback) já é robusto e verifica duplicados
         frequencia_ordenada = sorted(frequencia_total.keys(), key=lambda x: frequencia_total[x], reverse=True)
         for num in frequencia_ordenada:
             if len(sugeridos) >= n:
