@@ -4,7 +4,7 @@ from typing import Dict, Any, List
 
 class BalanceamentoTipos:
     NOME = "balanceamento_tipos"
-    DESCRICAO = "Sugere números equilibrando pares, ímpares e primos conforme o padrão mais comum."
+    DESCRICAO = "Sugere uma combinação balanceada de pares, ímpares e primos, preenchendo a lista com os números menos frequentes para garantir diversidade."
     DEPENDENCIAS = ["padrao_tipos_numeros", "frequencia_total"]
 
     def _is_prime(self, n: int) -> bool:
@@ -16,38 +16,38 @@ class BalanceamentoTipos:
         return True
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
-        padrao_ideal = estatisticas.get('padrao_tipos_numeros', (3, 2, 1)) # Padrão ideal (Pares, Ímpares, Primos)
+        padrao_ideal = estatisticas.get('padrao_tipos_numeros', (3, 2, 1))
         
         if not (isinstance(padrao_ideal, tuple) and len(padrao_ideal) == 3):
             padrao_ideal = (0, 0, 0)
             
-        num_pares, num_impares, num_primos = padrao_ideal
+        num_pares_desejados, num_impares_desejados, num_primos_desejados = padrao_ideal
 
         frequencia = estatisticas.get('frequencia_total', {})
         if not frequencia:
             return []
 
-        todos_os_numeros = sorted(frequencia.keys(), key=lambda x: frequencia[x], reverse=True)
+        todos_os_numeros_ordenados_por_frequencia = sorted(frequencia.keys(), key=lambda x: frequencia[x], reverse=True)
         sugeridos = []
         
-        # Seleciona os pares mais frequentes
-        pares_candidatos = [num for num in todos_os_numeros if num % 2 == 0]
-        sugeridos.extend(pares_candidatos[:num_pares])
+        # Seleção inicial: pega os mais frequentes de cada tipo
+        pares_frequentes = [num for num in todos_os_numeros_ordenados_por_frequencia if num % 2 == 0]
+        impares_frequentes = [num for num in todos_os_numeros_ordenados_por_frequencia if num % 2 != 0]
+        primos_frequentes = [num for num in todos_os_numeros_ordenados_por_frequencia if self._is_prime(num)]
         
-        # Seleciona os ímpares mais frequentes
-        impares_candidatos = [num for num in todos_os_numeros if num % 2 != 0 and num not in sugeridos]
-        sugeridos.extend(impares_candidatos[:num_impares])
+        sugeridos.extend(pares_frequentes[:num_pares_desejados])
+        sugeridos.extend(impares_frequentes[:num_impares_desejados])
+        sugeridos.extend(primos_frequentes[:num_primos_desejados])
         
-        # Seleciona os primos mais frequentes
-        primos_candidatos = [num for num in todos_os_numeros if self._is_prime(num) and num not in sugeridos]
-        sugeridos.extend(primos_candidatos[:num_primos])
-
-        # Preenche com os mais frequentes se a lista ainda não tiver n números
-        if len(sugeridos) < n:
-            for num in todos_os_numeros:
-                if len(sugeridos) >= n:
-                    break
-                if num not in sugeridos:
-                    sugeridos.append(num)
+        # Preenchimento: completa a lista com os números menos frequentes
+        while len(sugeridos) < n:
+            candidatos_restantes_por_frequencia = sorted(
+                [num for num in todos_os_numeros_ordenados_por_frequencia if num not in sugeridos],
+                key=lambda x: frequencia[x]
+            )
+            if not candidatos_restantes_por_frequencia:
+                break
+            
+            sugeridos.append(candidatos_restantes_por_frequencia[0])
 
         return sorted(sugeridos)
