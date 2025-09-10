@@ -13,7 +13,6 @@ class CiclosAdaptativos:
     # --- Metadados da Heurística ---
     NOME = "ciclos_adaptativos"
     DESCRICAO = "Sugere números com base na sua frequência e precisão em ciclos de tempo recentes."
-    # Esta heurística dependerá de uma nova estatística, a 'frequencia_por_ciclo'.
     DEPENDENCIAS = ["frequencia_por_ciclo"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
@@ -26,15 +25,16 @@ class CiclosAdaptativos:
             print("Aviso: A estatística 'frequencia_por_ciclo' não está disponível. A retornar lista vazia.")
             return []
 
-        # CORREÇÃO: Usar a chave correta 'ultimos_10'
-        # A chave 'recentes' não existe na estatística.
-        numeros_do_ciclo_recente = frequencia_por_ciclo.get('ultimos_10', Counter())
-        
-        if not numeros_do_ciclo_recente:
+        # CORREÇÃO: Usar a chave correta e obter a lista de contadores
+        blocos_de_frequencia = frequencia_por_ciclo.get('blocos_de_10', [])
+
+        # Se a lista de blocos estiver vazia, não há dados para prever
+        if not blocos_de_frequencia:
             return []
-        
-        # A variável 'numeros_do_ciclo_recente' já é um Counter,
-        # por isso não precisamos de a converter novamente.
-        sugeridos = [num for num, _ in numeros_do_ciclo_recente.most_common(n)]
+
+        # Usar o contador do bloco mais recente (o último da lista)
+        ultimo_bloco_frequencia = blocos_de_frequencia[-1]
+
+        sugeridos = [num for num, _ in ultimo_bloco_frequencia.most_common(n)]
         
         return sorted(sugeridos)
