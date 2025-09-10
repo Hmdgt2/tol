@@ -5,7 +5,7 @@ from collections import Counter
 
 class FrequenciaSoma:
     NOME = "frequencia_soma"
-    DESCRICAO = "Sugere os números mais frequentes que saíram em sorteios com a soma mais comum."
+    DESCRICAO = "Sugere os números mais frequentes que saíram em sorteios com a soma mais comum, preenchendo a lista com os menos frequentes desse subconjunto para garantir uma previsão completa."
     DEPENDENCIAS = ["numeros_soma_mais_frequente"]
 
     def prever(self, estatisticas: Dict[str, Any], n: int = 5) -> List[int]:
