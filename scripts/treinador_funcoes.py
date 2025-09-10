@@ -142,7 +142,7 @@ def treinar_e_encontrar_logica(ano_alvo: int):
     }
 
     # 3. Salva o relatório
-    pasta_resultados = os.path.join(PROJECT_ROOT, 'dados')
+    pasta_resultados = os.path.join(PROJECT_ROOT, 'relatorios')
     os.makedirs(pasta_resultados, exist_ok=True)
     nome_arquivo = f'sumario_anual_engenharia_reversa_{ano_alvo}.json'
     caminho_completo_arquivo = os.path.join(pasta_resultados, nome_arquivo)
