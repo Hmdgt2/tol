@@ -1,6 +1,7 @@
 # lib/funcoes_analiticas/series_temporais.py
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.tsa.stattools import acf, pacf, adfuller, kpss
 import pandas as pd
 import statsmodels.api as sm
 from typing import List, Tuple
@@ -125,3 +126,44 @@ def ar_residuals(lst: list, order: int = 1) -> list:
 def moving_average(lst: list, window: int = 3) -> list:
     """Calcula a média móvel de uma lista."""
     return pd.Series(lst).rolling(window).mean().tolist()
+
+def autocorr(lst: list, lags: int = 10) -> list:
+    """Calcula a função de autocorrelação (ACF)."""
+    return acf(lst, nlags=lags).tolist()
+
+def partial_autocorr(lst: list, lags: int = 10) -> list:
+    """Calcula a função de autocorrelação parcial (PACF)."""
+    return pacf(lst, nlags=lags).tolist()
+
+def adf_test(lst: list) -> float:
+    """Realiza o teste de Dickey-Fuller aumentado (ADF) e retorna o p-valor."""
+    return adfuller(lst)[1]
+
+def kpss_test(lst: list) -> float:
+    """Realiza o teste de KPSS e retorna o p-valor."""
+    return kpss(lst, regression='c')[1]
+
+def rolling_mean(lst: list, window: int = 5) -> list:
+    """Calcula a média móvel de uma série temporal."""
+    return [np.mean(lst[i:i + window]) for i in range(len(lst) - window + 1)]
+
+def rolling_var(lst: list, window: int = 5) -> list:
+    """Calcula a variância móvel de uma série temporal."""
+    return [np.var(lst[i:i + window], ddof=1) for i in range(len(lst) - window + 1)]
+
+def exp_weighted_mean(lst: list, alpha: float = 0.3) -> list:
+    """Calcula a média móvel exponencialmente ponderada."""
+    result = []
+    prev = lst[0]
+    for x in lst:
+        prev = alpha * x + (1 - alpha) * prev
+        result.append(prev)
+    return result
+
+def diff_series(lst: list) -> list:
+    """Calcula a diferença entre elementos consecutivos de uma série."""
+    return np.diff(lst).tolist()
+
+def log_transform(lst: list) -> list:
+    """Aplica a transformação logarítmica (log(x+1))."""
+    return np.log(np.array(lst) + 1).tolist()
