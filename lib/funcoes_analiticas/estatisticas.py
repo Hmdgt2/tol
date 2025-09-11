@@ -1,7 +1,4 @@
-"""
-Funções estatísticas gerais e avançadas, incluindo medidas de tendência central,
-dispersão, forma, normalização, probabilidade, séries especiais e detecção de outliers.
-"""
+# lib/funcoes_analiticas/estatisticas.py
 
 import statistics
 import numpy as np
