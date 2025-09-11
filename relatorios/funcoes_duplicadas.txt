@@ -37,10 +37,6 @@
   - lib/funcoes_analiticas/grafos.py
   - lib/funcoes_analiticas/grafos.py
 
-⚠️ Função `combination_count` aparece em:
-  - lib/funcoes_analiticas/combinatoria_avancada.py
-  - lib/funcoes_analiticas/combinatoria_avancada.py
-
 ⚠️ Função `consecutive_diff` aparece em:
   - lib/funcoes_analiticas/series_temporais.py
   - lib/funcoes_analiticas/series_temporais.py
@@ -155,10 +151,6 @@
   - lib/funcoes_analiticas/estatisticas.py
   - lib/funcoes_analiticas/estatisticas.py
 
-⚠️ Função `permutation_count` aparece em:
-  - lib/funcoes_analiticas/combinatoria_avancada.py
-  - lib/funcoes_analiticas/combinatoria_avancada.py
-
 ⚠️ Função `plot_histogram` aparece em:
   - lib/funcoes_analiticas/exploracao.py
   - lib/funcoes_analiticas/plots.py
@@ -179,10 +171,6 @@
 ⚠️ Função `rolling_std` aparece em:
   - lib/funcoes_analiticas/sequencias.py
   - lib/funcoes_analiticas/series_temporais.py
-
-⚠️ Função `sum_combinations2` aparece em:
-  - lib/funcoes_analiticas/combinatoria_avancada.py
-  - lib/funcoes_analiticas/combinatoria_avancada.py
 
 ⚠️ Função `trimmed_mean` aparece em:
   - lib/funcoes_analiticas/estatisticas.py

@@ -11,11 +11,6 @@
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:
-  - `permuted_sums` em lib/funcoes_analiticas/combinatoria_avancada.py
-  - `sum_permutations` em lib/funcoes_analiticas/combinatoria_avancada.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
   - `fibonacci_num` em lib/funcoes_analiticas/teoria_numeros.py
   - `fibonacci` em lib/funcoes_analiticas/numeros_especiais.py
   ✅ Lógica funcional idêntica
@@ -41,18 +36,8 @@
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:
-  - `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-  - `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
   - `partition_number` em lib/funcoes_analiticas/teoria_numeros.py
   - `partition_number` em lib/funcoes_analiticas/numeros_especiais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `normalized_mutual_info` em lib/funcoes_analiticas/teoria_informacao.py
-  - `normalized_mutual_info` em lib/funcoes_analiticas/estatistica_multivariada.py
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:

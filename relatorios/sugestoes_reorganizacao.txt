@@ -12,15 +12,6 @@
 🔧 Função `bernoulli_number` aparece em múltiplos módulos: teoria_numeros, numeros_especiais
    ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
 
-🔧 Função `sum_combinations2` aparece em múltiplos módulos: combinatoria_avancada, combinatoria_avancada
-   ➤ Sugestão: manter em `combinatoria_avancada.py`, remover duplicados
-
-🔧 Função `combination_count` aparece em múltiplos módulos: combinatoria_avancada, combinatoria_avancada
-   ➤ Sugestão: manter em `combinatoria_avancada.py`, remover duplicados
-
-🔧 Função `permutation_count` aparece em múltiplos módulos: combinatoria_avancada, combinatoria_avancada
-   ➤ Sugestão: manter em `combinatoria_avancada.py`, remover duplicados
-
 🔧 Função `iqr_outliers` aparece em múltiplos módulos: deteccao_anomalias, estatisticas, estatisticas
    ➤ Sugestão: manter em `deteccao_anomalias.py`, remover duplicados
 
@@ -156,22 +147,13 @@
 🔁 Funções equivalentes: bernoulli_number
    ➤ Sugestão: fundir em `teoria_numeros.py` com nome padronizado
 
-🔁 Funções equivalentes: permuted_sums, sum_permutations
-   ➤ Sugestão: fundir em `combinatoria_avancada.py` com nome padronizado
-
-🔁 Funções equivalentes: sum_combinations2
-   ➤ Sugestão: fundir em `combinatoria_avancada.py` com nome padronizado
-
 🔁 Funções equivalentes: count_even
    ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
 
 🔁 Funções equivalentes: count_odd
    ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
 
-🔁 Funções equivalentes: normalized_mutual_info
-   ➤ Sugestão: fundir em `teoria_informacao.py` com nome padronizado
-
-🔁 Funções equivalentes: diff, consecutive_diff
+🔁 Funções equivalentes: consecutive_diff, diff
    ➤ Sugestão: fundir em `sequencias.py` com nome padronizado
 
 🔁 Funções equivalentes: graph_density
@@ -185,44 +167,20 @@
    🔁 Similaridade: 90.91%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `combinations_sum` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
-   🔁 Similaridade: 90.11%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `combinations_sum` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
-   🔁 Similaridade: 90.11%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
 🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
-   🔁 Similaridade: 93.71%
+   🔁 Similaridade: 87.43%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
-   🔁 Similaridade: 93.71%
+   🔁 Similaridade: 87.43%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `sum_combinations3` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
-   🔁 Similaridade: 92.57%
+   🔁 Similaridade: 86.23%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `sum_combinations3` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
-   🔁 Similaridade: 94.86%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `sumsq_combinations` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
-   🔁 Similaridade: 86.52%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `sumsq_combinations` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
-   🔁 Similaridade: 86.52%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
-   🔁 Similaridade: 93.71%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
-   🔁 Similaridade: 93.71%
+   🔁 Similaridade: 88.62%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `prob_normal` (estatisticas) ≈ `normal_pdf` (probabilidade)
@@ -250,7 +208,7 @@
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `shortest_path_all_pairs` (algoritmos_grafos) ≈ `shortest_paths_length` (grafos)
-   🔁 Similaridade: 87.56%
+   🔁 Similaridade: 92.52%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `wavelet_waverec` (wavelets) ≈ `wavelet_reconstruct` (processamento_sinal)

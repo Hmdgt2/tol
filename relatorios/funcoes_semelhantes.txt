@@ -8,45 +8,21 @@
    ≈ `bell_number` em lib/funcoes_analiticas/numeros_especiais.py
    🔁 Similaridade: 90.91%
 
-⚠️ `combinations_sum` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 90.11%
-
-⚠️ `combinations_sum` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 90.11%
-
 ⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
    ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 93.71%
+   🔁 Similaridade: 87.43%
 
 ⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
    ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 93.71%
+   🔁 Similaridade: 87.43%
 
 ⚠️ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
    ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 92.57%
+   🔁 Similaridade: 86.23%
 
 ⚠️ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
    ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 94.86%
-
-⚠️ `sumsq_combinations` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 86.52%
-
-⚠️ `sumsq_combinations` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 86.52%
-
-⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 93.71%
-
-⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 93.71%
+   🔁 Similaridade: 88.62%
 
 ⚠️ `prob_normal` em lib/funcoes_analiticas/estatisticas.py
    ≈ `normal_pdf` em lib/funcoes_analiticas/probabilidade.py
@@ -74,7 +50,7 @@
 
 ⚠️ `shortest_path_all_pairs` em lib/funcoes_analiticas/algoritmos_grafos.py
    ≈ `shortest_paths_length` em lib/funcoes_analiticas/grafos.py
-   🔁 Similaridade: 87.56%
+   🔁 Similaridade: 92.52%
 
 ⚠️ `wavelet_waverec` em lib/funcoes_analiticas/wavelets.py
    ≈ `wavelet_reconstruct` em lib/funcoes_analiticas/processamento_sinal.py
