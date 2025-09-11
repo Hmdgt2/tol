@@ -23,3 +23,4 @@ from .deteccao_anomalias import *
 from .analise_primos import *
 from .matematica_especial import *
 from .teoria_numeros import *
+from .algebra_linear import *
