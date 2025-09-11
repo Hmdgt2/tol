@@ -32,3 +32,4 @@ from .wavelets import *
 from .geometria import *
 from .estatistica_multivariada import *
 from .teoria_informacao import *
+from .machine_learning import *
