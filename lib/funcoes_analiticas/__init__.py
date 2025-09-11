@@ -33,3 +33,7 @@ from .geometria import *
 from .estatistica_multivariada import *
 from .teoria_informacao import *
 from .machine_learning import *
+from .manipulacao_dados import *
+from .plots import *
+from .algoritmos_grafos import *
+from .criptografia import *
