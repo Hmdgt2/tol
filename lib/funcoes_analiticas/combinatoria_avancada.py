@@ -7,8 +7,8 @@ import math
 from .aritmetica import prod_list
 import random
 import numpy as np
-from itertools import combinations, permutations
-from scipy.special import comb, perm
+from itertools import combinations, permutations, product
+from scipy.special import comb, perm, factorial
 
 def combinations_sum(lst: list, r: int = 2) -> list:
     """Calcula a soma de todas as combinações de r elementos da lista."""
@@ -108,3 +108,81 @@ def combination_count(n: int, k: int) -> int:
 def permutation_count(n: int, k: int) -> int:
     """Calcula o número de permutações."""
     return perm(n, k, exact=True)
+
+# Combinatória exata
+def combination_count(n: int, k: int) -> int:
+    """Calcula o número exato de combinações."""
+    return int(comb(n, k, exact=True))
+
+# Permutação exata
+def permutation_count(n: int, k: int) -> int:
+    """Calcula o número exato de permutações."""
+    return int(perm(n, k, exact=True))
+
+# Fatorial de cada elemento
+def factorial_list(lst: List[int]) -> List[int]:
+    """Calcula o fatorial de cada elemento de uma lista."""
+    return [int(factorial(x)) for x in lst]
+
+# Produto cartesiano soma
+def product_sum(lst1: list, lst2: list) -> list:
+    """Calcula a soma dos elementos em cada par do produto cartesiano de duas listas."""
+    return [sum(p) for p in product(lst1, lst2)]
+
+# Produto cartesiano produto
+def product_prod(lst1: list, lst2: list) -> list:
+    """Calcula o produto dos elementos em cada par do produto cartesiano de duas listas."""
+    return [np.prod(p) for p in product(lst1, lst2)]
+
+# Soma combinações k=2
+def sum_combinations2(lst: list) -> list:
+    """Calcula a soma de todas as combinações de 2 elementos."""
+    return [sum(c) for c in combinations(lst, 2)]
+
+# Produto combinações k=2
+def prod_combinations2(lst: list) -> float:
+    """Calcula o produto das somas de todas as combinações de 2 elementos."""
+    res = 1
+    for c in combinations(lst, 2):
+        res *= sum(c)
+    return res
+
+# Diferença combinações k=2
+def diff_combinations2(lst: list) -> list:
+    """Calcula as diferenças consecutivas das somas de combinações de 2 elementos."""
+    sums = [sum(c) for c in combinations(lst, 2)]
+    return [sums[i + 1] - sums[i] for i in range(len(sums) - 1)]
+
+# Média combinações k=2
+def mean_combinations2(lst: list) -> float:
+    """Calcula a média das somas de todas as combinações de 2 elementos."""
+    return np.mean([sum(c) for c in combinations(lst, 2)])
+
+# Soma permutações k=2
+def sum_permutations2(lst: list) -> list:
+    """Calcula a soma de todas as permutações de 2 elementos."""
+    return [sum(p) for p in permutations(lst, 2)]
+
+# Produto permutações k=2
+def prod_permutations2(lst: list) -> float:
+    """Calcula o produto das somas de todas as permutações de 2 elementos."""
+    res = 1
+    for p in permutations(lst, 2):
+        res *= sum(p)
+    return res
+
+# Diferença permutações k=2
+def diff_permutations2(lst: list) -> list:
+    """Calcula as diferenças consecutivas das somas de permutações de 2 elementos."""
+    sums = [sum(p) for p in permutations(lst, 2)]
+    return [sums[i + 1] - sums[i] for i in range(len(sums) - 1)]
+
+# Produto cartesiano soma quadrática
+def product_sum_square(lst1: list, lst2: list) -> list:
+    """Calcula o quadrado da soma de cada par do produto cartesiano."""
+    return [sum(p)**2 for p in product(lst1, lst2)]
+
+# Produto cartesiano produto quadrático
+def product_prod_square(lst1: list, lst2: list) -> list:
+    """Calcula o quadrado do produto de cada par do produto cartesiano."""
+    return [np.prod(p)**2 for p in product(lst1, lst2)]
