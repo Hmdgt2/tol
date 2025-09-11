@@ -30,3 +30,4 @@ from .numeros_especiais import *
 from .probabilidade import *
 from .wavelets import *
 from .geometria import *
+from .estatistica_multivariada import *
