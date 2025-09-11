@@ -81,3 +81,18 @@ def mad(lst: list) -> float:
     """Calcula o desvio absoluto mediano."""
     med = np.median(lst)
     return np.median([abs(x - med) for x in lst])
+
+def z_score_list(lst: list) -> list:
+    """Calcula a pontuação Z (z-score) para cada elemento em uma lista."""
+    arr = np.array(lst)
+    return stats.zscore(arr).tolist() if arr.size > 1 and np.std(arr) != 0 else [0] * len(lst)
+
+def min_max_scale(lst: list) -> list:
+    """Normaliza uma lista de números para a escala 0-1."""
+    mn = min(lst)
+    mx = max(lst)
+    return [(x - mn) / (mx - mn) if (mx - mn) != 0 else 0 for x in lst]
+
+def percentile_rank(lst: list) -> list:
+    """Calcula o percentil de cada elemento em uma lista."""
+    return [stats.percentileofscore(lst, x) for x in lst]
