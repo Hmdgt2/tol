@@ -1,27 +1,27 @@
 {
   "lightgbm_classifier": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/lightgbm_classifier_pipeline.joblib",
-    "score_treino": 0.8980672348356947,
-    "ultima_atualizacao": "2025-09-08 08:40:39"
+    "score_treino": 0.8980131735233776,
+    "ultima_atualizacao": "2025-09-11 08:45:52"
   },
   "xgboost_classifier": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/xgboost_classifier_pipeline.joblib",
-    "score_treino": 0.8988911249476628,
-    "ultima_atualizacao": "2025-09-08 08:40:40"
+    "score_treino": 0.8985935644098909,
+    "ultima_atualizacao": "2025-09-11 08:45:52"
   },
   "random_forest": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/random_forest_pipeline.joblib",
-    "score_treino": 0.9014573400505139,
-    "ultima_atualizacao": "2025-09-08 08:40:44"
+    "score_treino": 0.902345858978512,
+    "ultima_atualizacao": "2025-09-11 08:45:56"
   },
   "svm_classifier": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/svm_classifier_pipeline.joblib",
-    "score_treino": 0.8979861964640257,
-    "ultima_atualizacao": "2025-09-08 08:51:58"
+    "score_treino": 0.8979591836734694,
+    "ultima_atualizacao": "2025-09-11 08:56:43"
   },
   "regressao_logistica": {
     "caminho": "/home/runner/work/tol/tol/decisor/modelos_salvos/regressao_logistica_pipeline.joblib",
     "score_treino": 0.8979591836734694,
-    "ultima_atualizacao": "2025-09-08 08:51:58"
+    "ultima_atualizacao": "2025-09-11 08:56:44"
   }
 }
