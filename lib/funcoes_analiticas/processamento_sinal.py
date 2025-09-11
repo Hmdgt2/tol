@@ -1,7 +1,7 @@
 # lib/funcoes_analiticas/processamento_sinal.py
 import numpy as np
-from scipy.fft import fft, ifft
-from scipy.signal import butter, filtfilt, find_peaks, hilbert
+from scipy.fft import fft, ifft, fftfreq, rfft, irfft
+from scipy.signal import butter, filtfilt, find_peaks, hilbert, welch, savgol_filter
 import pywt
 from typing import List
 
@@ -112,3 +112,57 @@ def idwt_reconstruct(lst: list, wavelet: str = 'db1') -> list:
 def hilbert_transform(lst: list) -> list:
     """Calcula a Transformada de Hilbert de uma lista."""
     return np.abs(hilbert(lst)).tolist()
+
+# Filtros
+def lowpass_filter(lst: list, cutoff: float = 0.1) -> list:
+    """Aplica um filtro passa-baixa Butterworth."""
+    b, a = butter(4, cutoff)
+    return filtfilt(b, a, lst).tolist()
+
+def highpass_filter(lst: list, cutoff: float = 0.1) -> list:
+    """Aplica um filtro passa-alta Butterworth."""
+    b, a = butter(4, cutoff, 'high')
+    return filtfilt(b, a, lst).tolist()
+
+def bandpass_filter(lst: list, low: float = 0.05, high: float = 0.2) -> list:
+    """Aplica um filtro passa-faixa Butterworth."""
+    b, a = butter(4, [low, high], btype='band')
+    return filtfilt(b, a, lst).tolist()
+
+def savgol_smooth(lst: list, window: int = 5, poly: int = 2) -> list:
+    """Aplica um filtro de Savitzky-Golay para suavização."""
+    return savgol_filter(lst, window, poly).tolist()
+
+# Transformadas
+def fft_transform(lst: list) -> list:
+    """Aplica a Transformada Rápida de Fourier (FFT)."""
+    return fft(lst).tolist()
+
+def ifft_transform(lst: list) -> list:
+    """Aplica a Transformada Inversa de Fourier (IFFT)."""
+    return ifft(lst).tolist()
+
+def fft_frequencies(n: int, sample_rate: float) -> list:
+    """Retorna as frequências do sinal da FFT."""
+    return fftfreq(n, 1 / sample_rate).tolist()
+
+# Análise de Espectro
+def spectral_power(lst: list) -> list:
+    """Calcula o espectro de densidade de potência."""
+    f, Pxx = welch(lst)
+    return Pxx.tolist()
+
+def spectral_freqs(lst: list) -> list:
+    """Retorna as frequências correspondentes ao espectro de potência."""
+    f, Pxx = welch(lst)
+    return f.tolist()
+
+def spectral_energy(lst: list) -> float:
+    """Calcula a energia total do espectro."""
+    return np.sum(np.abs(fft(lst))**2)
+
+def spectral_entropy(lst: list) -> float:
+    """Calcula a entropia espectral."""
+    X = np.abs(fft(lst))**2
+    P = X / np.sum(X) if np.sum(X) != 0 else np.zeros_like(X)
+    return -np.sum(P * np.log2(P + 1e-12))
