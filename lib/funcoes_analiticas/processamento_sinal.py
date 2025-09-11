@@ -50,3 +50,11 @@ def detect_cycle_length(lst: list) -> int:
         if lst[:l] == lst[l:2 * l]:
             return l
     return 0
+
+def wavelet_decompose_coiflet(lst: list, level: int = 3) -> list:
+    """Decompõe uma lista em coeficientes de wavelet Coiflet."""
+    return pywt.wavedec(lst, 'coif1', level=level)
+
+def wavelet_reconstruct_coiflet(coeffs: list) -> list:
+    """Reconstrói a lista a partir de coeficientes de wavelet Coiflet."""
+    return pywt.waverec(coeffs, 'coif1').tolist()
