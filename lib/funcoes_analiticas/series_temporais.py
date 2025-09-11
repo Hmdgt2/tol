@@ -1,6 +1,8 @@
 # lib/funcoes_analiticas/series_temporais.py
 import numpy as np
 from statsmodels.tsa.arima.model import ARIMA
+import pandas as pd
+import statsmodels.api as sm
 from typing import List, Tuple
 
 def arima_predict(lst: list, order: Tuple[int, int, int] = (1, 0, 0), steps: int = 1) -> list:
@@ -82,3 +84,44 @@ def cumulative_min(lst: list) -> list:
         current = min(current, x)
         res.append(current)
     return res
+
+# Soma acumulativa
+def cumulative_sum(lst: list) -> list:
+    """Calcula a soma acumulativa de uma lista."""
+    return np.cumsum(lst).tolist()
+
+# Produto acumulativo
+def cumulative_product(lst: list) -> list:
+    """Calcula o produto acumulativo de uma lista."""
+    return np.cumprod(lst).tolist()
+
+# Diferenças consecutivas
+def consecutive_diff(lst: list) -> list:
+    """Calcula as diferenças entre elementos consecutivos."""
+    return [lst[i + 1] - lst[i] for i in range(len(lst) - 1)]
+
+# Diferença relativa
+def relative_diff(lst: list) -> list:
+    """Calcula as diferenças relativas entre elementos consecutivos."""
+    return [(lst[i + 1] - lst[i]) / lst[i] if lst[i] != 0 else 0 for i in range(len(lst) - 1)]
+
+# Soma de elementos não sobrepostos
+def non_overlapping_sum(lst: list, k: int = 2) -> list:
+    """Calcula a soma de elementos em blocos não sobrepostos."""
+    return [sum(lst[i:i + k]) for i in range(0, len(lst), k)]
+
+# Média móvel exponencial
+def ewma(lst: list, span: int = 3) -> list:
+    """Calcula a média móvel exponencial de uma lista."""
+    return pd.Series(lst).ewm(span=span).mean().tolist()
+
+# Residuals de regressão AR
+def ar_residuals(lst: list, order: int = 1) -> list:
+    """Calcula os resíduos de um modelo autorregressivo (AR)."""
+    model = sm.tsa.AR(lst).fit(maxlag=order)
+    return model.resid.tolist()
+
+# Média móvel simples
+def moving_average(lst: list, window: int = 3) -> list:
+    """Calcula a média móvel de uma lista."""
+    return pd.Series(lst).rolling(window).mean().tolist()
