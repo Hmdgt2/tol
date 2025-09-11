@@ -1,6 +1,7 @@
 # lib/funcoes_analiticas/ia_heuristica.py
 import random
 import numpy as np
+from itertools import combinations
 from typing import List, Callable, Dict, Any
 
 def mutate_list(lst: list, mutation_rate: float = 0.1, max_val: int = 49) -> list:
@@ -80,3 +81,40 @@ def combined_stochastic_score(lst: list, heuristics: List[Callable], weights: Li
         w = random.choice(weights)
         results.append(h(lst) * w)
     return np.mean(results)
+
+# Seleção aleatória de k elementos
+def random_selection(lst: list, k: int = 2) -> list:
+    """Seleciona k elementos aleatórios de uma lista."""
+    return random.sample(lst, k)
+
+# Escolha aleatória com pesos
+def weighted_choice(lst: list, weights: list) -> any:
+    """Faz uma escolha aleatória de um elemento com base em pesos."""
+    return random.choices(lst, weights=weights, k=1)[0]
+
+# Shuffle e soma
+def shuffle_sum(lst: list) -> float:
+    """Embaralha a lista e retorna a soma de seus elementos."""
+    temp = lst[:]
+    random.shuffle(temp)
+    return sum(temp)
+
+# Shuffle e produto
+def shuffle_product(lst: list) -> float:
+    """Embaralha a lista e retorna o produto de seus elementos."""
+    temp = lst[:]
+    random.shuffle(temp)
+    res = 1
+    for x in temp:
+        res *= x
+    return res
+
+# Média de seleções aleatórias
+def random_mean(lst: list, k: int = 3, trials: int = 10) -> float:
+    """Calcula a média de múltiplas seleções aleatórias de k elementos."""
+    return np.mean([np.mean(random.sample(lst, k)) for _ in range(trials)])
+
+# Soma cumulativa aleatória
+def random_cumsum(lst: list, k: int = 2, trials: int = 10) -> list:
+    """Calcula a soma de k elementos selecionados aleatoriamente, repetindo por N testes."""
+    return [sum(random.sample(lst, k)) for _ in range(trials)]
