@@ -1,0 +1,42 @@
+# lib/funcoes_analiticas/ia_heuristica.py
+import random
+import numpy as np
+from typing import List, Callable, Dict, Any
+
+def mutate_list(lst: list, mutation_rate: float = 0.1, max_val: int = 49) -> list:
+    """Aplica mutação a uma lista, trocando elementos aleatoriamente."""
+    return [x if random.random() > mutation_rate else random.randint(1, max_val) for x in lst]
+
+def crossover_lists(lst1: list, lst2: list) -> list:
+    """Combina duas listas em um ponto de cruzamento."""
+    point = random.randint(1, len(lst1) - 1)
+    return lst1[:point] + lst2[point:]
+
+def fitness_sum(lst: list, target: float = 100) -> float:
+    """Calcula o 'fitness' de uma lista com base em sua soma."""
+    return -abs(sum(lst) - target)
+
+def fitness_even_ratio(lst: list, target_ratio: float = 0.5) -> float:
+    """Calcula o 'fitness' com base na proporção de números pares."""
+    if not lst: return -1
+    ratio = sum(1 for x in lst if x % 2 == 0) / len(lst)
+    return -abs(ratio - target_ratio)
+
+def select_best_population(population: List[list], fitness_func: Callable, k: int = 5) -> List[list]:
+    """Seleciona a melhor parte de uma população com base em uma função de fitness."""
+    scored = [(fitness_func(lst), lst) for lst in population]
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [lst for _, lst in scored[:k]]
+
+def combined_score(lst: list, heuristics: List[Callable]) -> float:
+    """Combina o score de múltiplas heurísticas para uma lista."""
+    return sum(h(lst) for h in heuristics)
+
+def weighted_score(lst: list, heuristics: List[Callable], weights: List[float]) -> float:
+    """Calcula o score combinado de heurísticas com pesos."""
+    return sum(h(lst) * w for h, w in zip(heuristics, weights))
+
+def rank_heuristics(lst: list, heuristics: List[Callable]) -> list:
+    """Classifica heurísticas com base em seu desempenho em uma lista."""
+    scores = [h(lst) for h in heuristics]
+    return sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
