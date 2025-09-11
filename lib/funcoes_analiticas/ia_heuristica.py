@@ -40,3 +40,43 @@ def rank_heuristics(lst: list, heuristics: List[Callable]) -> list:
     """Classifica heurísticas com base em seu desempenho em uma lista."""
     scores = [h(lst) for h in heuristics]
     return sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
+
+def generate_heuristic_from_library(lst: list, funcs: List[Callable]) -> Any:
+    """Gera um valor a partir de uma heurística aleatória da biblioteca."""
+    f = random.choice(funcs)
+    return f(lst)
+
+def integrated_heuristic_test(lst: list, heuristics: List[Callable]) -> List[Callable]:
+    """Testa e retorna heurísticas ordenadas por score."""
+    scores = [h(lst) for h in heuristics]
+    ranked = np.argsort(scores)[::-1]
+    return [heuristics[i] for i in ranked]
+
+def top_k_integrated(lst: list, heuristics: List[Callable], k: int = 5) -> List[Callable]:
+    """Retorna as top K heurísticas integradas."""
+    ranked = integrated_heuristic_test(lst, heuristics)
+    return ranked[:k]
+
+def generate_new_combined_heuristic(heuristics: List[Callable], transforms: List[Callable]) -> Callable:
+    """Gera uma nova heurística combinando uma função com uma transformação."""
+    h = random.choice(heuristics)
+    t = random.choice(transforms or [lambda x: x])
+    return lambda x: h(t(x))
+
+def stochastic_score(lst: list, heuristics: List[Callable], trials: int = 100) -> float:
+    """Calcula o score estocástico de uma lista."""
+    results = []
+    for _ in range(trials):
+        h = random.choice(heuristics)
+        results.append(h(lst))
+    return np.mean(results)
+
+def combined_stochastic_score(lst: list, heuristics: List[Callable], weights: List[float] = None, trials: int = 100) -> float:
+    """Calcula o score estocástico combinado com pesos."""
+    results = []
+    weights = weights or [1] * len(heuristics)
+    for _ in range(trials):
+        h = random.choice(heuristics)
+        w = random.choice(weights)
+        results.append(h(lst) * w)
+    return np.mean(results)
