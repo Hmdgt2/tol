@@ -16,3 +16,4 @@ from .modelagem_preditiva import *
 from .ia_heuristica import *
 from .funcoes_especiais import *
 from .processamento_sinal import *
+from .series_temporais import *
