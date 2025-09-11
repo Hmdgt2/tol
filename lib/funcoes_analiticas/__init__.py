@@ -20,3 +20,4 @@ from .series_temporais import *
 from .probabilidade_distribuicoes import *
 from .analise_numerica import *
 from .deteccao_anomalias import *
+from .analise_primos import *
