@@ -35,6 +35,7 @@ jobs:
           git add relatorios/funcoes_duplicadas.txt
           git add relatorios/funcoes_equivalentes.txt
           git add relatorios/funcoes_semelhantes.txt
+          git add relatorios/sugestoes_reorganizacao.txt
           git commit -m "Automatização: Relatórios de funções duplicadas, equivalentes e semelhantes" || echo "Nenhum ficheiro para commit"
           git push
 
