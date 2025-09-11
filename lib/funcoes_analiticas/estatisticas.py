@@ -3,6 +3,8 @@ import statistics
 import numpy as np
 import pandas as pd
 from scipy import stats
+from scipy.stats import poisson, binom, norm
+from typing import List
 
 def mean(lst: list) -> float:
     """Calcula a média de uma lista de números."""
@@ -73,15 +75,6 @@ def percentile_func(lst: list, p: int) -> float:
     """Calcula o percentil de uma lista."""
     return np.percentile(lst, p)
 
-def zscore_func(lst: list) -> list:
-    """Calcula o z-score para cada elemento de uma lista."""
-    return stats.zscore(lst).tolist()
-
-def mad(lst: list) -> float:
-    """Calcula o desvio absoluto mediano."""
-    med = np.median(lst)
-    return np.median([abs(x - med) for x in lst])
-
 def z_score_list(lst: list) -> list:
     """Calcula a pontuação Z (z-score) para cada elemento em uma lista."""
     arr = np.array(lst)
@@ -96,3 +89,50 @@ def min_max_scale(lst: list) -> list:
 def percentile_rank(lst: list) -> list:
     """Calcula o percentil de cada elemento em uma lista."""
     return [stats.percentileofscore(lst, x) for x in lst]
+
+def prob_binomial(n, p, k):
+    """Calcula a probabilidade de k sucessos em n tentativas de Binomial."""
+    return binom.pmf(k, n, p)
+
+def prob_poisson(lam, k):
+    """Calcula a probabilidade de k eventos ocorrerem em Poisson."""
+    return poisson.pmf(k, lam)
+
+def prob_normal(mu, sigma, x):
+    """Calcula a densidade de probabilidade de x em uma distribuição Normal."""
+    return norm.pdf(x, mu, sigma)
+
+def cdf_normal(mu, sigma, x):
+    """Calcula a probabilidade cumulativa de x em uma distribuição Normal."""
+    return norm.cdf(x, mu, sigma)
+
+def count_even(lst: list) -> int:
+    """Conta os números pares em uma lista."""
+    return sum(1 for x in lst if x % 2 == 0)
+
+def count_odd(lst: list) -> int:
+    """Conta os números ímpares em uma lista."""
+    return sum(1 for x in lst if x % 2 == 1)
+
+def is_prime(x: int) -> bool:
+    """Verifica se um número é primo."""
+    if x < 2: return False
+    for i in range(2, int(x**0.5) + 1):
+        if x % i == 0: return False
+    return True
+
+def count_prime(lst: list) -> int:
+    """Conta os números primos em uma lista."""
+    return sum(1 for x in lst if is_prime(x))
+
+def conditional_prob_even(lst: list, next_even: bool = True) -> float:
+    """Probabilidade de o próximo número ser par, dado que o anterior foi par."""
+    total = sum(1 for x in lst[:-1] if x % 2 == 0)
+    count = sum(1 for i in range(len(lst) - 1) if lst[i] % 2 == 0 and lst[i+1] % 2 == (0 if next_even else 1))
+    return count / total if total > 0 else 0
+
+def conditional_prob_prime(lst: list, next_prime: bool = True) -> float:
+    """Probabilidade de o próximo número ser primo, dado que o anterior foi primo."""
+    total = sum(1 for x in lst[:-1] if is_prime(x))
+    count = sum(1 for i in range(len(lst) - 1) if is_prime(lst[i]) and is_prime(lst[i+1]) == next_prime)
+    return count / total if total > 0 else 0
