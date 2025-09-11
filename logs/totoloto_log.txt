@@ -40,3 +40,4 @@
 [2025-09-07 07:23:22] [vercapas] Resultado do concurso 072/2025 já existe. Nada a fazer.
 [2025-09-08 23:25:07] [vercapas] Resultado do concurso 072/2025 já existe. Nada a fazer.
 [2025-09-10 21:52:03] [santacasa] Resultado do concurso 073/2025 adicionado ao JSON 2025.
+[2025-09-11 07:26:01] [vercapas] Resultado do concurso 073/2025 já existe. Nada a fazer.
