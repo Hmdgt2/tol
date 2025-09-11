@@ -55,3 +55,27 @@ def check_prime(n: int) -> bool:
 def generate_primes(n: int) -> list:
     """Gera uma lista de primos até n."""
     return list(primerange(1, n))
+
+def fibonacci_num(n: int) -> int:
+    """Retorna o n-ésimo número de Fibonacci."""
+    return sp.fibonacci(n)
+
+def lucas_num(n: int) -> int:
+    """Retorna o n-ésimo número de Lucas."""
+    return sp.lucas(n)
+
+def catalan_num(n: int) -> int:
+    """Retorna o n-ésimo número de Catalan."""
+    return sp.catalan(n)
+
+def bell_number(n: int) -> int:
+    """Retorna o n-ésimo número de Bell."""
+    return sp.bell(n)
+
+def partition_number(n: int) -> int:
+    """Retorna o número de partições de n."""
+    return sp.partition(n)
+
+def bernoulli_number(n: int) -> int:
+    """Retorna o n-ésimo número de Bernoulli."""
+    return sp.bernoulli(n)
