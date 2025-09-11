@@ -18,3 +18,4 @@ from .funcoes_especiais import *
 from .processamento_sinal import *
 from .series_temporais import *
 from .probabilidade_distribuicoes import *
+from .analise_numerica import *
