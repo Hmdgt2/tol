@@ -9,3 +9,6 @@ from .temporais import *
 from .grafos import *
 from .combinatoria_avancada import *
 from .precisao import *
+from .simulacao import *
+from .analise_padroes import *
+from .exploracao import *
