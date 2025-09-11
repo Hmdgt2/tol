@@ -136,3 +136,56 @@ def conditional_prob_prime(lst: list, next_prime: bool = True) -> float:
     total = sum(1 for x in lst[:-1] if is_prime(x))
     count = sum(1 for i in range(len(lst) - 1) if is_prime(lst[i]) and is_prime(lst[i+1]) == next_prime)
     return count / total if total > 0 else 0
+
+def mean_absolute_deviation(lst: list) -> float:
+    """Calcula o desvio médio absoluto de uma lista."""
+    return np.mean(np.abs(np.array(lst) - np.mean(lst)))
+
+def median_absolute_deviation(lst: list) -> float:
+    """Calcula o desvio absoluto mediano de uma lista."""
+    med = np.median(lst)
+    return np.median([abs(x - med) for x in lst])
+
+def weighted_mean(lst: list, weights: list) -> float:
+    """Calcula a média ponderada de uma lista."""
+    return np.average(lst, weights=weights)
+
+def variance_ratio(lst1: list, lst2: list) -> float:
+    """Calcula a razão das variâncias de duas listas."""
+    var2 = np.var(lst2)
+    return np.var(lst1) / var2 if var2 != 0 else 0
+
+def normalized_std(lst: list) -> float:
+    """Calcula o desvio padrão normalizado (coeficiente de variação)."""
+    mean_val = np.mean(lst)
+    return np.std(lst) / mean_val if mean_val != 0 else 0
+
+def trimmed_mean(lst: list, percent: float = 0.1) -> float:
+    """Calcula a média aparada (trimmed mean) de uma lista."""
+    sorted_lst = sorted(lst)
+    n = int(len(lst) * percent)
+    return np.mean(sorted_lst[n:-n])
+
+def interquartile_range(lst: list) -> float:
+    """Calcula o intervalo interquartil de uma lista."""
+    q75, q25 = np.percentile(lst, [75, 25])
+    return q75 - q25
+
+def percentile_diff(lst: list, p1: float, p2: float) -> float:
+    """Calcula a diferença entre dois percentis de uma lista."""
+    return np.percentile(lst, p2) - np.percentile(lst, p1)
+
+def median_ratio(lst: list) -> float:
+    """Calcula a razão entre a mediana e a média."""
+    mean_val = np.mean(lst)
+    return np.median(lst) / mean_val if mean_val != 0 else 0
+
+def weighted_std(lst: list, weights: list) -> float:
+    """Calcula o desvio padrão ponderado."""
+    average = np.average(lst, weights=weights)
+    variance = np.average((np.array(lst) - average) ** 2, weights=weights)
+    return np.sqrt(variance)
+
+def percentile_rank(lst: list, value: float) -> float:
+    """Calcula a classificação percentual de um valor em uma lista."""
+    return np.sum([1 for x in lst if x <= value]) / len(lst) if lst else 0
