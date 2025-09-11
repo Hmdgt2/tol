@@ -12,3 +12,7 @@ from .precisao import *
 from .simulacao import *
 from .analise_padroes import *
 from .exploracao import *
+from .modelagem_preditiva import *
+from .ia_heuristica import *
+from .funcoes_especiais import *
+from .processamento_sinal import *
