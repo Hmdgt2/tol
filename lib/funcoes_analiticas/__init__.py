@@ -5,3 +5,7 @@ from .sequencias import *
 from .combinatoria import *
 from .conjuntos import *
 from .transformacoes import *
+from .temporais import *
+from .grafos import *
+from .combinatoria_avancada import *
+from .precisao import *
