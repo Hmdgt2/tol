@@ -1,9 +1,10 @@
 # lib/funcoes_analiticas/estatisticas.py
 import statistics
 import numpy as np
+import math
 import pandas as pd
 from scipy import stats
-from scipy.stats import poisson, binom, norm
+from scipy.stats import poisson, binom, norm, trim_mean
 from typing import List
 
 def mean(lst: list) -> float:
@@ -189,3 +190,27 @@ def weighted_std(lst: list, weights: list) -> float:
 def percentile_rank(lst: list, value: float) -> float:
     """Calcula a classificação percentual de um valor em uma lista."""
     return np.sum([1 for x in lst if x <= value]) / len(lst) if lst else 0
+
+# Inverso do desvio padrão
+def inv_std(lst: list) -> float:
+    """Calcula o inverso do desvio padrão de uma lista."""
+    std = np.std(lst)
+    return 1 / std if std != 0 else 0
+
+# Inverso do desvio médio absoluto
+def inv_mad(lst: list) -> float:
+    """Calcula o inverso do desvio médio absoluto (MAD) de uma lista."""
+    mad = np.mean(np.abs(np.array(lst) - np.mean(lst)))
+    return 1 / mad if mad != 0 else 0
+
+# Soma de quadrados normalizada
+def normalized_square_sum(lst: list) -> list:
+    """Calcula a soma de quadrados normalizada de uma lista."""
+    squares = [x**2 for x in lst]
+    total = sum(squares)
+    return [x / total if total != 0 else 0 for x in squares]
+
+# Estatística robusta
+def trimmed_mean_func(lst: list, proportion: float = 0.1) -> float:
+    """Calcula a média aparada (trimmed mean) de uma lista."""
+    return trim_mean(lst, proportion)
