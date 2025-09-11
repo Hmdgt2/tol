@@ -4,7 +4,7 @@ from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.stattools import acf, pacf, adfuller, kpss
 import pandas as pd
 import statsmodels.api as sm
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 def arima_predict(lst: list, order: Tuple[int, int, int] = (1, 0, 0), steps: int = 1) -> list:
     """Prediz o próximo valor de uma série temporal usando o modelo ARIMA."""
@@ -167,3 +167,20 @@ def diff_series(lst: list) -> list:
 def log_transform(lst: list) -> list:
     """Aplica a transformação logarítmica (log(x+1))."""
     return np.log(np.array(lst) + 1).tolist()
+
+def arima_forecast(lst: list, order: tuple, steps: int) -> list:
+    """
+    Prevê o futuro de uma série temporal usando o modelo ARIMA.
+    
+    Args:
+        lst (list): Série temporal de entrada.
+        order (tuple): Tupla (p, d, q) para o modelo ARIMA.
+        steps (int): Número de passos futuros para prever.
+        
+    Returns:
+        list: Previsão dos próximos 'steps' valores.
+    """
+    model = ARIMA(lst, order=order)
+    model_fit = model.fit()
+    forecast = model_fit.forecast(steps=steps)
+    return forecast.tolist()
