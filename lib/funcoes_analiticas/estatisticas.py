@@ -327,3 +327,23 @@ def geom_series_sum(a: Union[int, float], r: Union[int, float], n: int) -> Union
 def alt_harmonic_sum(n: int) -> float:
     """Soma de uma série harmônica alternada."""
     return sum((-1) ** (k + 1) / k for k in range(1, n + 1))
+
+# Funções de análise de Outliers
+def zscore_outliers(lst: list, thr: float = 3.0) -> list:
+    """Identifica outliers usando o Z-score."""
+    z = (np.array(lst) - np.mean(lst)) / np.std(lst)
+    return np.where(np.abs(z) > thr)[0].tolist()
+
+def iqr_outliers(lst: list) -> list:
+    """Identifica outliers usando o método do IQR."""
+    q1, q3 = np.percentile(lst, [25, 75])
+    iqr_val = q3 - q1
+    lower_bound = q1 - 1.5 * iqr_val
+    upper_bound = q3 + 1.5 * iqr_val
+    return [i for i, x in enumerate(lst) if x < lower_bound or x > upper_bound]
+
+def winsorize_series(lst: list, alpha: float = 0.05) -> list:
+    """Winsoriza uma série para limitar o efeito de outliers."""
+    s = np.sort(lst)
+    k = int(len(s) * alpha)
+    return np.clip(lst, s[k], s[-k - 1]).tolist()
