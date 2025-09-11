@@ -1,7 +1,7 @@
 # lib/funcoes_analiticas/processamento_sinal.py
 import numpy as np
 from scipy.fft import fft, ifft, fftfreq, rfft, irfft
-from scipy.signal import butter, filtfilt, find_peaks, hilbert, welch, savgol_filter
+from scipy.signal import butter, filtfilt, find_peaks, hilbert, welch, savgol_filter, stft, istft, welch, periodogram, lfilter
 import pywt
 from typing import List
 
@@ -166,3 +166,36 @@ def spectral_entropy(lst: list) -> float:
     X = np.abs(fft(lst))**2
     P = X / np.sum(X) if np.sum(X) != 0 else np.zeros_like(X)
     return -np.sum(P * np.log2(P + 1e-12))
+
+def stft_transform(x: list, fs: float) -> list:
+    """Aplica a Transformada de Fourier de Curto Prazo (STFT)."""
+    f, t, Zxx = stft(x, fs=fs)
+    return Zxx.tolist()
+
+def istft_transform(Z: list, fs: float) -> list:
+    """Aplica a Transformada de Fourier Inversa de Curto Prazo (ISTFT)."""
+    t, x = istft(Z, fs=fs)
+    return x.tolist()
+
+def welch_psd(x: list, fs: float) -> tuple[list, list]:
+    """Calcula o Espectro de Densidade de Potência usando o método de Welch."""
+    f, P = welch(x, fs=fs)
+    return f.tolist(), P.tolist()
+
+def periodogram_psd(x: list, fs: float) -> tuple[list, list]:
+    """Calcula o Espectro de Densidade de Potência usando o periodograma."""
+    f, P = periodogram(x, fs=fs)
+    return f.tolist(), P.tolist()
+
+def find_signal_peaks(x: list) -> list:
+    """Encontra os picos de um sinal."""
+    peaks, _ = find_peaks(x)
+    return peaks.tolist()
+
+def butter_lowpass(cutoff: float, fs: float, order: int = 5) -> tuple:
+    """Retorna os coeficientes de um filtro passa-baixa Butterworth."""
+    return butter(order, cutoff, fs=fs, btype='low')
+
+def filter_signal(b: list, a: list, x: list) -> list:
+    """Filtra um sinal usando os coeficientes b e a."""
+    return lfilter(b, a, x).tolist()
