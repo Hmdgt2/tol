@@ -1,5 +1,5 @@
 # lib/funcoes_analiticas/probabilidade.py
-from scipy.stats import poisson, binom, norm, uniform, expon, bernoulli, geom
+from scipy.stats import poisson, binom, norm, uniform, expon, bernoulli, geom, entropy
 from typing import List, Union
 
 def poisson_pmf(k: int, mu: float) -> float:
@@ -57,3 +57,27 @@ def normal_cdf(x: float, mu: float, sigma: float) -> float:
 def exponential_pdf(x: float, lmbda: float) -> float:
     """Calcula a PDF da distribuição exponencial."""
     return expon.pdf(x, scale=1 / lmbda)
+
+def poisson_var(mu: float) -> float:
+    """Calcula a variância da distribuição de Poisson."""
+    return poisson.var(mu)
+
+def binomial_var(n: int, p: float) -> float:
+    """Calcula a variância da distribuição binomial."""
+    return binom.var(n, p)
+
+def normal_var(sigma: float) -> float:
+    """Calcula a variância da distribuição normal."""
+    return sigma**2
+
+def poisson_entropy(mu: float) -> float:
+    """Calcula a entropia da distribuição de Poisson."""
+    return poisson.entropy(mu)
+
+def binomial_entropy(n: int, p: float) -> float:
+    """Calcula a entropia da distribuição binomial."""
+    return binom.entropy(n, p)
+
+def normal_entropy(mu: float, sigma: float) -> float:
+    """Calcula a entropia da distribuição normal."""
+    return norm(mu, sigma).entropy()
