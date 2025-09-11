@@ -4,7 +4,7 @@ import numpy as np
 import math
 import pandas as pd
 from scipy import stats
-from scipy.stats import poisson, binom, norm, trim_mean
+from scipy.stats import poisson, binom, norm, iqr, median_abs_deviation, trim_mean, gmean, hmean, kurtosis, skew, mode, gstd, rankdata
 from typing import List
 
 def mean(lst: list) -> float:
@@ -214,3 +214,79 @@ def normalized_square_sum(lst: list) -> list:
 def trimmed_mean_func(lst: list, proportion: float = 0.1) -> float:
     """Calcula a média aparada (trimmed mean) de uma lista."""
     return trim_mean(lst, proportion)
+
+# Estatística robusta
+def interquartile_range(lst: list) -> float:
+    """Calcula o intervalo interquartil (IQR)."""
+    return iqr(lst)
+
+def mad(lst: list) -> float:
+    """Calcula o desvio absoluto da mediana (MAD)."""
+    return median_abs_deviation(lst)
+
+def trimmed_mean(lst: list) -> float:
+    """Calcula a média aparada (trimmed mean) com proporção padrão de 0.1."""
+    return trim_mean(lst, 0.1)
+
+def geometric_mean(lst: list) -> float:
+    """Calcula a média geométrica."""
+    return gmean(lst)
+
+def harmonic_mean(lst: list) -> float:
+    """Calcula a média harmônica."""
+    return hmean(lst)
+
+def percentile90(lst: list) -> float:
+    """Retorna o 90º percentil."""
+    return np.percentile(lst, 90)
+
+def percentile10(lst: list) -> float:
+    """Retorna o 10º percentil."""
+    return np.percentile(lst, 10)
+
+def robust_zscore(lst: list) -> list:
+    """Calcula o z-score robusto usando a mediana e o MAD."""
+    med = np.median(lst)
+    mad_val = median_abs_deviation(lst)
+    return [(x - med) / mad_val for x in lst]
+
+# Estatística avançada
+def sample_variance(lst: list) -> float:
+    """Calcula a variância da amostra."""
+    return np.var(lst, ddof=1)
+
+def sample_std(lst: list) -> float:
+    """Calcula o desvio padrão da amostra."""
+    return np.std(lst, ddof=1)
+
+def population_variance(lst: list) -> float:
+    """Calcula a variância da população."""
+    return np.var(lst)
+
+def population_std(lst: list) -> float:
+    """Calcula o desvio padrão da população."""
+    return np.std(lst)
+
+def coefficient_variation(lst: list) -> float:
+    """Calcula o coeficiente de variação."""
+    return np.std(lst) / np.mean(lst) if np.mean(lst) != 0 else 0
+
+def skewness(lst: list) -> float:
+    """Calcula a assimetria (skewness)."""
+    return skew(lst)
+
+def kurtosis_excess(lst: list) -> float:
+    """Calcula a curtose de excesso."""
+    return kurtosis(lst)
+
+def geometric_std(lst: list) -> float:
+    """Calcula o desvio padrão geométrico."""
+    return gstd(lst)
+
+def mode_value(lst: list) -> float:
+    """Retorna a moda de uma lista."""
+    return mode(lst, keepdims=True).mode[0]
+
+def trimmed_mean_20(lst: list) -> float:
+    """Calcula a média aparada com proporção de 20%."""
+    return trim_mean(lst, 0.2)
