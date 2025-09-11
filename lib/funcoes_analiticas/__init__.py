@@ -21,3 +21,4 @@ from .probabilidade_distribuicoes import *
 from .analise_numerica import *
 from .deteccao_anomalias import *
 from .analise_primos import *
+from .matematica_especial import *
