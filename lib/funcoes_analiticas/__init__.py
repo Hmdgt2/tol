@@ -24,3 +24,4 @@ from .analise_primos import *
 from .matematica_especial import *
 from .teoria_numeros import *
 from .algebra_linear import *
+from .estatistica_nao_parametrica import *
