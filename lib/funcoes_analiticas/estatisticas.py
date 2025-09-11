@@ -290,3 +290,40 @@ def mode_value(lst: list) -> float:
 def trimmed_mean_20(lst: list) -> float:
     """Calcula a média aparada com proporção de 20%."""
     return trim_mean(lst, 0.2)
+
+# Estatística Robusta & Outliers
+def median_absolute_deviation(lst: list) -> float:
+    """Calcula o Desvio Absoluto da Mediana (MAD)."""
+    med = np.median(lst)
+    return np.median(np.abs(np.array(lst) - med))
+
+def iqr(lst: list) -> float:
+    """Calcula o Intervalo Interquartil (IQR)."""
+    q1, q3 = np.percentile(lst, [25, 75])
+    return q3 - q1
+
+def bowley_skewness(lst: list) -> float:
+    """Calcula a assimetria de Bowley."""
+    q1, q2, q3 = np.percentile(lst, [25, 50, 75])
+    return (q3 + q1 - 2 * q2) / (q3 - q1)
+
+def iqr_outliers(lst: list) -> list:
+    """Encontra os índices dos outliers usando a regra do IQR."""
+    q1, q3 = np.percentile(lst, [25, 75])
+    iqr_val = q3 - q1
+    return [i for i, x in enumerate(lst) if x < q1 - 1.5 * iqr_val or x > q3 + 1.5 * iqr_val]
+
+# Séries Numéricas Especiais (não-SymPy)
+def arith_series_sum(a: Union[int, float], d: Union[int, float], n: int) -> Union[int, float]:
+    """Soma de uma série aritmética."""
+    return n / 2 * (2 * a + (n - 1) * d)
+
+def geom_series_sum(a: Union[int, float], r: Union[int, float], n: int) -> Union[int, float]:
+    """Soma de uma série geométrica."""
+    if r == 1:
+        return a * n
+    return a * (1 - r ** n) / (1 - r)
+
+def alt_harmonic_sum(n: int) -> float:
+    """Soma de uma série harmônica alternada."""
+    return sum((-1) ** (k + 1) / k for k in range(1, n + 1))
