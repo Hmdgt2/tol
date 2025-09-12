@@ -1,9 +1,13 @@
 # lib/visualizacao/plots.py
 import matplotlib.pyplot as plt
 import seaborn as sns
-from typing import List, Optional
+from typing import List, Optional, Union
 
-def plot_histogram(data: list, title: str = 'Histograma', bins: int = 10, color: str = 'skyblue') -> None:
+# ============================================================
+# Funções de visualização
+# ============================================================
+
+def plot_histogram(data: List[float], title: str = 'Histograma', bins: int = 10, color: str = 'skyblue') -> None:
     """Plota um histograma de uma lista de dados."""
     plt.figure(figsize=(8, 6))
     sns.histplot(data, bins=bins, color=color, kde=True)
@@ -13,7 +17,7 @@ def plot_histogram(data: list, title: str = 'Histograma', bins: int = 10, color:
     plt.grid(axis='y', alpha=0.75)
     plt.show()
 
-def plot_scatter(x: list, y: list, title: str = 'Gráfico de Dispersão', color: str = 'green') -> None:
+def plot_scatter(x: List[float], y: List[float], title: str = 'Gráfico de Dispersão', color: str = 'green') -> None:
     """Plota um gráfico de dispersão de dois conjuntos de dados."""
     plt.figure(figsize=(8, 6))
     plt.scatter(x, y, color=color)
@@ -23,7 +27,7 @@ def plot_scatter(x: list, y: list, title: str = 'Gráfico de Dispersão', color:
     plt.grid(True)
     plt.show()
 
-def plot_boxplot(data: list, title: str = 'Boxplot') -> None:
+def plot_boxplot(data: List[float], title: str = 'Boxplot') -> None:
     """Plota um boxplot para visualizar a distribuição e outliers."""
     plt.figure(figsize=(8, 6))
     sns.boxplot(data=data)
@@ -32,7 +36,7 @@ def plot_boxplot(data: list, title: str = 'Boxplot') -> None:
     plt.grid(True)
     plt.show()
 
-def plot_time_series(series: list, title: str = 'Série Temporal', color: str = 'blue') -> None:
+def plot_time_series(series: List[float], title: str = 'Série Temporal', color: str = 'blue') -> None:
     """Plota uma série temporal."""
     plt.figure(figsize=(12, 6))
     plt.plot(series, color=color, marker='o', linestyle='-')
