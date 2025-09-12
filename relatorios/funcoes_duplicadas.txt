@@ -15,31 +15,10 @@
 ⚠️ Função `bessel_j` aparece em:
   - lib/funcoes_analiticas/funcoes_especiais.py
   - lib/funcoes_analiticas/matematica_especial.py
-  - lib/funcoes_analiticas/matematica_especial.py
 
 ⚠️ Função `beta_func` aparece em:
   - lib/funcoes_analiticas/funcoes_especiais.py
   - lib/funcoes_analiticas/matematica_especial.py
-
-⚠️ Função `binomial_cdf` aparece em:
-  - lib/funcoes_analiticas/probabilidade.py
-  - lib/funcoes_analiticas/probabilidade.py
-
-⚠️ Função `binomial_pmf` aparece em:
-  - lib/funcoes_analiticas/probabilidade.py
-  - lib/funcoes_analiticas/probabilidade.py
-
-⚠️ Função `chebyshev_t` aparece em:
-  - lib/funcoes_analiticas/matematica_especial.py
-  - lib/funcoes_analiticas/matematica_especial.py
-
-⚠️ Função `closeness_centrality` aparece em:
-  - lib/funcoes_analiticas/grafos.py
-  - lib/funcoes_analiticas/grafos.py
-
-⚠️ Função `consecutive_diff` aparece em:
-  - lib/funcoes_analiticas/series_temporais.py
-  - lib/funcoes_analiticas/series_temporais.py
 
 ⚠️ Função `count_even` aparece em:
   - lib/funcoes_analiticas/estatisticas.py
@@ -53,18 +32,6 @@
   - lib/funcoes_analiticas/estatisticas.py
   - lib/funcoes_analiticas/conjuntos.py
 
-⚠️ Função `create_graph` aparece em:
-  - lib/funcoes_analiticas/grafos.py
-  - lib/funcoes_analiticas/grafos.py
-
-⚠️ Função `cumulative_product` aparece em:
-  - lib/funcoes_analiticas/series_temporais.py
-  - lib/funcoes_analiticas/series_temporais.py
-
-⚠️ Função `cumulative_sum` aparece em:
-  - lib/funcoes_analiticas/series_temporais.py
-  - lib/funcoes_analiticas/series_temporais.py
-
 ⚠️ Função `diff_ratio` aparece em:
   - lib/funcoes_analiticas/sequencias.py
   - lib/funcoes_analiticas/series_temporais.py
@@ -73,71 +40,29 @@
   - lib/funcoes_analiticas/teoria_numeros.py
   - lib/funcoes_analiticas/matematica_especial.py
 
-⚠️ Função `fft_magnitude` aparece em:
-  - lib/funcoes_analiticas/temporais.py
-  - lib/funcoes_analiticas/processamento_sinal.py
-
 ⚠️ Função `fft_phase` aparece em:
   - lib/funcoes_analiticas/temporais.py
-  - lib/funcoes_analiticas/processamento_sinal.py
-
-⚠️ Função `fft_real` aparece em:
-  - lib/funcoes_analiticas/processamento_sinal.py
   - lib/funcoes_analiticas/processamento_sinal.py
 
 ⚠️ Função `gamma_func` aparece em:
   - lib/funcoes_analiticas/funcoes_especiais.py
   - lib/funcoes_analiticas/matematica_especial.py
-  - lib/funcoes_analiticas/matematica_especial.py
-
-⚠️ Função `geometric_mean` aparece em:
-  - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/estatisticas.py
-
-⚠️ Função `graph_density` aparece em:
-  - lib/funcoes_analiticas/grafos.py
-  - lib/funcoes_analiticas/grafos.py
 
 ⚠️ Função `ifft_real` aparece em:
   - lib/funcoes_analiticas/temporais.py
   - lib/funcoes_analiticas/processamento_sinal.py
 
-⚠️ Função `interquartile_range` aparece em:
-  - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/estatisticas.py
-
 ⚠️ Função `iqr_outliers` aparece em:
   - lib/funcoes_analiticas/deteccao_anomalias.py
   - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/estatisticas.py
-
-⚠️ Função `legendre_p` aparece em:
-  - lib/funcoes_analiticas/matematica_especial.py
-  - lib/funcoes_analiticas/matematica_especial.py
 
 ⚠️ Função `log_transform` aparece em:
   - lib/funcoes_analiticas/transformacoes.py
   - lib/funcoes_analiticas/series_temporais.py
 
-⚠️ Função `median_absolute_deviation` aparece em:
-  - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/estatisticas.py
-
-⚠️ Função `moving_average` aparece em:
-  - lib/funcoes_analiticas/series_temporais.py
-  - lib/funcoes_analiticas/series_temporais.py
-
 ⚠️ Função `mutual_info` aparece em:
   - lib/funcoes_analiticas/teoria_informacao.py
   - lib/funcoes_analiticas/estatistica_multivariada.py
-
-⚠️ Função `normal_cdf` aparece em:
-  - lib/funcoes_analiticas/probabilidade.py
-  - lib/funcoes_analiticas/probabilidade.py
-
-⚠️ Função `normal_pdf` aparece em:
-  - lib/funcoes_analiticas/probabilidade.py
-  - lib/funcoes_analiticas/probabilidade.py
 
 ⚠️ Função `normalized_mutual_info` aparece em:
   - lib/funcoes_analiticas/teoria_informacao.py
@@ -147,32 +72,15 @@
   - lib/funcoes_analiticas/teoria_numeros.py
   - lib/funcoes_analiticas/numeros_especiais.py
 
-⚠️ Função `percentile_rank` aparece em:
-  - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/estatisticas.py
-
 ⚠️ Função `plot_histogram` aparece em:
   - lib/funcoes_analiticas/exploracao.py
   - lib/funcoes_analiticas/plots.py
 
-⚠️ Função `poisson_cdf` aparece em:
-  - lib/funcoes_analiticas/probabilidade.py
-  - lib/funcoes_analiticas/probabilidade.py
-
-⚠️ Função `poisson_pmf` aparece em:
-  - lib/funcoes_analiticas/probabilidade.py
-  - lib/funcoes_analiticas/probabilidade.py
-
 ⚠️ Função `rolling_mean` aparece em:
   - lib/funcoes_analiticas/sequencias.py
-  - lib/funcoes_analiticas/series_temporais.py
   - lib/funcoes_analiticas/series_temporais.py
 
 ⚠️ Função `rolling_std` aparece em:
   - lib/funcoes_analiticas/sequencias.py
   - lib/funcoes_analiticas/series_temporais.py
-
-⚠️ Função `trimmed_mean` aparece em:
-  - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/estatisticas.py
 

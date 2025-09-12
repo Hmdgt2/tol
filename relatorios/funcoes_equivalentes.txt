@@ -1,52 +1,12 @@
 🔍 Funções com lógica equivalente (mesmo com nomes diferentes):
 
 ⚠️ Implementações idênticas encontradas:
-  - `count_even` em lib/funcoes_analiticas/estatisticas.py
-  - `count_even` em lib/funcoes_analiticas/conjuntos.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `bernoulli_number` em lib/funcoes_analiticas/teoria_numeros.py
-  - `bernoulli_number` em lib/funcoes_analiticas/numeros_especiais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `fibonacci_num` em lib/funcoes_analiticas/teoria_numeros.py
-  - `fibonacci` em lib/funcoes_analiticas/numeros_especiais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `graph_density` em lib/funcoes_analiticas/grafos.py
-  - `graph_density` em lib/funcoes_analiticas/grafos.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `bell_number` em lib/funcoes_analiticas/teoria_numeros.py
-  - `bell_number` em lib/funcoes_analiticas/numeros_especiais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `catalan_num` em lib/funcoes_analiticas/teoria_numeros.py
-  - `catalan_number` em lib/funcoes_analiticas/numeros_especiais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `lucas_num` em lib/funcoes_analiticas/teoria_numeros.py
-  - `lucas` em lib/funcoes_analiticas/numeros_especiais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `partition_number` em lib/funcoes_analiticas/teoria_numeros.py
-  - `partition_number` em lib/funcoes_analiticas/numeros_especiais.py
+  - `bessel_j` em lib/funcoes_analiticas/funcoes_especiais.py
+  - `bessel_j` em lib/funcoes_analiticas/matematica_especial.py
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:
   - `diff` em lib/funcoes_analiticas/sequencias.py
   - `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-  ✅ Lógica funcional idêntica
-
-⚠️ Implementações idênticas encontradas:
-  - `count_odd` em lib/funcoes_analiticas/estatisticas.py
-  - `count_odd` em lib/funcoes_analiticas/conjuntos.py
   ✅ Lógica funcional idêntica
 
