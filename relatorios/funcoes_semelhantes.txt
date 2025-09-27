@@ -1,51 +1,19 @@
 🔍 Funções com lógica semelhante (estrutura parecida):
 
-⚠️ `fibonacci_num` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `fibonacci` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 96.0%
-
-⚠️ `lucas_num` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `lucas` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 95.41%
-
-⚠️ `catalan_num` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `catalan_number` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 95.73%
-
-⚠️ `bell_number` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `bell_number` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 95.24%
-
-⚠️ `bell_number` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `bernoulli_number` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 86.96%
-
-⚠️ `partition_number` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `partition_number` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 95.73%
-
-⚠️ `bernoulli_number` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `bell_number` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 86.96%
-
-⚠️ `bernoulli_number` em lib/funcoes_analiticas/teoria_numeros.py
-   ≈ `bernoulli_number` em lib/funcoes_analiticas/numeros_especiais.py
-   🔁 Similaridade: 96.0%
-
-⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
+⚠️ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
+   ≈ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
    🔁 Similaridade: 87.43%
 
-⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   🔁 Similaridade: 87.43%
-
-⚠️ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
+⚠️ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
+   ≈ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
    🔁 Similaridade: 86.23%
 
-⚠️ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
-   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
+⚠️ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
+   ≈ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
+   🔁 Similaridade: 87.43%
+
+⚠️ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
+   ≈ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
    🔁 Similaridade: 88.62%
 
 ⚠️ `count_even` em lib/funcoes_analiticas/estatisticas.py
@@ -68,18 +36,6 @@
    ≈ `count_prime` em lib/funcoes_analiticas/conjuntos.py
    🔁 Similaridade: 90.23%
 
-⚠️ `shortest_path_all_pairs` em lib/funcoes_analiticas/algoritmos_grafos.py
-   ≈ `shortest_paths_length` em lib/funcoes_analiticas/grafos.py
-   🔁 Similaridade: 92.52%
-
-⚠️ `successive_diff` em lib/funcoes_analiticas/exploracao.py
-   ≈ `diff` em lib/funcoes_analiticas/sequencias.py
-   🔁 Similaridade: 90.53%
-
-⚠️ `successive_diff` em lib/funcoes_analiticas/exploracao.py
-   ≈ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 90.53%
-
 ⚠️ `diff` em lib/funcoes_analiticas/sequencias.py
    ≈ `relative_diff` em lib/funcoes_analiticas/series_temporais.py
    🔁 Similaridade: 85.33%
@@ -87,6 +43,10 @@
 ⚠️ `diff` em lib/funcoes_analiticas/sequencias.py
    ≈ `diff_ratio` em lib/funcoes_analiticas/series_temporais.py
    🔁 Similaridade: 87.67%
+
+⚠️ `diff` em lib/funcoes_analiticas/sequencias.py
+   ≈ `successive_diff` em lib/funcoes_analiticas/exploracao.py
+   🔁 Similaridade: 90.53%
 
 ⚠️ `diff_squared` em lib/funcoes_analiticas/sequencias.py
    ≈ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
@@ -112,6 +72,46 @@
    ≈ `rolling_mean` em lib/funcoes_analiticas/series_temporais.py
    🔁 Similaridade: 87.7%
 
+⚠️ `fibonacci` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `fibonacci_num` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 96.0%
+
+⚠️ `lucas` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `lucas_num` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 95.41%
+
+⚠️ `catalan_number` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `catalan_num` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 95.73%
+
+⚠️ `bell_number` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `bell_number` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 95.24%
+
+⚠️ `bell_number` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `bernoulli_number` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 86.96%
+
+⚠️ `partition_number` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `partition_number` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 95.73%
+
+⚠️ `bernoulli_number` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `bell_number` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 86.96%
+
+⚠️ `bernoulli_number` em lib/funcoes_analiticas/numeros_especiais.py
+   ≈ `bernoulli_number` em lib/funcoes_analiticas/teoria_numeros.py
+   🔁 Similaridade: 96.0%
+
+⚠️ `shortest_paths_length` em lib/funcoes_analiticas/grafos.py
+   ≈ `shortest_path_all_pairs` em lib/funcoes_analiticas/algoritmos_grafos.py
+   🔁 Similaridade: 92.52%
+
+⚠️ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
+   ≈ `successive_diff` em lib/funcoes_analiticas/exploracao.py
+   🔁 Similaridade: 90.53%
+
 ⚠️ `gamma_func` em lib/funcoes_analiticas/funcoes_especiais.py
    ≈ `gamma_func` em lib/funcoes_analiticas/matematica_especial.py
    🔁 Similaridade: 95.24%
@@ -131,8 +131,4 @@
 ⚠️ `chebyshev_T` em lib/funcoes_analiticas/funcoes_especiais.py
    ≈ `chebyshev_t` em lib/funcoes_analiticas/matematica_especial.py
    🔁 Similaridade: 86.49%
-
-⚠️ `lag_series` em lib/funcoes_analiticas/temporais.py
-   ≈ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 85.85%
 

@@ -1,20 +1,5 @@
 🧠 Sugestões de Reorganização Funcional:
 
-🔧 Função `euler_totient` aparece em múltiplos módulos: teoria_numeros, matematica_especial
-   ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
-
-🔧 Função `bell_number` aparece em múltiplos módulos: teoria_numeros, numeros_especiais
-   ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
-
-🔧 Função `partition_number` aparece em múltiplos módulos: teoria_numeros, numeros_especiais
-   ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
-
-🔧 Função `bernoulli_number` aparece em múltiplos módulos: teoria_numeros, numeros_especiais
-   ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
-
-🔧 Função `iqr_outliers` aparece em múltiplos módulos: deteccao_anomalias, estatisticas
-   ➤ Sugestão: manter em `deteccao_anomalias.py`, remover duplicados
-
 🔧 Função `count_even` aparece em múltiplos módulos: estatisticas, conjuntos
    ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
 
@@ -24,17 +9,8 @@
 🔧 Função `count_prime` aparece em múltiplos módulos: estatisticas, conjuntos
    ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
 
-🔧 Função `mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
-   ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
-
-🔧 Função `normalized_mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
-   ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
-
-🔧 Função `plot_histogram` aparece em múltiplos módulos: exploracao, plots
-   ➤ Sugestão: manter em `exploracao.py`, remover duplicados
-
-🔧 Função `log_transform` aparece em múltiplos módulos: transformacoes, series_temporais
-   ➤ Sugestão: manter em `transformacoes.py`, remover duplicados
+🔧 Função `iqr_outliers` aparece em múltiplos módulos: estatisticas, deteccao_anomalias
+   ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
 
 🔧 Função `diff_ratio` aparece em múltiplos módulos: sequencias, series_temporais
    ➤ Sugestão: manter em `sequencias.py`, remover duplicados
@@ -45,6 +21,21 @@
 🔧 Função `rolling_std` aparece em múltiplos módulos: sequencias, series_temporais
    ➤ Sugestão: manter em `sequencias.py`, remover duplicados
 
+🔧 Função `bell_number` aparece em múltiplos módulos: numeros_especiais, teoria_numeros
+   ➤ Sugestão: manter em `numeros_especiais.py`, remover duplicados
+
+🔧 Função `partition_number` aparece em múltiplos módulos: numeros_especiais, teoria_numeros
+   ➤ Sugestão: manter em `numeros_especiais.py`, remover duplicados
+
+🔧 Função `bernoulli_number` aparece em múltiplos módulos: numeros_especiais, teoria_numeros
+   ➤ Sugestão: manter em `numeros_especiais.py`, remover duplicados
+
+🔧 Função `log_transform` aparece em múltiplos módulos: transformacoes, series_temporais
+   ➤ Sugestão: manter em `transformacoes.py`, remover duplicados
+
+🔧 Função `autocorr` aparece em múltiplos módulos: series_temporais, temporais
+   ➤ Sugestão: manter em `series_temporais.py`, remover duplicados
+
 🔧 Função `gamma_func` aparece em múltiplos módulos: funcoes_especiais, matematica_especial
    ➤ Sugestão: manter em `funcoes_especiais.py`, remover duplicados
 
@@ -54,14 +45,23 @@
 🔧 Função `bessel_j` aparece em múltiplos módulos: funcoes_especiais, matematica_especial
    ➤ Sugestão: manter em `funcoes_especiais.py`, remover duplicados
 
+🔧 Função `euler_totient` aparece em múltiplos módulos: teoria_numeros, matematica_especial
+   ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
+
 🔧 Função `fft_phase` aparece em múltiplos módulos: temporais, processamento_sinal
    ➤ Sugestão: manter em `temporais.py`, remover duplicados
 
 🔧 Função `ifft_real` aparece em múltiplos módulos: temporais, processamento_sinal
    ➤ Sugestão: manter em `temporais.py`, remover duplicados
 
-🔧 Função `autocorr` aparece em múltiplos módulos: temporais, series_temporais
-   ➤ Sugestão: manter em `temporais.py`, remover duplicados
+🔧 Função `plot_histogram` aparece em múltiplos módulos: plots, exploracao
+   ➤ Sugestão: manter em `plots.py`, remover duplicados
+
+🔧 Função `mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
+   ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
+
+🔧 Função `normalized_mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
+   ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
 
 🔁 Funções equivalentes: consecutive_diff, diff
    ➤ Sugestão: fundir em `sequencias.py` com nome padronizado
@@ -69,51 +69,19 @@
 🔁 Funções equivalentes: bessel_j
    ➤ Sugestão: fundir em `funcoes_especiais.py` com nome padronizado
 
-🔍 Funções semelhantes `fibonacci_num` (teoria_numeros) ≈ `fibonacci` (numeros_especiais)
-   🔁 Similaridade: 96.0%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `lucas_num` (teoria_numeros) ≈ `lucas` (numeros_especiais)
-   🔁 Similaridade: 95.41%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `catalan_num` (teoria_numeros) ≈ `catalan_number` (numeros_especiais)
-   🔁 Similaridade: 95.73%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `bell_number` (teoria_numeros) ≈ `bell_number` (numeros_especiais)
-   🔁 Similaridade: 95.24%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `bell_number` (teoria_numeros) ≈ `bernoulli_number` (numeros_especiais)
-   🔁 Similaridade: 86.96%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `partition_number` (teoria_numeros) ≈ `partition_number` (numeros_especiais)
-   🔁 Similaridade: 95.73%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `bernoulli_number` (teoria_numeros) ≈ `bell_number` (numeros_especiais)
-   🔁 Similaridade: 86.96%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `bernoulli_number` (teoria_numeros) ≈ `bernoulli_number` (numeros_especiais)
-   🔁 Similaridade: 96.0%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
+🔍 Funções semelhantes `sum_of_pairs` (analise_padroes) ≈ `sum_combinations2` (combinatoria_avancada)
    🔁 Similaridade: 87.43%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
-   🔁 Similaridade: 87.43%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `sum_combinations3` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
+🔍 Funções semelhantes `sum_of_pairs` (analise_padroes) ≈ `sum_combinations3` (combinatoria_avancada)
    🔁 Similaridade: 86.23%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `sum_combinations3` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
+🔍 Funções semelhantes `sum_of_triples` (analise_padroes) ≈ `sum_combinations2` (combinatoria_avancada)
+   🔁 Similaridade: 87.43%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `sum_of_triples` (analise_padroes) ≈ `sum_combinations3` (combinatoria_avancada)
    🔁 Similaridade: 88.62%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
@@ -137,24 +105,16 @@
    🔁 Similaridade: 90.23%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `shortest_path_all_pairs` (algoritmos_grafos) ≈ `shortest_paths_length` (grafos)
-   🔁 Similaridade: 92.52%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `successive_diff` (exploracao) ≈ `diff` (sequencias)
-   🔁 Similaridade: 90.53%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `successive_diff` (exploracao) ≈ `consecutive_diff` (series_temporais)
-   🔁 Similaridade: 90.53%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
 🔍 Funções semelhantes `diff` (sequencias) ≈ `relative_diff` (series_temporais)
    🔁 Similaridade: 85.33%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `diff` (sequencias) ≈ `diff_ratio` (series_temporais)
    🔁 Similaridade: 87.67%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `diff` (sequencias) ≈ `successive_diff` (exploracao)
+   🔁 Similaridade: 90.53%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `diff_squared` (sequencias) ≈ `consecutive_diff` (series_temporais)
@@ -181,6 +141,46 @@
    🔁 Similaridade: 87.7%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
+🔍 Funções semelhantes `fibonacci` (numeros_especiais) ≈ `fibonacci_num` (teoria_numeros)
+   🔁 Similaridade: 96.0%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `lucas` (numeros_especiais) ≈ `lucas_num` (teoria_numeros)
+   🔁 Similaridade: 95.41%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `catalan_number` (numeros_especiais) ≈ `catalan_num` (teoria_numeros)
+   🔁 Similaridade: 95.73%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `bell_number` (numeros_especiais) ≈ `bell_number` (teoria_numeros)
+   🔁 Similaridade: 95.24%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `bell_number` (numeros_especiais) ≈ `bernoulli_number` (teoria_numeros)
+   🔁 Similaridade: 86.96%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `partition_number` (numeros_especiais) ≈ `partition_number` (teoria_numeros)
+   🔁 Similaridade: 95.73%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `bernoulli_number` (numeros_especiais) ≈ `bell_number` (teoria_numeros)
+   🔁 Similaridade: 86.96%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `bernoulli_number` (numeros_especiais) ≈ `bernoulli_number` (teoria_numeros)
+   🔁 Similaridade: 96.0%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `shortest_paths_length` (grafos) ≈ `shortest_path_all_pairs` (algoritmos_grafos)
+   🔁 Similaridade: 92.52%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
+🔍 Funções semelhantes `consecutive_diff` (series_temporais) ≈ `successive_diff` (exploracao)
+   🔁 Similaridade: 90.53%
+   ➤ Sugestão: avaliar fusão ou renomeação para consistência
+
 🔍 Funções semelhantes `gamma_func` (funcoes_especiais) ≈ `gamma_func` (matematica_especial)
    🔁 Similaridade: 95.24%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
@@ -199,9 +199,5 @@
 
 🔍 Funções semelhantes `chebyshev_T` (funcoes_especiais) ≈ `chebyshev_t` (matematica_especial)
    🔁 Similaridade: 86.49%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `lag_series` (temporais) ≈ `consecutive_diff` (series_temporais)
-   🔁 Similaridade: 85.85%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 

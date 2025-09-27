@@ -1,16 +1,16 @@
 🔍 Funções com o mesmo nome em múltiplos ficheiros:
 
 ⚠️ Função `autocorr` aparece em:
-  - lib/funcoes_analiticas/temporais.py
   - lib/funcoes_analiticas/series_temporais.py
+  - lib/funcoes_analiticas/temporais.py
 
 ⚠️ Função `bell_number` aparece em:
-  - lib/funcoes_analiticas/teoria_numeros.py
   - lib/funcoes_analiticas/numeros_especiais.py
+  - lib/funcoes_analiticas/teoria_numeros.py
 
 ⚠️ Função `bernoulli_number` aparece em:
-  - lib/funcoes_analiticas/teoria_numeros.py
   - lib/funcoes_analiticas/numeros_especiais.py
+  - lib/funcoes_analiticas/teoria_numeros.py
 
 ⚠️ Função `bessel_j` aparece em:
   - lib/funcoes_analiticas/funcoes_especiais.py
@@ -53,8 +53,8 @@
   - lib/funcoes_analiticas/processamento_sinal.py
 
 ⚠️ Função `iqr_outliers` aparece em:
-  - lib/funcoes_analiticas/deteccao_anomalias.py
   - lib/funcoes_analiticas/estatisticas.py
+  - lib/funcoes_analiticas/deteccao_anomalias.py
 
 ⚠️ Função `log_transform` aparece em:
   - lib/funcoes_analiticas/transformacoes.py
@@ -69,12 +69,12 @@
   - lib/funcoes_analiticas/estatistica_multivariada.py
 
 ⚠️ Função `partition_number` aparece em:
-  - lib/funcoes_analiticas/teoria_numeros.py
   - lib/funcoes_analiticas/numeros_especiais.py
+  - lib/funcoes_analiticas/teoria_numeros.py
 
 ⚠️ Função `plot_histogram` aparece em:
-  - lib/funcoes_analiticas/exploracao.py
   - lib/funcoes_analiticas/plots.py
+  - lib/funcoes_analiticas/exploracao.py
 
 ⚠️ Função `rolling_mean` aparece em:
   - lib/funcoes_analiticas/sequencias.py
