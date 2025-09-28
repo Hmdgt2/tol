@@ -16,61 +16,13 @@
    ≈ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
    🔁 Similaridade: 88.62%
 
-⚠️ `count_even` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `count_even` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 90.16%
+⚠️ `intersection` em lib/funcoes_analiticas/estatisticas.py
+   ≈ `union` em lib/funcoes_analiticas/conjuntos.py
+   🔁 Similaridade: 85.53%
 
-⚠️ `count_even` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `count_odd` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 87.1%
-
-⚠️ `count_odd` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `count_even` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 87.1%
-
-⚠️ `count_odd` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `count_odd` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 90.48%
-
-⚠️ `count_prime` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `count_prime` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 90.23%
-
-⚠️ `diff` em lib/funcoes_analiticas/sequencias.py
-   ≈ `relative_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 85.33%
-
-⚠️ `diff` em lib/funcoes_analiticas/sequencias.py
-   ≈ `diff_ratio` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 87.67%
-
-⚠️ `diff` em lib/funcoes_analiticas/sequencias.py
-   ≈ `successive_diff` em lib/funcoes_analiticas/exploracao.py
-   🔁 Similaridade: 90.53%
-
-⚠️ `diff_squared` em lib/funcoes_analiticas/sequencias.py
-   ≈ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 92.75%
-
-⚠️ `diff_squared` em lib/funcoes_analiticas/sequencias.py
-   ≈ `diff_ratio` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 87.18%
-
-⚠️ `diff_abs` em lib/funcoes_analiticas/sequencias.py
-   ≈ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 93.66%
-
-⚠️ `diff_ratio` em lib/funcoes_analiticas/sequencias.py
-   ≈ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 86.27%
-
-⚠️ `diff_ratio` em lib/funcoes_analiticas/sequencias.py
-   ≈ `relative_diff` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 88.61%
-
-⚠️ `rolling_mean` em lib/funcoes_analiticas/sequencias.py
-   ≈ `rolling_mean` em lib/funcoes_analiticas/series_temporais.py
-   🔁 Similaridade: 87.7%
+⚠️ `union` em lib/funcoes_analiticas/estatisticas.py
+   ≈ `intersection` em lib/funcoes_analiticas/conjuntos.py
+   🔁 Similaridade: 85.53%
 
 ⚠️ `fibonacci` em lib/funcoes_analiticas/numeros_especiais.py
    ≈ `fibonacci_num` em lib/funcoes_analiticas/teoria_numeros.py
@@ -107,10 +59,6 @@
 ⚠️ `shortest_paths_length` em lib/funcoes_analiticas/grafos.py
    ≈ `shortest_path_all_pairs` em lib/funcoes_analiticas/algoritmos_grafos.py
    🔁 Similaridade: 92.52%
-
-⚠️ `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
-   ≈ `successive_diff` em lib/funcoes_analiticas/exploracao.py
-   🔁 Similaridade: 90.53%
 
 ⚠️ `gamma_func` em lib/funcoes_analiticas/funcoes_especiais.py
    ≈ `gamma_func` em lib/funcoes_analiticas/matematica_especial.py

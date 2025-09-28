@@ -1,25 +1,22 @@
 🧠 Sugestões de Reorganização Funcional:
 
-🔧 Função `count_even` aparece em múltiplos módulos: estatisticas, conjuntos
+🔧 Função `unique_count` aparece em múltiplos módulos: estatisticas, conjuntos
    ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
 
-🔧 Função `count_odd` aparece em múltiplos módulos: estatisticas, conjuntos
+🔧 Função `intersection` aparece em múltiplos módulos: estatisticas, conjuntos
    ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
 
-🔧 Função `count_prime` aparece em múltiplos módulos: estatisticas, conjuntos
+🔧 Função `union` aparece em múltiplos módulos: estatisticas, conjuntos
+   ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
+
+🔧 Função `mirror_count` aparece em múltiplos módulos: estatisticas, conjuntos
+   ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
+
+🔧 Função `pair_sum_count` aparece em múltiplos módulos: estatisticas, conjuntos
    ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
 
 🔧 Função `iqr_outliers` aparece em múltiplos módulos: estatisticas, deteccao_anomalias
    ➤ Sugestão: manter em `estatisticas.py`, remover duplicados
-
-🔧 Função `diff_ratio` aparece em múltiplos módulos: sequencias, series_temporais
-   ➤ Sugestão: manter em `sequencias.py`, remover duplicados
-
-🔧 Função `rolling_mean` aparece em múltiplos módulos: sequencias, series_temporais
-   ➤ Sugestão: manter em `sequencias.py`, remover duplicados
-
-🔧 Função `rolling_std` aparece em múltiplos módulos: sequencias, series_temporais
-   ➤ Sugestão: manter em `sequencias.py`, remover duplicados
 
 🔧 Função `bell_number` aparece em múltiplos módulos: numeros_especiais, teoria_numeros
    ➤ Sugestão: manter em `numeros_especiais.py`, remover duplicados
@@ -29,12 +26,6 @@
 
 🔧 Função `bernoulli_number` aparece em múltiplos módulos: numeros_especiais, teoria_numeros
    ➤ Sugestão: manter em `numeros_especiais.py`, remover duplicados
-
-🔧 Função `log_transform` aparece em múltiplos módulos: transformacoes, series_temporais
-   ➤ Sugestão: manter em `transformacoes.py`, remover duplicados
-
-🔧 Função `autocorr` aparece em múltiplos módulos: series_temporais, temporais
-   ➤ Sugestão: manter em `series_temporais.py`, remover duplicados
 
 🔧 Função `gamma_func` aparece em múltiplos módulos: funcoes_especiais, matematica_especial
    ➤ Sugestão: manter em `funcoes_especiais.py`, remover duplicados
@@ -54,17 +45,26 @@
 🔧 Função `ifft_real` aparece em múltiplos módulos: temporais, processamento_sinal
    ➤ Sugestão: manter em `temporais.py`, remover duplicados
 
-🔧 Função `plot_histogram` aparece em múltiplos módulos: plots, exploracao
-   ➤ Sugestão: manter em `plots.py`, remover duplicados
-
 🔧 Função `mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
    ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
 
 🔧 Função `normalized_mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
    ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
 
-🔁 Funções equivalentes: diff, consecutive_diff
-   ➤ Sugestão: fundir em `sequencias.py` com nome padronizado
+🔁 Funções equivalentes: unique_count
+   ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
+
+🔁 Funções equivalentes: intersection
+   ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
+
+🔁 Funções equivalentes: union
+   ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
+
+🔁 Funções equivalentes: mirror_count
+   ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
+
+🔁 Funções equivalentes: pair_sum_count
+   ➤ Sugestão: fundir em `estatisticas.py` com nome padronizado
 
 🔁 Funções equivalentes: bessel_j
    ➤ Sugestão: fundir em `funcoes_especiais.py` com nome padronizado
@@ -85,60 +85,12 @@
    🔁 Similaridade: 88.62%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `count_even` (estatisticas) ≈ `count_even` (conjuntos)
-   🔁 Similaridade: 90.16%
+🔍 Funções semelhantes `intersection` (estatisticas) ≈ `union` (conjuntos)
+   🔁 Similaridade: 85.53%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `count_even` (estatisticas) ≈ `count_odd` (conjuntos)
-   🔁 Similaridade: 87.1%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `count_odd` (estatisticas) ≈ `count_even` (conjuntos)
-   🔁 Similaridade: 87.1%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `count_odd` (estatisticas) ≈ `count_odd` (conjuntos)
-   🔁 Similaridade: 90.48%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `count_prime` (estatisticas) ≈ `count_prime` (conjuntos)
-   🔁 Similaridade: 90.23%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff` (sequencias) ≈ `relative_diff` (series_temporais)
-   🔁 Similaridade: 85.33%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff` (sequencias) ≈ `diff_ratio` (series_temporais)
-   🔁 Similaridade: 87.67%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff` (sequencias) ≈ `successive_diff` (exploracao)
-   🔁 Similaridade: 90.53%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff_squared` (sequencias) ≈ `consecutive_diff` (series_temporais)
-   🔁 Similaridade: 92.75%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff_squared` (sequencias) ≈ `diff_ratio` (series_temporais)
-   🔁 Similaridade: 87.18%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff_abs` (sequencias) ≈ `consecutive_diff` (series_temporais)
-   🔁 Similaridade: 93.66%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff_ratio` (sequencias) ≈ `consecutive_diff` (series_temporais)
-   🔁 Similaridade: 86.27%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `diff_ratio` (sequencias) ≈ `relative_diff` (series_temporais)
-   🔁 Similaridade: 88.61%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `rolling_mean` (sequencias) ≈ `rolling_mean` (series_temporais)
-   🔁 Similaridade: 87.7%
+🔍 Funções semelhantes `union` (estatisticas) ≈ `intersection` (conjuntos)
+   🔁 Similaridade: 85.53%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `fibonacci` (numeros_especiais) ≈ `fibonacci_num` (teoria_numeros)
@@ -175,10 +127,6 @@
 
 🔍 Funções semelhantes `shortest_paths_length` (grafos) ≈ `shortest_path_all_pairs` (algoritmos_grafos)
    🔁 Similaridade: 92.52%
-   ➤ Sugestão: avaliar fusão ou renomeação para consistência
-
-🔍 Funções semelhantes `consecutive_diff` (series_temporais) ≈ `successive_diff` (exploracao)
-   🔁 Similaridade: 90.53%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `gamma_func` (funcoes_especiais) ≈ `gamma_func` (matematica_especial)

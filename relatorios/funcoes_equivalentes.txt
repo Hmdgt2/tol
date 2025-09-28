@@ -1,12 +1,32 @@
 🔍 Funções com lógica equivalente (mesmo com nomes diferentes):
 
 ⚠️ Implementações idênticas encontradas:
+  - `pair_sum_count` em lib/funcoes_analiticas/estatisticas.py
+  - `pair_sum_count` em lib/funcoes_analiticas/conjuntos.py
+  ✅ Lógica funcional idêntica
+
+⚠️ Implementações idênticas encontradas:
+  - `intersection` em lib/funcoes_analiticas/estatisticas.py
+  - `intersection` em lib/funcoes_analiticas/conjuntos.py
+  ✅ Lógica funcional idêntica
+
+⚠️ Implementações idênticas encontradas:
+  - `union` em lib/funcoes_analiticas/estatisticas.py
+  - `union` em lib/funcoes_analiticas/conjuntos.py
+  ✅ Lógica funcional idêntica
+
+⚠️ Implementações idênticas encontradas:
   - `bessel_j` em lib/funcoes_analiticas/funcoes_especiais.py
   - `bessel_j` em lib/funcoes_analiticas/matematica_especial.py
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:
-  - `diff` em lib/funcoes_analiticas/sequencias.py
-  - `consecutive_diff` em lib/funcoes_analiticas/series_temporais.py
+  - `mirror_count` em lib/funcoes_analiticas/estatisticas.py
+  - `mirror_count` em lib/funcoes_analiticas/conjuntos.py
+  ✅ Lógica funcional idêntica
+
+⚠️ Implementações idênticas encontradas:
+  - `unique_count` em lib/funcoes_analiticas/estatisticas.py
+  - `unique_count` em lib/funcoes_analiticas/conjuntos.py
   ✅ Lógica funcional idêntica
 
