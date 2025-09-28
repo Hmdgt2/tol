@@ -1,78 +1,98 @@
-#/scripts/ast_consolidador.py
+# ast_consolidador.py
 import ast
 import os
-
-# Defina a pasta raiz da sua biblioteca de funções
-FUNCOES_DIR = 'lib/funcoes_analiticas'
+import astunparse
 
 class ASTConsolidator:
-    def __init__(self, target_module, source_module):
-        self.target_module = os.path.join(FUNCOES_DIR, f"{target_module}.py")
-        self.source_module = os.path.join(FUNCOES_DIR, f"{source_module}.py")
-    
+    def __init__(self, target_module, source_module, base_staging_dir):
+        self.base_staging_dir = base_staging_dir
+        self.target_module_path = os.path.join(base_staging_dir, f"{target_module}.py")
+        self.source_module_path = os.path.join(base_staging_dir, f"{source_module}.py")
+        
+    def _carregar_ast(self, filepath):
+        """Carrega e retorna o AST de um ficheiro."""
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                source_code = f.read()
+                return ast.parse(source_code)
+        except FileNotFoundError:
+            return ast.Module(body=[], type_ignores=[])
+        except Exception as e:
+            print(f"❌ Erro ao carregar {filepath}: {e}")
+            return None
+
+    def _escrever_ast(self, filepath, tree):
+        """Escreve o AST de volta para o ficheiro."""
+        try:
+            code = astunparse.unparse(tree)
+            os.makedirs(os.path.dirname(filepath), exist_ok=True)
+            with open(filepath, 'w', encoding='utf-8') as f:
+                f.write(code)
+            return True
+        except Exception as e:
+            print(f"❌ Erro ao escrever {filepath}: {e}")
+            return False
+
+    def _encontrar_e_extrair_funcao(self, tree, func_name):
+        """Encontra e extrai uma função do AST, removendo-a da árvore original."""
+        funcao_a_mover = None
+        novos_nodes = []
+        
+        for node in tree.body:
+            if isinstance(node, ast.FunctionDef) and node.name == func_name:
+                funcao_a_mover = node
+            else:
+                novos_nodes.append(node)
+        
+        if funcao_a_mover:
+            tree.body = novos_nodes
+        
+        return funcao_a_mover
+
+    def _funcao_existe_no_destino(self, tree, func_name):
+        """Verifica se a função já existe no módulo de destino."""
+        for node in tree.body:
+            if isinstance(node, ast.FunctionDef) and node.name == func_name:
+                return True
+        return False
+
     def mover_funcao(self, func_name, nome_padrao=None):
         """
-        Move a função func_name do módulo de origem para o módulo de destino.
+        Move a função func_name do módulo de origem para o módulo de destino
+        dentro da área de staging.
         """
+        nome_final = nome_padrao or func_name
         
-        # 1. Carregar e analisar o módulo de origem
-        with open(self.source_module, 'r') as f:
-            source_code = f.read()
-            source_tree = ast.parse(source_code)
-            
-        # 2. Carregar e analisar o módulo de destino
-        with open(self.target_module, 'r') as f:
-            target_code = f.read()
-            target_tree = ast.parse(target_code)
+        print(f"  🔧 Processando: '{func_name}' → '{nome_final}'")
         
-        # Encontra a função no módulo de origem
-        funcao_a_mover = None
-        novas_source_nodes = []
+        source_tree = self._carregar_ast(self.source_module_path)
+        target_tree = self._carregar_ast(self.target_module_path)
         
-        for node in source_tree.body:
-            if isinstance(node, ast.FunctionDef) and node.name == func_name:
-                # Função encontrada! Guarda para mover e não inclui na reescrita.
-                funcao_a_mover = node
-                if nome_padrao:
-                    # Se houver um nome padronizado (ex: fibonacci_num), atualiza
-                    funcao_a_mover.name = nome_padrao 
-            else:
-                # Mantém o resto do código no ficheiro de origem
-                novas_source_nodes.append(node)
+        if source_tree is None or target_tree is None:
+            return False
 
+        # Extrair função da origem
+        funcao_a_mover = self._encontrar_e_extrair_funcao(source_tree, func_name)
         if not funcao_a_mover:
-            print(f"❌ Erro: Função '{func_name}' não encontrada em {self.source_module}")
+            print(f"    ⚠️ Função '{func_name}' não encontrada em {os.path.basename(self.source_module_path)}")
             return False
 
-        # 3. Adiciona a função ao módulo de destino
+        # Verificar se já existe no destino
+        if self._funcao_existe_no_destino(target_tree, nome_final):
+            print(f"    ⚠️ '{nome_final}' já existe no destino. Eliminando duplicado da origem.")
+            return self._escrever_ast(self.source_module_path, source_tree)
+        
+        # Renomear e adicionar ao destino
+        funcao_a_mover.name = nome_final
         target_tree.body.append(funcao_a_mover)
-        
-        # 4. Reescreve os ficheiros (usando um 'unparser' para converter AST de volta a código)
-        
-        try:
-            # Requer uma biblioteca auxiliar para converter AST para código
-            # (Exemplo simplificado, na vida real usaria 'astunparse' ou 'gast')
-            
-            # ATENÇÃO: A conversão de AST para código é complexa e requer uma biblioteca externa.
-            # Este código é apenas conceitual para focar na lógica.
-            
-            # Reescreve o ficheiro de destino com a nova função
-            # novo_target_code = ast_unparse(target_tree)
-            # with open(self.target_module, 'w') as f: f.write(novo_target_code)
-            
-            # Reescreve o ficheiro de origem sem a função movida
-            # novo_source_code = ast_unparse(ast.Module(body=novas_source_nodes, type_ignores=[]))
-            # with open(self.source_module, 'w') as f: f.write(novo_source_code)
 
-            print(f"✅ Movido/Consolidado: '{func_name}' de {self.source_module} para {self.target_module}")
+        # Escrever ficheiros atualizados
+        sucesso_origem = self._escrever_ast(self.source_module_path, source_tree)
+        sucesso_destino = self._escrever_ast(self.target_module_path, target_tree)
+
+        if sucesso_origem and sucesso_destino:
+            print(f"    ✅ Sucesso: Movida para {os.path.basename(self.target_module_path)}")
             return True
-
-        except Exception as e:
-            print(f"❌ ERRO na reescrita de código: {e}")
+        else:
+            print(f"    ❌ Falha ao escrever ficheiros")
             return False
-
-
-# EXEMPLO DE USO (Conceitual):
-# consolidator = ASTConsolidator('estatisticas', 'conjuntos')
-# consolidator.mover_funcao('intersection')
-# consolidator.mover_funcao('fibonacci', 'fibonacci_num') # Renomeia e move
