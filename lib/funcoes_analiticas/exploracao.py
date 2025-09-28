@@ -1,49 +1,9 @@
-# lib/funcoes_analiticas/exploracao.py
-
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from itertools import combinations
 from typing import List
 
-
 # ============================================================
-# Visualizações básicas
+# Análises exploratórias (não-gráficas)
 # ============================================================
-
-def plot_histogram(lst: List[float], bins: int = 10) -> None:
-    """Cria e exibe um histograma de uma lista de números."""
-    plt.hist(lst, bins=bins)
-    plt.title("Histograma")
-    plt.show()
-
-
-def rolling_mean_plot(lst: List[float], window: int = 3) -> None:
-    """Plota a média móvel de uma lista."""
-    pd.Series(lst).rolling(window=window).mean().plot(title="Média Móvel")
-    plt.show()
-
-
-def cumulative_sum_plot(lst: List[float]) -> None:
-    """Plota a soma cumulativa de uma lista."""
-    pd.Series(lst).cumsum().plot(title="Soma Cumulativa")
-    plt.show()
-
-
-# ============================================================
-# Análises exploratórias
-# ============================================================
-
-def heatmap_pairs(lst: List[int]) -> None:
-    """Cria um mapa de calor para a frequência de pares."""
-    pairs = [tuple(sorted(c)) for c in combinations(lst, 2)]
-    df = pd.DataFrame(pairs, columns=["Num1", "Num2"])
-    pivot_table = df.groupby(["Num1", "Num2"]).size().unstack(fill_value=0)
-    sns.heatmap(pivot_table, annot=True, fmt="d", cmap="YlGnBu")
-    plt.title("Frequência de Pares")
-    plt.show()
-
 
 def linear_trend_slope(lst: List[float]) -> float:
     """Calcula a inclinação da tendência linear de uma lista."""
@@ -54,7 +14,6 @@ def linear_trend_slope(lst: List[float]) -> float:
     y = np.array(lst)
     slope = np.polyfit(x, y, 1)[0]
     return float(slope)
-
 
 def successive_diff(lst: List[float]) -> List[float]:
     """Calcula a diferença entre elementos sucessivos."""
