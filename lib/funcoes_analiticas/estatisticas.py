@@ -2,8 +2,13 @@
 
 import statistics
 import numpy as np
+from sympy import isprime
 from scipy import stats
-from scipy.stats import poisson, binom, norm, trim_mean, gmean, hmean, kurtosis, skew, median_abs_deviation
+from scipy.stats import (
+    poisson, binom, norm,
+    gmean, hmean, kurtosis, skew,
+    median_abs_deviation
+)
 from typing import List, Union
 
 # -----------------------------
@@ -72,7 +77,7 @@ def mean_absolute_deviation(lst: list) -> float:
     """Desvio médio absoluto."""
     return np.mean(np.abs(np.array(lst) - np.mean(lst)))
 
-def median_absolute_deviation(lst: list) -> float:
+def median_absolute_deviation_func(lst: list) -> float:
     """Desvio absoluto mediano (MAD)."""
     return median_abs_deviation(lst)
 
@@ -140,26 +145,39 @@ def cdf_normal(mu, sigma, x):
     return norm.cdf(x, mu, sigma)
 
 # -----------------------------
-# Contagens e números especiais
+# Contagens e conjuntos
 # -----------------------------
 def count_even(lst: list) -> int:
     """Conta números pares."""
-    return sum(1 for x in lst if x%2==0)
+    return sum(1 for x in lst if x % 2 == 0)
 
 def count_odd(lst: list) -> int:
     """Conta números ímpares."""
-    return sum(1 for x in lst if x%2==1)
-
-def is_prime(x: int) -> bool:
-    """Verifica se x é primo."""
-    if x < 2: return False
-    for i in range(2,int(x**0.5)+1):
-        if x % i == 0: return False
-    return True
+    return sum(1 for x in lst if x % 2 == 1)
 
 def count_prime(lst: list) -> int:
     """Conta números primos."""
-    return sum(1 for x in lst if is_prime(x))
+    return sum(1 for x in lst if isprime(x))
+
+def unique_count(lst: list) -> int:
+    """Conta o número de elementos únicos em uma lista."""
+    return len(set(lst))
+
+def intersection(lst1: List[int], lst2: List[int]) -> List[int]:
+    """Retorna os elementos em comum entre duas listas."""
+    return list(set(lst1) & set(lst2))
+
+def union(lst1: List[int], lst2: List[int]) -> List[int]:
+    """Retorna a união de elementos de duas listas."""
+    return list(set(lst1) | set(lst2))
+
+def mirror_count(lst: List[int], total: int = 50) -> int:
+    """Conta os números que têm um 'espelho' na lista (e.g., total - x)."""
+    return sum(1 for x in lst if (total - x) in lst)
+
+def pair_sum_count(lst: List[int], target: int) -> int:
+    """Conta os pares de números que somam um valor alvo."""
+    return sum(1 for i in range(len(lst)) for j in range(i + 1, len(lst)) if lst[i] + lst[j] == target)
 
 # -----------------------------
 # Séries especiais
