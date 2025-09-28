@@ -44,7 +44,7 @@ jobs:
           # Isto é mais robusto do que usar o wildcard recursivo (**/*.py).
           file_pattern: 'lib/funcoes_limpas backup_biblioteca_original_*' 
           commit_message: '✨ CI: Funções consolidadas e limpas para staging (lib/funcoes_limpas)'
-          branch: ${{ github.ref_name }}l
+          branch: ${{ github.ref_name }}
 
       - name: ⬆️ Carregar Staging como Artefacto para Revisão
         # Opcional: Permite que você baixe a pasta 'funcoes_limpas' diretamente da interface
