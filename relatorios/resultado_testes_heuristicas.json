@@ -1,0 +1,134 @@
+{
+    "pares_distantes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [10, 12, 20, 27, 44]"
+    },
+    "ausencia_superior_media": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [20, 2, 40, 45, 1]"
+    },
+    "soma_provavel": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [19, 20, 23, 32, 33]"
+    },
+    "pares_frequentes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 21, 24, 39, 45]"
+    },
+    "trios_frequentes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [6, 16, 30, 34, 46]"
+    },
+    "padroes_de_grupos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 21, 24, 39, 45]"
+    },
+    "frequencia_terminacoes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [23, 26, 33, 38, 46]"
+    },
+    "numeros_quentes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 5, 17, 18, 22]"
+    },
+    "clusters_recentes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 5, 15, 17, 27]"
+    },
+    "distribuicao_quadrantes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [38, 45, 46, 47, 48]"
+    },
+    "pares_consecutivos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [32, 33, 36, 37, 47]"
+    },
+    "ciclos_longos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [20, 2, 45, 40, 46]"
+    },
+    "ciclos_e_atrasos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [8, 28, 32, 35, 43]"
+    },
+    "gap_medio": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [1, 12, 14, 27, 29]"
+    },
+    "soma_numeros": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [1, 2, 4, 14, 49]"
+    },
+    "crescimento_ano": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [1, 8, 23, 37, 39]"
+    },
+    "meta_avaliacao": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [46, 48, 47, 45, 41]"
+    },
+    "tendencia_recentes": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 5, 17, 18, 22]"
+    },
+    "ciclos_adaptativos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 5, 22, 26, 30]"
+    },
+    "numeros_retencao_longa": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [20, 2, 40, 45, 46]"
+    },
+    "repeticao_por_posicao": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [2, 11, 24, 37, 48]"
+    },
+    "comb_balanceadas": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [23, 26, 32, 33, 46]"
+    },
+    "combinador_quentes_frios": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [2, 4, 17, 18, 20]"
+    },
+    "distribuicao_uniforme_faixas": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 16, 26, 32, 46]"
+    },
+    "frequencia_total": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [23, 26, 32, 33, 46]"
+    },
+    "numeros_vizinhos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [43, 45, 46, 47, 48]"
+    },
+    "repeticoes_sorteios_anteriores": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 5, 17, 18, 22]"
+    },
+    "frequencia_soma": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [19, 20, 23, 32, 33]"
+    },
+    "numeros_frios": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [1, 2, 20, 40, 45]"
+    },
+    "balanceamento_tipos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [1, 12, 14, 27, 29]"
+    },
+    "posicao": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [2, 4, 46, 48, 49]"
+    },
+    "padrao_finais": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [16, 23, 26, 33, 46]"
+    },
+    "distribuicao_grupos": {
+        "status": "SUCESSO",
+        "detalhes": "Previsão gerada com sucesso: [4, 16, 26, 32, 46]"
+    }
+}
