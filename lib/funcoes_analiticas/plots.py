@@ -1,7 +1,8 @@
-# lib/visualizacao/plots.py
 import matplotlib.pyplot as plt
 import seaborn as sns
-from typing import List, Optional, Union
+import pandas as pd
+from itertools import combinations
+from typing import List
 
 # ============================================================
 # Funções de visualização
@@ -44,4 +45,27 @@ def plot_time_series(series: List[float], title: str = 'Série Temporal', color:
     plt.xlabel('Tempo')
     plt.ylabel('Valores')
     plt.grid(True)
+    plt.show()
+
+# ============================================================
+# Visualizações adicionais (vindas de exploracao.py)
+# ============================================================
+
+def rolling_mean_plot(lst: List[float], window: int = 3) -> None:
+    """Plota a média móvel de uma lista."""
+    pd.Series(lst).rolling(window=window).mean().plot(title="Média Móvel")
+    plt.show()
+
+def cumulative_sum_plot(lst: List[float]) -> None:
+    """Plota a soma cumulativa de uma lista."""
+    pd.Series(lst).cumsum().plot(title="Soma Cumulativa")
+    plt.show()
+
+def heatmap_pairs(lst: List[int]) -> None:
+    """Cria um mapa de calor para a frequência de pares."""
+    pairs = [tuple(sorted(c)) for c in combinations(lst, 2)]
+    df = pd.DataFrame(pairs, columns=["Num1", "Num2"])
+    pivot_table = df.groupby(["Num1", "Num2"]).size().unstack(fill_value=0)
+    sns.heatmap(pivot_table, annot=True, fmt="d", cmap="YlGnBu")
+    plt.title("Frequência de Pares")
     plt.show()
