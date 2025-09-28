@@ -188,12 +188,13 @@ def arith_series_sum(a: Union[int,float], d: Union[int,float], n:int) -> float:
 
 def geom_series_sum(a: Union[int,float], r: Union[int,float], n:int) -> float:
     """Soma de série geométrica."""
-    if r==1: return a*n
+    if r == 1:
+        return a*n
     return a*(1-r**n)/(1-r)
 
 def alt_harmonic_sum(n:int) -> float:
     """Soma de série harmónica alternada."""
-    return sum((-1)**(k+1)/k for k in range(1,n+1))
+    return sum((-1)**(k+1)/k for k in range(1, n+1))
 
 # -----------------------------
 # Detecção de outliers
@@ -201,14 +202,14 @@ def alt_harmonic_sum(n:int) -> float:
 def zscore_outliers(lst: list, thr: float = 3.0) -> list:
     """Índices de outliers usando Z-score."""
     z = (np.array(lst)-np.mean(lst))/np.std(lst)
-    return np.where(np.abs(z)>thr)[0].tolist()
+    return np.where(np.abs(z) > thr)[0].tolist()
 
 def iqr_outliers(lst: list) -> list:
     """Índices de outliers usando IQR."""
-    q1,q3 = np.percentile(lst,[25,75])
-    iqr_val = q3-q1
-    lower, upper = q1-1.5*iqr_val, q3+1.5*iqr_val
-    return [i for i,x in enumerate(lst) if x<lower or x>upper]
+    q1, q3 = np.percentile(lst, [25, 75])
+    iqr_val = q3 - q1
+    lower, upper = q1 - 1.5*iqr_val, q3 + 1.5*iqr_val
+    return [i for i, x in enumerate(lst) if x < lower or x > upper]
 
 def winsorize_series(lst: list, alpha: float = 0.05) -> list:
     """Winsoriza uma série para limitar outliers."""
