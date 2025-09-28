@@ -1,0 +1,343 @@
+{
+  "data_geracao": "2025-09-28 08:58:11",
+  "baseado_em_sorteio": "078/2025",
+  "previsao_modelo_ml": [
+    4,
+    26,
+    23,
+    18,
+    14
+  ],
+  "previsoes_heuristicas": [
+    {
+      "nome": "pares_distantes",
+      "numeros": [
+        10,
+        12,
+        20,
+        27,
+        44
+      ]
+    },
+    {
+      "nome": "ausencia_superior_media",
+      "numeros": [
+        20,
+        2,
+        40,
+        45,
+        1
+      ]
+    },
+    {
+      "nome": "soma_provavel",
+      "numeros": [
+        19,
+        20,
+        23,
+        32,
+        33
+      ]
+    },
+    {
+      "nome": "pares_frequentes",
+      "numeros": [
+        4,
+        21,
+        24,
+        39,
+        45
+      ]
+    },
+    {
+      "nome": "trios_frequentes",
+      "numeros": [
+        6,
+        16,
+        30,
+        34,
+        46
+      ]
+    },
+    {
+      "nome": "padroes_de_grupos",
+      "numeros": [
+        4,
+        21,
+        24,
+        39,
+        45
+      ]
+    },
+    {
+      "nome": "frequencia_terminacoes",
+      "numeros": [
+        23,
+        26,
+        33,
+        38,
+        46
+      ]
+    },
+    {
+      "nome": "numeros_quentes",
+      "numeros": [
+        4,
+        5,
+        17,
+        18,
+        22
+      ]
+    },
+    {
+      "nome": "clusters_recentes",
+      "numeros": [
+        4,
+        5,
+        15,
+        17,
+        27
+      ]
+    },
+    {
+      "nome": "distribuicao_quadrantes",
+      "numeros": [
+        38,
+        45,
+        46,
+        47,
+        48
+      ]
+    },
+    {
+      "nome": "pares_consecutivos",
+      "numeros": [
+        32,
+        33,
+        36,
+        37,
+        47
+      ]
+    },
+    {
+      "nome": "ciclos_longos",
+      "numeros": [
+        20,
+        2,
+        45,
+        40,
+        46
+      ]
+    },
+    {
+      "nome": "ciclos_e_atrasos",
+      "numeros": [
+        8,
+        28,
+        32,
+        35,
+        43
+      ]
+    },
+    {
+      "nome": "gap_medio",
+      "numeros": [
+        1,
+        12,
+        14,
+        27,
+        29
+      ]
+    },
+    {
+      "nome": "soma_numeros",
+      "numeros": [
+        1,
+        2,
+        4,
+        14,
+        49
+      ]
+    },
+    {
+      "nome": "crescimento_ano",
+      "numeros": [
+        1,
+        8,
+        23,
+        37,
+        39
+      ]
+    },
+    {
+      "nome": "meta_avaliacao",
+      "numeros": [
+        46,
+        48,
+        47,
+        45,
+        41
+      ]
+    },
+    {
+      "nome": "tendencia_recentes",
+      "numeros": [
+        4,
+        5,
+        17,
+        18,
+        22
+      ]
+    },
+    {
+      "nome": "ciclos_adaptativos",
+      "numeros": [
+        4,
+        5,
+        22,
+        26,
+        30
+      ]
+    },
+    {
+      "nome": "numeros_retencao_longa",
+      "numeros": [
+        20,
+        2,
+        40,
+        45,
+        46
+      ]
+    },
+    {
+      "nome": "repeticao_por_posicao",
+      "numeros": [
+        2,
+        11,
+        24,
+        37,
+        48
+      ]
+    },
+    {
+      "nome": "comb_balanceadas",
+      "numeros": [
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "combinador_quentes_frios",
+      "numeros": [
+        2,
+        4,
+        17,
+        18,
+        20
+      ]
+    },
+    {
+      "nome": "distribuicao_uniforme_faixas",
+      "numeros": [
+        4,
+        16,
+        26,
+        32,
+        46
+      ]
+    },
+    {
+      "nome": "frequencia_total",
+      "numeros": [
+        23,
+        26,
+        32,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "numeros_vizinhos",
+      "numeros": [
+        43,
+        45,
+        46,
+        47,
+        48
+      ]
+    },
+    {
+      "nome": "repeticoes_sorteios_anteriores",
+      "numeros": [
+        4,
+        5,
+        17,
+        18,
+        22
+      ]
+    },
+    {
+      "nome": "frequencia_soma",
+      "numeros": [
+        19,
+        20,
+        23,
+        32,
+        33
+      ]
+    },
+    {
+      "nome": "numeros_frios",
+      "numeros": [
+        1,
+        2,
+        20,
+        40,
+        45
+      ]
+    },
+    {
+      "nome": "balanceamento_tipos",
+      "numeros": [
+        1,
+        12,
+        14,
+        27,
+        29
+      ]
+    },
+    {
+      "nome": "posicao",
+      "numeros": [
+        2,
+        4,
+        46,
+        48,
+        49
+      ]
+    },
+    {
+      "nome": "padrao_finais",
+      "numeros": [
+        16,
+        23,
+        26,
+        33,
+        46
+      ]
+    },
+    {
+      "nome": "distribuicao_grupos",
+      "numeros": [
+        4,
+        16,
+        26,
+        32,
+        46
+      ]
+    }
+  ]
+}
