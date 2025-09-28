@@ -1,0 +1,55 @@
+name: Limpar e Consolidar Biblioteca (Staging)
+
+on:
+  # Permite correr manualmente
+  workflow_dispatch:
+
+jobs:
+  organizar_funcoes:
+    runs-on: ubuntu-latest
+    # Permissão necessária para o git-auto-commit-action fazer push de volta
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: 📦 Instalar Dependências Necessárias (Incluindo astunparse)
+        run: |
+          python -m pip install --upgrade pip
+          # Instala dependências listadas em requirements.txt e a dependência AST
+          pip install -r requirements.txt astunparse
+          # O ast_consolidador.py e organizador_biblioteca.py precisam de se importar
+          # mutuamente; garantimos que a pasta scripts está no PATH
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
+
+      - name: 🧹 Executar Limpeza e Staging da Biblioteca
+        id: limpeza
+        run: python scripts/organizador_biblioteca.py
+        env:
+          PYTHONPATH: ${{ github.workspace }}/scripts # Ajuste o caminho se necessário
+        
+      # O script Python já gerou a pasta 'lib/funcoes_limpas' e a 'backup_biblioteca_...'
+
+      - name: 💾 Commitar e Fazer Push dos Ficheiros Limpos e Backup
+        # Utilizamos uma ação especializada para commitar, que lida com a autenticação Git
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          # Commita a nova biblioteca limpa e o backup. 
+          # A pasta original 'lib/funcoes_analiticas' fica intocada.
+          file_pattern: 'lib/funcoes_limpas/**/*.py backup_biblioteca_original_*'
+          commit_message: '✨ CI: Funções consolidadas e limpas para staging (lib/funcoes_limpas)'
+          branch: ${{ github.ref_name }} # Commita para o branch atual
+
+      - name: ⬆️ Carregar Staging como Artefacto para Revisão
+        # Opcional: Permite que você baixe a pasta 'funcoes_limpas' diretamente da interface
+        uses: actions/upload-artifact@v4
+        with:
+          name: funcoes-limpas-staging
+          path: lib/funcoes_limpas/
