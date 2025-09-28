@@ -1,14 +1,17 @@
-# scripts/organizador_biblioteca.py
+# organizador_biblioteca.py
 import os
+import shutil
+import datetime
 from ast_consolidador import ASTConsolidator
 
-# Configurações
-FUNCOES_DIR = 'lib/funcoes_analiticas'
+# =================================================================
+# CONFIGURAÇÕES
+# =================================================================
+DIR_ORIGEM = 'lib/funcoes_analiticas'
+DIR_DESTINO = 'lib/funcoes_limpas'
 
-# REGRAS CANÓNICAS - Defina aqui todas as suas duplicações
+# REGRAS CANÓNICAS - Defina aqui TODAS as suas duplicações
 REGRAS_CANONICAS = {
-    # Formato: (nome_funcao, modulo_origem): (modulo_destino, [novo_nome_opcional])
-    
     # Estatísticas Básicas → estatisticas.py
     ("unique_count", "conjuntos"): ("estatisticas", None),
     ("intersection", "conjuntos"): ("estatisticas", None),
@@ -41,50 +44,87 @@ REGRAS_CANONICAS = {
 
 # Funções que requerem intervenção manual
 ACOES_MANUAIS = [
-    "sum_of_pairs",  # Conflito com sum_combinations2/3
-    "sum_of_triples", # Conflito com sum_combinations3
-    "shortest_paths_length", # Conflito com shortest_path_all_pairs
-    # Adicione aqui outras funções que precisam de fusão manual
+    "sum_of_pairs",
+    "sum_of_triples", 
+    "shortest_paths_length",
 ]
 
-def criar_backup():
-    """Cria um backup da biblioteca antes de fazer alterações."""
-    import shutil
-    import datetime
-    
-    backup_dir = f"backup_biblioteca_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
-    if os.path.exists(FUNCOES_DIR):
-        shutil.copytree(FUNCOES_DIR, backup_dir)
-        print(f"📦 Backup criado em: {backup_dir}")
+# =================================================================
+# FUNÇÕES AUXILIARES
+# =================================================================
+def criar_backup_original():
+    """Cria um backup da biblioteca original."""
+    if os.path.exists(DIR_ORIGEM):
+        timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_dir = f"backup_biblioteca_original_{timestamp}"
+        shutil.copytree(DIR_ORIGEM, backup_dir)
+        print(f"📦 Backup criado: {backup_dir}")
+        return backup_dir
     else:
-        print("⚠️ Diretório de funções não encontrado para backup")
+        print("⚠️ Diretório original não encontrado.")
+        return None
 
+def preparar_area_staging():
+    """Prepara a área de staging copiando a biblioteca original."""
+    # Limpar staging anterior
+    if os.path.exists(DIR_DESTINO):
+        shutil.rmtree(DIR_DESTINO)
+        print("♻️  Staging anterior removido")
+    
+    # Criar nova área de staging
+    shutil.copytree(DIR_ORIGEM, DIR_DESTINO)
+    print(f"✅ Área de staging criada: {DIR_DESTINO}")
+
+def verificar_ambiente():
+    """Verifica se o ambiente está pronto para execução."""
+    if not os.path.exists(DIR_ORIGEM):
+        print(f"❌ ERRO: Diretório original '{DIR_ORIGEM}' não encontrado!")
+        return False
+    
+    try:
+        import astunparse
+        return True
+    except ImportError:
+        print("❌ ERRO: 'astunparse' não instalado. Execute: pip install astunparse")
+        return False
+
+# =================================================================
+# ORQUESTRADOR PRINCIPAL
+# =================================================================
 def executar_consolidacao_automatica():
-    """Executa a consolidação automática baseada nas regras canónicas."""
-    print("🚀 INICIANDO CONSOLIDAÇÃO AUTOMÁTICA DA BIBLIOTECA")
+    """Executa o processo completo de consolidação."""
+    print("🧹 ORGANIZADOR DE BIBLIOTECA - MODO STAGING")
     print("=" * 60)
     
-    # Criar backup primeiro
-    criar_backup()
+    # Verificar ambiente
+    if not verificar_ambiente():
+        return
+    
+    # Preparação
+    criar_backup_original()
+    preparar_area_staging()
+    
+    print("\n🚀 INICIANDO LIMPEZA NA ÁREA DE STAGING")
+    print("=" * 60)
     
     sucesso_count = 0
     falha_count = 0
     ignoradas_count = 0
     
+    # Processar cada regra canónica
     for (func_name, source_mod), (target_mod, novo_nome) in REGRAS_CANONICAS.items():
-        print(f"\n📋 Processando: {func_name}")
-        print(f"   De: {source_mod}.py")
-        print(f"   Para: {target_mod}.py" + (f" (como {novo_nome})" if novo_nome else ""))
+        source_path = os.path.join(DIR_DESTINO, f"{source_mod}.py")
         
-        # Verificar se o módulo de origem existe
-        source_path = os.path.join(FUNCOES_DIR, f"{source_mod}.py")
+        # Verificar se o módulo de origem existe no staging
         if not os.path.exists(source_path):
-            print(f"   ⚠️ Ignorado: Módulo de origem {source_path} não existe")
+            print(f"📋 {func_name}: ❌ Módulo '{source_mod}.py' não encontrado no staging")
             ignoradas_count += 1
             continue
             
+        print(f"📋 {func_name}: {source_mod}.py → {target_mod}.py")
+        
         try:
-            consolidator = ASTConsolidator(target_mod, source_mod, FUNCOES_DIR)
+            consolidator = ASTConsolidator(target_mod, source_mod, DIR_DESTINO)
             resultado = consolidator.mover_funcao(func_name, novo_nome)
             
             if resultado:
@@ -93,50 +133,44 @@ def executar_consolidacao_automatica():
                 falha_count += 1
                 
         except Exception as e:
-            print(f"   ❌ Erro inesperado: {e}")
+            print(f"    ❌ Erro inesperado: {e}")
             falha_count += 1
     
-    return sucesso_count, falha_count, ignoradas_count
+    # Relatório Final
+    print("\n" + "=" * 60)
+    print("📊 RELATÓRIO FINAL DA AUTOMAÇÃO")
+    print("=" * 60)
+    print(f"✅ Consolidações bem sucedidas: {sucesso_count}")
+    print(f"❌ Falhas no processamento: {falha_count}")
+    print(f"⚠️  Ignoradas (módulo não encontrado): {ignoradas_count}")
+    
+    # Ações Manuais
+    if ACOES_MANUAIS:
+        mostrar_relatorio_manual()
+    
+    print(f"\n🎯 PRÓXIMOS PASSOS:")
+    print(f"   1. Biblioteca limpa disponível em: {DIR_DESTINO}")
+    print(f"   2. Biblioteca original preservada em: {DIR_ORIGEM}")
+    print(f"   3. Resolva as ações manuais listadas acima")
+    print(f"   4. Quando satisfeito, substitua {DIR_ORIGEM} por {DIR_DESTINO}")
 
 def mostrar_relatorio_manual():
     """Mostra as ações que precisam de intervenção manual."""
     print("\n🔧 AÇÕES MANUAIS NECESSÁRIAS")
     print("=" * 60)
-    print("As seguintes funções têm conflitos complexos e precisam de fusão manual:")
+    print("Estas funções têm conflitos de LÓGICA e precisam de fusão manual:")
     
     for i, acao in enumerate(ACOES_MANUAIS, 1):
-        print(f"   {i}. ⚠️ {acao}")
+        print(f"   {i}. ⚠️  {acao}")
     
-    print("\n📝 INSTRUÇÕES PARA FUSÃO MANUAL:")
-    print("   1. Analise o código de cada função em conflito")
-    print("   2. Escolha a implementação mais eficiente/geral")
-    print("   3. Funda as funções manualmente")
-    print("   4. Mantenha apenas uma versão no módulo canónico apropriado")
-    print("   5. Remova as versões duplicadas dos outros módulos")
+    print(f"\n📝 INSTRUÇÕES:")
+    print(f"   • Edite APENAS a pasta '{DIR_DESTINO}'")
+    print(f"   • Analise o código de cada função em conflito")
+    print(f"   • Escolha a implementação mais eficiente")
+    print(f"   • Funda manualmente e remova duplicados")
 
-def main():
-    """Função principal do organizador."""
-    print("🧹 ORGANIZADOR DE BIBLIOTECA - FASE DE LIMPEZA")
-    print("=" * 60)
-    
-    # Executar consolidação automática
-    sucesso, falha, ignoradas = executar_consolidacao_automatica()
-    
-    # Mostrar relatório final
-    print("\n📊 RELATÓRIO FINAL DA AUTOMAÇÃO")
-    print("=" * 60)
-    print(f"✅ Consolidações bem sucedidas: {sucesso}")
-    print(f"❌ Falhas: {falha}")
-    print(f"⚠️ Ignoradas: {ignoradas}")
-    
-    # Mostrar ações manuais
-    if ACOES_MANUAIS:
-        mostrar_relatorio_manual()
-    
-    print(f"\n🎯 PRÓXIMOS PASSOS:")
-    print(f"   1. Resolver as ações manuais listadas acima")
-    print(f"   2. Executar o analisador novamente para verificar duplicações restantes")
-    print(f"   3. Iniciar o desenvolvimento do Motor de IA com a biblioteca limpa")
-
+# =================================================================
+# EXECUÇÃO
+# =================================================================
 if __name__ == "__main__":
-    main()
+    executar_consolidacao_automatica()
