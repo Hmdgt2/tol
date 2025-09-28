@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números com base na sua frequência e precisão em ciclos de tempo recentes.",
-  "total_previsoes": 1511,
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 621,
-      "taxa_sucesso": "41.10%"
+      "total": 628,
+      "taxa_sucesso": "41.40%"
     },
     "acerto_2": {
-      "total": 91,
-      "taxa_sucesso": "6.02%"
+      "total": 104,
+      "taxa_sucesso": "6.86%"
     },
     "acerto_3": {
-      "total": 5,
-      "taxa_sucesso": "0.33%"
+      "total": 8,
+      "taxa_sucesso": "0.53%"
     },
     "acerto_4": {
       "total": 0,
@@ -25,27 +25,27 @@
     }
   },
   "melhor_previsao": {
-    "concurso": "061/2011",
-    "data": "03/09/2011",
+    "concurso": "005/2012",
+    "data": "18/01/2012",
     "numeros_acertados": 3,
     "numeros_previstos_pico": [
-      11,
-      16,
+      13,
+      18,
       19,
-      22,
-      32
+      35,
+      36
     ],
     "numeros_reais_pico": [
-      16,
-      19,
-      20,
-      22,
-      31
+      18,
+      26,
+      35,
+      36,
+      49
     ],
-    "indice_sorteio": 48
+    "indice_sorteio": 87
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1462,
-    "media_acertos_apos": 0.47
+    "sorteios_apos": 1429,
+    "media_acertos_apos": 0.48
   }
 }

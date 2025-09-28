@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
-  "descricao": "Sugere os números mais 'atrasados' ou que estão em um ciclo.",
-  "total_previsoes": 1511,
+  "descricao": "Sugere números cuja ausência atual é um múltiplo do seu intervalo médio histórico.",
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 679,
-      "taxa_sucesso": "44.94%"
+      "total": 668,
+      "taxa_sucesso": "44.03%"
     },
     "acerto_2": {
-      "total": 108,
-      "taxa_sucesso": "7.15%"
+      "total": 117,
+      "taxa_sucesso": "7.71%"
     },
     "acerto_3": {
-      "total": 5,
-      "taxa_sucesso": "0.33%"
+      "total": 6,
+      "taxa_sucesso": "0.40%"
     },
     "acerto_4": {
       "total": 1,
@@ -25,27 +25,27 @@
     }
   },
   "melhor_previsao": {
-    "concurso": "025/2014",
-    "data": "26/03/2014",
+    "concurso": "103/2024",
+    "data": "25/12/2024",
     "numeros_acertados": 4,
     "numeros_previstos_pico": [
-      15,
-      36,
-      37,
-      41,
-      42
+      9,
+      19,
+      24,
+      26,
+      44
     ],
     "numeros_reais_pico": [
-      2,
-      15,
-      36,
-      37,
-      42
+      6,
+      19,
+      24,
+      26,
+      44
     ],
-    "indice_sorteio": 315
+    "indice_sorteio": 1437
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1195,
-    "media_acertos_apos": 0.51
+    "sorteios_apos": 79,
+    "media_acertos_apos": 0.7
   }
 }

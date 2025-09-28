@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Avalia a precisão posicional histórica para sugerir os números mais frequentes das posições mais precisas.",
-  "total_previsoes": 1511,
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 661,
-      "taxa_sucesso": "43.75%"
+      "total": 663,
+      "taxa_sucesso": "43.70%"
     },
     "acerto_2": {
       "total": 116,
-      "taxa_sucesso": "7.68%"
+      "taxa_sucesso": "7.65%"
     },
     "acerto_3": {
       "total": 9,
-      "taxa_sucesso": "0.60%"
+      "taxa_sucesso": "0.59%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 25
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1485,
+    "sorteios_apos": 1491,
     "media_acertos_apos": 0.52
   }
 }

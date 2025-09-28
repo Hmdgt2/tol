@@ -1,80 +1,51 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números seguindo a distribuição mais comum por grupos de dezenas.",
-  "total_previsoes": 1511,
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 1510,
-      "taxa_sucesso": "99.93%"
+      "total": 630,
+      "taxa_sucesso": "41.53%"
     },
     "acerto_2": {
-      "total": 1508,
-      "taxa_sucesso": "99.80%"
+      "total": 101,
+      "taxa_sucesso": "6.66%"
     },
     "acerto_3": {
-      "total": 1505,
-      "taxa_sucesso": "99.60%"
+      "total": 9,
+      "taxa_sucesso": "0.59%"
     },
     "acerto_4": {
-      "total": 1503,
-      "taxa_sucesso": "99.47%"
+      "total": 0,
+      "taxa_sucesso": "0.00%"
     },
     "acerto_5": {
-      "total": 1499,
-      "taxa_sucesso": "99.21%"
+      "total": 0,
+      "taxa_sucesso": "0.00%"
     }
   },
   "melhor_previsao": {
-    "concurso": "021/2011",
-    "data": "16/04/2011",
-    "numeros_acertados": 5,
+    "concurso": "016/2013",
+    "data": "23/02/2013",
+    "numeros_acertados": 3,
     "numeros_previstos_pico": [
-      1,
       2,
-      3,
-      6,
-      12,
-      14,
       16,
-      17,
-      18,
-      19,
-      21,
-      22,
-      27,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
+      26,
       40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48,
-      49
+      48
     ],
     "numeros_reais_pico": [
-      27,
-      34,
-      38,
-      45,
-      47
+      2,
+      4,
+      9,
+      16,
+      40
     ],
-    "indice_sorteio": 8
+    "indice_sorteio": 202
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1502,
-    "media_acertos_apos": 4.99
+    "sorteios_apos": 1314,
+    "media_acertos_apos": 0.49
   }
 }

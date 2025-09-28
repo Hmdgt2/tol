@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números distribuídos de forma equilibrada entre as faixas do jogo, evitando concentrações.",
-  "total_previsoes": 1511,
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 626,
-      "taxa_sucesso": "41.43%"
+      "total": 629,
+      "taxa_sucesso": "41.46%"
     },
     "acerto_2": {
-      "total": 100,
-      "taxa_sucesso": "6.62%"
+      "total": 101,
+      "taxa_sucesso": "6.66%"
     },
     "acerto_3": {
       "total": 9,
-      "taxa_sucesso": "0.60%"
+      "taxa_sucesso": "0.59%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 202
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1308,
+    "sorteios_apos": 1314,
     "media_acertos_apos": 0.49
   }
 }

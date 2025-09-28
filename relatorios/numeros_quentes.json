@@ -1,6 +1,6 @@
 {
   "nome_heuristica": "",
-  "descricao": "Sugere números com base na probabilidade de repetição de números de sorteios anteriores.",
+  "descricao": "Sugere os números mais frequentes nos sorteios recentes.",
   "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {

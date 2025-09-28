@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
-  "descricao": "Sugere números equilibrando pares, ímpares e primos conforme o padrão mais comum.",
-  "total_previsoes": 1511,
+  "descricao": "Sugere uma combinação balanceada de pares, ímpares e primos, preenchendo a lista com os números menos frequentes para garantir diversidade.",
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 624,
-      "taxa_sucesso": "41.30%"
+      "total": 641,
+      "taxa_sucesso": "42.25%"
     },
     "acerto_2": {
-      "total": 106,
-      "taxa_sucesso": "7.02%"
+      "total": 116,
+      "taxa_sucesso": "7.65%"
     },
     "acerto_3": {
-      "total": 8,
-      "taxa_sucesso": "0.53%"
+      "total": 7,
+      "taxa_sucesso": "0.46%"
     },
     "acerto_4": {
       "total": 0,
@@ -25,27 +25,27 @@
     }
   },
   "melhor_previsao": {
-    "concurso": "036/2012",
-    "data": "05/05/2012",
+    "concurso": "057/2012",
+    "data": "18/07/2012",
     "numeros_acertados": 3,
     "numeros_previstos_pico": [
-      7,
-      16,
-      19,
-      20,
-      40
+      1,
+      3,
+      10,
+      39,
+      46
     ],
     "numeros_reais_pico": [
-      5,
-      19,
-      20,
-      25,
-      40
+      10,
+      26,
+      39,
+      46,
+      49
     ],
-    "indice_sorteio": 118
+    "indice_sorteio": 139
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1392,
-    "media_acertos_apos": 0.49
+    "sorteios_apos": 1377,
+    "media_acertos_apos": 0.51
   }
 }

@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
-  "descricao": "Sugere números que ajudam a formar a soma mais frequente dos sorteios.",
-  "total_previsoes": 1511,
+  "descricao": "Sugere os números mais frequentes que saíram em sorteios com a soma mais comum, preenchendo a lista com os menos frequentes desse subconjunto para garantir uma previsão completa.",
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 611,
-      "taxa_sucesso": "40.44%"
+      "total": 644,
+      "taxa_sucesso": "42.45%"
     },
     "acerto_2": {
-      "total": 118,
-      "taxa_sucesso": "7.81%"
+      "total": 101,
+      "taxa_sucesso": "6.66%"
     },
     "acerto_3": {
-      "total": 6,
-      "taxa_sucesso": "0.40%"
+      "total": 7,
+      "taxa_sucesso": "0.46%"
     },
     "acerto_4": {
       "total": 0,
@@ -25,27 +25,27 @@
     }
   },
   "melhor_previsao": {
-    "concurso": "016/2013",
-    "data": "23/02/2013",
+    "concurso": "045/2011",
+    "data": "09/07/2011",
     "numeros_acertados": 3,
     "numeros_previstos_pico": [
-      2,
-      16,
-      18,
-      40,
-      48
+      14,
+      22,
+      33,
+      38,
+      44
     ],
     "numeros_reais_pico": [
-      2,
-      4,
-      9,
-      16,
-      40
+      3,
+      22,
+      32,
+      33,
+      44
     ],
-    "indice_sorteio": 202
+    "indice_sorteio": 32
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1308,
+    "sorteios_apos": 1484,
     "media_acertos_apos": 0.49
   }
 }

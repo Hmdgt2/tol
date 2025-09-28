@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números com base na frequência em cada posição do sorteio, aproveitando padrões posicionais.",
-  "total_previsoes": 1511,
+  "total_previsoes": 1517,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 643,
-      "taxa_sucesso": "42.55%"
+      "total": 645,
+      "taxa_sucesso": "42.52%"
     },
     "acerto_2": {
       "total": 87,
-      "taxa_sucesso": "5.76%"
+      "taxa_sucesso": "5.74%"
     },
     "acerto_3": {
       "total": 10,
@@ -45,7 +45,7 @@
     "indice_sorteio": 63
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1447,
+    "sorteios_apos": 1453,
     "media_acertos_apos": 0.49
   }
 }
