@@ -38,14 +38,13 @@ jobs:
       # O script Python já gerou a pasta 'lib/funcoes_limpas' e a 'backup_biblioteca_...'
 
       - name: 💾 Commitar e Fazer Push dos Ficheiros Limpos e Backup
-        # Utilizamos uma ação especializada para commitar, que lida com a autenticação Git
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          # Commita a nova biblioteca limpa e o backup. 
-          # A pasta original 'lib/funcoes_analiticas' fica intocada.
-          file_pattern: 'lib/funcoes_limpas/**/*.py backup_biblioteca_original_*'
+          # Alteramos o padrão para incluir a PASTA inteira e o backup.
+          # Isto é mais robusto do que usar o wildcard recursivo (**/*.py).
+          file_pattern: 'lib/funcoes_limpas backup_biblioteca_original_*' 
           commit_message: '✨ CI: Funções consolidadas e limpas para staging (lib/funcoes_limpas)'
-          branch: ${{ github.ref_name }} # Commita para o branch atual
+          branch: ${{ github.ref_name }}l
 
       - name: ⬆️ Carregar Staging como Artefacto para Revisão
         # Opcional: Permite que você baixe a pasta 'funcoes_limpas' diretamente da interface
