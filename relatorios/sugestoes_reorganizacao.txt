@@ -63,7 +63,7 @@
 🔧 Função `normalized_mutual_info` aparece em múltiplos módulos: teoria_informacao, estatistica_multivariada
    ➤ Sugestão: manter em `teoria_informacao.py`, remover duplicados
 
-🔁 Funções equivalentes: consecutive_diff, diff
+🔁 Funções equivalentes: diff, consecutive_diff
    ➤ Sugestão: fundir em `sequencias.py` com nome padronizado
 
 🔁 Funções equivalentes: bessel_j
