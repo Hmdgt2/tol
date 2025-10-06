@@ -1,0 +1,46 @@
+🔍 Funções com lógica semelhante (estrutura parecida):
+
+⚠️ `sum_of_pairs` em lib/funcoes_limpas/analise_padroes.py
+   ≈ `sum_combinations2` em lib/funcoes_limpas/combinatoria_avancada.py
+   🔁 Similaridade: 87.43%
+
+⚠️ `sum_of_pairs` em lib/funcoes_limpas/analise_padroes.py
+   ≈ `sum_combinations3` em lib/funcoes_limpas/combinatoria_avancada.py
+   🔁 Similaridade: 86.23%
+
+⚠️ `sum_of_triples` em lib/funcoes_limpas/analise_padroes.py
+   ≈ `sum_combinations2` em lib/funcoes_limpas/combinatoria_avancada.py
+   🔁 Similaridade: 87.43%
+
+⚠️ `sum_of_triples` em lib/funcoes_limpas/analise_padroes.py
+   ≈ `sum_combinations3` em lib/funcoes_limpas/combinatoria_avancada.py
+   🔁 Similaridade: 88.62%
+
+⚠️ `fibonacci` em lib/funcoes_limpas/numeros_especiais.py
+   ≈ `fibonacci_num` em lib/funcoes_limpas/teoria_numeros.py
+   🔁 Similaridade: 96.0%
+
+⚠️ `lucas` em lib/funcoes_limpas/numeros_especiais.py
+   ≈ `lucas_num` em lib/funcoes_limpas/teoria_numeros.py
+   🔁 Similaridade: 95.41%
+
+⚠️ `catalan_number` em lib/funcoes_limpas/numeros_especiais.py
+   ≈ `catalan_num` em lib/funcoes_limpas/teoria_numeros.py
+   🔁 Similaridade: 95.73%
+
+⚠️ `shortest_paths_length` em lib/funcoes_limpas/grafos.py
+   ≈ `shortest_path_all_pairs` em lib/funcoes_limpas/algoritmos_grafos.py
+   🔁 Similaridade: 92.52%
+
+⚠️ `gamma_func` em lib/funcoes_limpas/funcoes_especiais.py
+   ≈ `digamma_func` em lib/funcoes_limpas/matematica_especial.py
+   🔁 Similaridade: 88.64%
+
+⚠️ `bessel_j` em lib/funcoes_limpas/funcoes_especiais.py
+   ≈ `bessel_y` em lib/funcoes_limpas/matematica_especial.py
+   🔁 Similaridade: 88.89%
+
+⚠️ `chebyshev_T` em lib/funcoes_limpas/funcoes_especiais.py
+   ≈ `chebyshev_t` em lib/funcoes_limpas/matematica_especial.py
+   🔁 Similaridade: 86.49%
+

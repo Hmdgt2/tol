@@ -1,0 +1,6 @@
+🔍 Funções com o mesmo nome em múltiplos ficheiros:
+
+⚠️ Função `euler_totient` aparece em:
+  - lib/funcoes_limpas/teoria_numeros.py
+  - lib/funcoes_limpas/matematica_especial.py
+
