@@ -1,4 +1,4 @@
-name: Detectar Funções Repetidas
+name: Detectar Funções Repetidas Limpas
 
 on:
   workflow_dispatch:
