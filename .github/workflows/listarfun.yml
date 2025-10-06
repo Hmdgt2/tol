@@ -28,7 +28,7 @@ jobs:
 
       - name: Executar Script de Listagem de Funções
         run: |
-          python src/listar_funcoes.py
+          python scripts/listar_funcoes.py
       
       - name: Commit e Enviar Relatório
         run: |
