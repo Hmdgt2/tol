@@ -1,0 +1,49 @@
+name: Detectar Funções Repetidas
+
+on:
+  workflow_dispatch:
+
+jobs:
+  analisar_funcoes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
+
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13"
+
+      - name: 📦 Instalar Dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🔍 Executar Script de Detecção
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/detectar_funcoes_repetidas_limpas.py
+
+      - name: 💾 Guardar Relatórios via Commit
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add relatorios/funcoes_duplicadas_limpas.txt
+          git add relatorios/funcoes_equivalentes_limpas.txt
+          git add relatorios/funcoes_semelhantes_limpas.txt
+          git add relatorios/sugestoes_reorganizacao_limpas.txt
+          git commit -m "Automatização: Relatórios de funções duplicadas, equivalentes e semelhantes" || echo "Nenhum ficheiro para commit"
+          git push
+
+      - name: ⬆️ Carregar Relatórios como Artefactos
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-funcoes-repetidas_limpas
+          path: |
+            relatorios/funcoes_duplicadas_limpas.txt
+            relatorios/funcoes_equivalentes_limpas.txt
+            relatorios/funcoes_semelhantes_limpas.txt
