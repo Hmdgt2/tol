@@ -1,137 +1,171 @@
-import os
-import re
-
-def gerar_universal_wrapper():
-    """Gera UniversalWrapper único importando todos os wrappers por categoria."""
-    
-    # Template do UniversalWrapper
-    template = '''"""
-UNIVERSAL WRAPPER - Interface única para todas as funções analíticas
-============================================================
-
-Gerado automaticamente por gerar_universal_wrapper.py
-NÃO EDITAR MANUALMENTE - Este arquivo será sobrescrito.
-
-Fornece acesso unificado a todas as 154+ funções através de uma única interface.
-Ideal para uso em algoritmos genéticos e ML que precisam compor funções livremente.
+#!/usr/bin/env python3
+"""
+GERADOR DE UNIVERSAL WRAPPER
+Gera wrapper único a partir dos wrappers por categoria gerados anteriormente
 """
 
-class UniversalWrapper:
-    """
-    Wrapper único com acesso a todas as funções analíticas.
-    
-    Objetivo: Fornecer interface padronizada para composição de heurísticas
-    Finalidade: Permitir que algoritmos genéticos/ML combinem funções livremente
-    
-    Características:
-    - Todas as funções retornam List[float] padronizada
-    - Tratamento automático de erros
-    - Interface consistente para o pipeline de IA
-    """
-    
-    # Métodos serão adicionados dinamicamente abaixo
-    pass
+import os
+import re
+import ast
+from datetime import datetime
 
-# ========== IMPORTAÇÃO DINÂMICA DE TODOS OS WRAPPERS ==========
-
-'''
+def gerar_universal_wrapper():
+    """Gera UniversalWrapper único baseado nos wrappers por categoria."""
     
-    # Ler o arquivo de wrappers gerado para extrair todas as funções
+    print("🌐 Iniciando geração do UniversalWrapper...")
+    
+    # Caminhos dos arquivos
     wrappers_file = "lib/funcoes_wrappers_auto.py"
+    output_file = "lib/universal_wrapper.py"
     
     if not os.path.exists(wrappers_file):
-        print("❌ Arquivo de wrappers não encontrado. Execute gerar_wrappers_funcoes.py primeiro.")
-        return
+        print(f"❌ Arquivo de wrappers não encontrado: {wrappers_file}")
+        print("💡 Execute primeiro: python scripts/gerar_wrappers_funcoes.py")
+        return False
     
+    # Ler wrappers gerados
     with open(wrappers_file, "r", encoding="utf-8") as f:
         wrappers_content = f.read()
     
-    # Extrair todas as classes de wrapper e seus métodos
+    # Extrair todas as classes e métodos
     classes = re.findall(r'class (\w+Wrapper):.*?(?=class|\Z)', wrappers_content, re.DOTALL)
     
     universal_methods = []
     imports_set = set()
+    total_funcoes = 0
     
     for class_block in classes:
-        # Extrair nome da classe
         class_match = re.match(r'class (\w+Wrapper)', class_block)
         if not class_match:
             continue
             
         class_name = class_match.group(1)
+        imports_set.add(class_name)
         
-        # Extrair métodos estáticos desta classe
-        methods = re.findall(r'@staticmethod\s+def (\w+)\([^)]*\):\s*""".*?""".*?return (\w+)\.apply_function\((\w+),', class_block, re.DOTALL)
-        
-        for method_name, wrapper_class, original_func in methods:
-            # Criar método no UniversalWrapper
-            method_code = f'''
+        # Extrair métodos usando AST para maior precisão
+        try:
+            tree = ast.parse(class_block)
+            for node in tree.body:
+                if isinstance(node, ast.ClassDef):
+                    for item in node.body:
+                        if isinstance(item, ast.FunctionDef) and not item.name.startswith('_'):
+                            # Encontrar a linha de return no código original
+                            method_code = None
+                            lines = class_block.split('\n')
+                            for i, line in enumerate(lines):
+                                if f"def {item.name}(" in line:
+                                    # Encontrar o bloco do método
+                                    j = i
+                                    while j < len(lines) and (lines[j].strip() or j == i):
+                                        if "return" in lines[j] and class_name in lines[j]:
+                                            method_code = lines[j]
+                                            break
+                                        j += 1
+                                    break
+                            
+                            if method_code:
+                                # Criar método no UniversalWrapper
+                                method_template = f'''
     @staticmethod
-    def {method_name}(*args, **kwargs):
-        """Wrapper para {method_name} - via {wrapper_class}"""
-        from lib.funcoes_wrappers_auto import {wrapper_class}
-        return {wrapper_class}.{method_name}(*args, **kwargs)
+    def {item.name}(*args, **kwargs):
+        """Método universal para {item.name}"""
+        from lib.funcoes_wrappers_auto import {class_name}
+        return {class_name}.{item.name}(*args, **kwargs)
 '''
-            universal_methods.append(method_code)
-            imports_set.add(wrapper_class)
+                                universal_methods.append(method_template)
+                                total_funcoes += 1
+        except Exception as e:
+            print(f"⚠️ Erro ao processar {class_name}: {e}")
+            continue
     
-    # Gerar imports
+    # Gerar conteúdo do UniversalWrapper
+    template = f'''"""
+UNIVERSAL WRAPPER - Interface Única para Todas as Funções
+================================================================
+Gerado automaticamente em: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+Total de funções: {total_funcoes}
+
+⚠️ NÃO EDITAR MANUALMENTE - Este arquivo é gerado automaticamente
+   Qualquer alteração será sobrescrita na próxima execução do pipeline.
+
+Fornece acesso unificado a todas as funções através de uma interface consistente.
+Ideal para algoritmos genéticos e sistemas de ML que precisam compor heurísticas.
+"""
+
+import numpy as np
+from typing import List, Any
+
+class UniversalWrapper:
+    """
+    Wrapper único com acesso a todas as funções analíticas.
+    
+    Objetivo: Interface padronizada para composição de heurísticas
+    Finalidade: Permitir combinação livre de funções em algoritmos genéticos/ML
+    
+    Características:
+    - Todas as funções retornam List[float] padronizada
+    - Tratamento automático de erros
+    - Interface consistente para pipeline de IA
+    - {total_funcoes} funções disponíveis
+    """
+    
+    # Importações dinâmicas de todos os wrappers
+'''
+    
+    # Adicionar imports
     imports_code = "\n".join([f"from lib.funcoes_wrappers_auto import {cls}" for cls in sorted(imports_set)])
     
-    # Arquivo final
-    final_content = template + imports_code + "\n\n" + "\n".join(universal_methods)
+    # Adicionar métodos
+    methods_code = "\n".join(universal_methods)
     
-    # Adicionar método de utilidade
-    final_content += '''
+    # Adicionar métodos utilitários
+    util_methods = f'''
     
     @staticmethod
     def get_available_functions():
-        """Retorna lista de todas as funções disponíveis no wrapper."""
+        """Retorna lista de todas as funções disponíveis."""
         return [method for method in dir(UniversalWrapper) 
                 if not method.startswith('_') and callable(getattr(UniversalWrapper, method))]
     
     @staticmethod
     def get_function_count():
         """Retorna o número total de funções disponíveis."""
-        return len([method for method in dir(UniversalWrapper) 
-                   if not method.startswith('_') and callable(getattr(UniversalWrapper, method))])
-
-# ========== EXEMPLO DE USO ==========
+        return {total_funcoes}
+    
+    @staticmethod
+    def get_function_info(func_name):
+        """Retorna informações sobre uma função específica."""
+        if hasattr(UniversalWrapper, func_name) and callable(getattr(UniversalWrapper, func_name)):
+            return f"Função {{func_name}} disponível no UniversalWrapper"
+        else:
+            return f"Função {{func_name}} não encontrada"
 
 if __name__ == "__main__":
-    # Teste básico do UniversalWrapper
-    print(f"🔧 UniversalWrapper carregado com {UniversalWrapper.get_function_count()} funções")
-    
-    # Exemplo de uso
-    dados = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    
-    # Usando diferentes funções através da mesma interface
-    resultado_fft = UniversalWrapper.fft_magnitude(dados)
-    resultado_primes = UniversalWrapper.count_primes(dados)
-    resultado_mean = UniversalWrapper.rolling_mean(dados, 3)
-    
-    print(f"📊 FFT: {resultado_fft}")
-    print(f"🔢 Primos: {resultado_primes}") 
-    print(f"📈 Média móvel: {resultado_mean}")
-    
+    # Teste básico
+    print(f"🔧 UniversalWrapper carregado com {{UniversalWrapper.get_function_count()}} funções")
     print("✅ UniversalWrapper pronto para uso no pipeline!")
 '''
     
-    # Escrever arquivo
-    output_path = "lib/universal_wrapper.py"
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    # Conteúdo final
+    final_content = template + imports_code + "\n" + methods_code + util_methods
     
-    with open(output_path, "w", encoding="utf-8") as f:
+    # Garantir que o diretório existe
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    
+    # Escrever arquivo
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(final_content)
     
-    print(f"✅ UniversalWrapper gerado em: {output_path}")
-    print(f"📊 Total de funções incluídas: {len(universal_methods)}")
-
-def main():
-    """Executa a geração do UniversalWrapper."""
-    print("🚀 Gerando UniversalWrapper único...")
-    gerar_universal_wrapper()
-    print("🎯 Próximo passo: Implementar gerador_logicas.py")
+    print(f"✅ UniversalWrapper gerado: {output_file}")
+    print(f"📊 Total de funções incluídas: {total_funcoes}")
+    print(f"📦 Wrappers importados: {len(imports_set)}")
+    
+    return True
 
 if __name__ == "__main__":
-    main()
+    success = gerar_universal_wrapper()
+    if success:
+        print("🎯 Próximo passo: Implementar gerador_logicas.py")
+    else:
+        print("💥 Falha na geração do UniversalWrapper")
+        sys.exit(1)
