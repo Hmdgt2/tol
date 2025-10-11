@@ -7,6 +7,7 @@ Gera wrapper único a partir dos wrappers por categoria gerados anteriormente
 import os
 import re
 import ast
+import sys
 from datetime import datetime
 
 def gerar_universal_wrapper():
@@ -49,34 +50,23 @@ def gerar_universal_wrapper():
                 if isinstance(node, ast.ClassDef):
                     for item in node.body:
                         if isinstance(item, ast.FunctionDef) and not item.name.startswith('_'):
-                            # Encontrar a linha de return no código original
-                            method_code = None
-                            lines = class_block.split('\n')
-                            for i, line in enumerate(lines):
-                                if f"def {item.name}(" in line:
-                                    # Encontrar o bloco do método
-                                    j = i
-                                    while j < len(lines) and (lines[j].strip() or j == i):
-                                        if "return" in lines[j] and class_name in lines[j]:
-                                            method_code = lines[j]
-                                            break
-                                        j += 1
-                                    break
-                            
-                            if method_code:
-                                # Criar método no UniversalWrapper
-                                method_template = f'''
+                            # Método mais simples: apenas criar o wrapper
+                            method_template = f'''
     @staticmethod
     def {item.name}(*args, **kwargs):
         """Método universal para {item.name}"""
         from lib.funcoes_wrappers_auto import {class_name}
         return {class_name}.{item.name}(*args, **kwargs)
 '''
-                                universal_methods.append(method_template)
-                                total_funcoes += 1
+                            universal_methods.append(method_template)
+                            total_funcoes += 1
         except Exception as e:
             print(f"⚠️ Erro ao processar {class_name}: {e}")
             continue
+    
+    if total_funcoes == 0:
+        print("❌ Nenhuma função encontrada nos wrappers")
+        return False
     
     # Gerar conteúdo do UniversalWrapper
     template = f'''"""
@@ -92,9 +82,6 @@ Fornece acesso unificado a todas as funções através de uma interface consiste
 Ideal para algoritmos genéticos e sistemas de ML que precisam compor heurísticas.
 """
 
-import numpy as np
-from typing import List, Any
-
 class UniversalWrapper:
     """
     Wrapper único com acesso a todas as funções analíticas.
@@ -109,7 +96,6 @@ class UniversalWrapper:
     - {total_funcoes} funções disponíveis
     """
     
-    # Importações dinâmicas de todos os wrappers
 '''
     
     # Adicionar imports
@@ -162,10 +148,26 @@ if __name__ == "__main__":
     
     return True
 
+def main():
+    """Executa a geração do UniversalWrapper."""
+    print("🔄 INICIANDO FASE 4: GERAÇÃO DO UNIVERSAL WRAPPER...")
+    
+    try:
+        success = gerar_universal_wrapper()
+        
+        # VERIFICAÇÃO FINAL - Para o GitHub Actions
+        if success and os.path.exists("lib/universal_wrapper.py"):
+            file_size = os.path.getsize("lib/universal_wrapper.py")
+            print(f"🎯 FASE 4 CONCLUÍDA - UniversalWrapper gerado ({file_size} bytes) pronto para commit")
+            return True
+        else:
+            print("❌ FALHA - UniversalWrapper não foi gerado")
+            return False
+            
+    except Exception as e:
+        print(f"💥 Erro no gerador de UniversalWrapper: {e}")
+        return False
+
 if __name__ == "__main__":
-    success = gerar_universal_wrapper()
-    if success:
-        print("🎯 Próximo passo: Implementar gerador_logicas.py")
-    else:
-        print("💥 Falha na geração do UniversalWrapper")
-        sys.exit(1)
+    success = main()
+    sys.exit(0 if success else 1)
