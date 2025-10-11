@@ -1,0 +1,217 @@
+# RELATÓRIO DE ATUALIZAÇÃO DE CATEGORIAS
+# Gerado em: 2025-10-11 12:55:46
+==================================================
+
+## 📊 ESTATÍSTICAS GERAIS
+- Total de categorias detectadas: 38
+- Novas categorias adicionadas: 17
+- Categorias removidas: 0
+- Funções duplicadas: 16
+
+## 🆕 NOVAS CATEGORIAS ADICIONADAS
+### estatisticas
+- Wrapper: BasicStatsWrapper
+- Objetivo: Estatísticas descritivas básicas
+- Finalidade: Cálculos estatísticos fundamentais
+- Funções: 10
+  - unique_count: ['lst']
+  - intersection: ['lst1', 'lst2']
+  - union: ['lst1', 'lst2']
+  - difference: ['lst1', 'lst2']
+  - symmetric_difference: ['lst1', 'lst2']
+  - ... e 5 mais
+
+### deteccao_anomalias
+- Wrapper: AnomalyDetectionWrapper
+- Objetivo: Detecção de outliers e anomalias
+- Finalidade: Identificação de valores atípicos
+- Funções: 3
+  - z_score_outliers: ['lst', 'threshold']
+  - iqr_outliers: ['lst']
+  - rolling_z_score: ['lst', 'window', 'threshold']
+
+### wavelets
+- Wrapper: WaveletAnalysisWrapper
+- Objetivo: Análise wavelet
+- Finalidade: Decomposição multirresolução de sinais
+- Funções: 5
+  - wavelet_dwt: ['data', 'wavelet']
+  - wavelet_idwt: ['cA', 'cD', 'wavelet']
+  - wavelet_wavedec: ['data', 'level', 'wavelet']
+  - wavelet_waverec: ['coeffs', 'wavelet']
+  - wavelet_energy: ['data', 'wavelet']
+
+### teoria_informacao
+- Wrapper: InformationTheoryWrapper
+- Objetivo: Teoria da informação
+- Finalidade: Cálculos de entropia e informação mútua
+- Funções: 7
+  - shannon_entropy: ['lst']
+  - normalized_entropy: ['lst']
+  - mutual_info: ['x', 'y']
+  - normalized_mutual_info: ['x', 'y']
+  - kl_divergence: ['p', 'q']
+  - ... e 2 mais
+
+### numeros_especiais
+- Wrapper: SpecialNumbersWrapper
+- Objetivo: Sequências numéricas especiais
+- Finalidade: Cálculos com sequências matemáticas especiais
+- Funções: 8
+  - fibonacci: ['n']
+  - lucas: ['n']
+  - catalan_number: ['n']
+  - bell_number: ['n']
+  - partition_number: ['n']
+  - ... e 3 mais
+
+### algebra_simbolica
+- Wrapper: SymbolicMathWrapper
+- Objetivo: Manipulação algébrica simbólica
+- Finalidade: Cálculos simbólicos e algebra avançada
+- Funções: 8
+  - sym_derivative: ['expr']
+  - sym_integral: ['expr']
+  - sym_series_expansion: ['expr', 'n']
+  - sym_limit: ['expr', 'point']
+  - sym_roots: ['expr']
+  - ... e 3 mais
+
+### algebra_linear
+- Wrapper: AlgebraLinearWrapper
+- Objetivo: Processar funções de algebra_linear
+- Finalidade: Feature extraction para pipeline de IA
+- Funções: 15
+  - matrix_determinant: ['mat']
+  - matrix_rank: ['mat']
+  - matrix_inverse: ['mat']
+  - matrix_trace: ['mat']
+  - matrix_condition_number: ['mat']
+  - ... e 10 mais
+
+### manipulacao_dados
+- Wrapper: DataManipulationWrapper
+- Objetivo: Transformação e preparação de dados
+- Finalidade: Pré-processamento e manipulação de datasets
+- Funções: 4
+  - fill_missing_values: ['lst', 'strategy']
+  - normalize_data: ['lst']
+  - standardize_data: ['lst']
+  - get_dummies: ['lst']
+
+### funcoes_especiais
+- Wrapper: SpecialFunctionsWrapper
+- Objetivo: Funções matemáticas especiais
+- Finalidade: Cálculos com funções matemáticas avançadas
+- Funções: 11
+  - gamma_func: ['x']
+  - beta_func: ['a', 'b']
+  - zeta_func: ['s']
+  - bessel_j: ['n', 'x']
+  - legendre_poly: ['n', 'x']
+  - ... e 6 mais
+
+### analise_padroes
+- Wrapper: PatternAnalysisWrapper
+- Objetivo: Análise e detecção de padrões
+- Finalidade: Identificação de padrões complexos em dados
+- Funções: 10
+  - sum_of_pairs: ['lst']
+  - sum_of_triples: ['lst']
+  - diff_of_pairs: ['lst']
+  - count_pair_sums_equal: ['lst', 'value']
+  - score_even_odd: ['lst']
+  - ... e 5 mais
+
+### probabilidade
+- Wrapper: ProbabilityTheoryWrapper
+- Objetivo: Teoria da probabilidade
+- Finalidade: Cálculos probabilísticos e distribuições
+- Funções: 14
+  - poisson_pmf: ['k', 'mu']
+  - poisson_cdf: ['k', 'mu']
+  - poisson_var: ['mu']
+  - poisson_entropy: ['mu']
+  - binomial_pmf: ['k', 'n', 'p']
+  - ... e 9 mais
+
+### series_temporais
+- Wrapper: TimeSeriesWrapper
+- Objetivo: Análise de séries temporais
+- Finalidade: Processamento e modelagem temporal
+- Funções: 9
+  - arima_predict: ['lst', 'order', 'steps']
+  - centered_moving_average: ['lst', 'window']
+  - ewma: ['lst', 'span']
+  - exp_weighted_mean: ['lst', 'alpha']
+  - cumulative_sum: ['lst']
+  - ... e 4 mais
+
+### estatistica_nao_parametrica
+- Wrapper: NonParametricStatsWrapper
+- Objetivo: Testes estatísticos não paramétricos
+- Finalidade: Análise robusta sem suposições distribucionais
+- Funções: 7
+  - kendall_tau: ['x', 'y']
+  - spearman_corr: ['x', 'y']
+  - mann_whitney: ['x', 'y']
+  - kruskal_test: []
+  - wilcoxon_test: ['x', 'y']
+  - ... e 2 mais
+
+### probabilidade_distribuicoes
+- Wrapper: ProbabilityWrapper
+- Objetivo: Simulação de distribuições probabilísticas
+- Finalidade: Geração de dados sintéticos e modelagem
+- Funções: 3
+  - simulate_multinomial_prob: ['lst', 'probabilities', 'trials']
+  - simulate_dirichlet: ['alpha', 'size']
+  - simulate_multivariate_wishart: ['df', 'scale', 'size']
+
+### sequencias
+- Wrapper: SequenceAnalysisWrapper
+- Objetivo: Análise de sequências e séries
+- Finalidade: Processamento e análise de dados sequenciais
+- Funções: 7
+  - diff: ['lst']
+  - diff_abs: ['lst']
+  - ratio_consecutive: ['lst']
+  - rolling_sum: ['lst', 'window']
+  - rolling_mean: ['lst', 'window']
+  - ... e 2 mais
+
+### precisao
+- Wrapper: PrecisionWrapper
+- Objetivo: Cálculos com alta precisão numérica
+- Finalidade: Operações matemáticas de alta precisão
+- Funções: 5
+  - mpmath_sqrt: ['x']
+  - mpmath_log: ['x']
+  - mpmath_sin: ['x']
+  - mpmath_prod_list: ['lst']
+  - mpmath_sum_list: ['lst']
+
+### transformacoes
+- Wrapper: TransformationWrapper
+- Objetivo: Transformações matemáticas de dados
+- Finalidade: Aplicação de transformações a conjuntos de dados
+- Funções: 25
+  - floor_div: ['a', 'b']
+  - ceil_div: ['a', 'b']
+  - mod_inverse: ['a', 'k']
+  - floor_val: ['a']
+  - ceil_val: ['a']
+  - ... e 20 mais
+
+## ⚠️ FUNÇÕES DUPLICADAS (REVISAR)
+- bell_number em lib/funcoes_analiticas/teoria_numeros.py (categoria: teoria_numeros)
+- partition_number em lib/funcoes_analiticas/teoria_numeros.py (categoria: teoria_numeros)
+- bernoulli_number em lib/funcoes_analiticas/teoria_numeros.py (categoria: teoria_numeros)
+- fft_phase em lib/funcoes_analiticas/processamento_sinal.py (categoria: processamento_sinal)
+- ifft_real em lib/funcoes_analiticas/processamento_sinal.py (categoria: processamento_sinal)
+- mutual_info em lib/funcoes_analiticas/estatistica_multivariada.py (categoria: estatistica_multivariada)
+- normalized_mutual_info em lib/funcoes_analiticas/estatistica_multivariada.py (categoria: estatistica_multivariada)
+- euler_totient em lib/funcoes_analiticas/matematica_especial.py (categoria: matematica_especial)
+- gamma_func em lib/funcoes_analiticas/matematica_especial.py (categoria: matematica_especial)
+- beta_func em lib/funcoes_analiticas/matematica_especial.py (categoria: matematica_especial)
+- ... e 6 mais duplicados
