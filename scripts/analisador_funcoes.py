@@ -18,11 +18,29 @@ def extrair_funcoes_com_estatisticas(base_dir):
     funcoes_unicas = set()
     duplicados = []
     
+    print(f"🔍 Analisando estrutura do diretório: {base_dir}")
+    
+    # Primeiro, verificar a estrutura de pastas
     for root, dirs, files in os.walk(base_dir):
+        print(f"📁 Pasta: {root}")
+        print(f"   Subpastas: {dirs}")
+        print(f"   Arquivos: {[f for f in files if f.endswith('.py')]}")
+        
         for file in files:
             if file.endswith(".py") and not file.startswith("__"):
                 caminho = os.path.join(root, file)
-                categoria = os.path.basename(root)
+                
+                # CORREÇÃO CRÍTICA: Detetar categoria corretamente
+                # Se estiver em subpasta, usar nome da subpasta
+                # Se estiver na raiz, usar nome do arquivo como categoria
+                if root == base_dir:
+                    # Está na pasta raiz - usar nome do arquivo como categoria
+                    categoria = file.replace('.py', '')
+                else:
+                    # Está em subpasta - usar nome da pasta
+                    categoria = os.path.basename(root)
+                
+                print(f"   📄 {file} → Categoria: {categoria}")
                 
                 try:
                     with open(caminho, "r", encoding="utf-8") as f:
@@ -61,6 +79,11 @@ def extrair_funcoes_com_estatisticas(base_dir):
 def main():
     """Função principal do analisador."""
     print("🔄 INICIANDO FASE 1: ANÁLISE DE FUNÇÕES...")
+    
+    # Verificar se o diretório existe
+    if not os.path.exists(BASE_DIR):
+        print(f"❌ Diretório não encontrado: {BASE_DIR}")
+        return False
     
     # Executar análise
     funcoes, categorias, duplicados = extrair_funcoes_com_estatisticas(BASE_DIR)
@@ -120,6 +143,7 @@ def main():
     print(f"✅ Relatório TXT gerado: {LISTA_FUNCOES_TXT}")
     print(f"✅ Relatório JSON gerado: {LISTA_FUNCOES_JSON}")
     print(f"📊 Estatísticas: {len(funcoes)} funções únicas, {len(categorias)} categorias")
+    
     if duplicados:
         print(f"⚠️  {len(duplicados)} funções duplicadas encontradas")
 
