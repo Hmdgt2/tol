@@ -1,2084 +1,870 @@
-- Função: kendall_tau
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: ['x', 'y']
-  Docstring: Calcula o coeficiente de correlação de Kendall.
-
-Args:
-    x (List[float]): Primeira amostra.
-    y (List[float]): Segunda amostra.
-
-Returns:
-    float: Coeficiente de Kendall tau.
-
-- Função: spearman_corr
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: ['x', 'y']
-  Docstring: Calcula o coeficiente de correlação de Spearman.
-
-Args:
-    x (List[float]): Primeira amostra.
-    y (List[float]): Segunda amostra.
-
-Returns:
-    float: Coeficiente de Spearman.
-
-- Função: mann_whitney
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: ['x', 'y']
-  Docstring: Realiza o teste de soma de postos de Mann-Whitney U.
-
-Args:
-    x (List[float]): Primeira amostra.
-    y (List[float]): Segunda amostra.
-
-Returns:
-    float: Estatística U.
-
-- Função: kruskal_test
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: []
-  Docstring: Realiza o teste de Kruskal-Wallis H para múltiplos grupos.
-
-Args:
-    *groups (List[float]): Um ou mais grupos de amostras.
-
-Returns:
-    float: Estatística H.
-
-- Função: wilcoxon_test
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: ['x', 'y']
-  Docstring: Realiza o teste de soma de postos de Wilcoxon para amostras pareadas.
-
-Args:
-    x (List[float]): Primeira amostra.
-    y (List[float]): Segunda amostra.
-
-Returns:
-    float: Estatística W.
-
-- Função: median_test
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: ['x', 'y']
-  Docstring: Calcula a diferença entre as medianas de duas amostras.
-
-Args:
-    x (List[float]): Primeira amostra.
-    y (List[float]): Segunda amostra.
-
-Returns:
-    float: Diferença entre as medianas.
-
-- Função: range_stat
-  Caminho: lib/funcoes_analiticas/estatistica_nao_parametrica.py
-  Args: ['lst']
-  Docstring: Calcula a amplitude (range) de uma amostra.
-
-Args:
-    lst (List[float]): Lista de valores.
-
-Returns:
-    float: Valor máximo menos mínimo.
-
-- Função: factorial_func
-  Caminho: lib/funcoes_analiticas/combinatoria.py
-  Args: ['a']
-  Docstring: Calcula o fatorial de um número inteiro não negativo.
-
-- Função: comb_func
-  Caminho: lib/funcoes_analiticas/combinatoria.py
-  Args: ['n', 'k']
-  Docstring: Calcula as combinações de n elementos em grupos de k.
-
-- Função: perm_func
-  Caminho: lib/funcoes_analiticas/combinatoria.py
-  Args: ['n', 'k']
-  Docstring: Calcula as permutações de n elementos em grupos de k.
-
-- Função: multinomial_coef
-  Caminho: lib/funcoes_analiticas/combinatoria.py
-  Args: ['lst']
-  Docstring: Calcula o coeficiente multinomial de uma lista de números.
-
-- Função: simulate_multinomial_prob
-  Caminho: lib/funcoes_analiticas/probabilidade_distribuicoes.py
-  Args: ['lst', 'probabilities', 'trials']
-  Docstring: Simula uma distribuição multinomial.
-
-- Função: simulate_dirichlet
-  Caminho: lib/funcoes_analiticas/probabilidade_distribuicoes.py
-  Args: ['alpha', 'size']
-  Docstring: Simula uma distribuição de Dirichlet.
-
-- Função: simulate_multivariate_wishart
-  Caminho: lib/funcoes_analiticas/probabilidade_distribuicoes.py
-  Args: ['df', 'scale', 'size']
-  Docstring: Simula uma distribuição de Wishart multivariada (avançada).
-
-- Função: mpmath_sqrt
-  Caminho: lib/funcoes_analiticas/precisao.py
-  Args: ['x']
-  Docstring: Calcula a raiz quadrada de x com alta precisão.
-
-- Função: mpmath_log
-  Caminho: lib/funcoes_analiticas/precisao.py
-  Args: ['x']
-  Docstring: Calcula o logaritmo natural de x com alta precisão.
-
-Retorna None se x <= 0.
-
-- Função: mpmath_sin
-  Caminho: lib/funcoes_analiticas/precisao.py
-  Args: ['x']
-  Docstring: Calcula o seno de x com alta precisão.
-
-- Função: mpmath_prod_list
-  Caminho: lib/funcoes_analiticas/precisao.py
-  Args: ['lst']
-  Docstring: Calcula o produto dos elementos de uma lista com alta precisão.
-
-- Função: mpmath_sum_list
-  Caminho: lib/funcoes_analiticas/precisao.py
-  Args: ['lst']
-  Docstring: Calcula a soma dos elementos de uma lista com alta precisão.
-
-- Função: sum_of_pairs
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Calcula a soma de todas as combinações de pares.
-
-- Função: sum_of_triples
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Calcula a soma de todas as combinações de trios.
-
-- Função: diff_of_pairs
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Calcula a diferença absoluta de todos os pares.
-
-- Função: count_pair_sums_equal
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst', 'value']
-  Docstring: Conta os pares cuja soma é igual a um valor.
-
-- Função: score_even_odd
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Pontua a lista com base na paridade dos elementos.
-
-- Função: score_prime
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Pontua a lista com base na presença de números primos.
-
-- Função: score_pairs_sum_mod
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst', 'k']
-  Docstring: Pontua a lista com base na soma dos pares módulo k.
-
-- Função: score_cumulative_diff
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Pontua a lista com base na soma das diferenças absolutas consecutivas.
-
-- Função: most_frequent_pairs
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst']
-  Docstring: Encontra os pares mais frequentes na lista.
-
-- Função: cluster_by_diff
-  Caminho: lib/funcoes_analiticas/analise_padroes.py
-  Args: ['lst', 'max_diff']
-  Docstring: Agrupa números que estão próximos uns dos outros.
-
-- Função: unique_count
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst']
-  Docstring: Conta o número de elementos únicos em uma lista.
-
-- Função: intersection
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst1', 'lst2']
-  Docstring: Retorna os elementos em comum entre duas listas.
-
-- Função: union
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst1', 'lst2']
-  Docstring: Retorna a união de elementos de duas listas.
-
-- Função: difference
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst1', 'lst2']
-  Docstring: Retorna os elementos de lst1 que não estão em lst2.
-
-- Função: symmetric_difference
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst1', 'lst2']
-  Docstring: Retorna os elementos que estão em lst1 ou lst2, mas não em ambos.
-
-- Função: mirror_count
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst', 'total']
-  Docstring: Conta os números que têm um 'espelho' na lista (e.g., total - x).
-
-- Função: pair_sum_count
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst', 'target']
-  Docstring: Conta os pares de números que somam um valor alvo.
-
-- Função: pair_product_count
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst', 'target']
-  Docstring: Conta os pares de números que multiplicados dão um valor alvo.
-
-- Função: count_even
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst']
-  Docstring: Conta números pares na lista.
-
-- Função: count_odd
-  Caminho: lib/funcoes_analiticas/estatisticas.py
-  Args: ['lst']
-  Docstring: Conta números ímpares na lista.
-
-- Função: diff
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst']
-  Docstring: Diferença entre elementos consecutivos (x₂ - x₁).
-
-- Função: diff_abs
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst']
-  Docstring: Diferença absoluta entre elementos consecutivos.
-
-- Função: ratio_consecutive
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst']
-  Docstring: Razão simples entre elementos consecutivos (x₂ / x₁).
-
-- Função: rolling_sum
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst', 'window']
-  Docstring: Soma em janela deslizante.
-
-- Função: rolling_mean
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst', 'window']
-  Docstring: Média em janela deslizante.
-
-- Função: rolling_std
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst', 'window']
-  Docstring: Desvio padrão em janela deslizante.
-
-- Função: rank_array
-  Caminho: lib/funcoes_analiticas/sequencias.py
-  Args: ['lst']
-  Docstring: Ranking dos elementos de uma lista.
-
-- Função: sym_derivative
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr']
-  Docstring: Calcula a derivada de uma expressão simbólica.
-
-- Função: sym_integral
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr']
-  Docstring: Calcula a integral indefinida de uma expressão simbólica.
-
-- Função: sym_series_expansion
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr', 'n']
-  Docstring: Expande uma expressão em série de Taylor em torno de 0.
-
-- Função: sym_limit
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr', 'point']
-  Docstring: Calcula o limite de uma expressão no ponto dado.
-
-- Função: sym_roots
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr']
-  Docstring: Encontra as raízes de uma expressão.
-
-- Função: sym_simplify
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr']
-  Docstring: Simplifica uma expressão.
-
-- Função: sym_expand
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr']
-  Docstring: Expande uma expressão.
-
-- Função: sym_factor
-  Caminho: lib/funcoes_analiticas/algebra_simbolica.py
-  Args: ['expr']
-  Docstring: Fatora uma expressão.
-
-- Função: fill_missing_values
-  Caminho: lib/funcoes_analiticas/manipulacao_dados.py
-  Args: ['lst', 'strategy']
-  Docstring: Preenche valores ausentes (np.nan) em uma lista usando uma estratégia específica.
-
-Args:
-    lst (List[float]): Lista de números com valores ausentes.
-    strategy (str): 'mean', 'median' ou 'mode'.
-    
-Returns:
-    List[float]: Lista com valores ausentes preenchidos.
-
-- Função: normalize_data
-  Caminho: lib/funcoes_analiticas/manipulacao_dados.py
-  Args: ['lst']
-  Docstring: Normaliza os dados para o intervalo [0, 1].
-
-Retorna 0 para todos os valores se todos forem iguais.
-
-- Função: standardize_data
-  Caminho: lib/funcoes_analiticas/manipulacao_dados.py
-  Args: ['lst']
-  Docstring: Padroniza os dados (média 0, desvio padrão 1).
-
-Retorna 0 para todos os valores se o desvio padrão for 0.
-
-- Função: get_dummies
-  Caminho: lib/funcoes_analiticas/manipulacao_dados.py
-  Args: ['lst']
-  Docstring: Converte uma lista de valores categóricos em variáveis dummy.
-
-Args:
-    lst (List[Union[str,int]]): Lista de valores categóricos.
-    
-Returns:
-    pd.DataFrame: DataFrame com colunas dummy.
-
-- Função: fibonacci
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Fibonacci.
-
-- Função: lucas
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Lucas.
-
-- Função: catalan_number
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Catalan.
-
-- Função: bell_number
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Bell.
-
-- Função: partition_number
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n']
-  Docstring: Retorna o número de partições de n.
-
-- Função: stirling2
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n', 'k']
-  Docstring: Retorna o número de Stirling de segunda espécie S(n, k).
-
-- Função: stirling1
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n', 'k']
-  Docstring: Retorna o número de Stirling de primeira espécie s(n, k).
-
-- Função: bernoulli_number
-  Caminho: lib/funcoes_analiticas/numeros_especiais.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Bernoulli.
-
-- Função: floor_div
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['a', 'b']
-  Docstring: Calcula a divisão inteira de dois números (floor division).
-
-- Função: ceil_div
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['a', 'b']
-  Docstring: Calcula a divisão inteira arredondada para cima (ceil division).
-
-- Função: mod_inverse
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['a', 'k']
-  Docstring: Calcula o inverso modular de 'a' mod 'k' (se existir).
-
-- Função: floor_val
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['a']
-  Docstring: Retorna o maior inteiro menor ou igual a 'a'.
-
-- Função: ceil_val
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['a']
-  Docstring: Retorna o menor inteiro maior ou igual a 'a'.
-
-- Função: sqrt_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação de raiz quadrada.
-
-- Função: cbrt_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação de raiz cúbica.
-
-- Função: square_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação de potência ao quadrado.
-
-- Função: cube_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação de potência ao cubo.
-
-- Função: exp_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação exponencial.
-
-- Função: reciprocal_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação recíproca (1/x).
-
-- Função: log_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação logarítmica (base e).
-
-- Função: log10_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação logarítmica (base 10).
-
-- Função: log_normalize
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Normalização com transformação logarítmica.
-
-- Função: sqrt_log_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação combinada: raiz da transformação logarítmica.
-
-- Função: sin_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação seno.
-
-- Função: cos_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação cosseno.
-
-- Função: tan_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação tangente.
-
-- Função: arcsin_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação arcoseno (normalizada pelo valor máximo).
-
-- Função: arccos_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação arccoseno (normalizada pelo valor máximo).
-
-- Função: arctan_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação arctangente.
-
-- Função: centered_sin
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Transformação seno centrada na média.
-
-- Função: mod_transform
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst', 'm']
-  Docstring: Transformação de módulo (x % m).
-
-- Função: minmax_normalize
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Normalização Min-Max.
-
-- Função: zscore_normalize
-  Caminho: lib/funcoes_analiticas/transformacoes.py
-  Args: ['lst']
-  Docstring: Normalização Z-Score.
-
-- Função: z_score_outliers
-  Caminho: lib/funcoes_analiticas/deteccao_anomalias.py
-  Args: ['lst', 'threshold']
-  Docstring: Detecta outliers usando o método de Z-score.
-
-Args:
-    lst (List[float]): Lista de valores.
-    threshold (float): Limite de desvio padrão para considerar outlier.
-
-Returns:
-    List[float]: Lista de valores considerados outliers.
-
-- Função: iqr_outliers
-  Caminho: lib/funcoes_analiticas/deteccao_anomalias.py
-  Args: ['lst']
-  Docstring: Detecta outliers usando o método do Intervalo Interquartil (IQR).
-
-Args:
-    lst (List[float]): Lista de valores.
-
-Returns:
-    List[float]: Lista de valores considerados outliers.
-
-- Função: rolling_z_score
-  Caminho: lib/funcoes_analiticas/deteccao_anomalias.py
-  Args: ['lst', 'window', 'threshold']
-  Docstring: Detecta outliers usando um Z-score móvel.
-
-Args:
-    lst (List[float]): Lista de valores.
-    window (int): Tamanho da janela móvel.
-    threshold (float): Limite de desvio padrão para considerar outlier.
-
-Returns:
-    List[float]: Lista de valores considerados outliers, sem duplicados.
-
-- Função: create_graph
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Cria um grafo completo a partir de uma lista de nós.
-
-- Função: num_nodes
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Retorna o número de nós de um grafo criado a partir de uma lista.
-
-- Função: num_edges
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Retorna o número de arestas de um grafo completo.
-
-- Função: node_degrees
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula os graus de cada nó em um grafo.
-
-- Função: graph_degree
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula o grau (número de conexões) de cada nó no grafo.
-
-- Função: graph_avg_degree
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula o grau médio de todos os nós do grafo.
-
-- Função: mean_degree
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula o grau médio de um grafo.
-
-- Função: std_degree
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula o desvio padrão dos graus de um grafo.
-
-- Função: is_complete
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Verifica se um grafo criado a partir da lista é completo.
-
-- Função: graph_density
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula a densidade do grafo.
-
-- Função: graph_diameter
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula o diâmetro do grafo (maior caminho mais curto).
-
-- Função: graph_connected_components_count
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Conta o número de componentes conectados no grafo.
-
-- Função: graph_connected_components
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Retorna os componentes conectados de um grafo.
-
-- Função: graph_triangle_count
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Conta o número de triângulos no grafo.
-
-- Função: degree_centrality
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula a centralidade de grau de cada nó.
-
-- Função: closeness_centrality_from_graph
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Calcula a centralidade de proximidade de um grafo existente.
-
-- Função: closeness_centrality_from_list
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['lst']
-  Docstring: Calcula a centralidade de proximidade de cada nó (grafo criado a partir da lista).
-
-- Função: betweenness_centrality
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Calcula a centralidade de intermediação de um grafo.
-
-- Função: eigenvector_centrality
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Calcula a centralidade de autovetor de um grafo.
-
-- Função: pagerank_scores
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G', 'alpha']
-  Docstring: Calcula os scores de PageRank de um grafo.
-
-- Função: shortest_paths_length
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Calcula os comprimentos dos caminhos mais curtos entre todos os pares de nós.
-
-- Função: graph_eigenvalues
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Calcula os autovalores da matriz de adjacência de um grafo.
-
-- Função: graph_laplacian_spectrum
-  Caminho: lib/funcoes_analiticas/grafos.py
-  Args: ['G']
-  Docstring: Calcula o espectro Laplaciano de um grafo.
-
-- Função: arima_predict
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst', 'order', 'steps']
-
-- Função: centered_moving_average
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst', 'window']
-
-- Função: ewma
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst', 'span']
-
-- Função: exp_weighted_mean
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst', 'alpha']
-
-- Função: cumulative_sum
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst']
-
-- Função: cumulative_product
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst']
-
-- Função: normalized_cumsum
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst']
-
-- Função: cumulative_max
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst']
-
-- Função: cumulative_min
-  Caminho: lib/funcoes_analiticas/series_temporais.py
-  Args: ['lst']
-
-- Função: poisson_pmf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['k', 'mu']
-  Docstring: Calcula a PMF da distribuição de Poisson.
-
-- Função: poisson_cdf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['k', 'mu']
-  Docstring: Calcula a CDF da distribuição de Poisson.
-
-- Função: poisson_var
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['mu']
-  Docstring: Calcula a variância da distribuição de Poisson.
-
-- Função: poisson_entropy
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['mu']
-  Docstring: Calcula a entropia da distribuição de Poisson.
-
-- Função: binomial_pmf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['k', 'n', 'p']
-  Docstring: Calcula a PMF da distribuição binomial.
-
-- Função: binomial_cdf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['k', 'n', 'p']
-  Docstring: Calcula a CDF da distribuição binomial.
-
-- Função: binomial_var
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['n', 'p']
-  Docstring: Calcula a variância da distribuição binomial.
-
-- Função: binomial_entropy
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['n', 'p']
-  Docstring: Calcula a entropia da distribuição binomial.
-
-- Função: normal_pdf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['x', 'mu', 'sigma']
-  Docstring: Calcula a PDF da distribuição normal.
-
-- Função: normal_cdf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['x', 'mu', 'sigma']
-  Docstring: Calcula a CDF da distribuição normal.
-
-- Função: normal_var
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['sigma']
-  Docstring: Calcula a variância da distribuição normal.
-
-- Função: normal_entropy
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['mu', 'sigma']
-  Docstring: Calcula a entropia da distribuição normal.
-
-- Função: exponential_pdf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['x', 'lmbda']
-  Docstring: Calcula a PDF da distribuição exponencial.
-
-- Função: uniform_pdf
-  Caminho: lib/funcoes_analiticas/probabilidade.py
-  Args: ['x', 'a', 'b']
-  Docstring: Calcula a PDF da distribuição uniforme.
-
-- Função: add
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a', 'b']
-  Docstring: Calcula a soma de dois números.
-
-- Função: sub
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a', 'b']
-  Docstring: Calcula a subtração de dois números.
-
-- Função: mul
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a', 'b']
-  Docstring: Calcula a multiplicação de dois números.
-
-- Função: div
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a', 'b']
-  Docstring: Calcula a divisão de dois números, evitando divisão por zero.
-
-- Função: mod
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a', 'b']
-  Docstring: Calcula o resto da divisão de dois números, evitando divisão por zero.
-
-- Função: pow_func
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a', 'b']
-  Docstring: Calcula a potência de um número.
-
-- Função: sqrt
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Calcula a raiz quadrada de um número.
-
-- Função: cbrt
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Calcula a raiz cúbica de um número.
-
-- Função: log_func
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Calcula o logaritmo natural de um número, se for positivo.
-
-- Função: exp_func
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Calcula o exponencial de um número.
-
-- Função: neg
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Retorna o negativo de um número.
-
-- Função: inv
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Calcula o inverso de um número, se não for zero.
-
-- Função: abs_val
-  Caminho: lib/funcoes_analiticas/aritmetica.py
-  Args: ['a']
-  Docstring: Calcula o valor absoluto de um número.
-
-- Função: gamma_func
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['x']
-  Docstring: Calcula a função Gamma.
-
-- Função: beta_func
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['a', 'b']
-  Docstring: Calcula a função Beta.
-
-- Função: zeta_func
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['s']
-  Docstring: Calcula a função Zeta de Riemann.
-
-- Função: bessel_j
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['n', 'x']
-  Docstring: Calcula a função de Bessel de primeira espécie.
-
-- Função: legendre_poly
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['n', 'x']
-  Docstring: Calcula o polinómio de Legendre.
-
-- Função: chebyshev_T
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['n', 'x']
-  Docstring: Calcula o polinómio de Chebyshev de primeira espécie.
-
-- Função: chebyshev_U
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['n', 'x']
-  Docstring: Calcula o polinómio de Chebyshev de segunda espécie.
-
-- Função: hermite_poly
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['n', 'x']
-  Docstring: Calcula o polinómio de Hermite.
-
-- Função: laguerre_poly
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['n', 'x']
-  Docstring: Calcula o polinómio de Laguerre.
-
-- Função: discrete_convolution
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['lst1', 'lst2']
-  Docstring: Calcula a convolução discreta de duas listas.
-
-- Função: cross_correlation
-  Caminho: lib/funcoes_analiticas/funcoes_especiais.py
-  Args: ['lst1', 'lst2']
-  Docstring: Calcula a correlação cruzada de duas listas.
-
-- Função: primes_in_list
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Filtra e retorna os números primos de uma lista.
-
-- Função: count_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Conta a quantidade de números primos em uma lista.
-
-- Função: count_primes_below
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst', 'limit']
-  Docstring: Conta os primos abaixo de um limite.
-
-- Função: count_primes_above
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst', 'limit']
-  Docstring: Conta os primos acima de um limite.
-
-- Função: sum_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Calcula a soma dos números primos em uma lista.
-
-- Função: mean_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Calcula a média dos números primos em uma lista.
-
-- Função: median_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Calcula a mediana dos números primos em uma lista.
-
-- Função: max_prime
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Retorna o maior número primo em uma lista.
-
-- Função: min_prime
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Retorna o menor número primo em uma lista.
-
-- Função: range_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Calcula a diferença entre o maior e o menor primo.
-
-- Função: prime_near_mean
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Retorna o número primo mais próximo da média da lista.
-
-- Função: next_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Retorna o próximo número primo de cada elemento.
-
-- Função: prime_gaps
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Calcula os gaps (diferenças) entre números primos consecutivos.
-
-- Função: sum_prime_gaps
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Calcula a soma dos gaps entre números primos.
-
-- Função: odd_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Retorna os números primos ímpares de uma lista.
-
-- Função: square_primes
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Retorna o quadrado de cada número primo em uma lista.
-
-- Função: prime_binary
-  Caminho: lib/funcoes_analiticas/analise_primos.py
-  Args: ['lst']
-  Docstring: Cria uma representação binária (1=primo, 0=não primo).
-
-- Função: wavelet_dwt
-  Caminho: lib/funcoes_analiticas/wavelets.py
-  Args: ['data', 'wavelet']
-  Docstring: Aplica a Transformada Discreta de Wavelet (DWT) de nível 1.
-
-- Função: wavelet_idwt
-  Caminho: lib/funcoes_analiticas/wavelets.py
-  Args: ['cA', 'cD', 'wavelet']
-  Docstring: Aplica a Transformada Discreta de Wavelet Inversa (IDWT) de nível 1.
-
-- Função: wavelet_wavedec
-  Caminho: lib/funcoes_analiticas/wavelets.py
-  Args: ['data', 'level', 'wavelet']
-  Docstring: Aplica a decomposição de wavelet multinível.
-
-- Função: wavelet_waverec
-  Caminho: lib/funcoes_analiticas/wavelets.py
-  Args: ['coeffs', 'wavelet']
-  Docstring: Reconstrói um sinal a partir dos coeficientes de wavelet.
-
-- Função: wavelet_energy
-  Caminho: lib/funcoes_analiticas/wavelets.py
-  Args: ['data', 'wavelet']
-  Docstring: Calcula a energia total de um sinal em diferentes níveis de wavelet.
-
-- Função: euler_totient
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Calcula a função totiente de Euler.
-
-- Função: factor_integer
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Fatora um número em seus fatores primos.
-
-- Função: prime_factors
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna os fatores primos únicos de um número.
-
-- Função: prime_factor_count
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o número de fatores primos únicos de um número.
-
-- Função: largest_prime_factor
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o maior fator primo de um número.
-
-- Função: smallest_prime_factor
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o menor fator primo de um número.
-
-- Função: gcd_list
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['lst']
-  Docstring: Calcula o Máximo Divisor Comum (MDC) de uma lista de números.
-
-- Função: lcm_list
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['lst']
-  Docstring: Calcula o Mínimo Múltiplo Comum (MMC) de uma lista de números.
-
-- Função: check_prime
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Verifica se um número é primo.
-
-- Função: count_primes_upto
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Conta o número de primos até n.
-
-- Função: next_prime_num
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Encontra o próximo número primo após n.
-
-- Função: prev_prime_num
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Encontra o número primo anterior a n.
-
-- Função: generate_primes
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Gera uma lista de primos até n.
-
-- Função: fibonacci_num
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Fibonacci.
-
-- Função: lucas_num
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Lucas.
-
-- Função: catalan_num
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Catalan.
-
-- Função: bell_number
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Bell.
-
-- Função: partition_number
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o número de partições de n.
-
-- Função: bernoulli_number
-  Caminho: lib/funcoes_analiticas/teoria_numeros.py
-  Args: ['n']
-  Docstring: Retorna o n-ésimo número de Bernoulli.
-
-- Função: generate_key
-  Caminho: lib/funcoes_analiticas/criptografia.py
-  Args: []
-  Docstring: Gera uma chave de criptografia Fernet e armazena globalmente.
-
-Returns:
-    str: Chave gerada como string.
-
-- Função: encrypt_data
-  Caminho: lib/funcoes_analiticas/criptografia.py
-  Args: ['data']
-  Docstring: Criptografa dados usando a chave Fernet armazenada.
-
-Args:
-    data (str | bytes): Dados a criptografar.
-
-Returns:
-    bytes: Dados criptografados.
-
-Raises:
-    RuntimeError: Se a chave não foi gerada.
-
-- Função: decrypt_data
-  Caminho: lib/funcoes_analiticas/criptografia.py
-  Args: ['token']
-  Docstring: Descriptografa dados usando a chave Fernet armazenada.
-
-Args:
-    token (bytes): Dados criptografados.
-
-Returns:
-    str: Dados descriptografados.
-
-Raises:
-    RuntimeError: Se a chave não foi gerada.
-
-- Função: lag_series
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst', 'lag']
-  Docstring: Calcula a diferença entre elementos com um certo atraso (lag).
-
-- Função: fft_magnitude
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst']
-  Docstring: Calcula a magnitude da Transformada Rápida de Fourier (FFT).
-
-- Função: fft_phase
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst']
-  Docstring: Calcula a fase da Transformada Rápida de Fourier (FFT).
-
-- Função: ifft_real
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst']
-  Docstring: Calcula a Transformada Inversa de Fourier (IFFT) e retorna a parte real.
-
-- Função: dominant_frequency
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst']
-  Docstring: Encontra o índice da frequência dominante em uma lista.
-
-- Função: autocorr
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst', 'lag']
-  Docstring: Calcula a autocorrelação de uma lista em um determinado atraso.
-
-- Função: autocorr_series
-  Caminho: lib/funcoes_analiticas/temporais.py
-  Args: ['lst', 'max_lag']
-  Docstring: Calcula a série de autocorrelação para múltiplos atrasos.
-
-- Função: euclidean_dist
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula a distância euclidiana entre dois pontos.
-
-- Função: manhattan_dist
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula a distância de Manhattan entre dois pontos.
-
-- Função: chebyshev_dist
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula a distância de Chebyshev entre dois pontos.
-
-- Função: cosine_dist
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula a distância do cosseno entre dois vetores.
-
-- Função: hamming_dist_str
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula a distância de Hamming entre duas strings.
-
-- Função: levenshtein_dist
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula a distância de Levenshtein entre duas strings.
-
-- Função: jaccard_index
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['a', 'b']
-  Docstring: Calcula o índice de Jaccard entre dois conjuntos.
-
-- Função: centroid
-  Caminho: lib/funcoes_analiticas/geometria.py
-  Args: ['points']
-  Docstring: Calcula o centroide de um conjunto de pontos.
-
-- Função: sample_binomial
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['n', 'p', 'size']
-  Docstring: Gera uma amostra de uma distribuição Binomial.
-
-- Função: sample_poisson
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['lam', 'size']
-  Docstring: Gera uma amostra de uma distribuição de Poisson.
-
-- Função: sample_normal
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['mu', 'sigma', 'size']
-  Docstring: Gera uma amostra de uma distribuição Normal.
-
-- Função: monte_carlo_sum
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['target_sum', 'trials']
-  Docstring: Calcula a probabilidade de atingir uma soma alvo em amostras aleatórias.
-
-- Função: monte_carlo_even_ratio
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['trials']
-  Docstring: Simula a proporção média de números pares em amostras aleatórias.
-
-- Função: monte_carlo_prime_ratio
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['trials']
-  Docstring: Simula a proporção média de números primos em amostras aleatórias.
-
-- Função: monte_carlo_max
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['trials']
-  Docstring: Simula os valores máximos de amostras aleatórias.
-
-- Função: monte_carlo_min
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['trials']
-  Docstring: Simula os valores mínimos de amostras aleatórias.
-
-- Função: monte_carlo_multistep
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['lst', 'steps', 'trials']
-  Docstring: Simulação Monte Carlo multi-passos, selecionando elementos aleatórios.
-
-- Função: metropolis_hastings
-  Caminho: lib/funcoes_analiticas/simulacao.py
-  Args: ['target_func', 'start', 'iterations', 'proposal_std']
-  Docstring: Geração de amostras MCMC usando o algoritmo Metropolis-Hastings.
-
-- Função: plot_histogram
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['data', 'title', 'bins', 'color']
-  Docstring: Plota um histograma de uma lista de dados.
-
-- Função: plot_scatter
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['x', 'y', 'title', 'color']
-  Docstring: Plota um gráfico de dispersão de dois conjuntos de dados.
-
-- Função: plot_boxplot
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['data', 'title']
-  Docstring: Plota um boxplot para visualizar a distribuição e outliers.
-
-- Função: plot_time_series
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['series', 'title', 'color']
-  Docstring: Plota uma série temporal.
-
-- Função: rolling_mean_plot
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['lst', 'window']
-  Docstring: Plota a média móvel de uma lista.
-
-- Função: cumulative_sum_plot
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['lst']
-  Docstring: Plota a soma cumulativa de uma lista.
-
-- Função: heatmap_pairs
-  Caminho: lib/funcoes_analiticas/plots.py
-  Args: ['lst']
-  Docstring: Cria um mapa de calor para a frequência de pares.
-
-- Função: linear_regression_predict
-  Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
-  Args: ['lst', 'steps']
-  Docstring: Prediz o próximo valor de uma lista usando regressão linear.
-
-- Função: poly_regression_predict
-  Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
-  Args: ['lst', 'degree', 'steps']
-  Docstring: Prediz o próximo valor de uma lista usando regressão polinomial.
-
-- Função: regression_on_frequency
-  Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
-  Args: ['lst', 'steps']
-  Docstring: Aplica regressão linear na frequência cumulativa de uma lista.
-
-- Função: linear_regression_coeffs
-  Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
-  Args: ['x', 'y']
-  Docstring: Calcula os coeficientes de regressão linear (inclinação e interceptação).
-
-- Função: predict_linear
-  Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
-  Args: ['x', 'm', 'c']
-  Docstring: Prediz valores usando uma equação de regressão linear.
-
-- Função: regression_score
-  Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
-  Args: ['x', 'y']
-  Docstring: Calcula a pontuação de ajuste de regressão linear (negativo do MSE).
-
-- Função: shannon_entropy
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['lst']
-  Docstring: Calcula a entropia de Shannon de uma distribuição de probabilidade.
-
-- Função: normalized_entropy
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['lst']
-  Docstring: Calcula a entropia de Shannon normalizada.
-
-- Função: mutual_info
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['x', 'y']
-  Docstring: Calcula a informação mútua entre duas listas.
-
-- Função: normalized_mutual_info
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['x', 'y']
-  Docstring: Calcula a informação mútua normalizada.
-
-- Função: kl_divergence
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['p', 'q']
-  Docstring: Calcula a divergência de Kullback-Leibler entre duas distribuições.
-
-- Função: jensen_shannon
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['p', 'q']
-  Docstring: Calcula a divergência de Jensen-Shannon entre duas distribuições.
-
-- Função: gini_impurity
-  Caminho: lib/funcoes_analiticas/teoria_informacao.py
-  Args: ['lst']
-  Docstring: Calcula a impureza de Gini de uma distribuição.
-
-- Função: fft_real
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a magnitude da FFT de uma lista.
-
-- Função: fft_phase
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a fase da FFT de uma lista.
-
-- Função: fft_log
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a FFT da lista transformada em log.
-
-- Função: fft_sqrt
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a FFT da raiz quadrada da lista.
-
-- Função: fft_normalized
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a FFT normalizada da lista.
-
-- Função: ifft_real
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a parte real da IFFT.
-
-- Função: fft_frequencies
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['n', 'sample_rate']
-  Docstring: Retorna as frequências correspondentes à FFT.
-
-- Função: apply_lowpass
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'cutoff', 'order']
-  Docstring: Aplica um filtro passa-baixa Butterworth.
-
-- Função: apply_highpass
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'cutoff', 'order']
-  Docstring: Aplica um filtro passa-alta Butterworth.
-
-- Função: apply_bandpass
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'low', 'high', 'order']
-  Docstring: Aplica um filtro passa-faixa Butterworth.
-
-- Função: wavelet_decompose
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'wavelet', 'level']
-  Docstring: Decompõe uma lista em coeficientes de Wavelet (DWT).
-
-- Função: wavelet_reconstruct
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['coeffs', 'wavelet']
-  Docstring: Reconstrói uma lista a partir de coeficientes de Wavelet.
-
-- Função: dwt_approx
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'wavelet']
-  Docstring: Retorna apenas os coeficientes de aproximação da DWT.
-
-- Função: dwt_detail
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'wavelet']
-  Docstring: Retorna os coeficientes de detalhe da DWT.
-
-- Função: hilbert_transform
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a Transformada de Hilbert (magnitude).
-
-- Função: savgol_smooth
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'window', 'poly']
-  Docstring: Aplica filtro de Savitzky-Golay para suavização.
-
-- Função: stft_transform
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'fs']
-  Docstring: Aplica a Transformada de Fourier de Curto Prazo (STFT).
-
-- Função: istft_transform
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['Z', 'fs']
-  Docstring: Reconstrói sinal a partir da STFT (ISTFT).
-
-- Função: welch_psd
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'fs']
-  Docstring: Calcula o Power Spectral Density pelo método de Welch.
-
-- Função: periodogram_psd
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst', 'fs']
-  Docstring: Calcula o Power Spectral Density pelo periodograma.
-
-- Função: spectral_energy
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a energia total do espectro.
-
-- Função: spectral_entropy
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Calcula a entropia espectral do sinal.
-
-- Função: find_signal_peaks
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Encontra os índices dos picos no sinal.
-
-- Função: detect_cycle_length
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['lst']
-  Docstring: Detecta o comprimento do ciclo repetitivo mais curto.
-
-- Função: butter_lowpass
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['cutoff', 'fs', 'order']
-  Docstring: Retorna coeficientes de filtro Butterworth passa-baixa.
-
-- Função: filter_signal
-  Caminho: lib/funcoes_analiticas/processamento_sinal.py
-  Args: ['b', 'a', 'x']
-  Docstring: Filtra um sinal usando os coeficientes b e a.
-
-- Função: covariance_matrix
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['X']
-  Docstring: Calcula a matriz de covariância de um conjunto de dados.
-
-Args:
-    X (List[List[float]]): Matriz de dados, linhas = amostras, colunas = variáveis.
-
-Returns:
-    List[List[float]]: Matriz de covariância.
-
-- Função: correlation_matrix
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['X']
-  Docstring: Calcula a matriz de correlação de um conjunto de dados.
-
-Args:
-    X (List[List[float]]): Matriz de dados, linhas = amostras, colunas = variáveis.
-
-Returns:
-    List[List[float]]: Matriz de correlação.
-
-- Função: mutual_info
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['x', 'y']
-  Docstring: Calcula a informação mútua entre duas variáveis discretas.
-
-Args:
-    x (List[int]): Primeira variável discreta.
-    y (List[int]): Segunda variável discreta.
-
-Returns:
-    float: Informação mútua.
-
-- Função: normalized_mutual_info
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['x', 'y']
-  Docstring: Calcula a informação mútua normalizada entre duas variáveis discretas.
-
-Args:
-    x (List[int]): Primeira variável discreta.
-    y (List[int]): Segunda variável discreta.
-
-Returns:
-    float: Informação mútua normalizada.
-
-- Função: silhouette
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['X', 'labels']
-  Docstring: Calcula o coeficiente de silhueta para avaliar a qualidade de um agrupamento.
-
-Args:
-    X (List[List[float]]): Matriz de dados.
-    labels (List[int]): Rótulos de cluster para cada ponto.
-
-Returns:
-    float: Coeficiente de silhueta.
-
-- Função: pca_eigenvalues
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['X']
-  Docstring: Calcula os autovalores da matriz de covariância para a Análise de Componentes Principais (PCA).
-
-Args:
-    X (List[List[float]]): Matriz de dados.
-
-Returns:
-    List[float]: Autovalores da matriz de covariância.
-
-- Função: gini_index
-  Caminho: lib/funcoes_analiticas/estatistica_multivariada.py
-  Args: ['values']
-  Docstring: Calcula o índice de Gini para medir a desigualdade.
-
-Args:
-    values (List[float]): Lista de valores.
-
-Returns:
-    float: Índice de Gini (0 = igualdade perfeita, 1 = desigualdade máxima).
-
-- Função: gamma_transform
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['lst']
-  Docstring: Aplica a função Gamma a cada elemento positivo da lista.
-
-- Função: bessel_j_list
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['lst', 'n']
-  Docstring: Calcula a função de Bessel de primeira espécie para uma lista.
-
-- Função: euler_totient
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['lst']
-  Docstring: Calcula a função totiente de Euler para cada elemento positivo.
-
-- Função: sum_divisors
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['lst']
-  Docstring: Calcula a soma dos divisores de cada elemento.
-
-- Função: gamma_func
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Calcula a função Gamma.
-
-- Função: loggamma_func
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Calcula o logaritmo da função Gamma.
-
-- Função: digamma_func
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Calcula a função Digamma.
-
-- Função: beta_func
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x', 'y']
-  Docstring: Calcula a função Beta.
-
-- Função: bessel_j
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['n', 'x']
-  Docstring: Calcula a função de Bessel de primeira espécie.
-
-- Função: bessel_y
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['n', 'x']
-  Docstring: Calcula a função de Bessel de segunda espécie.
-
-- Função: bessel_j0
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Função de Bessel de primeira espécie de ordem 0.
-
-- Função: bessel_y0
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Função de Bessel de segunda espécie de ordem 0.
-
-- Função: error_func
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Função de erro (erf).
-
-- Função: error_func_c
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Função de erro complementar (erfc).
-
-- Função: elliptic_j
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['u', 'm']
-  Docstring: Funções elípticas de Jacobi (sn, cn, dn).
-
-- Função: legendre_p
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['n', 'x']
-  Docstring: Polinômio de Legendre de ordem n.
-
-- Função: chebyshev_t
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['n', 'x']
-  Docstring: Polinômio de Chebyshev de primeira espécie de ordem n.
-
-- Função: airy_ai
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Função Airy Ai.
-
-- Função: airy_bi
-  Caminho: lib/funcoes_analiticas/matematica_especial.py
-  Args: ['x']
-  Docstring: Função Airy Bi.
-
-- Função: linear_trend_slope
-  Caminho: lib/funcoes_analiticas/exploracao.py
-  Args: ['lst']
-  Docstring: Calcula a inclinação da tendência linear de uma lista.
-
-- Função: successive_diff
-  Caminho: lib/funcoes_analiticas/exploracao.py
-  Args: ['lst']
-  Docstring: Calcula a diferença entre elementos sucessivos.
-
-- Função: mutate_list
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'mutation_rate', 'max_val']
-  Docstring: Aplica mutação a uma lista, trocando elementos aleatoriamente.
-
-- Função: crossover_lists
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst1', 'lst2']
-  Docstring: Combina duas listas em um ponto de cruzamento.
-
-- Função: fitness_sum
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'target']
-  Docstring: Calcula o 'fitness' de uma lista com base em sua soma.
-
-- Função: fitness_even_ratio
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'target_ratio']
-  Docstring: Calcula o 'fitness' com base na proporção de números pares.
-
-- Função: select_best_population
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['population', 'fitness_func', 'k']
-  Docstring: Seleciona a melhor parte de uma população com base em uma função de fitness.
-
-- Função: combined_score
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics']
-  Docstring: Combina o score de múltiplas heurísticas para uma lista.
-
-- Função: weighted_score
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics', 'weights']
-  Docstring: Calcula o score combinado de heurísticas com pesos.
-
-- Função: rank_heuristics
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics']
-  Docstring: Classifica heurísticas com base em seu desempenho em uma lista.
-
-- Função: generate_heuristic_from_library
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'funcs']
-  Docstring: Executa uma heurística aleatória da biblioteca.
-
-- Função: integrated_heuristic_test
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics']
-  Docstring: Testa e retorna heurísticas ordenadas por score.
-
-- Função: top_k_integrated
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics', 'k']
-  Docstring: Retorna as top K heurísticas integradas.
-
-- Função: generate_new_combined_heuristic
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['heuristics', 'transforms']
-  Docstring: Gera uma nova heurística combinando uma função com uma transformação.
-
-- Função: stochastic_score
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics', 'trials']
-  Docstring: Calcula o score estocástico de uma lista.
-
-- Função: combined_stochastic_score
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'heuristics', 'weights', 'trials']
-  Docstring: Calcula o score estocástico combinado com pesos.
-
-- Função: random_selection
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'k']
-  Docstring: Seleciona k elementos aleatórios de uma lista.
-
-- Função: weighted_choice
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'weights']
-  Docstring: Faz uma escolha aleatória de um elemento com base em pesos.
-
-- Função: shuffle_sum
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst']
-  Docstring: Embaralha a lista e retorna a soma de seus elementos.
-
-- Função: shuffle_product
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst']
-  Docstring: Embaralha a lista e retorna o produto de seus elementos.
-
-- Função: random_mean
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'k', 'trials']
-  Docstring: Calcula a média de múltiplas seleções aleatórias de k elementos.
-
-- Função: random_cumsum
-  Caminho: lib/funcoes_analiticas/ia_heuristica.py
-  Args: ['lst', 'k', 'trials']
-  Docstring: Calcula a soma de k elementos selecionados aleatoriamente, repetindo por N testes.
-
-- Função: mse
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula o Erro Quadrático Médio (MSE).
-
-- Função: rmse
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula a Raiz do Erro Quadrático Médio (RMSE).
-
-- Função: mae
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula o Erro Absoluto Médio (MAE).
-
-- Função: r2
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula o coeficiente de determinação R².
-
-- Função: accuracy
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula a acurácia para tarefas de classificação.
-
-- Função: f1
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula a pontuação F1 (macro-média).
-
-- Função: precision
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula a precisão (macro-média).
-
-- Função: recall
-  Caminho: lib/funcoes_analiticas/machine_learning.py
-  Args: ['y_true', 'y_pred']
-  Docstring: Calcula o recall (macro-média).
-
-- Função: matrix_determinant
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula o determinante de uma matriz.
-
-- Função: matrix_rank
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula o posto de uma matriz.
-
-- Função: matrix_inverse
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula a inversa de uma matriz.
-
-- Função: matrix_trace
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula o traço de uma matriz.
-
-- Função: matrix_condition_number
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula o número de condição de uma matriz.
-
-- Função: matrix_norm_fro
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula a norma de Frobenius de uma matriz.
-
-- Função: matrix_norm_inf
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula a norma do infinito de uma matriz.
-
-- Função: matrix_eigenvalues
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula os autovalores de uma matriz.
-
-- Função: matrix_eigenvectors
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula os autovetores de uma matriz.
-
-- Função: solve_linear_system
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['A', 'b']
-  Docstring: Resolve um sistema de equações lineares Ax=b.
-
-- Função: cholesky_decomposition
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Realiza a decomposição de Cholesky.
-
-- Função: qr_decomposition
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Realiza a decomposição QR.
-
-- Função: svd_u
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Retorna a matriz U da SVD.
-
-- Função: svd_s
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Retorna os valores singulares da SVD.
-
-- Função: matrix_pinv
-  Caminho: lib/funcoes_analiticas/algebra_linear.py
-  Args: ['mat']
-  Docstring: Calcula a pseudoinversa de uma matriz.
-
-- Função: laplace_transform
-  Caminho: lib/funcoes_analiticas/analise_numerica.py
-  Args: ['f', 'a']
-  Docstring: Calcula a transformada de Laplace de uma função.
-
-- Função: z_transform
-  Caminho: lib/funcoes_analiticas/analise_numerica.py
-  Args: ['lst']
-  Docstring: Calcula a transformada Z de uma sequência discreta.
-
-- Função: airy_func
-  Caminho: lib/funcoes_analiticas/analise_numerica.py
-  Args: ['x']
-  Docstring: Calcula a função Airy.
-
-- Função: product_primes
-  Caminho: lib/funcoes_analiticas/analise_numerica.py
-  Args: ['lst']
-  Docstring: Calcula o produto dos números primos numa lista.
-
-- Função: product_prime_gaps
-  Caminho: lib/funcoes_analiticas/analise_numerica.py
-  Args: ['lst']
-  Docstring: Calcula o produto dos gaps entre primos numa lista.
-
-- Função: combinations_sum
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst', 'r']
-  Docstring: Soma todas as combinações de r elementos da lista.
-
-- Função: permutations_sum
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst', 'r']
-  Docstring: Soma todas as permutações de r elementos da lista.
-
-- Função: sum_combinations2
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Soma de todas as combinações de 2 elementos.
-
-- Função: sum_combinations3
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Soma de todas as combinações de 3 elementos.
-
-- Função: sum_permutations2
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Soma de todas as permutações de 2 elementos.
-
-- Função: prod_combinations2
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Produto das somas de todas as combinações de 2 elementos.
-
-- Função: prod_permutations2
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Produto das somas de todas as permutações de 2 elementos.
-
-- Função: max_diff_combinations
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst', 'k']
-  Docstring: Diferença entre a soma máxima e mínima das combinações.
-
-- Função: mean_combinations2
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Média das somas de todas as combinações de 2 elementos.
-
-- Função: reduce_sum
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Soma de uma lista usando reduce.
-
-- Função: reduce_prod
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Produto de uma lista usando reduce.
-
-- Função: reduce_max
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Máximo de uma lista usando reduce.
-
-- Função: prod_ratio
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Produto das proporções entre elementos consecutivos.
-
-- Função: conditional_permutations
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst', 'condition']
-  Docstring: Permutações que satisfazem uma condição.
-
-- Função: combinations_with_sum
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst', 'target']
-  Docstring: Combinações cuja soma é igual ao valor alvo.
-
-- Função: count_combinations_with_sum
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst', 'target']
-  Docstring: Conta combinações cuja soma é igual ao valor alvo.
-
-- Função: product_sum
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst1', 'lst2']
-  Docstring: Soma dos pares do produto cartesiano de duas listas.
-
-- Função: product_prod
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst1', 'lst2']
-  Docstring: Produto dos pares do produto cartesiano de duas listas.
-
-- Função: product_sum_square
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst1', 'lst2']
-  Docstring: Quadrado da soma de cada par do produto cartesiano.
-
-- Função: product_prod_square
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst1', 'lst2']
-  Docstring: Quadrado do produto de cada par do produto cartesiano.
-
-- Função: combination_count
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['n', 'k']
-  Docstring: Número exato de combinações.
-
-- Função: permutation_count
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['n', 'k']
-  Docstring: Número exato de permutações.
-
-- Função: factorial_list
-  Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
-  Args: ['lst']
-  Docstring: Fatorial de cada elemento de uma lista.
-
-- Função: dijkstra_path
-  Caminho: lib/funcoes_analiticas/algoritmos_grafos.py
-  Args: ['G', 'source', 'target', 'weight']
-  Docstring: Encontra o caminho mais curto entre origem e destino (Dijkstra).
-
-- Função: dijkstra_length
-  Caminho: lib/funcoes_analiticas/algoritmos_grafos.py
-  Args: ['G', 'source', 'target', 'weight']
-  Docstring: Calcula o comprimento do caminho mais curto entre origem e destino (Dijkstra).
-
-- Função: shortest_path_all_pairs
-  Caminho: lib/funcoes_analiticas/algoritmos_grafos.py
-  Args: ['G']
-  Docstring: Encontra o comprimento do caminho mais curto entre todos os pares de nós.
-
-- Função: is_connected
-  Caminho: lib/funcoes_analiticas/algoritmos_grafos.py
-  Args: ['G']
-  Docstring: Verifica se o grafo é conexo.
-
-- Função: has_cycle
-  Caminho: lib/funcoes_analiticas/algoritmos_grafos.py
-  Args: ['G']
-  Docstring: Verifica se o grafo contém pelo menos um ciclo.
-
-- Função: unique_count
-  Caminho: lib/funcoes_analiticas/conjuntos.py
-  Args: ['lst']
-  Docstring: Conta o número de elementos únicos em uma lista.
-
-- Função: intersection
-  Caminho: lib/funcoes_analiticas/conjuntos.py
-  Args: ['lst1', 'lst2']
-  Docstring: Retorna os elementos em comum entre duas listas.
-
-- Função: union
-  Caminho: lib/funcoes_analiticas/conjuntos.py
-  Args: ['lst1', 'lst2']
-  Docstring: Retorna a união de elementos de duas listas.
-
-- Função: mirror_count
-  Caminho: lib/funcoes_analiticas/conjuntos.py
-  Args: ['lst', 'total']
-  Docstring: Conta os números que têm um 'espelho' na lista (e.g., total - x).
-
-- Função: pair_sum_count
-  Caminho: lib/funcoes_analiticas/conjuntos.py
-  Args: ['lst', 'target']
-  Docstring: Conta os pares de números que somam um valor alvo.
-
+# LISTA DE FUNÇÕES DA BIBLIOTECA
+# Gerado em: 2025-10-11 12:55:46
+==================================================
+
+## ESTATÍSTICAS GERAIS
+- Funções únicas: 388
+- Categorias: 38
+- Duplicados: 16
+
+## CATEGORIA: ALGEBRA_LINEAR (15 funções)
+- matrix_determinant(mat)
+  # Calcula o determinante de uma matriz
+- matrix_rank(mat)
+  # Calcula o posto de uma matriz
+- matrix_inverse(mat)
+  # Calcula a inversa de uma matriz
+- matrix_trace(mat)
+  # Calcula o traço de uma matriz
+- matrix_condition_number(mat)
+  # Calcula o número de condição de uma matriz
+- matrix_norm_fro(mat)
+  # Calcula a norma de Frobenius de uma matriz
+- matrix_norm_inf(mat)
+  # Calcula a norma do infinito de uma matriz
+- matrix_eigenvalues(mat)
+  # Calcula os autovalores de uma matriz
+- matrix_eigenvectors(mat)
+  # Calcula os autovetores de uma matriz
+- solve_linear_system(A, b)
+  # Resolve um sistema de equações lineares Ax=b
+- cholesky_decomposition(mat)
+  # Realiza a decomposição de Cholesky
+- qr_decomposition(mat)
+  # Realiza a decomposição QR
+- svd_u(mat)
+  # Retorna a matriz U da SVD
+- svd_s(mat)
+  # Retorna os valores singulares da SVD
+- matrix_pinv(mat)
+  # Calcula a pseudoinversa de uma matriz
+
+## CATEGORIA: ALGEBRA_SIMBOLICA (8 funções)
+- sym_derivative(expr)
+  # Calcula a derivada de uma expressão simbólica
+- sym_integral(expr)
+  # Calcula a integral indefinida de uma expressão simbólica
+- sym_series_expansion(expr, n)
+  # Expande uma expressão em série de Taylor em torno de 0
+- sym_limit(expr, point)
+  # Calcula o limite de uma expressão no ponto dado
+- sym_roots(expr)
+  # Encontra as raízes de uma expressão
+- sym_simplify(expr)
+  # Simplifica uma expressão
+- sym_expand(expr)
+  # Expande uma expressão
+- sym_factor(expr)
+  # Fatora uma expressão
+
+## CATEGORIA: ALGORITMOS_GRAFOS (5 funções)
+- dijkstra_path(G, source, target, weight)
+  # Encontra o caminho mais curto entre origem e destino (Dijkstra)
+- dijkstra_length(G, source, target, weight)
+  # Calcula o comprimento do caminho mais curto entre origem e destino (Dijkstra)
+- shortest_path_all_pairs(G)
+  # Encontra o comprimento do caminho mais curto entre todos os pares de nós
+- is_connected(G)
+  # Verifica se o grafo é conexo
+- has_cycle(G)
+  # Verifica se o grafo contém pelo menos um ciclo
+
+## CATEGORIA: ANALISE_NUMERICA (5 funções)
+- laplace_transform(f, a)
+  # Calcula a transformada de Laplace de uma função
+- z_transform(lst)
+  # Calcula a transformada Z de uma sequência discreta
+- airy_func(x)
+  # Calcula a função Airy
+- product_primes(lst)
+  # Calcula o produto dos números primos numa lista
+- product_prime_gaps(lst)
+  # Calcula o produto dos gaps entre primos numa lista
+
+## CATEGORIA: ANALISE_PADROES (10 funções)
+- sum_of_pairs(lst)
+  # Calcula a soma de todas as combinações de pares
+- sum_of_triples(lst)
+  # Calcula a soma de todas as combinações de trios
+- diff_of_pairs(lst)
+  # Calcula a diferença absoluta de todos os pares
+- count_pair_sums_equal(lst, value)
+  # Conta os pares cuja soma é igual a um valor
+- score_even_odd(lst)
+  # Pontua a lista com base na paridade dos elementos
+- score_prime(lst)
+  # Pontua a lista com base na presença de números primos
+- score_pairs_sum_mod(lst, k)
+  # Pontua a lista com base na soma dos pares módulo k
+- score_cumulative_diff(lst)
+  # Pontua a lista com base na soma das diferenças absolutas consecutivas
+- most_frequent_pairs(lst)
+  # Encontra os pares mais frequentes na lista
+- cluster_by_diff(lst, max_diff)
+  # Agrupa números que estão próximos uns dos outros
+
+## CATEGORIA: ANALISE_PRIMOS (17 funções)
+- primes_in_list(lst)
+  # Filtra e retorna os números primos de uma lista
+- count_primes(lst)
+  # Conta a quantidade de números primos em uma lista
+- count_primes_below(lst, limit)
+  # Conta os primos abaixo de um limite
+- count_primes_above(lst, limit)
+  # Conta os primos acima de um limite
+- sum_primes(lst)
+  # Calcula a soma dos números primos em uma lista
+- mean_primes(lst)
+  # Calcula a média dos números primos em uma lista
+- median_primes(lst)
+  # Calcula a mediana dos números primos em uma lista
+- max_prime(lst)
+  # Retorna o maior número primo em uma lista
+- min_prime(lst)
+  # Retorna o menor número primo em uma lista
+- range_primes(lst)
+  # Calcula a diferença entre o maior e o menor primo
+- prime_near_mean(lst)
+  # Retorna o número primo mais próximo da média da lista
+- next_primes(lst)
+  # Retorna o próximo número primo de cada elemento
+- prime_gaps(lst)
+  # Calcula os gaps (diferenças) entre números primos consecutivos
+- sum_prime_gaps(lst)
+  # Calcula a soma dos gaps entre números primos
+- odd_primes(lst)
+  # Retorna os números primos ímpares de uma lista
+- square_primes(lst)
+  # Retorna o quadrado de cada número primo em uma lista
+- prime_binary(lst)
+  # Cria uma representação binária (1=primo, 0=não primo)
+
+## CATEGORIA: ARITMETICA (13 funções)
+- add(a, b)
+  # Calcula a soma de dois números
+- sub(a, b)
+  # Calcula a subtração de dois números
+- mul(a, b)
+  # Calcula a multiplicação de dois números
+- div(a, b)
+  # Calcula a divisão de dois números, evitando divisão por zero
+- mod(a, b)
+  # Calcula o resto da divisão de dois números, evitando divisão por zero
+- pow_func(a, b)
+  # Calcula a potência de um número
+- sqrt(a)
+  # Calcula a raiz quadrada de um número
+- cbrt(a)
+  # Calcula a raiz cúbica de um número
+- log_func(a)
+  # Calcula o logaritmo natural de um número, se for positivo
+- exp_func(a)
+  # Calcula o exponencial de um número
+- neg(a)
+  # Retorna o negativo de um número
+- inv(a)
+  # Calcula o inverso de um número, se não for zero
+- abs_val(a)
+  # Calcula o valor absoluto de um número
+
+## CATEGORIA: COMBINATORIA (4 funções)
+- factorial_func(a)
+  # Calcula o fatorial de um número inteiro não negativo
+- comb_func(n, k)
+  # Calcula as combinações de n elementos em grupos de k
+- perm_func(n, k)
+  # Calcula as permutações de n elementos em grupos de k
+- multinomial_coef(lst)
+  # Calcula o coeficiente multinomial de uma lista de números
+
+## CATEGORIA: COMBINATORIA_AVANCADA (23 funções)
+- combinations_sum(lst, r)
+  # Soma todas as combinações de r elementos da lista
+- permutations_sum(lst, r)
+  # Soma todas as permutações de r elementos da lista
+- sum_combinations2(lst)
+  # Soma de todas as combinações de 2 elementos
+- sum_combinations3(lst)
+  # Soma de todas as combinações de 3 elementos
+- sum_permutations2(lst)
+  # Soma de todas as permutações de 2 elementos
+- prod_combinations2(lst)
+  # Produto das somas de todas as combinações de 2 elementos
+- prod_permutations2(lst)
+  # Produto das somas de todas as permutações de 2 elementos
+- max_diff_combinations(lst, k)
+  # Diferença entre a soma máxima e mínima das combinações
+- mean_combinations2(lst)
+  # Média das somas de todas as combinações de 2 elementos
+- reduce_sum(lst)
+  # Soma de uma lista usando reduce
+- reduce_prod(lst)
+  # Produto de uma lista usando reduce
+- reduce_max(lst)
+  # Máximo de uma lista usando reduce
+- prod_ratio(lst)
+  # Produto das proporções entre elementos consecutivos
+- conditional_permutations(lst, condition)
+  # Permutações que satisfazem uma condição
+- combinations_with_sum(lst, target)
+  # Combinações cuja soma é igual ao valor alvo
+- count_combinations_with_sum(lst, target)
+  # Conta combinações cuja soma é igual ao valor alvo
+- product_sum(lst1, lst2)
+  # Soma dos pares do produto cartesiano de duas listas
+- product_prod(lst1, lst2)
+  # Produto dos pares do produto cartesiano de duas listas
+- product_sum_square(lst1, lst2)
+  # Quadrado da soma de cada par do produto cartesiano
+- product_prod_square(lst1, lst2)
+  # Quadrado do produto de cada par do produto cartesiano
+- combination_count(n, k)
+  # Número exato de combinações
+- permutation_count(n, k)
+  # Número exato de permutações
+- factorial_list(lst)
+  # Fatorial de cada elemento de uma lista
+
+## CATEGORIA: CONJUNTOS (5 funções)
+- unique_count(lst)
+  # Conta o número de elementos únicos em uma lista
+- intersection(lst1, lst2)
+  # Retorna os elementos em comum entre duas listas
+- union(lst1, lst2)
+  # Retorna a união de elementos de duas listas
+- mirror_count(lst, total)
+  # Conta os números que têm um 'espelho' na lista (e
+- pair_sum_count(lst, target)
+  # Conta os pares de números que somam um valor alvo
+
+## CATEGORIA: CRIPTOGRAFIA (3 funções)
+- generate_key()
+  # Gera uma chave de criptografia Fernet e armazena globalmente
+- encrypt_data(data)
+  # Criptografa dados usando a chave Fernet armazenada
+- decrypt_data(token)
+  # Descriptografa dados usando a chave Fernet armazenada
+
+## CATEGORIA: DETECCAO_ANOMALIAS (3 funções)
+- z_score_outliers(lst, threshold)
+  # Detecta outliers usando o método de Z-score
+- iqr_outliers(lst)
+  # Detecta outliers usando o método do Intervalo Interquartil (IQR)
+- rolling_z_score(lst, window, threshold)
+  # Detecta outliers usando um Z-score móvel
+
+## CATEGORIA: ESTATISTICA_MULTIVARIADA (7 funções)
+- covariance_matrix(X)
+  # Calcula a matriz de covariância de um conjunto de dados
+- correlation_matrix(X)
+  # Calcula a matriz de correlação de um conjunto de dados
+- mutual_info(x, y)
+  # Calcula a informação mútua entre duas variáveis discretas
+- normalized_mutual_info(x, y)
+  # Calcula a informação mútua normalizada entre duas variáveis discretas
+- silhouette(X, labels)
+  # Calcula o coeficiente de silhueta para avaliar a qualidade de um agrupamento
+- pca_eigenvalues(X)
+  # Calcula os autovalores da matriz de covariância para a Análise de Componentes Principais (PCA)
+- gini_index(values)
+  # Calcula o índice de Gini para medir a desigualdade
+
+## CATEGORIA: ESTATISTICA_NAO_PARAMETRICA (7 funções)
+- kendall_tau(x, y)
+  # Calcula o coeficiente de correlação de Kendall
+- spearman_corr(x, y)
+  # Calcula o coeficiente de correlação de Spearman
+- mann_whitney(x, y)
+  # Realiza o teste de soma de postos de Mann-Whitney U
+- kruskal_test()
+  # Realiza o teste de Kruskal-Wallis H para múltiplos grupos
+- wilcoxon_test(x, y)
+  # Realiza o teste de soma de postos de Wilcoxon para amostras pareadas
+- median_test(x, y)
+  # Calcula a diferença entre as medianas de duas amostras
+- range_stat(lst)
+  # Calcula a amplitude (range) de uma amostra
+
+## CATEGORIA: ESTATISTICAS (10 funções)
+- unique_count(lst)
+  # Conta o número de elementos únicos em uma lista
+- intersection(lst1, lst2)
+  # Retorna os elementos em comum entre duas listas
+- union(lst1, lst2)
+  # Retorna a união de elementos de duas listas
+- difference(lst1, lst2)
+  # Retorna os elementos de lst1 que não estão em lst2
+- symmetric_difference(lst1, lst2)
+  # Retorna os elementos que estão em lst1 ou lst2, mas não em ambos
+- mirror_count(lst, total)
+  # Conta os números que têm um 'espelho' na lista (e
+- pair_sum_count(lst, target)
+  # Conta os pares de números que somam um valor alvo
+- pair_product_count(lst, target)
+  # Conta os pares de números que multiplicados dão um valor alvo
+- count_even(lst)
+  # Conta números pares na lista
+- count_odd(lst)
+  # Conta números ímpares na lista
+
+## CATEGORIA: EXPLORACAO (2 funções)
+- linear_trend_slope(lst)
+  # Calcula a inclinação da tendência linear de uma lista
+- successive_diff(lst)
+  # Calcula a diferença entre elementos sucessivos
+
+## CATEGORIA: FUNCOES_ESPECIAIS (11 funções)
+- gamma_func(x)
+  # Calcula a função Gamma
+- beta_func(a, b)
+  # Calcula a função Beta
+- zeta_func(s)
+  # Calcula a função Zeta de Riemann
+- bessel_j(n, x)
+  # Calcula a função de Bessel de primeira espécie
+- legendre_poly(n, x)
+  # Calcula o polinómio de Legendre
+- chebyshev_T(n, x)
+  # Calcula o polinómio de Chebyshev de primeira espécie
+- chebyshev_U(n, x)
+  # Calcula o polinómio de Chebyshev de segunda espécie
+- hermite_poly(n, x)
+  # Calcula o polinómio de Hermite
+- laguerre_poly(n, x)
+  # Calcula o polinómio de Laguerre
+- discrete_convolution(lst1, lst2)
+  # Calcula a convolução discreta de duas listas
+- cross_correlation(lst1, lst2)
+  # Calcula a correlação cruzada de duas listas
+
+## CATEGORIA: GEOMETRIA (8 funções)
+- euclidean_dist(a, b)
+  # Calcula a distância euclidiana entre dois pontos
+- manhattan_dist(a, b)
+  # Calcula a distância de Manhattan entre dois pontos
+- chebyshev_dist(a, b)
+  # Calcula a distância de Chebyshev entre dois pontos
+- cosine_dist(a, b)
+  # Calcula a distância do cosseno entre dois vetores
+- hamming_dist_str(a, b)
+  # Calcula a distância de Hamming entre duas strings
+- levenshtein_dist(a, b)
+  # Calcula a distância de Levenshtein entre duas strings
+- jaccard_index(a, b)
+  # Calcula o índice de Jaccard entre dois conjuntos
+- centroid(points)
+  # Calcula o centroide de um conjunto de pontos
+
+## CATEGORIA: GRAFOS (23 funções)
+- create_graph(lst)
+  # Cria um grafo completo a partir de uma lista de nós
+- num_nodes(lst)
+  # Retorna o número de nós de um grafo criado a partir de uma lista
+- num_edges(lst)
+  # Retorna o número de arestas de um grafo completo
+- node_degrees(lst)
+  # Calcula os graus de cada nó em um grafo
+- graph_degree(lst)
+  # Calcula o grau (número de conexões) de cada nó no grafo
+- graph_avg_degree(lst)
+  # Calcula o grau médio de todos os nós do grafo
+- mean_degree(lst)
+  # Calcula o grau médio de um grafo
+- std_degree(lst)
+  # Calcula o desvio padrão dos graus de um grafo
+- is_complete(lst)
+  # Verifica se um grafo criado a partir da lista é completo
+- graph_density(lst)
+  # Calcula a densidade do grafo
+- graph_diameter(lst)
+  # Calcula o diâmetro do grafo (maior caminho mais curto)
+- graph_connected_components_count(lst)
+  # Conta o número de componentes conectados no grafo
+- graph_connected_components(G)
+  # Retorna os componentes conectados de um grafo
+- graph_triangle_count(lst)
+  # Conta o número de triângulos no grafo
+- degree_centrality(lst)
+  # Calcula a centralidade de grau de cada nó
+- closeness_centrality_from_graph(G)
+  # Calcula a centralidade de proximidade de um grafo existente
+- closeness_centrality_from_list(lst)
+  # Calcula a centralidade de proximidade de cada nó (grafo criado a partir da lista)
+- betweenness_centrality(G)
+  # Calcula a centralidade de intermediação de um grafo
+- eigenvector_centrality(G)
+  # Calcula a centralidade de autovetor de um grafo
+- pagerank_scores(G, alpha)
+  # Calcula os scores de PageRank de um grafo
+- shortest_paths_length(G)
+  # Calcula os comprimentos dos caminhos mais curtos entre todos os pares de nós
+- graph_eigenvalues(G)
+  # Calcula os autovalores da matriz de adjacência de um grafo
+- graph_laplacian_spectrum(G)
+  # Calcula o espectro Laplaciano de um grafo
+
+## CATEGORIA: IA_HEURISTICA (20 funções)
+- mutate_list(lst, mutation_rate, max_val)
+  # Aplica mutação a uma lista, trocando elementos aleatoriamente
+- crossover_lists(lst1, lst2)
+  # Combina duas listas em um ponto de cruzamento
+- fitness_sum(lst, target)
+  # Calcula o 'fitness' de uma lista com base em sua soma
+- fitness_even_ratio(lst, target_ratio)
+  # Calcula o 'fitness' com base na proporção de números pares
+- select_best_population(population, fitness_func, k)
+  # Seleciona a melhor parte de uma população com base em uma função de fitness
+- combined_score(lst, heuristics)
+  # Combina o score de múltiplas heurísticas para uma lista
+- weighted_score(lst, heuristics, weights)
+  # Calcula o score combinado de heurísticas com pesos
+- rank_heuristics(lst, heuristics)
+  # Classifica heurísticas com base em seu desempenho em uma lista
+- generate_heuristic_from_library(lst, funcs)
+  # Executa uma heurística aleatória da biblioteca
+- integrated_heuristic_test(lst, heuristics)
+  # Testa e retorna heurísticas ordenadas por score
+- top_k_integrated(lst, heuristics, k)
+  # Retorna as top K heurísticas integradas
+- generate_new_combined_heuristic(heuristics, transforms)
+  # Gera uma nova heurística combinando uma função com uma transformação
+- stochastic_score(lst, heuristics, trials)
+  # Calcula o score estocástico de uma lista
+- combined_stochastic_score(lst, heuristics, weights, trials)
+  # Calcula o score estocástico combinado com pesos
+- random_selection(lst, k)
+  # Seleciona k elementos aleatórios de uma lista
+- weighted_choice(lst, weights)
+  # Faz uma escolha aleatória de um elemento com base em pesos
+- shuffle_sum(lst)
+  # Embaralha a lista e retorna a soma de seus elementos
+- shuffle_product(lst)
+  # Embaralha a lista e retorna o produto de seus elementos
+- random_mean(lst, k, trials)
+  # Calcula a média de múltiplas seleções aleatórias de k elementos
+- random_cumsum(lst, k, trials)
+  # Calcula a soma de k elementos selecionados aleatoriamente, repetindo por N testes
+
+## CATEGORIA: MACHINE_LEARNING (8 funções)
+- mse(y_true, y_pred)
+  # Calcula o Erro Quadrático Médio (MSE)
+- rmse(y_true, y_pred)
+  # Calcula a Raiz do Erro Quadrático Médio (RMSE)
+- mae(y_true, y_pred)
+  # Calcula o Erro Absoluto Médio (MAE)
+- r2(y_true, y_pred)
+  # Calcula o coeficiente de determinação R²
+- accuracy(y_true, y_pred)
+  # Calcula a acurácia para tarefas de classificação
+- f1(y_true, y_pred)
+  # Calcula a pontuação F1 (macro-média)
+- precision(y_true, y_pred)
+  # Calcula a precisão (macro-média)
+- recall(y_true, y_pred)
+  # Calcula o recall (macro-média)
+
+## CATEGORIA: MANIPULACAO_DADOS (4 funções)
+- fill_missing_values(lst, strategy)
+  # Preenche valores ausentes (np
+- normalize_data(lst)
+  # Normaliza os dados para o intervalo [0, 1]
+- standardize_data(lst)
+  # Padroniza os dados (média 0, desvio padrão 1)
+- get_dummies(lst)
+  # Converte uma lista de valores categóricos em variáveis dummy
+
+## CATEGORIA: MATEMATICA_ESPECIAL (19 funções)
+- gamma_transform(lst)
+  # Aplica a função Gamma a cada elemento positivo da lista
+- bessel_j_list(lst, n)
+  # Calcula a função de Bessel de primeira espécie para uma lista
+- euler_totient(lst)
+  # Calcula a função totiente de Euler para cada elemento positivo
+- sum_divisors(lst)
+  # Calcula a soma dos divisores de cada elemento
+- gamma_func(x)
+  # Calcula a função Gamma
+- loggamma_func(x)
+  # Calcula o logaritmo da função Gamma
+- digamma_func(x)
+  # Calcula a função Digamma
+- beta_func(x, y)
+  # Calcula a função Beta
+- bessel_j(n, x)
+  # Calcula a função de Bessel de primeira espécie
+- bessel_y(n, x)
+  # Calcula a função de Bessel de segunda espécie
+- bessel_j0(x)
+  # Função de Bessel de primeira espécie de ordem 0
+- bessel_y0(x)
+  # Função de Bessel de segunda espécie de ordem 0
+- error_func(x)
+  # Função de erro (erf)
+- error_func_c(x)
+  # Função de erro complementar (erfc)
+- elliptic_j(u, m)
+  # Funções elípticas de Jacobi (sn, cn, dn)
+- legendre_p(n, x)
+  # Polinômio de Legendre de ordem n
+- chebyshev_t(n, x)
+  # Polinômio de Chebyshev de primeira espécie de ordem n
+- airy_ai(x)
+  # Função Airy Ai
+- airy_bi(x)
+  # Função Airy Bi
+
+## CATEGORIA: MODELAGEM_PREDITIVA (6 funções)
+- linear_regression_predict(lst, steps)
+  # Prediz o próximo valor de uma lista usando regressão linear
+- poly_regression_predict(lst, degree, steps)
+  # Prediz o próximo valor de uma lista usando regressão polinomial
+- regression_on_frequency(lst, steps)
+  # Aplica regressão linear na frequência cumulativa de uma lista
+- linear_regression_coeffs(x, y)
+  # Calcula os coeficientes de regressão linear (inclinação e interceptação)
+- predict_linear(x, m, c)
+  # Prediz valores usando uma equação de regressão linear
+- regression_score(x, y)
+  # Calcula a pontuação de ajuste de regressão linear (negativo do MSE)
+
+## CATEGORIA: NUMEROS_ESPECIAIS (8 funções)
+- fibonacci(n)
+  # Retorna o n-ésimo número de Fibonacci
+- lucas(n)
+  # Retorna o n-ésimo número de Lucas
+- catalan_number(n)
+  # Retorna o n-ésimo número de Catalan
+- bell_number(n)
+  # Retorna o n-ésimo número de Bell
+- partition_number(n)
+  # Retorna o número de partições de n
+- stirling2(n, k)
+  # Retorna o número de Stirling de segunda espécie S(n, k)
+- stirling1(n, k)
+  # Retorna o número de Stirling de primeira espécie s(n, k)
+- bernoulli_number(n)
+  # Retorna o n-ésimo número de Bernoulli
+
+## CATEGORIA: PLOTS (7 funções)
+- plot_histogram(data, title, bins, color)
+  # Plota um histograma de uma lista de dados
+- plot_scatter(x, y, title, color)
+  # Plota um gráfico de dispersão de dois conjuntos de dados
+- plot_boxplot(data, title)
+  # Plota um boxplot para visualizar a distribuição e outliers
+- plot_time_series(series, title, color)
+  # Plota uma série temporal
+- rolling_mean_plot(lst, window)
+  # Plota a média móvel de uma lista
+- cumulative_sum_plot(lst)
+  # Plota a soma cumulativa de uma lista
+- heatmap_pairs(lst)
+  # Cria um mapa de calor para a frequência de pares
+
+## CATEGORIA: PRECISAO (5 funções)
+- mpmath_sqrt(x)
+  # Calcula a raiz quadrada de x com alta precisão
+- mpmath_log(x)
+  # Calcula o logaritmo natural de x com alta precisão
+- mpmath_sin(x)
+  # Calcula o seno de x com alta precisão
+- mpmath_prod_list(lst)
+  # Calcula o produto dos elementos de uma lista com alta precisão
+- mpmath_sum_list(lst)
+  # Calcula a soma dos elementos de uma lista com alta precisão
+
+## CATEGORIA: PROBABILIDADE (14 funções)
+- poisson_pmf(k, mu)
+  # Calcula a PMF da distribuição de Poisson
+- poisson_cdf(k, mu)
+  # Calcula a CDF da distribuição de Poisson
+- poisson_var(mu)
+  # Calcula a variância da distribuição de Poisson
+- poisson_entropy(mu)
+  # Calcula a entropia da distribuição de Poisson
+- binomial_pmf(k, n, p)
+  # Calcula a PMF da distribuição binomial
+- binomial_cdf(k, n, p)
+  # Calcula a CDF da distribuição binomial
+- binomial_var(n, p)
+  # Calcula a variância da distribuição binomial
+- binomial_entropy(n, p)
+  # Calcula a entropia da distribuição binomial
+- normal_pdf(x, mu, sigma)
+  # Calcula a PDF da distribuição normal
+- normal_cdf(x, mu, sigma)
+  # Calcula a CDF da distribuição normal
+- normal_var(sigma)
+  # Calcula a variância da distribuição normal
+- normal_entropy(mu, sigma)
+  # Calcula a entropia da distribuição normal
+- exponential_pdf(x, lmbda)
+  # Calcula a PDF da distribuição exponencial
+- uniform_pdf(x, a, b)
+  # Calcula a PDF da distribuição uniforme
+
+## CATEGORIA: PROBABILIDADE_DISTRIBUICOES (3 funções)
+- simulate_multinomial_prob(lst, probabilities, trials)
+  # Simula uma distribuição multinomial
+- simulate_dirichlet(alpha, size)
+  # Simula uma distribuição de Dirichlet
+- simulate_multivariate_wishart(df, scale, size)
+  # Simula uma distribuição de Wishart multivariada (avançada)
+
+## CATEGORIA: PROCESSAMENTO_SINAL (26 funções)
+- fft_real(lst)
+  # Calcula a magnitude da FFT de uma lista
+- fft_phase(lst)
+  # Calcula a fase da FFT de uma lista
+- fft_log(lst)
+  # Calcula a FFT da lista transformada em log
+- fft_sqrt(lst)
+  # Calcula a FFT da raiz quadrada da lista
+- fft_normalized(lst)
+  # Calcula a FFT normalizada da lista
+- ifft_real(lst)
+  # Calcula a parte real da IFFT
+- fft_frequencies(n, sample_rate)
+  # Retorna as frequências correspondentes à FFT
+- apply_lowpass(lst, cutoff, order)
+  # Aplica um filtro passa-baixa Butterworth
+- apply_highpass(lst, cutoff, order)
+  # Aplica um filtro passa-alta Butterworth
+- apply_bandpass(lst, low, high, order)
+  # Aplica um filtro passa-faixa Butterworth
+- wavelet_decompose(lst, wavelet, level)
+  # Decompõe uma lista em coeficientes de Wavelet (DWT)
+- wavelet_reconstruct(coeffs, wavelet)
+  # Reconstrói uma lista a partir de coeficientes de Wavelet
+- dwt_approx(lst, wavelet)
+  # Retorna apenas os coeficientes de aproximação da DWT
+- dwt_detail(lst, wavelet)
+  # Retorna os coeficientes de detalhe da DWT
+- hilbert_transform(lst)
+  # Calcula a Transformada de Hilbert (magnitude)
+- savgol_smooth(lst, window, poly)
+  # Aplica filtro de Savitzky-Golay para suavização
+- stft_transform(lst, fs)
+  # Aplica a Transformada de Fourier de Curto Prazo (STFT)
+- istft_transform(Z, fs)
+  # Reconstrói sinal a partir da STFT (ISTFT)
+- welch_psd(lst, fs)
+  # Calcula o Power Spectral Density pelo método de Welch
+- periodogram_psd(lst, fs)
+  # Calcula o Power Spectral Density pelo periodograma
+- spectral_energy(lst)
+  # Calcula a energia total do espectro
+- spectral_entropy(lst)
+  # Calcula a entropia espectral do sinal
+- find_signal_peaks(lst)
+  # Encontra os índices dos picos no sinal
+- detect_cycle_length(lst)
+  # Detecta o comprimento do ciclo repetitivo mais curto
+- butter_lowpass(cutoff, fs, order)
+  # Retorna coeficientes de filtro Butterworth passa-baixa
+- filter_signal(b, a, x)
+  # Filtra um sinal usando os coeficientes b e a
+
+## CATEGORIA: SEQUENCIAS (7 funções)
+- diff(lst)
+  # Diferença entre elementos consecutivos (x₂ - x₁)
+- diff_abs(lst)
+  # Diferença absoluta entre elementos consecutivos
+- ratio_consecutive(lst)
+  # Razão simples entre elementos consecutivos (x₂ / x₁)
+- rolling_sum(lst, window)
+  # Soma em janela deslizante
+- rolling_mean(lst, window)
+  # Média em janela deslizante
+- rolling_std(lst, window)
+  # Desvio padrão em janela deslizante
+- rank_array(lst)
+  # Ranking dos elementos de uma lista
+
+## CATEGORIA: SERIES_TEMPORAIS (9 funções)
+- arima_predict(lst, order, steps)
+- centered_moving_average(lst, window)
+- ewma(lst, span)
+- exp_weighted_mean(lst, alpha)
+- cumulative_sum(lst)
+- cumulative_product(lst)
+- normalized_cumsum(lst)
+- cumulative_max(lst)
+- cumulative_min(lst)
+
+## CATEGORIA: SIMULACAO (10 funções)
+- sample_binomial(n, p, size)
+  # Gera uma amostra de uma distribuição Binomial
+- sample_poisson(lam, size)
+  # Gera uma amostra de uma distribuição de Poisson
+- sample_normal(mu, sigma, size)
+  # Gera uma amostra de uma distribuição Normal
+- monte_carlo_sum(target_sum, trials)
+  # Calcula a probabilidade de atingir uma soma alvo em amostras aleatórias
+- monte_carlo_even_ratio(trials)
+  # Simula a proporção média de números pares em amostras aleatórias
+- monte_carlo_prime_ratio(trials)
+  # Simula a proporção média de números primos em amostras aleatórias
+- monte_carlo_max(trials)
+  # Simula os valores máximos de amostras aleatórias
+- monte_carlo_min(trials)
+  # Simula os valores mínimos de amostras aleatórias
+- monte_carlo_multistep(lst, steps, trials)
+  # Simulação Monte Carlo multi-passos, selecionando elementos aleatórios
+- metropolis_hastings(target_func, start, iterations, proposal_std)
+  # Geração de amostras MCMC usando o algoritmo Metropolis-Hastings
+
+## CATEGORIA: TEMPORAIS (7 funções)
+- lag_series(lst, lag)
+  # Calcula a diferença entre elementos com um certo atraso (lag)
+- fft_magnitude(lst)
+  # Calcula a magnitude da Transformada Rápida de Fourier (FFT)
+- fft_phase(lst)
+  # Calcula a fase da Transformada Rápida de Fourier (FFT)
+- ifft_real(lst)
+  # Calcula a Transformada Inversa de Fourier (IFFT) e retorna a parte real
+- dominant_frequency(lst)
+  # Encontra o índice da frequência dominante em uma lista
+- autocorr(lst, lag)
+  # Calcula a autocorrelação de uma lista em um determinado atraso
+- autocorr_series(lst, max_lag)
+  # Calcula a série de autocorrelação para múltiplos atrasos
+
+## CATEGORIA: TEORIA_INFORMACAO (7 funções)
+- shannon_entropy(lst)
+  # Calcula a entropia de Shannon de uma distribuição de probabilidade
+- normalized_entropy(lst)
+  # Calcula a entropia de Shannon normalizada
+- mutual_info(x, y)
+  # Calcula a informação mútua entre duas listas
+- normalized_mutual_info(x, y)
+  # Calcula a informação mútua normalizada
+- kl_divergence(p, q)
+  # Calcula a divergência de Kullback-Leibler entre duas distribuições
+- jensen_shannon(p, q)
+  # Calcula a divergência de Jensen-Shannon entre duas distribuições
+- gini_impurity(lst)
+  # Calcula a impureza de Gini de uma distribuição
+
+## CATEGORIA: TEORIA_NUMEROS (19 funções)
+- euler_totient(n)
+  # Calcula a função totiente de Euler
+- factor_integer(n)
+  # Fatora um número em seus fatores primos
+- prime_factors(n)
+  # Retorna os fatores primos únicos de um número
+- prime_factor_count(n)
+  # Retorna o número de fatores primos únicos de um número
+- largest_prime_factor(n)
+  # Retorna o maior fator primo de um número
+- smallest_prime_factor(n)
+  # Retorna o menor fator primo de um número
+- gcd_list(lst)
+  # Calcula o Máximo Divisor Comum (MDC) de uma lista de números
+- lcm_list(lst)
+  # Calcula o Mínimo Múltiplo Comum (MMC) de uma lista de números
+- check_prime(n)
+  # Verifica se um número é primo
+- count_primes_upto(n)
+  # Conta o número de primos até n
+- next_prime_num(n)
+  # Encontra o próximo número primo após n
+- prev_prime_num(n)
+  # Encontra o número primo anterior a n
+- generate_primes(n)
+  # Gera uma lista de primos até n
+- fibonacci_num(n)
+  # Retorna o n-ésimo número de Fibonacci
+- lucas_num(n)
+  # Retorna o n-ésimo número de Lucas
+- catalan_num(n)
+  # Retorna o n-ésimo número de Catalan
+- bell_number(n)
+  # Retorna o n-ésimo número de Bell
+- partition_number(n)
+  # Retorna o número de partições de n
+- bernoulli_number(n)
+  # Retorna o n-ésimo número de Bernoulli
+
+## CATEGORIA: TRANSFORMACOES (25 funções)
+- floor_div(a, b)
+  # Calcula a divisão inteira de dois números (floor division)
+- ceil_div(a, b)
+  # Calcula a divisão inteira arredondada para cima (ceil division)
+- mod_inverse(a, k)
+  # Calcula o inverso modular de 'a' mod 'k' (se existir)
+- floor_val(a)
+  # Retorna o maior inteiro menor ou igual a 'a'
+- ceil_val(a)
+  # Retorna o menor inteiro maior ou igual a 'a'
+- sqrt_transform(lst)
+  # Transformação de raiz quadrada
+- cbrt_transform(lst)
+  # Transformação de raiz cúbica
+- square_transform(lst)
+  # Transformação de potência ao quadrado
+- cube_transform(lst)
+  # Transformação de potência ao cubo
+- exp_transform(lst)
+  # Transformação exponencial
+- reciprocal_transform(lst)
+  # Transformação recíproca (1/x)
+- log_transform(lst)
+  # Transformação logarítmica (base e)
+- log10_transform(lst)
+  # Transformação logarítmica (base 10)
+- log_normalize(lst)
+  # Normalização com transformação logarítmica
+- sqrt_log_transform(lst)
+  # Transformação combinada: raiz da transformação logarítmica
+- sin_transform(lst)
+  # Transformação seno
+- cos_transform(lst)
+  # Transformação cosseno
+- tan_transform(lst)
+  # Transformação tangente
+- arcsin_transform(lst)
+  # Transformação arcoseno (normalizada pelo valor máximo)
+- arccos_transform(lst)
+  # Transformação arccoseno (normalizada pelo valor máximo)
+- arctan_transform(lst)
+  # Transformação arctangente
+- centered_sin(lst)
+  # Transformação seno centrada na média
+- mod_transform(lst, m)
+  # Transformação de módulo (x % m)
+- minmax_normalize(lst)
+  # Normalização Min-Max
+- zscore_normalize(lst)
+  # Normalização Z-Score
+
+## CATEGORIA: WAVELETS (5 funções)
+- wavelet_dwt(data, wavelet)
+  # Aplica a Transformada Discreta de Wavelet (DWT) de nível 1
+- wavelet_idwt(cA, cD, wavelet)
+  # Aplica a Transformada Discreta de Wavelet Inversa (IDWT) de nível 1
+- wavelet_wavedec(data, level, wavelet)
+  # Aplica a decomposição de wavelet multinível
+- wavelet_waverec(coeffs, wavelet)
+  # Reconstrói um sinal a partir dos coeficientes de wavelet
+- wavelet_energy(data, wavelet)
+  # Calcula a energia total de um sinal em diferentes níveis de wavelet
+
+
+## ⚠️ FUNÇÕES DUPLICADAS
+- bell_number em lib/funcoes_analiticas/teoria_numeros.py
+- partition_number em lib/funcoes_analiticas/teoria_numeros.py
+- bernoulli_number em lib/funcoes_analiticas/teoria_numeros.py
+- fft_phase em lib/funcoes_analiticas/processamento_sinal.py
+- ifft_real em lib/funcoes_analiticas/processamento_sinal.py
+- mutual_info em lib/funcoes_analiticas/estatistica_multivariada.py
+- normalized_mutual_info em lib/funcoes_analiticas/estatistica_multivariada.py
+- euler_totient em lib/funcoes_analiticas/matematica_especial.py
+- gamma_func em lib/funcoes_analiticas/matematica_especial.py
+- beta_func em lib/funcoes_analiticas/matematica_especial.py
+- bessel_j em lib/funcoes_analiticas/matematica_especial.py
+- unique_count em lib/funcoes_analiticas/conjuntos.py
+- intersection em lib/funcoes_analiticas/conjuntos.py
+- union em lib/funcoes_analiticas/conjuntos.py
+- mirror_count em lib/funcoes_analiticas/conjuntos.py
+- pair_sum_count em lib/funcoes_analiticas/conjuntos.py

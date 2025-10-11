@@ -1,0 +1,3914 @@
+{
+  "metadata": {
+    "data_geracao": "2025-10-11T12:55:46.501739",
+    "total_funcoes": 388,
+    "total_categorias": 38,
+    "total_duplicados": 16
+  },
+  "categorias": {
+    "estatistica_nao_parametrica": [
+      {
+        "nome": "kendall_tau",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula o coeficiente de correlação de Kendall.\n\nArgs:\n    x (List[float]): Primeira amostra.\n    y (List[float]): Segunda amostra.\n\nReturns:\n    float: Coeficiente de Kendall tau.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      },
+      {
+        "nome": "spearman_corr",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula o coeficiente de correlação de Spearman.\n\nArgs:\n    x (List[float]): Primeira amostra.\n    y (List[float]): Segunda amostra.\n\nReturns:\n    float: Coeficiente de Spearman.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      },
+      {
+        "nome": "mann_whitney",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Realiza o teste de soma de postos de Mann-Whitney U.\n\nArgs:\n    x (List[float]): Primeira amostra.\n    y (List[float]): Segunda amostra.\n\nReturns:\n    float: Estatística U.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      },
+      {
+        "nome": "kruskal_test",
+        "args": [],
+        "docstring": "Realiza o teste de Kruskal-Wallis H para múltiplos grupos.\n\nArgs:\n    *groups (List[float]): Um ou mais grupos de amostras.\n\nReturns:\n    float: Estatística H.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      },
+      {
+        "nome": "wilcoxon_test",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Realiza o teste de soma de postos de Wilcoxon para amostras pareadas.\n\nArgs:\n    x (List[float]): Primeira amostra.\n    y (List[float]): Segunda amostra.\n\nReturns:\n    float: Estatística W.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      },
+      {
+        "nome": "median_test",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a diferença entre as medianas de duas amostras.\n\nArgs:\n    x (List[float]): Primeira amostra.\n    y (List[float]): Segunda amostra.\n\nReturns:\n    float: Diferença entre as medianas.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      },
+      {
+        "nome": "range_stat",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a amplitude (range) de uma amostra.\n\nArgs:\n    lst (List[float]): Lista de valores.\n\nReturns:\n    float: Valor máximo menos mínimo.",
+        "modulo": "estatistica_nao_parametrica",
+        "caminho": "lib/funcoes_analiticas/estatistica_nao_parametrica.py"
+      }
+    ],
+    "combinatoria": [
+      {
+        "nome": "factorial_func",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula o fatorial de um número inteiro não negativo.",
+        "modulo": "combinatoria",
+        "caminho": "lib/funcoes_analiticas/combinatoria.py"
+      },
+      {
+        "nome": "comb_func",
+        "args": [
+          "n",
+          "k"
+        ],
+        "docstring": "Calcula as combinações de n elementos em grupos de k.",
+        "modulo": "combinatoria",
+        "caminho": "lib/funcoes_analiticas/combinatoria.py"
+      },
+      {
+        "nome": "perm_func",
+        "args": [
+          "n",
+          "k"
+        ],
+        "docstring": "Calcula as permutações de n elementos em grupos de k.",
+        "modulo": "combinatoria",
+        "caminho": "lib/funcoes_analiticas/combinatoria.py"
+      },
+      {
+        "nome": "multinomial_coef",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o coeficiente multinomial de uma lista de números.",
+        "modulo": "combinatoria",
+        "caminho": "lib/funcoes_analiticas/combinatoria.py"
+      }
+    ],
+    "probabilidade_distribuicoes": [
+      {
+        "nome": "simulate_multinomial_prob",
+        "args": [
+          "lst",
+          "probabilities",
+          "trials"
+        ],
+        "docstring": "Simula uma distribuição multinomial.",
+        "modulo": "probabilidade_distribuicoes",
+        "caminho": "lib/funcoes_analiticas/probabilidade_distribuicoes.py"
+      },
+      {
+        "nome": "simulate_dirichlet",
+        "args": [
+          "alpha",
+          "size"
+        ],
+        "docstring": "Simula uma distribuição de Dirichlet.",
+        "modulo": "probabilidade_distribuicoes",
+        "caminho": "lib/funcoes_analiticas/probabilidade_distribuicoes.py"
+      },
+      {
+        "nome": "simulate_multivariate_wishart",
+        "args": [
+          "df",
+          "scale",
+          "size"
+        ],
+        "docstring": "Simula uma distribuição de Wishart multivariada (avançada).",
+        "modulo": "probabilidade_distribuicoes",
+        "caminho": "lib/funcoes_analiticas/probabilidade_distribuicoes.py"
+      }
+    ],
+    "precisao": [
+      {
+        "nome": "mpmath_sqrt",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula a raiz quadrada de x com alta precisão.",
+        "modulo": "precisao",
+        "caminho": "lib/funcoes_analiticas/precisao.py"
+      },
+      {
+        "nome": "mpmath_log",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula o logaritmo natural de x com alta precisão.\n\nRetorna None se x <= 0.",
+        "modulo": "precisao",
+        "caminho": "lib/funcoes_analiticas/precisao.py"
+      },
+      {
+        "nome": "mpmath_sin",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula o seno de x com alta precisão.",
+        "modulo": "precisao",
+        "caminho": "lib/funcoes_analiticas/precisao.py"
+      },
+      {
+        "nome": "mpmath_prod_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o produto dos elementos de uma lista com alta precisão.",
+        "modulo": "precisao",
+        "caminho": "lib/funcoes_analiticas/precisao.py"
+      },
+      {
+        "nome": "mpmath_sum_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a soma dos elementos de uma lista com alta precisão.",
+        "modulo": "precisao",
+        "caminho": "lib/funcoes_analiticas/precisao.py"
+      }
+    ],
+    "analise_padroes": [
+      {
+        "nome": "sum_of_pairs",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a soma de todas as combinações de pares.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "sum_of_triples",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a soma de todas as combinações de trios.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "diff_of_pairs",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a diferença absoluta de todos os pares.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "count_pair_sums_equal",
+        "args": [
+          "lst",
+          "value"
+        ],
+        "docstring": "Conta os pares cuja soma é igual a um valor.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "score_even_odd",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Pontua a lista com base na paridade dos elementos.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "score_prime",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Pontua a lista com base na presença de números primos.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "score_pairs_sum_mod",
+        "args": [
+          "lst",
+          "k"
+        ],
+        "docstring": "Pontua a lista com base na soma dos pares módulo k.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "score_cumulative_diff",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Pontua a lista com base na soma das diferenças absolutas consecutivas.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "most_frequent_pairs",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Encontra os pares mais frequentes na lista.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      },
+      {
+        "nome": "cluster_by_diff",
+        "args": [
+          "lst",
+          "max_diff"
+        ],
+        "docstring": "Agrupa números que estão próximos uns dos outros.",
+        "modulo": "analise_padroes",
+        "caminho": "lib/funcoes_analiticas/analise_padroes.py"
+      }
+    ],
+    "estatisticas": [
+      {
+        "nome": "unique_count",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta o número de elementos únicos em uma lista.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "intersection",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Retorna os elementos em comum entre duas listas.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "union",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Retorna a união de elementos de duas listas.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "difference",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Retorna os elementos de lst1 que não estão em lst2.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "symmetric_difference",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Retorna os elementos que estão em lst1 ou lst2, mas não em ambos.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "mirror_count",
+        "args": [
+          "lst",
+          "total"
+        ],
+        "docstring": "Conta os números que têm um 'espelho' na lista (e.g., total - x).",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "pair_sum_count",
+        "args": [
+          "lst",
+          "target"
+        ],
+        "docstring": "Conta os pares de números que somam um valor alvo.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "pair_product_count",
+        "args": [
+          "lst",
+          "target"
+        ],
+        "docstring": "Conta os pares de números que multiplicados dão um valor alvo.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "count_even",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta números pares na lista.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      },
+      {
+        "nome": "count_odd",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta números ímpares na lista.",
+        "modulo": "estatisticas",
+        "caminho": "lib/funcoes_analiticas/estatisticas.py"
+      }
+    ],
+    "sequencias": [
+      {
+        "nome": "diff",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Diferença entre elementos consecutivos (x₂ - x₁).",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      },
+      {
+        "nome": "diff_abs",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Diferença absoluta entre elementos consecutivos.",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      },
+      {
+        "nome": "ratio_consecutive",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Razão simples entre elementos consecutivos (x₂ / x₁).",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      },
+      {
+        "nome": "rolling_sum",
+        "args": [
+          "lst",
+          "window"
+        ],
+        "docstring": "Soma em janela deslizante.",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      },
+      {
+        "nome": "rolling_mean",
+        "args": [
+          "lst",
+          "window"
+        ],
+        "docstring": "Média em janela deslizante.",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      },
+      {
+        "nome": "rolling_std",
+        "args": [
+          "lst",
+          "window"
+        ],
+        "docstring": "Desvio padrão em janela deslizante.",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      },
+      {
+        "nome": "rank_array",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Ranking dos elementos de uma lista.",
+        "modulo": "sequencias",
+        "caminho": "lib/funcoes_analiticas/sequencias.py"
+      }
+    ],
+    "algebra_simbolica": [
+      {
+        "nome": "sym_derivative",
+        "args": [
+          "expr"
+        ],
+        "docstring": "Calcula a derivada de uma expressão simbólica.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_integral",
+        "args": [
+          "expr"
+        ],
+        "docstring": "Calcula a integral indefinida de uma expressão simbólica.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_series_expansion",
+        "args": [
+          "expr",
+          "n"
+        ],
+        "docstring": "Expande uma expressão em série de Taylor em torno de 0.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_limit",
+        "args": [
+          "expr",
+          "point"
+        ],
+        "docstring": "Calcula o limite de uma expressão no ponto dado.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_roots",
+        "args": [
+          "expr"
+        ],
+        "docstring": "Encontra as raízes de uma expressão.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_simplify",
+        "args": [
+          "expr"
+        ],
+        "docstring": "Simplifica uma expressão.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_expand",
+        "args": [
+          "expr"
+        ],
+        "docstring": "Expande uma expressão.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      },
+      {
+        "nome": "sym_factor",
+        "args": [
+          "expr"
+        ],
+        "docstring": "Fatora uma expressão.",
+        "modulo": "algebra_simbolica",
+        "caminho": "lib/funcoes_analiticas/algebra_simbolica.py"
+      }
+    ],
+    "manipulacao_dados": [
+      {
+        "nome": "fill_missing_values",
+        "args": [
+          "lst",
+          "strategy"
+        ],
+        "docstring": "Preenche valores ausentes (np.nan) em uma lista usando uma estratégia específica.\n\nArgs:\n    lst (List[float]): Lista de números com valores ausentes.\n    strategy (str): 'mean', 'median' ou 'mode'.\n    \nReturns:\n    List[float]: Lista com valores ausentes preenchidos.",
+        "modulo": "manipulacao_dados",
+        "caminho": "lib/funcoes_analiticas/manipulacao_dados.py"
+      },
+      {
+        "nome": "normalize_data",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Normaliza os dados para o intervalo [0, 1].\n\nRetorna 0 para todos os valores se todos forem iguais.",
+        "modulo": "manipulacao_dados",
+        "caminho": "lib/funcoes_analiticas/manipulacao_dados.py"
+      },
+      {
+        "nome": "standardize_data",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Padroniza os dados (média 0, desvio padrão 1).\n\nRetorna 0 para todos os valores se o desvio padrão for 0.",
+        "modulo": "manipulacao_dados",
+        "caminho": "lib/funcoes_analiticas/manipulacao_dados.py"
+      },
+      {
+        "nome": "get_dummies",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Converte uma lista de valores categóricos em variáveis dummy.\n\nArgs:\n    lst (List[Union[str,int]]): Lista de valores categóricos.\n    \nReturns:\n    pd.DataFrame: DataFrame com colunas dummy.",
+        "modulo": "manipulacao_dados",
+        "caminho": "lib/funcoes_analiticas/manipulacao_dados.py"
+      }
+    ],
+    "numeros_especiais": [
+      {
+        "nome": "fibonacci",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Fibonacci.",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "lucas",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Lucas.",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "catalan_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Catalan.",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "bell_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Bell.",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "partition_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o número de partições de n.",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "stirling2",
+        "args": [
+          "n",
+          "k"
+        ],
+        "docstring": "Retorna o número de Stirling de segunda espécie S(n, k).",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "stirling1",
+        "args": [
+          "n",
+          "k"
+        ],
+        "docstring": "Retorna o número de Stirling de primeira espécie s(n, k).",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      },
+      {
+        "nome": "bernoulli_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Bernoulli.",
+        "modulo": "numeros_especiais",
+        "caminho": "lib/funcoes_analiticas/numeros_especiais.py"
+      }
+    ],
+    "transformacoes": [
+      {
+        "nome": "floor_div",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a divisão inteira de dois números (floor division).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "ceil_div",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a divisão inteira arredondada para cima (ceil division).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "mod_inverse",
+        "args": [
+          "a",
+          "k"
+        ],
+        "docstring": "Calcula o inverso modular de 'a' mod 'k' (se existir).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "floor_val",
+        "args": [
+          "a"
+        ],
+        "docstring": "Retorna o maior inteiro menor ou igual a 'a'.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "ceil_val",
+        "args": [
+          "a"
+        ],
+        "docstring": "Retorna o menor inteiro maior ou igual a 'a'.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "sqrt_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação de raiz quadrada.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "cbrt_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação de raiz cúbica.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "square_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação de potência ao quadrado.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "cube_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação de potência ao cubo.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "exp_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação exponencial.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "reciprocal_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação recíproca (1/x).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "log_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação logarítmica (base e).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "log10_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação logarítmica (base 10).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "log_normalize",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Normalização com transformação logarítmica.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "sqrt_log_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação combinada: raiz da transformação logarítmica.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "sin_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação seno.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "cos_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação cosseno.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "tan_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação tangente.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "arcsin_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação arcoseno (normalizada pelo valor máximo).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "arccos_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação arccoseno (normalizada pelo valor máximo).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "arctan_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação arctangente.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "centered_sin",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Transformação seno centrada na média.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "mod_transform",
+        "args": [
+          "lst",
+          "m"
+        ],
+        "docstring": "Transformação de módulo (x % m).",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "minmax_normalize",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Normalização Min-Max.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      },
+      {
+        "nome": "zscore_normalize",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Normalização Z-Score.",
+        "modulo": "transformacoes",
+        "caminho": "lib/funcoes_analiticas/transformacoes.py"
+      }
+    ],
+    "deteccao_anomalias": [
+      {
+        "nome": "z_score_outliers",
+        "args": [
+          "lst",
+          "threshold"
+        ],
+        "docstring": "Detecta outliers usando o método de Z-score.\n\nArgs:\n    lst (List[float]): Lista de valores.\n    threshold (float): Limite de desvio padrão para considerar outlier.\n\nReturns:\n    List[float]: Lista de valores considerados outliers.",
+        "modulo": "deteccao_anomalias",
+        "caminho": "lib/funcoes_analiticas/deteccao_anomalias.py"
+      },
+      {
+        "nome": "iqr_outliers",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Detecta outliers usando o método do Intervalo Interquartil (IQR).\n\nArgs:\n    lst (List[float]): Lista de valores.\n\nReturns:\n    List[float]: Lista de valores considerados outliers.",
+        "modulo": "deteccao_anomalias",
+        "caminho": "lib/funcoes_analiticas/deteccao_anomalias.py"
+      },
+      {
+        "nome": "rolling_z_score",
+        "args": [
+          "lst",
+          "window",
+          "threshold"
+        ],
+        "docstring": "Detecta outliers usando um Z-score móvel.\n\nArgs:\n    lst (List[float]): Lista de valores.\n    window (int): Tamanho da janela móvel.\n    threshold (float): Limite de desvio padrão para considerar outlier.\n\nReturns:\n    List[float]: Lista de valores considerados outliers, sem duplicados.",
+        "modulo": "deteccao_anomalias",
+        "caminho": "lib/funcoes_analiticas/deteccao_anomalias.py"
+      }
+    ],
+    "grafos": [
+      {
+        "nome": "create_graph",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Cria um grafo completo a partir de uma lista de nós.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "num_nodes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o número de nós de um grafo criado a partir de uma lista.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "num_edges",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o número de arestas de um grafo completo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "node_degrees",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula os graus de cada nó em um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_degree",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o grau (número de conexões) de cada nó no grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_avg_degree",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o grau médio de todos os nós do grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "mean_degree",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o grau médio de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "std_degree",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o desvio padrão dos graus de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "is_complete",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Verifica se um grafo criado a partir da lista é completo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_density",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a densidade do grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_diameter",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o diâmetro do grafo (maior caminho mais curto).",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_connected_components_count",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta o número de componentes conectados no grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_connected_components",
+        "args": [
+          "G"
+        ],
+        "docstring": "Retorna os componentes conectados de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_triangle_count",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta o número de triângulos no grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "degree_centrality",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a centralidade de grau de cada nó.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "closeness_centrality_from_graph",
+        "args": [
+          "G"
+        ],
+        "docstring": "Calcula a centralidade de proximidade de um grafo existente.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "closeness_centrality_from_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a centralidade de proximidade de cada nó (grafo criado a partir da lista).",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "betweenness_centrality",
+        "args": [
+          "G"
+        ],
+        "docstring": "Calcula a centralidade de intermediação de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "eigenvector_centrality",
+        "args": [
+          "G"
+        ],
+        "docstring": "Calcula a centralidade de autovetor de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "pagerank_scores",
+        "args": [
+          "G",
+          "alpha"
+        ],
+        "docstring": "Calcula os scores de PageRank de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "shortest_paths_length",
+        "args": [
+          "G"
+        ],
+        "docstring": "Calcula os comprimentos dos caminhos mais curtos entre todos os pares de nós.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_eigenvalues",
+        "args": [
+          "G"
+        ],
+        "docstring": "Calcula os autovalores da matriz de adjacência de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      },
+      {
+        "nome": "graph_laplacian_spectrum",
+        "args": [
+          "G"
+        ],
+        "docstring": "Calcula o espectro Laplaciano de um grafo.",
+        "modulo": "grafos",
+        "caminho": "lib/funcoes_analiticas/grafos.py"
+      }
+    ],
+    "series_temporais": [
+      {
+        "nome": "arima_predict",
+        "args": [
+          "lst",
+          "order",
+          "steps"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "centered_moving_average",
+        "args": [
+          "lst",
+          "window"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "ewma",
+        "args": [
+          "lst",
+          "span"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "exp_weighted_mean",
+        "args": [
+          "lst",
+          "alpha"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "cumulative_sum",
+        "args": [
+          "lst"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "cumulative_product",
+        "args": [
+          "lst"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "normalized_cumsum",
+        "args": [
+          "lst"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "cumulative_max",
+        "args": [
+          "lst"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      },
+      {
+        "nome": "cumulative_min",
+        "args": [
+          "lst"
+        ],
+        "docstring": "",
+        "modulo": "series_temporais",
+        "caminho": "lib/funcoes_analiticas/series_temporais.py"
+      }
+    ],
+    "probabilidade": [
+      {
+        "nome": "poisson_pmf",
+        "args": [
+          "k",
+          "mu"
+        ],
+        "docstring": "Calcula a PMF da distribuição de Poisson.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "poisson_cdf",
+        "args": [
+          "k",
+          "mu"
+        ],
+        "docstring": "Calcula a CDF da distribuição de Poisson.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "poisson_var",
+        "args": [
+          "mu"
+        ],
+        "docstring": "Calcula a variância da distribuição de Poisson.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "poisson_entropy",
+        "args": [
+          "mu"
+        ],
+        "docstring": "Calcula a entropia da distribuição de Poisson.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "binomial_pmf",
+        "args": [
+          "k",
+          "n",
+          "p"
+        ],
+        "docstring": "Calcula a PMF da distribuição binomial.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "binomial_cdf",
+        "args": [
+          "k",
+          "n",
+          "p"
+        ],
+        "docstring": "Calcula a CDF da distribuição binomial.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "binomial_var",
+        "args": [
+          "n",
+          "p"
+        ],
+        "docstring": "Calcula a variância da distribuição binomial.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "binomial_entropy",
+        "args": [
+          "n",
+          "p"
+        ],
+        "docstring": "Calcula a entropia da distribuição binomial.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "normal_pdf",
+        "args": [
+          "x",
+          "mu",
+          "sigma"
+        ],
+        "docstring": "Calcula a PDF da distribuição normal.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "normal_cdf",
+        "args": [
+          "x",
+          "mu",
+          "sigma"
+        ],
+        "docstring": "Calcula a CDF da distribuição normal.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "normal_var",
+        "args": [
+          "sigma"
+        ],
+        "docstring": "Calcula a variância da distribuição normal.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "normal_entropy",
+        "args": [
+          "mu",
+          "sigma"
+        ],
+        "docstring": "Calcula a entropia da distribuição normal.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "exponential_pdf",
+        "args": [
+          "x",
+          "lmbda"
+        ],
+        "docstring": "Calcula a PDF da distribuição exponencial.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      },
+      {
+        "nome": "uniform_pdf",
+        "args": [
+          "x",
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a PDF da distribuição uniforme.",
+        "modulo": "probabilidade",
+        "caminho": "lib/funcoes_analiticas/probabilidade.py"
+      }
+    ],
+    "aritmetica": [
+      {
+        "nome": "add",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a soma de dois números.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "sub",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a subtração de dois números.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "mul",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a multiplicação de dois números.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "div",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a divisão de dois números, evitando divisão por zero.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "mod",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula o resto da divisão de dois números, evitando divisão por zero.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "pow_func",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a potência de um número.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "sqrt",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula a raiz quadrada de um número.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "cbrt",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula a raiz cúbica de um número.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "log_func",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula o logaritmo natural de um número, se for positivo.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "exp_func",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula o exponencial de um número.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "neg",
+        "args": [
+          "a"
+        ],
+        "docstring": "Retorna o negativo de um número.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "inv",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula o inverso de um número, se não for zero.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      },
+      {
+        "nome": "abs_val",
+        "args": [
+          "a"
+        ],
+        "docstring": "Calcula o valor absoluto de um número.",
+        "modulo": "aritmetica",
+        "caminho": "lib/funcoes_analiticas/aritmetica.py"
+      }
+    ],
+    "funcoes_especiais": [
+      {
+        "nome": "gamma_func",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula a função Gamma.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "beta_func",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a função Beta.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "zeta_func",
+        "args": [
+          "s"
+        ],
+        "docstring": "Calcula a função Zeta de Riemann.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "bessel_j",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula a função de Bessel de primeira espécie.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "legendre_poly",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula o polinómio de Legendre.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "chebyshev_T",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula o polinómio de Chebyshev de primeira espécie.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "chebyshev_U",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula o polinómio de Chebyshev de segunda espécie.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "hermite_poly",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula o polinómio de Hermite.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "laguerre_poly",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula o polinómio de Laguerre.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "discrete_convolution",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Calcula a convolução discreta de duas listas.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      },
+      {
+        "nome": "cross_correlation",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Calcula a correlação cruzada de duas listas.",
+        "modulo": "funcoes_especiais",
+        "caminho": "lib/funcoes_analiticas/funcoes_especiais.py"
+      }
+    ],
+    "analise_primos": [
+      {
+        "nome": "primes_in_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Filtra e retorna os números primos de uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "count_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta a quantidade de números primos em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "count_primes_below",
+        "args": [
+          "lst",
+          "limit"
+        ],
+        "docstring": "Conta os primos abaixo de um limite.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "count_primes_above",
+        "args": [
+          "lst",
+          "limit"
+        ],
+        "docstring": "Conta os primos acima de um limite.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "sum_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a soma dos números primos em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "mean_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a média dos números primos em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "median_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a mediana dos números primos em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "max_prime",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o maior número primo em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "min_prime",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o menor número primo em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "range_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a diferença entre o maior e o menor primo.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "prime_near_mean",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o número primo mais próximo da média da lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "next_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o próximo número primo de cada elemento.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "prime_gaps",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula os gaps (diferenças) entre números primos consecutivos.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "sum_prime_gaps",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a soma dos gaps entre números primos.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "odd_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna os números primos ímpares de uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "square_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Retorna o quadrado de cada número primo em uma lista.",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      },
+      {
+        "nome": "prime_binary",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Cria uma representação binária (1=primo, 0=não primo).",
+        "modulo": "analise_primos",
+        "caminho": "lib/funcoes_analiticas/analise_primos.py"
+      }
+    ],
+    "wavelets": [
+      {
+        "nome": "wavelet_dwt",
+        "args": [
+          "data",
+          "wavelet"
+        ],
+        "docstring": "Aplica a Transformada Discreta de Wavelet (DWT) de nível 1.",
+        "modulo": "wavelets",
+        "caminho": "lib/funcoes_analiticas/wavelets.py"
+      },
+      {
+        "nome": "wavelet_idwt",
+        "args": [
+          "cA",
+          "cD",
+          "wavelet"
+        ],
+        "docstring": "Aplica a Transformada Discreta de Wavelet Inversa (IDWT) de nível 1.",
+        "modulo": "wavelets",
+        "caminho": "lib/funcoes_analiticas/wavelets.py"
+      },
+      {
+        "nome": "wavelet_wavedec",
+        "args": [
+          "data",
+          "level",
+          "wavelet"
+        ],
+        "docstring": "Aplica a decomposição de wavelet multinível.",
+        "modulo": "wavelets",
+        "caminho": "lib/funcoes_analiticas/wavelets.py"
+      },
+      {
+        "nome": "wavelet_waverec",
+        "args": [
+          "coeffs",
+          "wavelet"
+        ],
+        "docstring": "Reconstrói um sinal a partir dos coeficientes de wavelet.",
+        "modulo": "wavelets",
+        "caminho": "lib/funcoes_analiticas/wavelets.py"
+      },
+      {
+        "nome": "wavelet_energy",
+        "args": [
+          "data",
+          "wavelet"
+        ],
+        "docstring": "Calcula a energia total de um sinal em diferentes níveis de wavelet.",
+        "modulo": "wavelets",
+        "caminho": "lib/funcoes_analiticas/wavelets.py"
+      }
+    ],
+    "teoria_numeros": [
+      {
+        "nome": "euler_totient",
+        "args": [
+          "n"
+        ],
+        "docstring": "Calcula a função totiente de Euler.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "factor_integer",
+        "args": [
+          "n"
+        ],
+        "docstring": "Fatora um número em seus fatores primos.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "prime_factors",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna os fatores primos únicos de um número.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "prime_factor_count",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o número de fatores primos únicos de um número.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "largest_prime_factor",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o maior fator primo de um número.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "smallest_prime_factor",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o menor fator primo de um número.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "gcd_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o Máximo Divisor Comum (MDC) de uma lista de números.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "lcm_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o Mínimo Múltiplo Comum (MMC) de uma lista de números.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "check_prime",
+        "args": [
+          "n"
+        ],
+        "docstring": "Verifica se um número é primo.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "count_primes_upto",
+        "args": [
+          "n"
+        ],
+        "docstring": "Conta o número de primos até n.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "next_prime_num",
+        "args": [
+          "n"
+        ],
+        "docstring": "Encontra o próximo número primo após n.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "prev_prime_num",
+        "args": [
+          "n"
+        ],
+        "docstring": "Encontra o número primo anterior a n.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "generate_primes",
+        "args": [
+          "n"
+        ],
+        "docstring": "Gera uma lista de primos até n.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "fibonacci_num",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Fibonacci.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "lucas_num",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Lucas.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "catalan_num",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Catalan.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "bell_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Bell.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "partition_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o número de partições de n.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      },
+      {
+        "nome": "bernoulli_number",
+        "args": [
+          "n"
+        ],
+        "docstring": "Retorna o n-ésimo número de Bernoulli.",
+        "modulo": "teoria_numeros",
+        "caminho": "lib/funcoes_analiticas/teoria_numeros.py"
+      }
+    ],
+    "criptografia": [
+      {
+        "nome": "generate_key",
+        "args": [],
+        "docstring": "Gera uma chave de criptografia Fernet e armazena globalmente.\n\nReturns:\n    str: Chave gerada como string.",
+        "modulo": "criptografia",
+        "caminho": "lib/funcoes_analiticas/criptografia.py"
+      },
+      {
+        "nome": "encrypt_data",
+        "args": [
+          "data"
+        ],
+        "docstring": "Criptografa dados usando a chave Fernet armazenada.\n\nArgs:\n    data (str | bytes): Dados a criptografar.\n\nReturns:\n    bytes: Dados criptografados.\n\nRaises:\n    RuntimeError: Se a chave não foi gerada.",
+        "modulo": "criptografia",
+        "caminho": "lib/funcoes_analiticas/criptografia.py"
+      },
+      {
+        "nome": "decrypt_data",
+        "args": [
+          "token"
+        ],
+        "docstring": "Descriptografa dados usando a chave Fernet armazenada.\n\nArgs:\n    token (bytes): Dados criptografados.\n\nReturns:\n    str: Dados descriptografados.\n\nRaises:\n    RuntimeError: Se a chave não foi gerada.",
+        "modulo": "criptografia",
+        "caminho": "lib/funcoes_analiticas/criptografia.py"
+      }
+    ],
+    "temporais": [
+      {
+        "nome": "lag_series",
+        "args": [
+          "lst",
+          "lag"
+        ],
+        "docstring": "Calcula a diferença entre elementos com um certo atraso (lag).",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      },
+      {
+        "nome": "fft_magnitude",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a magnitude da Transformada Rápida de Fourier (FFT).",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      },
+      {
+        "nome": "fft_phase",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a fase da Transformada Rápida de Fourier (FFT).",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      },
+      {
+        "nome": "ifft_real",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a Transformada Inversa de Fourier (IFFT) e retorna a parte real.",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      },
+      {
+        "nome": "dominant_frequency",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Encontra o índice da frequência dominante em uma lista.",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      },
+      {
+        "nome": "autocorr",
+        "args": [
+          "lst",
+          "lag"
+        ],
+        "docstring": "Calcula a autocorrelação de uma lista em um determinado atraso.",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      },
+      {
+        "nome": "autocorr_series",
+        "args": [
+          "lst",
+          "max_lag"
+        ],
+        "docstring": "Calcula a série de autocorrelação para múltiplos atrasos.",
+        "modulo": "temporais",
+        "caminho": "lib/funcoes_analiticas/temporais.py"
+      }
+    ],
+    "geometria": [
+      {
+        "nome": "euclidean_dist",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a distância euclidiana entre dois pontos.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "manhattan_dist",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a distância de Manhattan entre dois pontos.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "chebyshev_dist",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a distância de Chebyshev entre dois pontos.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "cosine_dist",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a distância do cosseno entre dois vetores.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "hamming_dist_str",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a distância de Hamming entre duas strings.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "levenshtein_dist",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula a distância de Levenshtein entre duas strings.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "jaccard_index",
+        "args": [
+          "a",
+          "b"
+        ],
+        "docstring": "Calcula o índice de Jaccard entre dois conjuntos.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      },
+      {
+        "nome": "centroid",
+        "args": [
+          "points"
+        ],
+        "docstring": "Calcula o centroide de um conjunto de pontos.",
+        "modulo": "geometria",
+        "caminho": "lib/funcoes_analiticas/geometria.py"
+      }
+    ],
+    "simulacao": [
+      {
+        "nome": "sample_binomial",
+        "args": [
+          "n",
+          "p",
+          "size"
+        ],
+        "docstring": "Gera uma amostra de uma distribuição Binomial.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "sample_poisson",
+        "args": [
+          "lam",
+          "size"
+        ],
+        "docstring": "Gera uma amostra de uma distribuição de Poisson.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "sample_normal",
+        "args": [
+          "mu",
+          "sigma",
+          "size"
+        ],
+        "docstring": "Gera uma amostra de uma distribuição Normal.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "monte_carlo_sum",
+        "args": [
+          "target_sum",
+          "trials"
+        ],
+        "docstring": "Calcula a probabilidade de atingir uma soma alvo em amostras aleatórias.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "monte_carlo_even_ratio",
+        "args": [
+          "trials"
+        ],
+        "docstring": "Simula a proporção média de números pares em amostras aleatórias.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "monte_carlo_prime_ratio",
+        "args": [
+          "trials"
+        ],
+        "docstring": "Simula a proporção média de números primos em amostras aleatórias.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "monte_carlo_max",
+        "args": [
+          "trials"
+        ],
+        "docstring": "Simula os valores máximos de amostras aleatórias.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "monte_carlo_min",
+        "args": [
+          "trials"
+        ],
+        "docstring": "Simula os valores mínimos de amostras aleatórias.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "monte_carlo_multistep",
+        "args": [
+          "lst",
+          "steps",
+          "trials"
+        ],
+        "docstring": "Simulação Monte Carlo multi-passos, selecionando elementos aleatórios.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      },
+      {
+        "nome": "metropolis_hastings",
+        "args": [
+          "target_func",
+          "start",
+          "iterations",
+          "proposal_std"
+        ],
+        "docstring": "Geração de amostras MCMC usando o algoritmo Metropolis-Hastings.",
+        "modulo": "simulacao",
+        "caminho": "lib/funcoes_analiticas/simulacao.py"
+      }
+    ],
+    "plots": [
+      {
+        "nome": "plot_histogram",
+        "args": [
+          "data",
+          "title",
+          "bins",
+          "color"
+        ],
+        "docstring": "Plota um histograma de uma lista de dados.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      },
+      {
+        "nome": "plot_scatter",
+        "args": [
+          "x",
+          "y",
+          "title",
+          "color"
+        ],
+        "docstring": "Plota um gráfico de dispersão de dois conjuntos de dados.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      },
+      {
+        "nome": "plot_boxplot",
+        "args": [
+          "data",
+          "title"
+        ],
+        "docstring": "Plota um boxplot para visualizar a distribuição e outliers.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      },
+      {
+        "nome": "plot_time_series",
+        "args": [
+          "series",
+          "title",
+          "color"
+        ],
+        "docstring": "Plota uma série temporal.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      },
+      {
+        "nome": "rolling_mean_plot",
+        "args": [
+          "lst",
+          "window"
+        ],
+        "docstring": "Plota a média móvel de uma lista.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      },
+      {
+        "nome": "cumulative_sum_plot",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Plota a soma cumulativa de uma lista.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      },
+      {
+        "nome": "heatmap_pairs",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Cria um mapa de calor para a frequência de pares.",
+        "modulo": "plots",
+        "caminho": "lib/funcoes_analiticas/plots.py"
+      }
+    ],
+    "modelagem_preditiva": [
+      {
+        "nome": "linear_regression_predict",
+        "args": [
+          "lst",
+          "steps"
+        ],
+        "docstring": "Prediz o próximo valor de uma lista usando regressão linear.",
+        "modulo": "modelagem_preditiva",
+        "caminho": "lib/funcoes_analiticas/modelagem_preditiva.py"
+      },
+      {
+        "nome": "poly_regression_predict",
+        "args": [
+          "lst",
+          "degree",
+          "steps"
+        ],
+        "docstring": "Prediz o próximo valor de uma lista usando regressão polinomial.",
+        "modulo": "modelagem_preditiva",
+        "caminho": "lib/funcoes_analiticas/modelagem_preditiva.py"
+      },
+      {
+        "nome": "regression_on_frequency",
+        "args": [
+          "lst",
+          "steps"
+        ],
+        "docstring": "Aplica regressão linear na frequência cumulativa de uma lista.",
+        "modulo": "modelagem_preditiva",
+        "caminho": "lib/funcoes_analiticas/modelagem_preditiva.py"
+      },
+      {
+        "nome": "linear_regression_coeffs",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula os coeficientes de regressão linear (inclinação e interceptação).",
+        "modulo": "modelagem_preditiva",
+        "caminho": "lib/funcoes_analiticas/modelagem_preditiva.py"
+      },
+      {
+        "nome": "predict_linear",
+        "args": [
+          "x",
+          "m",
+          "c"
+        ],
+        "docstring": "Prediz valores usando uma equação de regressão linear.",
+        "modulo": "modelagem_preditiva",
+        "caminho": "lib/funcoes_analiticas/modelagem_preditiva.py"
+      },
+      {
+        "nome": "regression_score",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a pontuação de ajuste de regressão linear (negativo do MSE).",
+        "modulo": "modelagem_preditiva",
+        "caminho": "lib/funcoes_analiticas/modelagem_preditiva.py"
+      }
+    ],
+    "teoria_informacao": [
+      {
+        "nome": "shannon_entropy",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a entropia de Shannon de uma distribuição de probabilidade.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      },
+      {
+        "nome": "normalized_entropy",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a entropia de Shannon normalizada.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      },
+      {
+        "nome": "mutual_info",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a informação mútua entre duas listas.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      },
+      {
+        "nome": "normalized_mutual_info",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a informação mútua normalizada.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      },
+      {
+        "nome": "kl_divergence",
+        "args": [
+          "p",
+          "q"
+        ],
+        "docstring": "Calcula a divergência de Kullback-Leibler entre duas distribuições.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      },
+      {
+        "nome": "jensen_shannon",
+        "args": [
+          "p",
+          "q"
+        ],
+        "docstring": "Calcula a divergência de Jensen-Shannon entre duas distribuições.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      },
+      {
+        "nome": "gini_impurity",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a impureza de Gini de uma distribuição.",
+        "modulo": "teoria_informacao",
+        "caminho": "lib/funcoes_analiticas/teoria_informacao.py"
+      }
+    ],
+    "processamento_sinal": [
+      {
+        "nome": "fft_real",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a magnitude da FFT de uma lista.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "fft_phase",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a fase da FFT de uma lista.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "fft_log",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a FFT da lista transformada em log.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "fft_sqrt",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a FFT da raiz quadrada da lista.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "fft_normalized",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a FFT normalizada da lista.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "ifft_real",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a parte real da IFFT.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "fft_frequencies",
+        "args": [
+          "n",
+          "sample_rate"
+        ],
+        "docstring": "Retorna as frequências correspondentes à FFT.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "apply_lowpass",
+        "args": [
+          "lst",
+          "cutoff",
+          "order"
+        ],
+        "docstring": "Aplica um filtro passa-baixa Butterworth.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "apply_highpass",
+        "args": [
+          "lst",
+          "cutoff",
+          "order"
+        ],
+        "docstring": "Aplica um filtro passa-alta Butterworth.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "apply_bandpass",
+        "args": [
+          "lst",
+          "low",
+          "high",
+          "order"
+        ],
+        "docstring": "Aplica um filtro passa-faixa Butterworth.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "wavelet_decompose",
+        "args": [
+          "lst",
+          "wavelet",
+          "level"
+        ],
+        "docstring": "Decompõe uma lista em coeficientes de Wavelet (DWT).",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "wavelet_reconstruct",
+        "args": [
+          "coeffs",
+          "wavelet"
+        ],
+        "docstring": "Reconstrói uma lista a partir de coeficientes de Wavelet.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "dwt_approx",
+        "args": [
+          "lst",
+          "wavelet"
+        ],
+        "docstring": "Retorna apenas os coeficientes de aproximação da DWT.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "dwt_detail",
+        "args": [
+          "lst",
+          "wavelet"
+        ],
+        "docstring": "Retorna os coeficientes de detalhe da DWT.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "hilbert_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a Transformada de Hilbert (magnitude).",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "savgol_smooth",
+        "args": [
+          "lst",
+          "window",
+          "poly"
+        ],
+        "docstring": "Aplica filtro de Savitzky-Golay para suavização.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "stft_transform",
+        "args": [
+          "lst",
+          "fs"
+        ],
+        "docstring": "Aplica a Transformada de Fourier de Curto Prazo (STFT).",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "istft_transform",
+        "args": [
+          "Z",
+          "fs"
+        ],
+        "docstring": "Reconstrói sinal a partir da STFT (ISTFT).",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "welch_psd",
+        "args": [
+          "lst",
+          "fs"
+        ],
+        "docstring": "Calcula o Power Spectral Density pelo método de Welch.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "periodogram_psd",
+        "args": [
+          "lst",
+          "fs"
+        ],
+        "docstring": "Calcula o Power Spectral Density pelo periodograma.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "spectral_energy",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a energia total do espectro.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "spectral_entropy",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a entropia espectral do sinal.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "find_signal_peaks",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Encontra os índices dos picos no sinal.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "detect_cycle_length",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Detecta o comprimento do ciclo repetitivo mais curto.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "butter_lowpass",
+        "args": [
+          "cutoff",
+          "fs",
+          "order"
+        ],
+        "docstring": "Retorna coeficientes de filtro Butterworth passa-baixa.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      },
+      {
+        "nome": "filter_signal",
+        "args": [
+          "b",
+          "a",
+          "x"
+        ],
+        "docstring": "Filtra um sinal usando os coeficientes b e a.",
+        "modulo": "processamento_sinal",
+        "caminho": "lib/funcoes_analiticas/processamento_sinal.py"
+      }
+    ],
+    "estatistica_multivariada": [
+      {
+        "nome": "covariance_matrix",
+        "args": [
+          "X"
+        ],
+        "docstring": "Calcula a matriz de covariância de um conjunto de dados.\n\nArgs:\n    X (List[List[float]]): Matriz de dados, linhas = amostras, colunas = variáveis.\n\nReturns:\n    List[List[float]]: Matriz de covariância.",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      },
+      {
+        "nome": "correlation_matrix",
+        "args": [
+          "X"
+        ],
+        "docstring": "Calcula a matriz de correlação de um conjunto de dados.\n\nArgs:\n    X (List[List[float]]): Matriz de dados, linhas = amostras, colunas = variáveis.\n\nReturns:\n    List[List[float]]: Matriz de correlação.",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      },
+      {
+        "nome": "mutual_info",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a informação mútua entre duas variáveis discretas.\n\nArgs:\n    x (List[int]): Primeira variável discreta.\n    y (List[int]): Segunda variável discreta.\n\nReturns:\n    float: Informação mútua.",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      },
+      {
+        "nome": "normalized_mutual_info",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a informação mútua normalizada entre duas variáveis discretas.\n\nArgs:\n    x (List[int]): Primeira variável discreta.\n    y (List[int]): Segunda variável discreta.\n\nReturns:\n    float: Informação mútua normalizada.",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      },
+      {
+        "nome": "silhouette",
+        "args": [
+          "X",
+          "labels"
+        ],
+        "docstring": "Calcula o coeficiente de silhueta para avaliar a qualidade de um agrupamento.\n\nArgs:\n    X (List[List[float]]): Matriz de dados.\n    labels (List[int]): Rótulos de cluster para cada ponto.\n\nReturns:\n    float: Coeficiente de silhueta.",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      },
+      {
+        "nome": "pca_eigenvalues",
+        "args": [
+          "X"
+        ],
+        "docstring": "Calcula os autovalores da matriz de covariância para a Análise de Componentes Principais (PCA).\n\nArgs:\n    X (List[List[float]]): Matriz de dados.\n\nReturns:\n    List[float]: Autovalores da matriz de covariância.",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      },
+      {
+        "nome": "gini_index",
+        "args": [
+          "values"
+        ],
+        "docstring": "Calcula o índice de Gini para medir a desigualdade.\n\nArgs:\n    values (List[float]): Lista de valores.\n\nReturns:\n    float: Índice de Gini (0 = igualdade perfeita, 1 = desigualdade máxima).",
+        "modulo": "estatistica_multivariada",
+        "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py"
+      }
+    ],
+    "matematica_especial": [
+      {
+        "nome": "gamma_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Aplica a função Gamma a cada elemento positivo da lista.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "bessel_j_list",
+        "args": [
+          "lst",
+          "n"
+        ],
+        "docstring": "Calcula a função de Bessel de primeira espécie para uma lista.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "euler_totient",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a função totiente de Euler para cada elemento positivo.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "sum_divisors",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a soma dos divisores de cada elemento.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "gamma_func",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula a função Gamma.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "loggamma_func",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula o logaritmo da função Gamma.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "digamma_func",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula a função Digamma.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "beta_func",
+        "args": [
+          "x",
+          "y"
+        ],
+        "docstring": "Calcula a função Beta.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "bessel_j",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula a função de Bessel de primeira espécie.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "bessel_y",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Calcula a função de Bessel de segunda espécie.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "bessel_j0",
+        "args": [
+          "x"
+        ],
+        "docstring": "Função de Bessel de primeira espécie de ordem 0.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "bessel_y0",
+        "args": [
+          "x"
+        ],
+        "docstring": "Função de Bessel de segunda espécie de ordem 0.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "error_func",
+        "args": [
+          "x"
+        ],
+        "docstring": "Função de erro (erf).",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "error_func_c",
+        "args": [
+          "x"
+        ],
+        "docstring": "Função de erro complementar (erfc).",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "elliptic_j",
+        "args": [
+          "u",
+          "m"
+        ],
+        "docstring": "Funções elípticas de Jacobi (sn, cn, dn).",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "legendre_p",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Polinômio de Legendre de ordem n.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "chebyshev_t",
+        "args": [
+          "n",
+          "x"
+        ],
+        "docstring": "Polinômio de Chebyshev de primeira espécie de ordem n.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "airy_ai",
+        "args": [
+          "x"
+        ],
+        "docstring": "Função Airy Ai.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      },
+      {
+        "nome": "airy_bi",
+        "args": [
+          "x"
+        ],
+        "docstring": "Função Airy Bi.",
+        "modulo": "matematica_especial",
+        "caminho": "lib/funcoes_analiticas/matematica_especial.py"
+      }
+    ],
+    "exploracao": [
+      {
+        "nome": "linear_trend_slope",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a inclinação da tendência linear de uma lista.",
+        "modulo": "exploracao",
+        "caminho": "lib/funcoes_analiticas/exploracao.py"
+      },
+      {
+        "nome": "successive_diff",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a diferença entre elementos sucessivos.",
+        "modulo": "exploracao",
+        "caminho": "lib/funcoes_analiticas/exploracao.py"
+      }
+    ],
+    "ia_heuristica": [
+      {
+        "nome": "mutate_list",
+        "args": [
+          "lst",
+          "mutation_rate",
+          "max_val"
+        ],
+        "docstring": "Aplica mutação a uma lista, trocando elementos aleatoriamente.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "crossover_lists",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Combina duas listas em um ponto de cruzamento.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "fitness_sum",
+        "args": [
+          "lst",
+          "target"
+        ],
+        "docstring": "Calcula o 'fitness' de uma lista com base em sua soma.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "fitness_even_ratio",
+        "args": [
+          "lst",
+          "target_ratio"
+        ],
+        "docstring": "Calcula o 'fitness' com base na proporção de números pares.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "select_best_population",
+        "args": [
+          "population",
+          "fitness_func",
+          "k"
+        ],
+        "docstring": "Seleciona a melhor parte de uma população com base em uma função de fitness.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "combined_score",
+        "args": [
+          "lst",
+          "heuristics"
+        ],
+        "docstring": "Combina o score de múltiplas heurísticas para uma lista.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "weighted_score",
+        "args": [
+          "lst",
+          "heuristics",
+          "weights"
+        ],
+        "docstring": "Calcula o score combinado de heurísticas com pesos.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "rank_heuristics",
+        "args": [
+          "lst",
+          "heuristics"
+        ],
+        "docstring": "Classifica heurísticas com base em seu desempenho em uma lista.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "generate_heuristic_from_library",
+        "args": [
+          "lst",
+          "funcs"
+        ],
+        "docstring": "Executa uma heurística aleatória da biblioteca.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "integrated_heuristic_test",
+        "args": [
+          "lst",
+          "heuristics"
+        ],
+        "docstring": "Testa e retorna heurísticas ordenadas por score.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "top_k_integrated",
+        "args": [
+          "lst",
+          "heuristics",
+          "k"
+        ],
+        "docstring": "Retorna as top K heurísticas integradas.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "generate_new_combined_heuristic",
+        "args": [
+          "heuristics",
+          "transforms"
+        ],
+        "docstring": "Gera uma nova heurística combinando uma função com uma transformação.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "stochastic_score",
+        "args": [
+          "lst",
+          "heuristics",
+          "trials"
+        ],
+        "docstring": "Calcula o score estocástico de uma lista.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "combined_stochastic_score",
+        "args": [
+          "lst",
+          "heuristics",
+          "weights",
+          "trials"
+        ],
+        "docstring": "Calcula o score estocástico combinado com pesos.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "random_selection",
+        "args": [
+          "lst",
+          "k"
+        ],
+        "docstring": "Seleciona k elementos aleatórios de uma lista.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "weighted_choice",
+        "args": [
+          "lst",
+          "weights"
+        ],
+        "docstring": "Faz uma escolha aleatória de um elemento com base em pesos.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "shuffle_sum",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Embaralha a lista e retorna a soma de seus elementos.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "shuffle_product",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Embaralha a lista e retorna o produto de seus elementos.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "random_mean",
+        "args": [
+          "lst",
+          "k",
+          "trials"
+        ],
+        "docstring": "Calcula a média de múltiplas seleções aleatórias de k elementos.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      },
+      {
+        "nome": "random_cumsum",
+        "args": [
+          "lst",
+          "k",
+          "trials"
+        ],
+        "docstring": "Calcula a soma de k elementos selecionados aleatoriamente, repetindo por N testes.",
+        "modulo": "ia_heuristica",
+        "caminho": "lib/funcoes_analiticas/ia_heuristica.py"
+      }
+    ],
+    "machine_learning": [
+      {
+        "nome": "mse",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula o Erro Quadrático Médio (MSE).",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "rmse",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula a Raiz do Erro Quadrático Médio (RMSE).",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "mae",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula o Erro Absoluto Médio (MAE).",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "r2",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula o coeficiente de determinação R².",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "accuracy",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula a acurácia para tarefas de classificação.",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "f1",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula a pontuação F1 (macro-média).",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "precision",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula a precisão (macro-média).",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      },
+      {
+        "nome": "recall",
+        "args": [
+          "y_true",
+          "y_pred"
+        ],
+        "docstring": "Calcula o recall (macro-média).",
+        "modulo": "machine_learning",
+        "caminho": "lib/funcoes_analiticas/machine_learning.py"
+      }
+    ],
+    "algebra_linear": [
+      {
+        "nome": "matrix_determinant",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula o determinante de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_rank",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula o posto de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_inverse",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula a inversa de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_trace",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula o traço de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_condition_number",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula o número de condição de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_norm_fro",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula a norma de Frobenius de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_norm_inf",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula a norma do infinito de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_eigenvalues",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula os autovalores de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_eigenvectors",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula os autovetores de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "solve_linear_system",
+        "args": [
+          "A",
+          "b"
+        ],
+        "docstring": "Resolve um sistema de equações lineares Ax=b.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "cholesky_decomposition",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Realiza a decomposição de Cholesky.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "qr_decomposition",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Realiza a decomposição QR.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "svd_u",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Retorna a matriz U da SVD.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "svd_s",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Retorna os valores singulares da SVD.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      },
+      {
+        "nome": "matrix_pinv",
+        "args": [
+          "mat"
+        ],
+        "docstring": "Calcula a pseudoinversa de uma matriz.",
+        "modulo": "algebra_linear",
+        "caminho": "lib/funcoes_analiticas/algebra_linear.py"
+      }
+    ],
+    "analise_numerica": [
+      {
+        "nome": "laplace_transform",
+        "args": [
+          "f",
+          "a"
+        ],
+        "docstring": "Calcula a transformada de Laplace de uma função.",
+        "modulo": "analise_numerica",
+        "caminho": "lib/funcoes_analiticas/analise_numerica.py"
+      },
+      {
+        "nome": "z_transform",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula a transformada Z de uma sequência discreta.",
+        "modulo": "analise_numerica",
+        "caminho": "lib/funcoes_analiticas/analise_numerica.py"
+      },
+      {
+        "nome": "airy_func",
+        "args": [
+          "x"
+        ],
+        "docstring": "Calcula a função Airy.",
+        "modulo": "analise_numerica",
+        "caminho": "lib/funcoes_analiticas/analise_numerica.py"
+      },
+      {
+        "nome": "product_primes",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o produto dos números primos numa lista.",
+        "modulo": "analise_numerica",
+        "caminho": "lib/funcoes_analiticas/analise_numerica.py"
+      },
+      {
+        "nome": "product_prime_gaps",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Calcula o produto dos gaps entre primos numa lista.",
+        "modulo": "analise_numerica",
+        "caminho": "lib/funcoes_analiticas/analise_numerica.py"
+      }
+    ],
+    "combinatoria_avancada": [
+      {
+        "nome": "combinations_sum",
+        "args": [
+          "lst",
+          "r"
+        ],
+        "docstring": "Soma todas as combinações de r elementos da lista.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "permutations_sum",
+        "args": [
+          "lst",
+          "r"
+        ],
+        "docstring": "Soma todas as permutações de r elementos da lista.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "sum_combinations2",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Soma de todas as combinações de 2 elementos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "sum_combinations3",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Soma de todas as combinações de 3 elementos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "sum_permutations2",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Soma de todas as permutações de 2 elementos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "prod_combinations2",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Produto das somas de todas as combinações de 2 elementos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "prod_permutations2",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Produto das somas de todas as permutações de 2 elementos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "max_diff_combinations",
+        "args": [
+          "lst",
+          "k"
+        ],
+        "docstring": "Diferença entre a soma máxima e mínima das combinações.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "mean_combinations2",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Média das somas de todas as combinações de 2 elementos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "reduce_sum",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Soma de uma lista usando reduce.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "reduce_prod",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Produto de uma lista usando reduce.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "reduce_max",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Máximo de uma lista usando reduce.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "prod_ratio",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Produto das proporções entre elementos consecutivos.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "conditional_permutations",
+        "args": [
+          "lst",
+          "condition"
+        ],
+        "docstring": "Permutações que satisfazem uma condição.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "combinations_with_sum",
+        "args": [
+          "lst",
+          "target"
+        ],
+        "docstring": "Combinações cuja soma é igual ao valor alvo.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "count_combinations_with_sum",
+        "args": [
+          "lst",
+          "target"
+        ],
+        "docstring": "Conta combinações cuja soma é igual ao valor alvo.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "product_sum",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Soma dos pares do produto cartesiano de duas listas.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "product_prod",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Produto dos pares do produto cartesiano de duas listas.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "product_sum_square",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Quadrado da soma de cada par do produto cartesiano.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "product_prod_square",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Quadrado do produto de cada par do produto cartesiano.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "combination_count",
+        "args": [
+          "n",
+          "k"
+        ],
+        "docstring": "Número exato de combinações.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "permutation_count",
+        "args": [
+          "n",
+          "k"
+        ],
+        "docstring": "Número exato de permutações.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      },
+      {
+        "nome": "factorial_list",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Fatorial de cada elemento de uma lista.",
+        "modulo": "combinatoria_avancada",
+        "caminho": "lib/funcoes_analiticas/combinatoria_avancada.py"
+      }
+    ],
+    "algoritmos_grafos": [
+      {
+        "nome": "dijkstra_path",
+        "args": [
+          "G",
+          "source",
+          "target",
+          "weight"
+        ],
+        "docstring": "Encontra o caminho mais curto entre origem e destino (Dijkstra).",
+        "modulo": "algoritmos_grafos",
+        "caminho": "lib/funcoes_analiticas/algoritmos_grafos.py"
+      },
+      {
+        "nome": "dijkstra_length",
+        "args": [
+          "G",
+          "source",
+          "target",
+          "weight"
+        ],
+        "docstring": "Calcula o comprimento do caminho mais curto entre origem e destino (Dijkstra).",
+        "modulo": "algoritmos_grafos",
+        "caminho": "lib/funcoes_analiticas/algoritmos_grafos.py"
+      },
+      {
+        "nome": "shortest_path_all_pairs",
+        "args": [
+          "G"
+        ],
+        "docstring": "Encontra o comprimento do caminho mais curto entre todos os pares de nós.",
+        "modulo": "algoritmos_grafos",
+        "caminho": "lib/funcoes_analiticas/algoritmos_grafos.py"
+      },
+      {
+        "nome": "is_connected",
+        "args": [
+          "G"
+        ],
+        "docstring": "Verifica se o grafo é conexo.",
+        "modulo": "algoritmos_grafos",
+        "caminho": "lib/funcoes_analiticas/algoritmos_grafos.py"
+      },
+      {
+        "nome": "has_cycle",
+        "args": [
+          "G"
+        ],
+        "docstring": "Verifica se o grafo contém pelo menos um ciclo.",
+        "modulo": "algoritmos_grafos",
+        "caminho": "lib/funcoes_analiticas/algoritmos_grafos.py"
+      }
+    ],
+    "conjuntos": [
+      {
+        "nome": "unique_count",
+        "args": [
+          "lst"
+        ],
+        "docstring": "Conta o número de elementos únicos em uma lista.",
+        "modulo": "conjuntos",
+        "caminho": "lib/funcoes_analiticas/conjuntos.py"
+      },
+      {
+        "nome": "intersection",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Retorna os elementos em comum entre duas listas.",
+        "modulo": "conjuntos",
+        "caminho": "lib/funcoes_analiticas/conjuntos.py"
+      },
+      {
+        "nome": "union",
+        "args": [
+          "lst1",
+          "lst2"
+        ],
+        "docstring": "Retorna a união de elementos de duas listas.",
+        "modulo": "conjuntos",
+        "caminho": "lib/funcoes_analiticas/conjuntos.py"
+      },
+      {
+        "nome": "mirror_count",
+        "args": [
+          "lst",
+          "total"
+        ],
+        "docstring": "Conta os números que têm um 'espelho' na lista (e.g., total - x).",
+        "modulo": "conjuntos",
+        "caminho": "lib/funcoes_analiticas/conjuntos.py"
+      },
+      {
+        "nome": "pair_sum_count",
+        "args": [
+          "lst",
+          "target"
+        ],
+        "docstring": "Conta os pares de números que somam um valor alvo.",
+        "modulo": "conjuntos",
+        "caminho": "lib/funcoes_analiticas/conjuntos.py"
+      }
+    ]
+  },
+  "duplicados": [
+    {
+      "nome": "bell_number",
+      "caminho": "lib/funcoes_analiticas/teoria_numeros.py",
+      "categoria": "teoria_numeros"
+    },
+    {
+      "nome": "partition_number",
+      "caminho": "lib/funcoes_analiticas/teoria_numeros.py",
+      "categoria": "teoria_numeros"
+    },
+    {
+      "nome": "bernoulli_number",
+      "caminho": "lib/funcoes_analiticas/teoria_numeros.py",
+      "categoria": "teoria_numeros"
+    },
+    {
+      "nome": "fft_phase",
+      "caminho": "lib/funcoes_analiticas/processamento_sinal.py",
+      "categoria": "processamento_sinal"
+    },
+    {
+      "nome": "ifft_real",
+      "caminho": "lib/funcoes_analiticas/processamento_sinal.py",
+      "categoria": "processamento_sinal"
+    },
+    {
+      "nome": "mutual_info",
+      "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py",
+      "categoria": "estatistica_multivariada"
+    },
+    {
+      "nome": "normalized_mutual_info",
+      "caminho": "lib/funcoes_analiticas/estatistica_multivariada.py",
+      "categoria": "estatistica_multivariada"
+    },
+    {
+      "nome": "euler_totient",
+      "caminho": "lib/funcoes_analiticas/matematica_especial.py",
+      "categoria": "matematica_especial"
+    },
+    {
+      "nome": "gamma_func",
+      "caminho": "lib/funcoes_analiticas/matematica_especial.py",
+      "categoria": "matematica_especial"
+    },
+    {
+      "nome": "beta_func",
+      "caminho": "lib/funcoes_analiticas/matematica_especial.py",
+      "categoria": "matematica_especial"
+    },
+    {
+      "nome": "bessel_j",
+      "caminho": "lib/funcoes_analiticas/matematica_especial.py",
+      "categoria": "matematica_especial"
+    },
+    {
+      "nome": "unique_count",
+      "caminho": "lib/funcoes_analiticas/conjuntos.py",
+      "categoria": "conjuntos"
+    },
+    {
+      "nome": "intersection",
+      "caminho": "lib/funcoes_analiticas/conjuntos.py",
+      "categoria": "conjuntos"
+    },
+    {
+      "nome": "union",
+      "caminho": "lib/funcoes_analiticas/conjuntos.py",
+      "categoria": "conjuntos"
+    },
+    {
+      "nome": "mirror_count",
+      "caminho": "lib/funcoes_analiticas/conjuntos.py",
+      "categoria": "conjuntos"
+    },
+    {
+      "nome": "pair_sum_count",
+      "caminho": "lib/funcoes_analiticas/conjuntos.py",
+      "categoria": "conjuntos"
+    }
+  ],
+  "estatisticas_categorias": {
+    "estatistica_nao_parametrica": 7,
+    "combinatoria": 4,
+    "probabilidade_distribuicoes": 3,
+    "precisao": 5,
+    "analise_padroes": 10,
+    "estatisticas": 10,
+    "sequencias": 7,
+    "algebra_simbolica": 8,
+    "manipulacao_dados": 4,
+    "numeros_especiais": 8,
+    "transformacoes": 25,
+    "deteccao_anomalias": 3,
+    "grafos": 23,
+    "series_temporais": 9,
+    "probabilidade": 14,
+    "aritmetica": 13,
+    "funcoes_especiais": 11,
+    "analise_primos": 17,
+    "wavelets": 5,
+    "teoria_numeros": 19,
+    "criptografia": 3,
+    "temporais": 7,
+    "geometria": 8,
+    "simulacao": 10,
+    "plots": 7,
+    "modelagem_preditiva": 6,
+    "teoria_informacao": 7,
+    "processamento_sinal": 26,
+    "estatistica_multivariada": 7,
+    "matematica_especial": 19,
+    "exploracao": 2,
+    "ia_heuristica": 20,
+    "machine_learning": 8,
+    "algebra_linear": 15,
+    "analise_numerica": 5,
+    "combinatoria_avancada": 23,
+    "algoritmos_grafos": 5,
+    "conjuntos": 5
+  }
+}
