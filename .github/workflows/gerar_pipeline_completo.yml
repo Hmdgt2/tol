@@ -7,12 +7,6 @@ on:
         description: 'Motivo para execução manual do pipeline completo'
         required: false
         default: 'Atualização automática do sistema de wrappers'
-  push:
-    branches: [ main ]
-    paths:
-      - 'lib/funcoes_analiticas/**'
-      - 'scripts/gerar_wrappers_funcoes.py'
-      - 'scripts/analisador_funcoes.py'
 
 jobs:
   executar_pipeline_completo:
@@ -35,57 +29,115 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install numpy pandas scipy sympy matplotlib networkx scikit-learn
           
+      # FASE 1: Analisar Funções
       - name: Executar Analisador de Funções
+        id: analisador
         run: |
           echo "📋 Executando analisador_funcoes.py..."
           python scripts/analisador_funcoes.py
+          echo "relatorios_gerados=true" >> $GITHUB_OUTPUT
           
+      - name: Commit Fase 1 - Relatório de Funções
+        if: steps.analisador.outputs.relatorios_gerados == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add relatorios/lista_funcoes.txt relatorios/lista_funcoes.json
+          if git diff --staged --quiet; then
+            echo "✅ Nenhuma alteração nos relatórios de funções"
+          else
+            git commit -m "🤖 Fase 1: Relatório de funções gerado"
+            echo "📊 Relatórios de funções commitados"
+          fi
+          
+      # FASE 2: Atualizar Categorias
       - name: Executar Atualizador de Categorias
+        id: atualizador
         run: |
           echo "🔧 Executando atualizador_categorias.py..."
           python scripts/atualizador_categorias.py
+          echo "categorias_atualizadas=true" >> $GITHUB_OUTPUT
           
+      - name: Commit Fase 2 - Categorias Atualizadas
+        if: steps.atualizador.outputs.categorias_atualizadas == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/gerar_wrappers_funcoes.py relatorios/atualizacao_categorias.txt
+          if git diff --staged --quiet; then
+            echo "✅ Nenhuma alteração nas categorias"
+          else
+            git commit -m "🤖 Fase 2: Categorias atualizadas"
+            echo "🔧 Categorias atualizadas e commitadas"
+          fi
+          
+      # FASE 3: Gerar Wrappers
       - name: Executar Gerador de Wrappers
+        id: gerador_wrappers
         run: |
           echo "🏗️ Executando gerar_wrappers_funcoes.py..."
           python scripts/gerar_wrappers_funcoes.py
+          echo "wrappers_gerados=true" >> $GITHUB_OUTPUT
           
+      - name: Commit Fase 3 - Wrappers por Categoria
+        if: steps.gerador_wrappers.outputs.wrappers_gerados == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add lib/funcoes_wrappers_auto.py
+          if git diff --staged --quiet; then
+            echo "✅ Nenhuma alteração nos wrappers"
+          else
+            git commit -m "🤖 Fase 3: Wrappers por categoria gerados"
+            echo "🏗️ Wrappers por categoria commitados"
+          fi
+          
+      # FASE 4: Gerar UniversalWrapper
       - name: Executar Gerador de UniversalWrapper
+        id: gerador_universal
         run: |
           echo "🌐 Executando gerar_universal_wrapper.py..."
           python scripts/gerar_universal_wrapper.py
+          echo "universal_wrapper_gerado=true" >> $GITHUB_OUTPUT
           
-      - name: Commit e Push das Alterações
+      - name: Commit Fase 4 - UniversalWrapper
+        if: steps.gerador_universal.outputs.universal_wrapper_gerado == 'true'
         run: |
-          echo "📦 Preparando commit das alterações..."
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Verificar se há alterações nos wrappers gerados
-          git add lib/funcoes_wrappers_auto.py
           git add lib/universal_wrapper.py
-          git add relatorios/
-          
-          # Fazer commit apenas se houver alterações
           if git diff --staged --quiet; then
-            echo "✅ Nenhuma alteração detectada nos wrappers"
+            echo "✅ Nenhuma alteração no UniversalWrapper"
           else
-            git commit -m "🤖 Atualização automática: wrappers gerados pelo pipeline"
-            git pull origin main --rebase
-            git push origin main
-            echo "🚀 Wrappers atualizados e enviados para o repositório"
+            git commit -m "🤖 Fase 4: UniversalWrapper gerado"
+            echo "🌐 UniversalWrapper commitado"
           fi
           
-      - name: Gerar Relatório do Pipeline
+      # FASE FINAL: Push de todas as alterações
+      - name: Push Final de Todas as Alterações
         run: |
-          echo "📊 Gerando relatório final..."
+          echo "📦 Fazendo push de todas as alterações..."
+          git pull origin main --rebase
+          git push origin main
+          echo "🚀 Pipeline concluído com sucesso!"
+          
+      - name: Gerar Relatório Final
+        run: |
+          echo "📊 Gerando relatório final do pipeline..."
           echo "# Relatório do Pipeline de Wrappers" > relatorios/relatorio_pipeline.md
           echo "Data: $(date)" >> relatorios/relatorio_pipeline.md
           echo "" >> relatorios/relatorio_pipeline.md
+          echo "## Fases Executadas:" >> relatorios/relatorio_pipeline.md
+          echo "1. ✅ Analisador de Funções" >> relatorios/relatorio_pipeline.md
+          echo "2. ✅ Atualizador de Categorias" >> relatorios/relatorio_pipeline.md
+          echo "3. ✅ Gerador de Wrappers por Categoria" >> relatorios/relatorio_pipeline.md
+          echo "4. ✅ Gerador de UniversalWrapper" >> relatorios/relatorio_pipeline.md
+          echo "" >> relatorios/relatorio_pipeline.md
           echo "## Arquivos Gerados:" >> relatorios/relatorio_pipeline.md
-          echo "- ✅ lib/funcoes_wrappers_auto.py" >> relatorios/relatorio_pipeline.md
-          echo "- ✅ lib/universal_wrapper.py" >> relatorios/relatorio_pipeline.md
-          echo "- ✅ relatorios/lista_funcoes.txt" >> relatorios/relatorio_pipeline.md
-          echo "- ✅ relatorios/atualizacao_categorias.txt" >> relatorios/relatorio_pipeline.md
+          echo "- 📋 relatorios/lista_funcoes.txt" >> relatorios/relatorio_pipeline.md
+          echo "- 📋 relatorios/lista_funcoes.json" >> relatorios/relatorio_pipeline.md
+          echo "- 🔧 relatorios/atualizacao_categorias.txt" >> relatorios/relatorio_pipeline.md
+          echo "- 🏗️ lib/funcoes_wrappers_auto.py" >> relatorios/relatorio_pipeline.md
+          echo "- 🌐 lib/universal_wrapper.py" >> relatorios/relatorio_pipeline.md
           echo "" >> relatorios/relatorio_pipeline.md
           echo "Pipeline executado com sucesso! 🎉" >> relatorios/relatorio_pipeline.md
