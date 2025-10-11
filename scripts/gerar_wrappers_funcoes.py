@@ -1,5 +1,6 @@
 import os
 import ast
+import sys
 
 # Mapear tipo de módulo para classe de wrapper, objetivo e finalidade
 FUNCAO_CATEGORIA_MAP = {
@@ -70,6 +71,9 @@ def gerar_wrappers(funcoes, destino_path):
             metadados_dict[wrapper_class] = (objetivo, finalidade)
         wrappers_dict[wrapper_class].append(func)
 
+    # Garantir que o diretório existe
+    os.makedirs(os.path.dirname(destino_path), exist_ok=True)
+
     # Gerar arquivo de wrappers
     with open(destino_path, "w", encoding="utf-8") as f:
         f.write("# Wrappers automáticos para funções analíticas\n")
@@ -111,6 +115,34 @@ def gerar_wrappers(funcoes, destino_path):
             f.write("\n")
     print(f"✅ Wrappers gerados em: {destino_path}")
 
+def main():
+    """Função principal do gerador de wrappers."""
+    print("🔄 INICIANDO FASE 3: GERAÇÃO DE WRAPPERS POR CATEGORIA...")
+    
+    try:
+        print("📁 Extraindo funções da biblioteca...")
+        funcoes = extrair_funcoes(BASE_DIR)
+        
+        if not funcoes:
+            print("❌ Nenhuma função encontrada para processar")
+            return False
+            
+        print(f"📊 Processando {len(funcoes)} funções...")
+        gerar_wrappers(funcoes, WRAPPER_MODULE_PATH)
+        
+        # VERIFICAÇÃO FINAL - Para o GitHub Actions
+        if os.path.exists(WRAPPER_MODULE_PATH):
+            file_size = os.path.getsize(WRAPPER_MODULE_PATH)
+            print(f"🎯 FASE 3 CONCLUÍDA - Wrappers gerados ({file_size} bytes) prontos para commit")
+            return True
+        else:
+            print("❌ FALHA - Wrappers não foram gerados")
+            return False
+            
+    except Exception as e:
+        print(f"💥 Erro no gerador de wrappers: {e}")
+        return False
+
 if __name__ == "__main__":
-    funcoes = extrair_funcoes(BASE_DIR)
-    gerar_wrappers(funcoes, WRAPPER_MODULE_PATH)
+    success = main()
+    sys.exit(0 if success else 1)
