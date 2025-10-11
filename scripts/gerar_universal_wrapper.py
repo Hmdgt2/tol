@@ -28,8 +28,13 @@ def gerar_universal_wrapper():
     with open(wrappers_file, "r", encoding="utf-8") as f:
         wrappers_content = f.read()
     
-    # Extrair todas as classes e métodos
+    # DEBUG: Ver o conteúdo do arquivo
+    print(f"📄 Tamanho do arquivo de wrappers: {len(wrappers_content)} bytes")
+    
+    # Extrair todas as classes - método mais robusto
     classes = re.findall(r'class (\w+Wrapper):.*?(?=class|\Z)', wrappers_content, re.DOTALL)
+    
+    print(f"🔍 Encontradas {len(classes)} classes de wrapper")
     
     universal_methods = []
     imports_set = set()
@@ -42,30 +47,57 @@ def gerar_universal_wrapper():
             
         class_name = class_match.group(1)
         imports_set.add(class_name)
+        print(f"📦 Processando classe: {class_name}")
         
-        # Extrair métodos usando AST para maior precisão
-        try:
-            tree = ast.parse(class_block)
-            for node in tree.body:
-                if isinstance(node, ast.ClassDef):
-                    for item in node.body:
-                        if isinstance(item, ast.FunctionDef) and not item.name.startswith('_'):
-                            # Método mais simples: apenas criar o wrapper
-                            method_template = f'''
+        # Extrair métodos - método mais simples e direto
+        method_matches = re.findall(r'@staticmethod\s+def (\w+)\([^)]*\):', class_block)
+        
+        for method_name in method_matches:
+            if not method_name.startswith('_'):
+                # Criar método no UniversalWrapper
+                method_template = f'''
     @staticmethod
-    def {item.name}(*args, **kwargs):
-        """Método universal para {item.name}"""
+    def {method_name}(*args, **kwargs):
+        """Método universal para {method_name}"""
         from lib.funcoes_wrappers_auto import {class_name}
-        return {class_name}.{item.name}(*args, **kwargs)
+        return {class_name}.{method_name}(*args, **kwargs)
 '''
-                            universal_methods.append(method_template)
-                            total_funcoes += 1
-        except Exception as e:
-            print(f"⚠️ Erro ao processar {class_name}: {e}")
-            continue
+                universal_methods.append(method_template)
+                total_funcoes += 1
+                print(f"   ✅ Adicionado método: {method_name}")
     
     if total_funcoes == 0:
         print("❌ Nenhuma função encontrada nos wrappers")
+        print("🔍 Tentando método alternativo de extração...")
+        
+        # Método alternativo: procurar diretamente por métodos
+        all_methods = re.findall(r'def (\w+)\([^)]*\):', wrappers_content)
+        unique_methods = set([m for m in all_methods if not m.startswith('_')])
+        
+        print(f"🔍 Métodos encontrados (alternativo): {len(unique_methods)}")
+        for method in sorted(unique_methods)[:10]:  # Mostrar primeiros 10
+            print(f"   - {method}")
+        
+        if unique_methods:
+            # Se encontrou métodos, criar UniversalWrapper básico
+            class_name = "FuncoesAnaliticasWrapper"  # Assumir nome padrão
+            imports_set.add(class_name)
+            
+            for method_name in sorted(unique_methods):
+                method_template = f'''
+    @staticmethod
+    def {method_name}(*args, **kwargs):
+        """Método universal para {method_name}"""
+        from lib.funcoes_wrappers_auto import {class_name}
+        return {class_name}.{method_name}(*args, **kwargs)
+'''
+                universal_methods.append(method_template)
+                total_funcoes += 1
+            
+            print(f"🔄 Criado UniversalWrapper com {total_funcoes} métodos (método alternativo)")
+    
+    if total_funcoes == 0:
+        print("❌ FALHA CRÍTICA - Não foi possível extrair nenhuma função")
         return False
     
     # Gerar conteúdo do UniversalWrapper
