@@ -35,6 +35,12 @@ jobs:
           echo ""
           echo "✅ Ficheiros necessários:"
           ls -la lib/ | grep -E "(dados|despachante|gerador).py" || echo "⚠️  Alguns ficheiros podem estar faltando"
+
+      - name: 🔍 Verificar Ambiente
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python check_environment.py 
       
       - name: 🧠 Executar Treino com Heurísticas Dinâmicas
         env:
