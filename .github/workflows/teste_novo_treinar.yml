@@ -12,191 +12,66 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 Checkout do Repositório
+      - name: Checkout do Repositório
         uses: actions/checkout@v4
 
-      - name: 🐍 Configurar Python
+      - name: Configurar Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: 📦 Instalar Dependências
+      - name: Instalar Dependências
         run: |
-          python -m pip install --upgrade pip
-          if [ ! -f "requirements.txt" ]; then
-            echo "numpy>=1.21.0" > requirements.txt
-            echo "scikit-learn>=1.0.0" >> requirements.txt
-            echo "scipy>=1.7.0" >> requirements.txt
-            echo "joblib>=1.1.0" >> requirements.txt
-          fi
-          pip install -r requirements.txt
+          pip install numpy scikit-learn scipy joblib
 
-      - name: 🔍 Verificar Ambiente com Check Script
+      - name: Verificar Ambiente
         run: |
-          PYTHONPATH=$GITHUB_WORKSPACE python check_environment.py
+          PYTHONPATH=. python check_environment.py
 
-      - name: 🧪 Testar Integração Dinâmica
+      - name: Testar Importações Básicas
         run: |
-          PYTHONPATH=$GITHUB_WORKSPACE python - << EOF
-import sys
-import os
-sys.path.insert(0, os.getcwd())
+          PYTHONPATH=. python -c "from lib.dados import Dados; from lib.despachante_new import Despachante; print('Importações OK')"
 
-try:
-    print('1. Importando módulos...')
-    from lib.dados import Dados
-    from lib.despachante_new import Despachante
-    from lib.GeradorHeuristicasDinamicas import GeradorHeuristicasDinamicas
-    
-    print('2. Criando despachante com dinâmicas...')
-    despachante = Despachante(usar_dinamicas=True)
-    
-    print('3. Verificando heurísticas carregadas...')
-    metadados = despachante.obter_metadados()
-    total = len(metadados)
-    dinamicas = [h for h, meta in metadados.items() if meta.get('tipo') == 'dinamica']
-    fixas = [h for h, meta in metadados.items() if meta.get('tipo') == 'fixa']
-    
-    print(f'    Total: {total} heurísticas')
-    print(f'    Fixas: {len(fixas)}')
-    print(f'    Dinâmicas: {len(dinamicas)}')
-    
-    if len(dinamicas) > 0:
-        print('4. Testando previsões...')
-        dados = Dados()
-        deps = despachante.obter_todas_dependencias()
-        stats, _ = dados.obter_estatisticas(deps)
-        previsoes = despachante.get_previsoes(stats, n=5)
-        
-        print(f'    Previsões: {len(previsoes)} heurísticas')
-        print('SISTEMA DINAMICO FUNCIONANDO')
-    else:
-        print('Nenhuma heurística dinâmica carregada')
-        sys.exit(1)
-        
-except Exception as e:
-    print(f'ERRO: {e}')
-    import traceback
-    traceback.print_exc()
-    sys.exit(1)
-EOF
-
-      - name: 🧠 Executar Treino com Heurísticas Dinâmicas
+      - name: Executar Treino
         run: |
-          PYTHONPATH=$GITHUB_WORKSPACE python treinar_decisor1.py --num-dinamicas 25
+          PYTHONPATH=. python treinar_decisor1.py --num-dinamicas 25
 
-      - name: 📊 Executar Avaliação do Sistema
+      - name: Executar Avaliação
         run: |
-          PYTHONPATH=$GITHUB_WORKSPACE python avaliador/avaliador1.py --manutencao
+          PYTHONPATH=. python avaliador/avaliador1.py --manutencao
 
-      - name: ✅ Verificar Resultados do Treino
+      - name: Verificar Resultados
         run: |
           echo "Verificando ficheiros gerados:"
-          
           if [ -d "decisor/modelos_salvos" ]; then
-            echo "Pasta de modelos encontrada"
-            MODEL_COUNT=$(find decisor/modelos_salvos/ -name "*.joblib" | wc -l)
-            echo "Modelos treinados: $MODEL_COUNT"
+            echo "Modelos encontrados: $(ls decisor/modelos_salvos/*.joblib 2>/dev/null | wc -l)"
           else
-            echo "Pasta de modelos não encontrada"
+            echo "ERRO: Pasta de modelos não encontrada"
             exit 1
           fi
           
           if [ -f "decisor/metadados_modelo.json" ]; then
             echo "Metadados encontrados"
-            PYTHONPATH=$GITHUB_WORKSPACE python -c "
-import json
-try:
-    with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    stats = data.get('estatisticas_sistema', {})
-    config = data.get('configuracao', {})
-    print(f'Heuristicas totais: {stats.get(\"total_heuristicas\", 0)}')
-    print(f'Heuristicas fixas: {stats.get(\"heuristicas_fixas\", 0)}')
-    print(f'Heuristicas dinamicas: {stats.get(\"heuristicas_dinamicas\", 0)}')
-    print(f'Dataset: {config.get(\"dimensoes_dataset\", \"N/A\")}')
-    print(f'Sorteios: {config.get(\"sorteios_processados\", 0)}')
-    if stats.get(\"heuristicas_dinamicas\", 0) > 0:
-        print('Heuristicas dinamicas: ATIVAS')
-    else:
-        print('Heuristicas dinamicas: INATIVAS')
-except Exception as e:
-    print(f'Erro: {e}')
-"
+            PYTHONPATH=. python -c "import json; data = json.load(open('decisor/metadados_modelo.json')); print(f'Heuristicas: {len(data.get(\\\"heuristicas_ordenadas\\\", []))}')"
           else
-            echo "Metadados não encontrados"
+            echo "ERRO: Metadados não encontrados"
             exit 1
           fi
 
-      - name: 💾 Commitar e Enviar Modelos Atualizados
+      - name: Commitar Modelos Atualizados
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add decisor/modelos_salvos/ decisor/metadados_modelo.json
+          git diff --staged --quiet || (git commit -m "Update models [bot]" && git push)
 
-          git add decisor/modelos_salvos/
-          git add decisor/metadados_modelo.json
-          git add decisor/configuracao_despachante.json 2>/dev/null || echo "Configuracao não encontrada"
-          git add decisor/historico_otimizacao.json 2>/dev/null || echo "Historico não encontrado"
-          
-          if git diff --staged --quiet; then
-            echo "Nenhuma alteração para commitar"
-          else
-            echo "Comitando modelos atualizados..."
-            git commit -m "feat: Atualiza modelo com heuristicas dinamicas [bot]"
-            git push
-            echo "Modelos atualizados com sucesso"
-          fi
-
-      - name: 📋 Gerar Relatório de Execução
+      - name: Gerar Relatório
         if: always()
         run: |
-          echo "RELATORIO DE EXECUCAO" > $GITHUB_STEP_SUMMARY
-          echo "=====================" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          
-          PYTHONPATH=$GITHUB_WORKSPACE python - << 'EOF'
-import json, os, datetime
-
-print('## Status do Pipeline de Heuristicas Dinamicas')
-print('')
-
-if os.path.exists('decisor/metadados_modelo.json'):
-    try:
-        with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f:
-            data = json.load(f)
-        
-        stats = data.get('estatisticas_sistema', {})
-        config = data.get('configuracao', {})
-        
-        print('### Estatisticas do Sistema')
-        print(f'- **Heuristicas totais:** {stats.get("total_heuristicas", 0)}')
-        print(f'- **Heuristicas fixas:** {stats.get("heuristicas_fixas", 0)}')
-        print(f'- **Heuristicas dinamicas:** {stats.get("heuristicas_dinamicas", 0)}')
-        print(f'- **Dimensoes do dataset:** {config.get("dimensoes_dataset", "N/A")}')
-        print(f'- **Sorteios processados:** {config.get("sorteios_processados", 0)}')
-        print(f'- **Data do treino:** {data.get("data_treino", "N/A")}')
-        
-        modelos = [f for f in os.listdir('decisor/modelos_salvos/') if f.endswith('.joblib')]
-        print(f'- **Modelos treinados:** {len(modelos)}')
-        
-        if stats.get("heuristicas_dinamicas", 0) > 0:
-            print('- **Heuristicas dinamicas:** ATIVAS e funcionando')
-            print('Pipeline dinamico operacional')
-        else:
-            print('- **Heuristicas dinamicas:** NAO carregadas')
-            print('Sistema usando apenas heuristicas fixas')
-            
-    except Exception as e:
-        print(f'Erro ao ler metadados: {e}')
-else:
-    print('Falha no treino')
-    print('Os metadados do modelo não foram gerados.')
-    print('')
-    print('### Possiveis causas:')
-    print('- Erro no carregamento das heuristicas dinamicas')
-    print('- Problema nos dados de treino') 
-    print('- Falha na geracao de features')
-
-print('')
-print(f'Executado em: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
-EOF
+          echo "RELATORIO" > $GITHUB_STEP_SUMMARY
+          echo "========" >> $GITHUB_STEP_SUMMARY
+          if [ -f "decisor/metadados_modelo.json" ]; then
+            echo "SUCESSO: Modelos treinados" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "FALHA: Treino não concluído" >> $GITHUB_STEP_SUMMARY
+          fi
