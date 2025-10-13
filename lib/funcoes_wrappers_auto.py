@@ -151,6 +151,34 @@ class GenericFeatureWrapper:
         return GenericFeatureWrapper.apply_function(multinomial_coef, lst)
 
     @staticmethod
+    def variety_dimension(polynomials, points):
+        """Dimensão de variedade algébrica aproximada."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.geometria_algebrica import variety_dimension
+        return GenericFeatureWrapper.apply_function(variety_dimension, polynomials, points)
+
+    @staticmethod
+    def bezout_theorem_degree(curve1, curve2, domain):
+        """Número de interseções entre duas curvas (Teorema de Bézout)."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.geometria_algebrica import bezout_theorem_degree
+        return GenericFeatureWrapper.apply_function(bezout_theorem_degree, curve1, curve2, domain)
+
+    @staticmethod
+    def algebraic_curve_genus(degree, singular_points):
+        """Gênero de curva algébrica (fórmula de Plücker simplificada)."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.geometria_algebrica import algebraic_curve_genus
+        return GenericFeatureWrapper.apply_function(algebraic_curve_genus, degree, singular_points)
+
+    @staticmethod
+    def projective_space_embedding(points):
+        """Embedding em espaço projetivo (homogeneização)."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.geometria_algebrica import projective_space_embedding
+        return GenericFeatureWrapper.apply_function(projective_space_embedding, points)
+
+    @staticmethod
     def simulated_annealing(objective, bounds, max_iter, temp):
         """Algoritmo de simulated annealing para otimização."""
         # Chamada original + adaptação universal
@@ -191,6 +219,34 @@ class GenericFeatureWrapper:
         # Chamada original + adaptação universal
         from lib.funcoes_analiticas.probabilidade_distribuicoes import simulate_multivariate_wishart
         return GenericFeatureWrapper.apply_function(simulate_multivariate_wishart, df, scale, size)
+
+    @staticmethod
+    def controllability_matrix(A, B):
+        """Matriz de controlabilidade."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_controle import controllability_matrix
+        return GenericFeatureWrapper.apply_function(controllability_matrix, A, B)
+
+    @staticmethod
+    def observability_matrix(A, C):
+        """Matriz de observabilidade."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_controle import observability_matrix
+        return GenericFeatureWrapper.apply_function(observability_matrix, A, C)
+
+    @staticmethod
+    def lyapunov_equation_solution(A, Q):
+        """Solução da equação de Lyapunov AᵀP + PA = -Q."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_controle import lyapunov_equation_solution
+        return GenericFeatureWrapper.apply_function(lyapunov_equation_solution, A, Q)
+
+    @staticmethod
+    def kalman_filter_gain(A, C, Q, R):
+        """Ganho do filtro de Kalman."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_controle import kalman_filter_gain
+        return GenericFeatureWrapper.apply_function(kalman_filter_gain, A, C, Q, R)
 
     @staticmethod
     def mpmath_sqrt(x):
@@ -300,6 +356,41 @@ class GenericFeatureWrapper:
         return GenericFeatureWrapper.apply_function(cluster_by_diff, lst, max_diff)
 
     @staticmethod
+    def q_learning_update(q_table, state, action, reward, next_state, alpha, gamma):
+        """Atualização Q-learning."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.aprendizado_reforco import q_learning_update
+        return GenericFeatureWrapper.apply_function(q_learning_update, q_table, state, action, reward, next_state, alpha, gamma)
+
+    @staticmethod
+    def policy_gradient_log_prob(policy, state, action):
+        """Log-probabilidade de ação sob política."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.aprendizado_reforco import policy_gradient_log_prob
+        return GenericFeatureWrapper.apply_function(policy_gradient_log_prob, policy, state, action)
+
+    @staticmethod
+    def temporal_difference_error(v_values, state, next_state, reward, gamma):
+        """Erro de diferença temporal."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.aprendizado_reforco import temporal_difference_error
+        return GenericFeatureWrapper.apply_function(temporal_difference_error, v_values, state, next_state, reward, gamma)
+
+    @staticmethod
+    def eligibility_traces_update(eligibility, state, lambda_val, gamma):
+        """Atualização de traços de elegibilidade."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.aprendizado_reforco import eligibility_traces_update
+        return GenericFeatureWrapper.apply_function(eligibility_traces_update, eligibility, state, lambda_val, gamma)
+
+    @staticmethod
+    def bellman_optimality_residual(q_values, rewards, gamma):
+        """Resíduo da equação de otimalidade de Bellman."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.aprendizado_reforco import bellman_optimality_residual
+        return GenericFeatureWrapper.apply_function(bellman_optimality_residual, q_values, rewards, gamma)
+
+    @staticmethod
     def unique_count(lst):
         """Conta o número de elementos únicos em uma lista."""
         # Chamada original + adaptação universal
@@ -368,6 +459,41 @@ class GenericFeatureWrapper:
         # Chamada original + adaptação universal
         from lib.funcoes_analiticas.estatisticas import count_odd
         return GenericFeatureWrapper.apply_function(count_odd, lst)
+
+    @staticmethod
+    def cauchy_integral_formula(f, z0, radius):
+        """Fórmula integral de Cauchy."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.analise_complexa import cauchy_integral_formula
+        return GenericFeatureWrapper.apply_function(cauchy_integral_formula, f, z0, radius)
+
+    @staticmethod
+    def residue_theorem(f, poles, domain):
+        """Teorema dos resíduos simplificado."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.analise_complexa import residue_theorem
+        return GenericFeatureWrapper.apply_function(residue_theorem, f, poles, domain)
+
+    @staticmethod
+    def conformal_mapping_distortion(z_points, f):
+        """Distorção de mapeamento conforme."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.analise_complexa import conformal_mapping_distortion
+        return GenericFeatureWrapper.apply_function(conformal_mapping_distortion, z_points, f)
+
+    @staticmethod
+    def mandelbrot_set_membership(c, max_iter):
+        """Verifica se ponto pertence ao conjunto de Mandelbrot."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.analise_complexa import mandelbrot_set_membership
+        return GenericFeatureWrapper.apply_function(mandelbrot_set_membership, c, max_iter)
+
+    @staticmethod
+    def riemann_zeta_zeros_approx(t_values):
+        """Aproximação de zeros da função zeta de Riemann."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.analise_complexa import riemann_zeta_zeros_approx
+        return GenericFeatureWrapper.apply_function(riemann_zeta_zeros_approx, t_values)
 
     @staticmethod
     def pollard_rho_factorization(n, max_iter):
@@ -447,6 +573,69 @@ class GenericFeatureWrapper:
         return GenericFeatureWrapper.apply_function(rank_array, lst)
 
     @staticmethod
+    def group_character_table(elements, operation):
+        """Tabela de caracteres de um grupo finito."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.algebra_abstrata import group_character_table
+        return GenericFeatureWrapper.apply_function(group_character_table, elements, operation)
+
+    @staticmethod
+    def group_commutator_subgroup_size(elements, operation):
+        """Tamanho do subgrupo comutador aproximado."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.algebra_abstrata import group_commutator_subgroup_size
+        return GenericFeatureWrapper.apply_function(group_commutator_subgroup_size, elements, operation)
+
+    @staticmethod
+    def ring_ideal_generator(ring_elements, operation):
+        """Encontra gerador de ideal principal em anel comutativo."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.algebra_abstrata import ring_ideal_generator
+        return GenericFeatureWrapper.apply_function(ring_ideal_generator, ring_elements, operation)
+
+    @staticmethod
+    def field_extension_degree(base_field, extension):
+        """Grau de extensão de corpo aproximado."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.algebra_abstrata import field_extension_degree
+        return GenericFeatureWrapper.apply_function(field_extension_degree, base_field, extension)
+
+    @staticmethod
+    def module_homomorphism_rank(domain, codomain):
+        """Posto de homomorfismo entre módulos."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.algebra_abstrata import module_homomorphism_rank
+        return GenericFeatureWrapper.apply_function(module_homomorphism_rank, domain, codomain)
+
+    @staticmethod
+    def word_embeddings_cosine(text1, text2, word_vectors):
+        """Similaridade de cosseno entre embeddings de palavras."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.nlp_avancado import word_embeddings_cosine
+        return GenericFeatureWrapper.apply_function(word_embeddings_cosine, text1, text2, word_vectors)
+
+    @staticmethod
+    def tfidf_vectorizer(documents):
+        """Vectorização TF-IDF simplificada."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.nlp_avancado import tfidf_vectorizer
+        return GenericFeatureWrapper.apply_function(tfidf_vectorizer, documents)
+
+    @staticmethod
+    def perplexity_language_model(text, ngram_probs, n):
+        """Perplexidade de modelo de linguagem n-gram."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.nlp_avancado import perplexity_language_model
+        return GenericFeatureWrapper.apply_function(perplexity_language_model, text, ngram_probs, n)
+
+    @staticmethod
+    def named_entity_recognition_confidence(text, entities):
+        """Confiança de reconhecimento de entidades nomeadas."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.nlp_avancado import named_entity_recognition_confidence
+        return GenericFeatureWrapper.apply_function(named_entity_recognition_confidence, text, entities)
+
+    @staticmethod
     def sym_derivative(expr):
         """Calcula a derivada de uma expressão simbólica."""
         # Chamada original + adaptação universal
@@ -501,6 +690,34 @@ class GenericFeatureWrapper:
         # Chamada original + adaptação universal
         from lib.funcoes_analiticas.algebra_simbolica import sym_factor
         return GenericFeatureWrapper.apply_function(sym_factor, expr)
+
+    @staticmethod
+    def betti_numbers_approx(simplicial_complex):
+        """Números de Betti aproximados de um complexo simplicial."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.topologia_algebrica import betti_numbers_approx
+        return GenericFeatureWrapper.apply_function(betti_numbers_approx, simplicial_complex)
+
+    @staticmethod
+    def euler_characteristic_simplicial(simplicial_complex):
+        """Característica de Euler para complexo simplicial."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.topologia_algebrica import euler_characteristic_simplicial
+        return GenericFeatureWrapper.apply_function(euler_characteristic_simplicial, simplicial_complex)
+
+    @staticmethod
+    def fundamental_group_generators(points):
+        """Número de geradores do grupo fundamental aproximado."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.topologia_algebrica import fundamental_group_generators
+        return GenericFeatureWrapper.apply_function(fundamental_group_generators, points)
+
+    @staticmethod
+    def homology_group_torsion(complex_data):
+        """Ordem dos subgrupos de torção em homologia."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.topologia_algebrica import homology_group_torsion
+        return GenericFeatureWrapper.apply_function(homology_group_torsion, complex_data)
 
     @staticmethod
     def fill_missing_values(lst, strategy):
@@ -1904,6 +2121,34 @@ class GenericFeatureWrapper:
         return GenericFeatureWrapper.apply_function(metropolis_hastings, target_func, start, iterations, proposal_std)
 
     @staticmethod
+    def character_orthogonality(chars1, chars2):
+        """Produto interno de caracteres (ortogonalidade)."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_representacao import character_orthogonality
+        return GenericFeatureWrapper.apply_function(character_orthogonality, chars1, chars2)
+
+    @staticmethod
+    def representation_dimension(rep_matrices):
+        """Dimensão de uma representação."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_representacao import representation_dimension
+        return GenericFeatureWrapper.apply_function(representation_dimension, rep_matrices)
+
+    @staticmethod
+    def irreducible_components_count(character, irreps):
+        """Número de componentes irredutíveis em uma representação."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_representacao import irreducible_components_count
+        return GenericFeatureWrapper.apply_function(irreducible_components_count, character, irreps)
+
+    @staticmethod
+    def schur_lemma_test(rep1, rep2):
+        """Teste simplificado do Lema de Schur."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.teoria_representacao import schur_lemma_test
+        return GenericFeatureWrapper.apply_function(schur_lemma_test, rep1, rep2)
+
+    @staticmethod
     def rossler_attractor(a, b, c, steps):
         """Atractor de Rössler - sistema caótico."""
         # Chamada original + adaptação universal
@@ -2021,6 +2266,34 @@ class GenericFeatureWrapper:
         # Chamada original + adaptação universal
         from lib.funcoes_analiticas.modelagem_preditiva import regression_score
         return GenericFeatureWrapper.apply_function(regression_score, x, y)
+
+    @staticmethod
+    def convex_function_test(f, domain, samples):
+        """Testa se função é convexa."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.otimizacao_convexa import convex_function_test
+        return GenericFeatureWrapper.apply_function(convex_function_test, f, domain, samples)
+
+    @staticmethod
+    def subgradient_method(f, subgrad, x0, steps):
+        """Método do subgradiente para otimização não-suave."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.otimizacao_convexa import subgradient_method
+        return GenericFeatureWrapper.apply_function(subgradient_method, f, subgrad, x0, steps)
+
+    @staticmethod
+    def lagrange_duality(primal_obj, constraints, x0):
+        """Valor dual de problema de otimização."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.otimizacao_convexa import lagrange_duality
+        return GenericFeatureWrapper.apply_function(lagrange_duality, primal_obj, constraints, x0)
+
+    @staticmethod
+    def barrier_method(f, constraints, x0, mu):
+        """Método de barreira para otimização com restrições."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.otimizacao_convexa import barrier_method
+        return GenericFeatureWrapper.apply_function(barrier_method, f, constraints, x0, mu)
 
     @staticmethod
     def sobolev_norm(f, domain, order, p):
@@ -2843,6 +3116,41 @@ class GenericFeatureWrapper:
         # Chamada original + adaptação universal
         from lib.funcoes_analiticas.combinatoria_avancada_1 import bipartite_graph_count
         return GenericFeatureWrapper.apply_function(bipartite_graph_count, m, n)
+
+    @staticmethod
+    def levy_process_increments(times, alpha):
+        """Incrementos de processo de Lévy estável."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.probabilidade_avancada import levy_process_increments
+        return GenericFeatureWrapper.apply_function(levy_process_increments, times, alpha)
+
+    @staticmethod
+    def martingale_property(process):
+        """Verifica propriedade de martingale."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.probabilidade_avancada import martingale_property
+        return GenericFeatureWrapper.apply_function(martingale_property, process)
+
+    @staticmethod
+    def brownian_bridge_probability(brownian_path, target, tolerance):
+        """Probabilidade de ponte browniana atingir valor."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.probabilidade_avancada import brownian_bridge_probability
+        return GenericFeatureWrapper.apply_function(brownian_bridge_probability, brownian_path, target, tolerance)
+
+    @staticmethod
+    def stochastic_integral_approx(integrand, brownian_path):
+        """Integral estocástica aproximada (Itô)."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.probabilidade_avancada import stochastic_integral_approx
+        return GenericFeatureWrapper.apply_function(stochastic_integral_approx, integrand, brownian_path)
+
+    @staticmethod
+    def girsanov_theorem_density(brownian_path, drift):
+        """Densidade de Girsanov para mudança de medida."""
+        # Chamada original + adaptação universal
+        from lib.funcoes_analiticas.probabilidade_avancada import girsanov_theorem_density
+        return GenericFeatureWrapper.apply_function(girsanov_theorem_density, brownian_path, drift)
 
     @staticmethod
     def matrix_determinant(mat):
