@@ -71,7 +71,7 @@ try:
         previsoes = despachante.get_previsoes(stats, n=5)
         
         print(f'   ✅ Previsões: {len(previsoes)} heurísticas')
-        print('🎉 SISTEMA DINÂMICO FUNCIONANDO')
+        print('🎉 SISTEMA DINAMICO FUNCIONANDO')
     else:
         print('❌ Nenhuma heurística dinâmica carregada')
         sys.exit(1)
