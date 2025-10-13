@@ -38,9 +38,9 @@ jobs:
       - name: 🧪 Testar Integração Dinâmica
         run: |
           PYTHONPATH=$GITHUB_WORKSPACE python - << EOF
-import sys
-import os
-sys.path.insert(0, os.getcwd())
+          import sys
+          import os
+          sys.path.insert(0, os.getcwd())
 
 try:
     print('1. Importando módulos...')
