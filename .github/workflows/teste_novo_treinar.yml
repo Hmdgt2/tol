@@ -119,22 +119,22 @@ EOF
           
           if [ -f "decisor/metadados_modelo.json" ]; then
             echo "Metadados encontrados"
-            python -c "import json; \
-try: \
-    with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f: \
-        data = json.load(f) \
-    stats = data.get('estatisticas_sistema', {}); \
-    config = data.get('configuracao', {}); \
-    print(f'Heuristicas totais: {stats.get(\\\"total_heuristicas\\\", 0)}'); \
-    print(f'Heuristicas fixas: {stats.get(\\\"heuristicas_fixas\\\", 0)}'); \
-    print(f'Heuristicas dinamicas: {stats.get(\\\"heuristicas_dinamicas\\\", 0)}'); \
-    print(f'Dataset: {config.get(\\\"dimensoes_dataset\\\", \\\"N/A\\\")}'); \
-    print(f'Sorteios: {config.get(\\\"sorteios_processados\\\", 0)}'); \
-    if stats.get(\\\"heuristicas_dinamicas\\\", 0) > 0: \
-        print(\\\"Heuristicas dinamicas: ATIVAS\\\"); \
-    else: \
-        print(\\\"Heuristicas dinamicas: INATIVAS\\\"); \
-except Exception as e: \
+            python -c "import json
+try:
+    with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    stats = data.get('estatisticas_sistema', {})
+    config = data.get('configuracao', {})
+    print(f'Heuristicas totais: {stats.get(\"total_heuristicas\", 0)}')
+    print(f'Heuristicas fixas: {stats.get(\"heuristicas_fixas\", 0)}')
+    print(f'Heuristicas dinamicas: {stats.get(\"heuristicas_dinamicas\", 0)}')
+    print(f'Dataset: {config.get(\"dimensoes_dataset\", \"N/A\")}')
+    print(f'Sorteios: {config.get(\"sorteios_processados\", 0)}')
+    if stats.get(\"heuristicas_dinamicas\", 0) > 0:
+        print('Heuristicas dinamicas: ATIVAS')
+    else:
+        print('Heuristicas dinamicas: INATIVAS')
+except Exception as e:
     print(f'Erro: {e}')"
           else
             echo "Metadados não encontrados"
