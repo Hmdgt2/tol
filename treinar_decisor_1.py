@@ -19,7 +19,7 @@ if PROJECT_ROOT not in sys.path:
 
 # IMPORTANTE: Agora importamos a classe 'Dados' em vez das funções
 from lib.dados import Dados 
-from lib.despachante import Despachante
+from lib.despachante_new import Despachante
 
 # Adicionamos os imports para os modelos e o scaler
 from sklearn.preprocessing import StandardScaler
