@@ -37,7 +37,7 @@ jobs:
 
       - name: 🧪 Testar Integração Dinâmica
         run: |
-          PYTHONPATH=$GITHUB_WORKSPACE python - << 'EOF'
+          PYTHONPATH=$GITHUB_WORKSPACE python - << EOF
 import sys
 import os
 sys.path.insert(0, os.getcwd())
