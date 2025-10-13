@@ -34,7 +34,7 @@ jobs:
 
       - name: Executar Treino
         run: |
-          PYTHONPATH=. python treinar_decisor1.py --num-dinamicas 25
+          PYTHONPATH=. python treinar_decisor_1.py --num-dinamicas 25
 
       - name: Executar Avaliação
         run: |
