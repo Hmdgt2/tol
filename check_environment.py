@@ -17,7 +17,7 @@ def check_environment():
         'lib/GeradorHeuristicasDinamicas.py',
         'treinar_decisor_1.py',
         'avaliador/avaliador1.py',
-        'decisor/decisor_final1.py'
+        'decisor/decisor_final_1.py'
     ]
     
     missing_files = []
