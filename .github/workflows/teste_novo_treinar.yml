@@ -32,14 +32,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: 🔍 Verificar Ambiente com Check Script
-        env:
-          PYTHONPATH: ${{ github.workspace }}
         run: |
-          python check_environment.py
+          PYTHONPATH=$GITHUB_WORKSPACE python check_environment.py
 
-      - name: 🧪 Criar Script de Teste Dinâmico
+      - name: 🧪 Testar Integração Dinâmica
         run: |
-          cat > test_dynamic_integration.py << 'EOF'
+          PYTHONPATH=$GITHUB_WORKSPACE python - << 'EOF'
 import sys
 import os
 sys.path.insert(0, os.getcwd())
@@ -83,26 +81,13 @@ except Exception as e:
     sys.exit(1)
 EOF
 
-      - name: 🧪 Executar Teste Dinâmico
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-        run: |
-          echo "TESTANDO HEURISTICAS DINAMICAS..."
-          python test_dynamic_integration.py
-
       - name: 🧠 Executar Treino com Heurísticas Dinâmicas
-        env:
-          PYTHONPATH: ${{ github.workspace }}
         run: |
-          echo "Iniciando treino com heuristicas dinamicas..."
-          python treinar_decisor1.py --num-dinamicas 25
+          PYTHONPATH=$GITHUB_WORKSPACE python treinar_decisor1.py --num-dinamicas 25
 
       - name: 📊 Executar Avaliação do Sistema
-        env:
-          PYTHONPATH: ${{ github.workspace }}
         run: |
-          echo "Executando avaliação do sistema..."
-          python avaliador/avaliador1.py --manutencao
+          PYTHONPATH=$GITHUB_WORKSPACE python avaliador/avaliador1.py --manutencao
 
       - name: ✅ Verificar Resultados do Treino
         run: |
@@ -119,7 +104,8 @@ EOF
           
           if [ -f "decisor/metadados_modelo.json" ]; then
             echo "Metadados encontrados"
-            python -c "import json
+            PYTHONPATH=$GITHUB_WORKSPACE python -c "
+import json
 try:
     with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
@@ -135,7 +121,8 @@ try:
     else:
         print('Heuristicas dinamicas: INATIVAS')
 except Exception as e:
-    print(f'Erro: {e}')"
+    print(f'Erro: {e}')
+"
           else
             echo "Metadados não encontrados"
             exit 1
@@ -160,11 +147,6 @@ except Exception as e:
             echo "Modelos atualizados com sucesso"
           fi
 
-      - name: 🧹 Limpar Script Temporário
-        if: always()
-        run: |
-          rm -f test_dynamic_integration.py
-
       - name: 📋 Gerar Relatório de Execução
         if: always()
         run: |
@@ -172,7 +154,7 @@ except Exception as e:
           echo "=====================" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          cat > generate_report.py << 'EOF'
+          PYTHONPATH=$GITHUB_WORKSPACE python - << 'EOF'
 import json, os, datetime
 
 print('## Status do Pipeline de Heuristicas Dinamicas')
@@ -218,6 +200,3 @@ else:
 print('')
 print(f'Executado em: {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
 EOF
-          
-          python generate_report.py >> $GITHUB_STEP_SUMMARY
-          rm -f generate_report.py
