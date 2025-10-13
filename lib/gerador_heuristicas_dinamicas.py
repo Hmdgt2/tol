@@ -10,7 +10,7 @@ import json
 import numpy as np
 from typing import List, Dict, Any, Set
 from collections import Counter
-from gerador_logicas_ultra import GeradorLogicasEscalavelUltra
+from lib.gerador_logicas_ultra import GeradorLogicasEscalavelUltra
 from universal_wrapper import UniversalWrapper
 
 class HeuristicaDinamica:
