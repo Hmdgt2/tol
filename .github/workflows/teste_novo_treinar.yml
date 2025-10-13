@@ -37,12 +37,9 @@ jobs:
         run: |
           python check_environment.py
 
-      - name: 🧪 Testar Integração Dinâmica
-        env:
-          PYTHONPATH: ${{ github.workspace }}
+      - name: 🧪 Criar Script de Teste Dinâmico
         run: |
-          echo "🧪 TESTANDO HEURÍSTICAS DINÂMICAS..."
-          python -c "
+          cat > test_dynamic_integration.py << 'EOF'
 import sys
 import os
 sys.path.insert(0, os.getcwd())
@@ -84,7 +81,14 @@ except Exception as e:
     import traceback
     traceback.print_exc()
     sys.exit(1)
-"
+EOF
+
+      - name: 🧪 Executar Teste Dinâmico
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          echo "🧪 TESTANDO HEURÍSTICAS DINÂMICAS..."
+          python test_dynamic_integration.py
 
       - name: 🧠 Executar Treino com Heurísticas Dinâmicas
         env:
@@ -115,29 +119,23 @@ except Exception as e:
           
           if [ -f "decisor/metadados_modelo.json" ]; then
             echo "✅ Metadados encontrados"
-            python -c "
-import json
-try:
-    with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f:
-        data = json.load(f)
-    
-    stats = data.get('estatisticas_sistema', {})
-    config = data.get('configuracao', {})
-    
-    print(f'Heurísticas totais: {stats.get(\"total_heuristicas\", 0)}')
-    print(f'Heurísticas fixas: {stats.get(\"heuristicas_fixas\", 0)}') 
-    print(f'Heurísticas dinâmicas: {stats.get(\"heuristicas_dinamicas\", 0)}')
-    print(f'Dataset: {config.get(\"dimensoes_dataset\", \"N/A\")}')
-    print(f'Sorteios: {config.get(\"sorteios_processados\", 0)}')
-    
-    if stats.get(\"heuristicas_dinamicas\", 0) > 0:
-        print('✅ Heurísticas dinâmicas: ATIVAS')
-    else:
-        print('❌ Heurísticas dinâmicas: INATIVAS')
-    
-except Exception as e:
-    print(f'Erro: {e}')
-"
+            python -c "import json; \
+try: \
+    with open('decisor/metadados_modelo.json', 'r', encoding='utf-8') as f: \
+        data = json.load(f) \
+    stats = data.get('estatisticas_sistema', {}); \
+    config = data.get('configuracao', {}); \
+    print(f'Heurísticas totais: {stats.get(\\\"total_heuristicas\\\", 0)}'); \
+    print(f'Heurísticas fixas: {stats.get(\\\"heuristicas_fixas\\\", 0)}'); \
+    print(f'Heurísticas dinâmicas: {stats.get(\\\"heuristicas_dinamicas\\\", 0)}'); \
+    print(f'Dataset: {config.get(\\\"dimensoes_dataset\\\", \\\"N/A\\\")}'); \
+    print(f'Sorteios: {config.get(\\\"sorteios_processados\\\", 0)}'); \
+    if stats.get(\\\"heuristicas_dinamicas\\\", 0) > 0: \
+        print(\\\"✅ Heurísticas dinâmicas: ATIVAS\\\"); \
+    else: \
+        print(\\\"❌ Heurísticas dinâmicas: INATIVAS\\\"); \
+except Exception as e: \
+    print(f'Erro: {e}')"
           else
             echo "❌ Metadados não encontrados"
             exit 1
@@ -162,6 +160,11 @@ except Exception as e:
             echo "✅ Modelos atualizados com sucesso!"
           fi
 
+      - name: 🧹 Limpar Script Temporário
+        if: always()
+        run: |
+          rm -f test_dynamic_integration.py
+
       - name: 📋 Gerar Relatório de Execução
         if: always()
         run: |
@@ -169,7 +172,7 @@ except Exception as e:
           echo "==========================" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           
-          python -c "
+          cat > generate_report.py << 'EOF'
 import json, os, datetime
 
 print('## 🔧 Status do Pipeline de Heurísticas Dinâmicas')
@@ -184,17 +187,17 @@ if os.path.exists('decisor/metadados_modelo.json'):
         config = data.get('configuracao', {})
         
         print('### 📊 Estatísticas do Sistema')
-        print(f'- **Heurísticas totais:** {stats.get(\"total_heuristicas\", 0)}')
-        print(f'- **Heurísticas fixas:** {stats.get(\"heuristicas_fixas\", 0)}')
-        print(f'- **Heurísticas dinâmicas:** {stats.get(\"heuristicas_dinamicas\", 0)}')
-        print(f'- **Dimensões do dataset:** {config.get(\"dimensoes_dataset\", \"N/A\")}')
-        print(f'- **Sorteios processados:** {config.get(\"sorteios_processados\", 0)}')
-        print(f'- **Data do treino:** {data.get(\"data_treino\", \"N/A\")}')
+        print(f'- **Heurísticas totais:** {stats.get("total_heuristicas", 0)}')
+        print(f'- **Heurísticas fixas:** {stats.get("heuristicas_fixas", 0)}')
+        print(f'- **Heurísticas dinâmicas:** {stats.get("heuristicas_dinamicas", 0)}')
+        print(f'- **Dimensões do dataset:** {config.get("dimensoes_dataset", "N/A")}')
+        print(f'- **Sorteios processados:** {config.get("sorteios_processados", 0)}')
+        print(f'- **Data do treino:** {data.get("data_treino", "N/A")}')
         
         modelos = [f for f in os.listdir('decisor/modelos_salvos/') if f.endswith('.joblib')]
         print(f'- **Modelos treinados:** {len(modelos)}')
         
-        if stats.get(\"heuristicas_dinamicas\", 0) > 0:
+        if stats.get("heuristicas_dinamicas", 0) > 0:
             print('- **🔧 Heurísticas dinâmicas:** ✅ Ativas e funcionando')
             print('🎉 **Pipeline dinâmico operacional!**')
         else:
@@ -213,5 +216,8 @@ else:
     print('- Falha na geração de features')
 
 print('')
-print(f'⏰ **Executado em:** {datetime.datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")}')
-" >> $GITHUB_STEP_SUMMARY
+print(f'⏰ **Executado em:** {datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+EOF
+          
+          python generate_report.py >> $GITHUB_STEP_SUMMARY
+          rm -f generate_report.py
