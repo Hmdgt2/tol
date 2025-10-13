@@ -15,7 +15,7 @@ def check_environment():
         'lib/dados.py',
         'lib/despachante_new.py', 
         'lib/GeradorHeuristicasDinamicas.py',
-        'treinar_decisor1.py',
+        'treinar_decisor_1.py',
         'avaliador/avaliador1.py',
         'decisor/decisor_final1.py'
     ]
