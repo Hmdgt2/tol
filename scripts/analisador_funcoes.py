@@ -5,7 +5,7 @@ import sys
 from collections import defaultdict
 from datetime import datetime
 
-BASE_DIR = "lib/funcoes_analiticas"
+BASE_DIR = "lib/funcoes_limpas"
 LISTA_FUNCOES_TXT = "relatorios/lista_funcoes.txt"
 LISTA_FUNCOES_JSON = "relatorios/lista_funcoes.json"
 
