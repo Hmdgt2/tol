@@ -1,4 +1,4 @@
-name: Treinar e Salvar Modelo com Heurísticas Dinâmicas
+name: Treinar 2 e Salvar Modelo com Heurísticas Dinâmicas
 
 on:
   workflow_dispatch:
