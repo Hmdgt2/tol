@@ -1,4 +1,4 @@
-# treinar_decisor.py
+# treinar_decisor_1.py
 import os
 import sys
 import json
