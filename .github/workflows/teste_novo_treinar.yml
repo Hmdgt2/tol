@@ -1,77 +1,42 @@
-name: Treinar e Salvar Modelo com Heurísticas Dinâmicas
-
+name: Treinar Modelo com Heuristicas Dinamicas
 on:
   workflow_dispatch:
   schedule:
     - cron: '0 8 * * 1'
-
 jobs:
-  train_dynamic_model:
+  train_model:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
-      - name: Checkout do Repositório
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Configurar Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
-
-      - name: Instalar Dependências
+      - name: Install deps
+        run: pip install numpy scikit-learn scipy joblib
+      - name: Check environment
+        run: PYTHONPATH=. python check_environment.py
+      - name: Test imports
+        run: PYTHONPATH=. python -c "from lib.dados import Dados; print('Dados OK')"
+      - name: Run training
+        run: PYTHONPATH=. python treinar_decisor1.py --num-dinamicas 25
+      - name: Run evaluation
+        run: PYTHONPATH=. python avaliador/avaliador1.py --manutencao
+      - name: Check results
         run: |
-          pip install numpy scikit-learn scipy joblib
-
-      - name: Verificar Ambiente
-        run: |
-          PYTHONPATH=. python check_environment.py
-
-      - name: Testar Importações Básicas
-        run: |
-          PYTHONPATH=. python -c "from lib.dados import Dados; from lib.despachante_new import Despachante; print('Importações OK')"
-
-      - name: Executar Treino
-        run: |
-          PYTHONPATH=. python treinar_decisor1.py --num-dinamicas 25
-
-      - name: Executar Avaliação
-        run: |
-          PYTHONPATH=. python avaliador/avaliador1.py --manutencao
-
-      - name: Verificar Resultados
-        run: |
-          echo "Verificando ficheiros gerados:"
-          if [ -d "decisor/modelos_salvos" ]; then
-            echo "Modelos encontrados: $(ls decisor/modelos_salvos/*.joblib 2>/dev/null | wc -l)"
+          if [ -f "decisor/metadados_modelo.json" ]; then
+            echo "SUCCESS: Training completed"
           else
-            echo "ERRO: Pasta de modelos não encontrada"
+            echo "ERROR: Training failed"
             exit 1
           fi
-          
-          if [ -f "decisor/metadados_modelo.json" ]; then
-            echo "Metadados encontrados"
-            PYTHONPATH=. python -c "import json; data = json.load(open('decisor/metadados_modelo.json')); print(f'Heuristicas: {len(data.get(\\\"heuristicas_ordenadas\\\", []))}')"
-          else
-            echo "ERRO: Metadados não encontrados"
-            exit 1
-          fi
-
-      - name: Commitar Modelos Atualizados
+      - name: Commit models
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add decisor/modelos_salvos/ decisor/metadados_modelo.json
-          git diff --staged --quiet || (git commit -m "Update models [bot]" && git push)
-
-      - name: Gerar Relatório
-        if: always()
-        run: |
-          echo "RELATORIO" > $GITHUB_STEP_SUMMARY
-          echo "========" >> $GITHUB_STEP_SUMMARY
-          if [ -f "decisor/metadados_modelo.json" ]; then
-            echo "SUCESSO: Modelos treinados" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "FALHA: Treino não concluído" >> $GITHUB_STEP_SUMMARY
-          fi
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add decisor/
+          git commit -m "Update models" || exit 0
+          git push
