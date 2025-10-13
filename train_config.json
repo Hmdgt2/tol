@@ -1,0 +1,33 @@
+{
+  "train_config": {
+    "use_dynamic_heuristics": true,
+    "num_dynamic_heuristics": 25,
+    "auto_optimize": true,
+    "max_training_samples": 10000,
+    "evaluation_window": 50,
+    "retrain_on_new_data": true,
+    "optimization_strategy": "balanced",
+    "min_training_samples": 100
+  },
+  "paths": {
+    "training_script": "treinar_decisor1.py",
+    "evaluation_script": "avaliador/avaliador1.py", 
+    "decisor_script": "decisor/decisor_final1.py",
+    "despachante_script": "lib/despachante_new.py",
+    "data_class": "lib/dados.py",
+    "heuristic_generator": "lib/GeradorHeuristicasDinamicas.py",
+    "models_directory": "decisor/modelos_salvos/",
+    "metadata_file": "decisor/metadados_modelo.json"
+  },
+  "github_actions": {
+    "schedule": "0 8 * * 1",
+    "python_version": "3.13",
+    "auto_commit": true,
+    "notify_on_failure": true
+  },
+  "performance_targets": {
+    "min_model_score": 0.6,
+    "min_heuristic_success_rate": 0.3,
+    "max_training_time_minutes": 30
+  }
+}
