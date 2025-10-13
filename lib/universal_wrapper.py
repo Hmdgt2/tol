@@ -1,8 +1,8 @@
 """
 UNIVERSAL WRAPPER - Interface Única para Todas as Funções
 ================================================================
-Gerado automaticamente em: 2025-10-13 17:10:47
-Total de funções: 462
+Gerado automaticamente em: 2025-10-13 17:27:10
+Total de funções: 506
 
 ⚠️ NÃO EDITAR MANUALMENTE - Este arquivo é gerado automaticamente
    Qualquer alteração será sobrescrita na próxima execução do pipeline.
@@ -22,7 +22,7 @@ class UniversalWrapper:
     - Todas as funções retornam List[float] padronizada
     - Tratamento automático de erros
     - Interface consistente para pipeline de IA
-    - 462 funções disponíveis
+    - 506 funções disponíveis
     """
     
 from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -74,6 +74,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para airy_func"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.airy_func(*args, **kwargs)
+
+
+    @staticmethod
+    def algebraic_curve_genus(*args, **kwargs):
+        """Método universal para algebraic_curve_genus"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.algebraic_curve_genus(*args, **kwargs)
 
 
     @staticmethod
@@ -161,10 +168,24 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def barrier_method(*args, **kwargs):
+        """Método universal para barrier_method"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.barrier_method(*args, **kwargs)
+
+
+    @staticmethod
     def bell_number(*args, **kwargs):
         """Método universal para bell_number"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.bell_number(*args, **kwargs)
+
+
+    @staticmethod
+    def bellman_optimality_residual(*args, **kwargs):
+        """Método universal para bellman_optimality_residual"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.bellman_optimality_residual(*args, **kwargs)
 
 
     @staticmethod
@@ -217,6 +238,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def betti_numbers_approx(*args, **kwargs):
+        """Método universal para betti_numbers_approx"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.betti_numbers_approx(*args, **kwargs)
+
+
+    @staticmethod
     def betweenness_centrality(*args, **kwargs):
         """Método universal para betweenness_centrality"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -228,6 +256,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para betweenness_centrality_approx"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.betweenness_centrality_approx(*args, **kwargs)
+
+
+    @staticmethod
+    def bezout_theorem_degree(*args, **kwargs):
+        """Método universal para bezout_theorem_degree"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.bezout_theorem_degree(*args, **kwargs)
 
 
     @staticmethod
@@ -273,6 +308,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def brownian_bridge_probability(*args, **kwargs):
+        """Método universal para brownian_bridge_probability"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.brownian_bridge_probability(*args, **kwargs)
+
+
+    @staticmethod
     def butter_lowpass(*args, **kwargs):
         """Método universal para butter_lowpass"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -298,6 +340,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para catalan_number"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.catalan_number(*args, **kwargs)
+
+
+    @staticmethod
+    def cauchy_integral_formula(*args, **kwargs):
+        """Método universal para cauchy_integral_formula"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.cauchy_integral_formula(*args, **kwargs)
 
 
     @staticmethod
@@ -347,6 +396,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para centroid"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.centroid(*args, **kwargs)
+
+
+    @staticmethod
+    def character_orthogonality(*args, **kwargs):
+        """Método universal para character_orthogonality"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.character_orthogonality(*args, **kwargs)
 
 
     @staticmethod
@@ -487,6 +543,27 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para conditional_permutations"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.conditional_permutations(*args, **kwargs)
+
+
+    @staticmethod
+    def conformal_mapping_distortion(*args, **kwargs):
+        """Método universal para conformal_mapping_distortion"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.conformal_mapping_distortion(*args, **kwargs)
+
+
+    @staticmethod
+    def controllability_matrix(*args, **kwargs):
+        """Método universal para controllability_matrix"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.controllability_matrix(*args, **kwargs)
+
+
+    @staticmethod
+    def convex_function_test(*args, **kwargs):
+        """Método universal para convex_function_test"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.convex_function_test(*args, **kwargs)
 
 
     @staticmethod
@@ -791,6 +868,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def eligibility_traces_update(*args, **kwargs):
+        """Método universal para eligibility_traces_update"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.eligibility_traces_update(*args, **kwargs)
+
+
+    @staticmethod
     def elliptic_j(*args, **kwargs):
         """Método universal para elliptic_j"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -837,6 +921,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para euclidean_dist"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.euclidean_dist(*args, **kwargs)
+
+
+    @staticmethod
+    def euler_characteristic_simplicial(*args, **kwargs):
+        """Método universal para euler_characteristic_simplicial"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.euler_characteristic_simplicial(*args, **kwargs)
 
 
     @staticmethod
@@ -987,6 +1078,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def field_extension_degree(*args, **kwargs):
+        """Método universal para field_extension_degree"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.field_extension_degree(*args, **kwargs)
+
+
+    @staticmethod
     def fill_missing_values(*args, **kwargs):
         """Método universal para fill_missing_values"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1054,6 +1152,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para functor_application"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.functor_application(*args, **kwargs)
+
+
+    @staticmethod
+    def fundamental_group_generators(*args, **kwargs):
+        """Método universal para fundamental_group_generators"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.fundamental_group_generators(*args, **kwargs)
 
 
     @staticmethod
@@ -1148,6 +1253,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def girsanov_theorem_density(*args, **kwargs):
+        """Método universal para girsanov_theorem_density"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.girsanov_theorem_density(*args, **kwargs)
+
+
+    @staticmethod
     def graph_avg_degree(*args, **kwargs):
         """Método universal para graph_avg_degree"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1218,6 +1330,20 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def group_character_table(*args, **kwargs):
+        """Método universal para group_character_table"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.group_character_table(*args, **kwargs)
+
+
+    @staticmethod
+    def group_commutator_subgroup_size(*args, **kwargs):
+        """Método universal para group_commutator_subgroup_size"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.group_commutator_subgroup_size(*args, **kwargs)
+
+
+    @staticmethod
     def hamming_dist_str(*args, **kwargs):
         """Método universal para hamming_dist_str"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1278,6 +1404,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para hilbert_transform"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.hilbert_transform(*args, **kwargs)
+
+
+    @staticmethod
+    def homology_group_torsion(*args, **kwargs):
+        """Método universal para homology_group_torsion"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.homology_group_torsion(*args, **kwargs)
 
 
     @staticmethod
@@ -1351,6 +1484,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def irreducible_components_count(*args, **kwargs):
+        """Método universal para irreducible_components_count"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.irreducible_components_count(*args, **kwargs)
+
+
+    @staticmethod
     def is_complete(*args, **kwargs):
         """Método universal para is_complete"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1400,6 +1540,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def kalman_filter_gain(*args, **kwargs):
+        """Método universal para kalman_filter_gain"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.kalman_filter_gain(*args, **kwargs)
+
+
+    @staticmethod
     def kendall_tau(*args, **kwargs):
         """Método universal para kendall_tau"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1432,6 +1579,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para lag_series"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.lag_series(*args, **kwargs)
+
+
+    @staticmethod
+    def lagrange_duality(*args, **kwargs):
+        """Método universal para lagrange_duality"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.lagrange_duality(*args, **kwargs)
 
 
     @staticmethod
@@ -1502,6 +1656,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para levenshtein_distance_ratio"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.levenshtein_distance_ratio(*args, **kwargs)
+
+
+    @staticmethod
+    def levy_process_increments(*args, **kwargs):
+        """Método universal para levy_process_increments"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.levy_process_increments(*args, **kwargs)
 
 
     @staticmethod
@@ -1596,6 +1757,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def lyapunov_equation_solution(*args, **kwargs):
+        """Método universal para lyapunov_equation_solution"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.lyapunov_equation_solution(*args, **kwargs)
+
+
+    @staticmethod
     def lyapunov_exponent(*args, **kwargs):
         """Método universal para lyapunov_exponent"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1624,6 +1792,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def mandelbrot_set_membership(*args, **kwargs):
+        """Método universal para mandelbrot_set_membership"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.mandelbrot_set_membership(*args, **kwargs)
+
+
+    @staticmethod
     def manhattan_dist(*args, **kwargs):
         """Método universal para manhattan_dist"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1635,6 +1810,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para mann_whitney"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.mann_whitney(*args, **kwargs)
+
+
+    @staticmethod
+    def martingale_property(*args, **kwargs):
+        """Método universal para martingale_property"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.martingale_property(*args, **kwargs)
 
 
     @staticmethod
@@ -1848,6 +2030,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def module_homomorphism_rank(*args, **kwargs):
+        """Método universal para module_homomorphism_rank"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.module_homomorphism_rank(*args, **kwargs)
+
+
+    @staticmethod
     def monoid_operation_check(*args, **kwargs):
         """Método universal para monoid_operation_check"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -1988,6 +2177,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def named_entity_recognition_confidence(*args, **kwargs):
+        """Método universal para named_entity_recognition_confidence"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.named_entity_recognition_confidence(*args, **kwargs)
+
+
+    @staticmethod
     def natural_transformation(*args, **kwargs):
         """Método universal para natural_transformation"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -2090,6 +2286,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para num_nodes"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.num_nodes(*args, **kwargs)
+
+
+    @staticmethod
+    def observability_matrix(*args, **kwargs):
+        """Método universal para observability_matrix"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.observability_matrix(*args, **kwargs)
 
 
     @staticmethod
@@ -2198,6 +2401,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def perplexity_language_model(*args, **kwargs):
+        """Método universal para perplexity_language_model"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.perplexity_language_model(*args, **kwargs)
+
+
+    @staticmethod
     def plot_boxplot(*args, **kwargs):
         """Método universal para plot_boxplot"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -2251,6 +2461,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para poisson_var"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.poisson_var(*args, **kwargs)
+
+
+    @staticmethod
+    def policy_gradient_log_prob(*args, **kwargs):
+        """Método universal para policy_gradient_log_prob"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.policy_gradient_log_prob(*args, **kwargs)
 
 
     @staticmethod
@@ -2398,6 +2615,20 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para product_sum_square"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.product_sum_square(*args, **kwargs)
+
+
+    @staticmethod
+    def projective_space_embedding(*args, **kwargs):
+        """Método universal para projective_space_embedding"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.projective_space_embedding(*args, **kwargs)
+
+
+    @staticmethod
+    def q_learning_update(*args, **kwargs):
+        """Método universal para q_learning_update"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.q_learning_update(*args, **kwargs)
 
 
     @staticmethod
@@ -2555,10 +2786,38 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def representation_dimension(*args, **kwargs):
+        """Método universal para representation_dimension"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.representation_dimension(*args, **kwargs)
+
+
+    @staticmethod
+    def residue_theorem(*args, **kwargs):
+        """Método universal para residue_theorem"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.residue_theorem(*args, **kwargs)
+
+
+    @staticmethod
     def riemann_metric_tensor(*args, **kwargs):
         """Método universal para riemann_metric_tensor"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.riemann_metric_tensor(*args, **kwargs)
+
+
+    @staticmethod
+    def riemann_zeta_zeros_approx(*args, **kwargs):
+        """Método universal para riemann_zeta_zeros_approx"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.riemann_zeta_zeros_approx(*args, **kwargs)
+
+
+    @staticmethod
+    def ring_ideal_generator(*args, **kwargs):
+        """Método universal para ring_ideal_generator"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.ring_ideal_generator(*args, **kwargs)
 
 
     @staticmethod
@@ -2643,6 +2902,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para savgol_smooth"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.savgol_smooth(*args, **kwargs)
+
+
+    @staticmethod
+    def schur_lemma_test(*args, **kwargs):
+        """Método universal para schur_lemma_test"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.schur_lemma_test(*args, **kwargs)
 
 
     @staticmethod
@@ -2919,6 +3185,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def stochastic_integral_approx(*args, **kwargs):
+        """Método universal para stochastic_integral_approx"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.stochastic_integral_approx(*args, **kwargs)
+
+
+    @staticmethod
     def stochastic_score(*args, **kwargs):
         """Método universal para stochastic_score"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -2930,6 +3203,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para sub"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.sub(*args, **kwargs)
+
+
+    @staticmethod
+    def subgradient_method(*args, **kwargs):
+        """Método universal para subgradient_method"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.subgradient_method(*args, **kwargs)
 
 
     @staticmethod
@@ -3094,6 +3374,20 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def temporal_difference_error(*args, **kwargs):
+        """Método universal para temporal_difference_error"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.temporal_difference_error(*args, **kwargs)
+
+
+    @staticmethod
+    def tfidf_vectorizer(*args, **kwargs):
+        """Método universal para tfidf_vectorizer"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.tfidf_vectorizer(*args, **kwargs)
+
+
+    @staticmethod
     def top_k_integrated(*args, **kwargs):
         """Método universal para top_k_integrated"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -3126,6 +3420,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         """Método universal para unique_count"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
         return FuncoesAnaliticasWrapper.unique_count(*args, **kwargs)
+
+
+    @staticmethod
+    def variety_dimension(*args, **kwargs):
+        """Método universal para variety_dimension"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.variety_dimension(*args, **kwargs)
 
 
     @staticmethod
@@ -3220,6 +3521,13 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
 
 
     @staticmethod
+    def word_embeddings_cosine(*args, **kwargs):
+        """Método universal para word_embeddings_cosine"""
+        from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
+        return FuncoesAnaliticasWrapper.word_embeddings_cosine(*args, **kwargs)
+
+
+    @staticmethod
     def yoneda_embedding(*args, **kwargs):
         """Método universal para yoneda_embedding"""
         from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
@@ -3270,7 +3578,7 @@ from lib.funcoes_wrappers_auto import FuncoesAnaliticasWrapper
     @staticmethod
     def get_function_count():
         """Retorna o número total de funções disponíveis."""
-        return 462
+        return 506
     
     @staticmethod
     def get_function_info(func_name):
