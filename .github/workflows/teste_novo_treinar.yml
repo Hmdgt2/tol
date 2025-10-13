@@ -71,7 +71,7 @@ try:
         previsoes = despachante.get_previsoes(stats, n=5)
         
         print(f'   ✅ Previsões: {len(previsoes)} heurísticas')
-        print('🎉 SISTEMA DINÂMICO FUNCIONANDO!')
+        print('🎉 SISTEMA DINÂMICO FUNCIONANDO')
     else:
         print('❌ Nenhuma heurística dinâmica carregada')
         sys.exit(1)
@@ -157,7 +157,7 @@ except Exception as e: \
             echo "🚀 Comitando modelos atualizados..."
             git commit -m "feat: Atualiza modelo com heurísticas dinâmicas [bot]"
             git push
-            echo "✅ Modelos atualizados com sucesso!"
+            echo "✅ Modelos atualizados com sucesso"
           fi
 
       - name: 🧹 Limpar Script Temporário
@@ -199,7 +199,7 @@ if os.path.exists('decisor/metadados_modelo.json'):
         
         if stats.get("heuristicas_dinamicas", 0) > 0:
             print('- **🔧 Heurísticas dinâmicas:** ✅ Ativas e funcionando')
-            print('🎉 **Pipeline dinâmico operacional!**')
+            print('🎉 **Pipeline dinâmico operacional**')
         else:
             print('- **🔧 Heurísticas dinâmicas:** ❌ Não carregadas')
             print('⚠️ **Sistema usando apenas heurísticas fixas**')
