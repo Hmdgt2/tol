@@ -38,9 +38,9 @@ jobs:
       - name: 🧪 Testar Integração Dinâmica
         run: |
           PYTHONPATH=$GITHUB_WORKSPACE python - << EOF
-         import sys
-         import os
-         sys.path.insert(0, os.getcwd())
+import sys
+import os
+sys.path.insert(0, os.getcwd())
 
 try:
     print('1. Importando módulos...')
@@ -57,9 +57,9 @@ try:
     dinamicas = [h for h, meta in metadados.items() if meta.get('tipo') == 'dinamica']
     fixas = [h for h, meta in metadados.items() if meta.get('tipo') == 'fixa']
     
-    print(f'   Total: {total} heurísticas')
-    print(f'   Fixas: {len(fixas)}')
-    print(f'   Dinâmicas: {len(dinamicas)}')
+    print(f'    Total: {total} heurísticas')
+    print(f'    Fixas: {len(fixas)}')
+    print(f'    Dinâmicas: {len(dinamicas)}')
     
     if len(dinamicas) > 0:
         print('4. Testando previsões...')
@@ -68,7 +68,7 @@ try:
         stats, _ = dados.obter_estatisticas(deps)
         previsoes = despachante.get_previsoes(stats, n=5)
         
-        print(f'   Previsões: {len(previsoes)} heurísticas')
+        print(f'    Previsões: {len(previsoes)} heurísticas')
         print('SISTEMA DINAMICO FUNCIONANDO')
     else:
         print('Nenhuma heurística dinâmica carregada')
