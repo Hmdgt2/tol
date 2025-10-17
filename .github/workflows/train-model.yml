@@ -45,7 +45,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           echo "🚀 Iniciando treino com heurísticas dinâmicas..."
-          python treinar_decisor1.py --num-dinamicas 25
+          python treinar_decisor_1.py --num-dinamicas 25
           
       - name: 📊 Executar Avaliação do Sistema
         env:
