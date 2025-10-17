@@ -24,8 +24,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install numpy scikit-learn scipy
-          
+                    
       - name: 🔧 Verificar Estrutura de Ficheiros
         run: |
           echo "📁 Estrutura do projeto:"
