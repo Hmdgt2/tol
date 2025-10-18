@@ -1,0 +1,495 @@
+{
+  "resumo_heuristicas": {
+    "numeros_quentes": {
+      "descricao": "Sugere os números mais frequentes nos sorteios recentes.",
+      "dependencias": [
+        "frequencia_recente"
+      ],
+      "modulo": "numeros_quentes",
+      "funcao": "prever"
+    },
+    "balanceamento_tipos": {
+      "descricao": "Sugere uma combinação balanceada de pares, ímpares e primos, preenchendo a lista com os números menos frequentes para garantir diversidade.",
+      "dependencias": [
+        "padrao_tipos_numeros",
+        "frequencia_total"
+      ],
+      "modulo": "balanceamento_tipos",
+      "funcao": "prever"
+    },
+    "ciclos_e_atrasos": {
+      "descricao": "Sugere números cuja ausência atual é um múltiplo do seu intervalo médio histórico.",
+      "dependencias": [
+        "ausencia_atual",
+        "gaps_medios"
+      ],
+      "modulo": "ciclos_e_atrasos",
+      "funcao": "prever"
+    },
+    "padroes_de_grupos": {
+      "descricao": "Sugere números com base nos grupos de números que são frequentemente sorteados juntos.",
+      "dependencias": [
+        "frequencia_grupos"
+      ],
+      "modulo": "padroes_de_grupos",
+      "funcao": "prever"
+    },
+    "frequencia_soma": {
+      "descricao": "Sugere os números mais frequentes que saíram em sorteios com a soma mais comum, preenchendo a lista com os menos frequentes desse subconjunto para garantir uma previsão completa.",
+      "dependencias": [
+        "numeros_soma_mais_frequente"
+      ],
+      "modulo": "frequencia_soma",
+      "funcao": "prever"
+    },
+    "repeticoes_sorteios_anteriores": {
+      "descricao": "Sugere números com base na probabilidade de repetição de números de sorteios anteriores.",
+      "dependencias": [
+        "probabilidades_repeticoes",
+        "frequencia_recente",
+        "frequencia_total"
+      ],
+      "modulo": "repeticoes_sorteios_anteriores",
+      "funcao": "prever"
+    },
+    "padrao_finais": {
+      "descricao": "Sugere números com terminações semelhantes ao último sorteio.",
+      "dependencias": [
+        "frequencia_terminacoes_padrao",
+        "frequencia_total"
+      ],
+      "modulo": "padrao_finais",
+      "funcao": "prever"
+    },
+    "numeros_frios": {
+      "descricao": "Sugere os números que estão ausentes há mais tempo.",
+      "dependencias": [
+        "ausencia_atual"
+      ],
+      "modulo": "numeros_frios",
+      "funcao": "prever"
+    },
+    "combinador_quentes_frios": {
+      "descricao": "Combina os números mais frequentes e os mais ausentes.",
+      "dependencias": [
+        "frequencia_recente",
+        "ausencia_atual",
+        "frequencia_total"
+      ],
+      "modulo": "combinador_quentes_frios",
+      "funcao": "prever"
+    },
+    "soma_provavel": {
+      "descricao": "Sugere números cuja soma tende à soma mais frequente nos sorteios.",
+      "dependencias": [
+        "numeros_soma_mais_frequente",
+        "frequencia_total"
+      ],
+      "modulo": "soma_provavel",
+      "funcao": "prever"
+    },
+    "posicao": {
+      "descricao": "Sugere números com base na sua tendência de aparecerem em posições específicas do sorteio.",
+      "dependencias": [
+        "frequencia_por_posicao"
+      ],
+      "modulo": "posicao",
+      "funcao": "prever"
+    },
+    "tendencia_recentes": {
+      "descricao": "Sugere os números mais frequentes nos últimos sorteios.",
+      "dependencias": [
+        "frequencia_recente"
+      ],
+      "modulo": "tendencia_recentes",
+      "funcao": "prever"
+    },
+    "crescimento_ano": {
+      "descricao": "Sugere números cuja frequência tem aumentado de ano para ano.",
+      "dependencias": [
+        "frequencia_por_ano"
+      ],
+      "modulo": "crescimento_ano",
+      "funcao": "prever"
+    },
+    "distribuicao_uniforme_faixas": {
+      "descricao": "Sugere números distribuídos de forma equilibrada entre as faixas do jogo, evitando concentrações.",
+      "dependencias": [
+        "frequencia_total"
+      ],
+      "modulo": "distribuicao_uniforme_faixas",
+      "funcao": "prever"
+    },
+    "pares_consecutivos": {
+      "descricao": "Sugere números que formam pares consecutivos frequentes.",
+      "dependencias": [
+        "frequencia_pares_consecutivos"
+      ],
+      "modulo": "pares_consecutivos",
+      "funcao": "prever"
+    },
+    "trios_frequentes": {
+      "descricao": "Sugere números que aparecem juntos em trios frequentes nos sorteios passados.",
+      "dependencias": [
+        "trios_frequentes"
+      ],
+      "modulo": "trios_frequentes",
+      "funcao": "prever"
+    },
+    "gap_medio": {
+      "descricao": "Sugere números que historicamente têm os maiores intervalos médios entre saídas.",
+      "dependencias": [
+        "gaps_medios"
+      ],
+      "modulo": "gap_medio",
+      "funcao": "prever"
+    },
+    "clusters_recentes": {
+      "descricao": "Prioriza grupos de números que saíram juntos recentemente, capturando pequenos clusters ou padrões.",
+      "dependencias": [
+        "pares_recentes"
+      ],
+      "modulo": "clusters_recentes",
+      "funcao": "prever"
+    },
+    "comb_balanceadas": {
+      "descricao": "Sugere combinações que equilibram números pares e ímpares, altos e baixos, com base em padrões históricos.",
+      "dependencias": [
+        "frequencia_total"
+      ],
+      "modulo": "comb_balanceadas",
+      "funcao": "prever"
+    },
+    "ciclos_longos": {
+      "descricao": "Sugere números que estão atrasados em relação ao seu ciclo histórico, com base no intervalo médio entre aparições.",
+      "dependencias": [
+        "gaps_medios",
+        "ausencia_atual"
+      ],
+      "modulo": "ciclos_longos",
+      "funcao": "prever"
+    },
+    "ciclos_adaptativos": {
+      "descricao": "Sugere números com base na sua frequência e precisão em ciclos de tempo recentes.",
+      "dependencias": [
+        "frequencia_por_ciclo"
+      ],
+      "modulo": "ciclos_adaptativos",
+      "funcao": "prever"
+    },
+    "numeros_vizinhos": {
+      "descricao": "Sugere números vizinhos de sorteios recentes mais frequentes.",
+      "dependencias": [
+        "frequencia_vizinhos",
+        "frequencia_total"
+      ],
+      "modulo": "numeros_vizinhos",
+      "funcao": "prever"
+    },
+    "numeros_retencao_longa": {
+      "descricao": "Prioriza números que estão a demorar mais para sair do que o seu padrão histórico.",
+      "dependencias": [
+        "ausencia_atual",
+        "gaps_medios"
+      ],
+      "modulo": "numeros_retenção_longa",
+      "funcao": "prever"
+    },
+    "pares_frequentes": {
+      "descricao": "Sugere números presentes nos pares mais frequentes.",
+      "dependencias": [
+        "frequencia_pares"
+      ],
+      "modulo": "pares_frequentes",
+      "funcao": "prever"
+    },
+    "ausencia_superior_media": {
+      "descricao": "Sugere números ausentes há mais tempo que a média.",
+      "dependencias": [
+        "ausencia_atual"
+      ],
+      "modulo": "ausencia_superior_media",
+      "funcao": "prever"
+    },
+    "frequencia_terminacoes": {
+      "descricao": "Sugere números com terminações mais frequentes.",
+      "dependencias": [
+        "frequencia_total"
+      ],
+      "modulo": "frequencia_terminacoes",
+      "funcao": "prever"
+    },
+    "pares_distantes": {
+      "descricao": "Prioriza números que raramente saem juntos, aumentando a diversidade do jogo.",
+      "dependencias": [
+        "frequencia_pares"
+      ],
+      "modulo": "pares_distantes",
+      "funcao": "prever"
+    },
+    "soma_numeros": {
+      "descricao": "Sugere os números menos frequentes que saíram em sorteios com a soma mais comum, promovendo uma maior diversidade.",
+      "dependencias": [
+        "numeros_soma_mais_frequente",
+        "frequencia_total"
+      ],
+      "modulo": "soma_numeros",
+      "funcao": "prever"
+    },
+    "repeticao_por_posicao": {
+      "descricao": "Sugere números com base na frequência em cada posição do sorteio, aproveitando padrões posicionais.",
+      "dependencias": [
+        "frequencia_por_posicao",
+        "frequencia_total"
+      ],
+      "modulo": "repeticao_por_posicao",
+      "funcao": "prever"
+    },
+    "distribuicao_grupos": {
+      "descricao": "Sugere números seguindo a distribuição mais comum por grupos de dezenas.",
+      "dependencias": [
+        "distribuicao_dezenas",
+        "frequencia_total"
+      ],
+      "modulo": "distribuicao_grupos",
+      "funcao": "prever"
+    },
+    "distribuicao_quadrantes": {
+      "descricao": "Sugere números de acordo com a distribuição mais comum por quadrantes.",
+      "dependencias": [
+        "distribuicao_quadrantes",
+        "frequencia_total"
+      ],
+      "modulo": "distribuicao_quadrantes",
+      "funcao": "prever"
+    },
+    "meta_avaliacao": {
+      "descricao": "Avalia a precisão posicional histórica para sugerir os números mais frequentes das posições mais precisas.",
+      "dependencias": [
+        "precisao_posicional_historica",
+        "frequencia_por_posicao"
+      ],
+      "modulo": "meta_avaliacao",
+      "funcao": "prever"
+    },
+    "frequencia_total": {
+      "descricao": "Sugere os números mais frequentes no histórico.",
+      "dependencias": [
+        "frequencia_total"
+      ],
+      "modulo": "frequencia_total",
+      "funcao": "prever"
+    }
+  },
+  "resumo_funcoes_de_calculo": {
+    "frequencia_total": {
+      "descricao": "Frequência total de ocorrência de cada número ao longo de todos os sorteios.",
+      "logica_principais": [
+        "frequencia",
+        "global",
+        "historico"
+      ]
+    },
+    "ausencia_atual": {
+      "descricao": "Número de concursos decorridos desde a última vez que cada número saiu.",
+      "logica_principais": [
+        "ausencia",
+        "atraso",
+        "recencia"
+      ]
+    },
+    "gaps_medios": {
+      "descricao": "Intervalo médio de concursos entre aparições sucessivas de cada número.",
+      "logica_principais": [
+        "gap",
+        "periodicidade",
+        "ritmo"
+      ]
+    },
+    "frequencia_pares": {
+      "descricao": "Contagem de todas as combinações de pares que já saíram nos sorteios.",
+      "logica_principais": [
+        "pares",
+        "combinacoes",
+        "associacao"
+      ]
+    },
+    "frequencia_trios": {
+      "descricao": "Contagem de todas as combinações de trios que já saíram nos sorteios.",
+      "logica_principais": [
+        "trios",
+        "combinacoes",
+        "associacao"
+      ]
+    },
+    "frequencia_recente": {
+      "descricao": "Frequência dos números considerando apenas uma janela dos últimos sorteios.",
+      "logica_principais": [
+        "frequencia",
+        "recente",
+        "tendencia"
+      ]
+    },
+    "frequencia_por_posicao": {
+      "descricao": "Frequência de cada número por posição no sorteio.",
+      "logica_principais": [
+        "posicao",
+        "frequencia",
+        "historico"
+      ]
+    },
+    "distribuicao_dezenas": {
+      "descricao": "Distribuição de frequência dos números por grupo de dezenas (0-9, 10-19, etc.).",
+      "logica_principais": [
+        "distribuicao",
+        "dezenas",
+        "agrupamento"
+      ]
+    },
+    "distribuicao_quadrantes": {
+      "descricao": "Distribuição de frequência dos números pelos quadrantes (1-12, 13-24, 25-36, 37-49).",
+      "logica_principais": [
+        "distribuicao",
+        "quadrantes",
+        "agrupamento"
+      ]
+    },
+    "frequencia_por_ciclo": {
+      "descricao": "Frequência de ocorrência dos números dentro de ciclos recentes de concursos.",
+      "logica_principais": [
+        "ciclos",
+        "recente",
+        "frequencia"
+      ]
+    },
+    "frequencia_vizinhos": {
+      "descricao": "Número de vezes que cada número saiu acompanhado de um vizinho (n-1 ou n+1).",
+      "logica_principais": [
+        "vizinhos",
+        "pares",
+        "proximidade"
+      ]
+    },
+    "pares_recentes": {
+      "descricao": "Frequência dos pares de números nos últimos concursos.",
+      "logica_principais": [
+        "pares",
+        "recente",
+        "tendencia"
+      ]
+    },
+    "frequencia_pares_consecutivos": {
+      "descricao": "Frequência de pares consecutivos (ex: 5 e 6).",
+      "logica_principais": [
+        "pares",
+        "consecutivos",
+        "sequencias"
+      ]
+    },
+    "frequencia_por_ano": {
+      "descricao": "Distribuição de frequência dos números em cada ano.",
+      "logica_principais": [
+        "frequencia",
+        "temporal",
+        "ano"
+      ]
+    },
+    "probabilidades_repeticoes": {
+      "descricao": "Probabilidade de um número se repetir do sorteio anterior.",
+      "logica_principais": [
+        "repeticao",
+        "probabilidade",
+        "historico"
+      ]
+    },
+    "padrao_tipos_numeros": {
+      "descricao": "Padrão mais frequente de pares, ímpares e primos dentro dos sorteios.",
+      "logica_principais": [
+        "pares",
+        "impares",
+        "primos"
+      ]
+    },
+    "numeros_soma_mais_frequente": {
+      "descricao": "Números mais comuns em sorteios cuja soma total caiu no intervalo típico.",
+      "logica_principais": [
+        "soma",
+        "intervalo",
+        "frequencia"
+      ]
+    },
+    "precisao_posicional_historica": {
+      "descricao": "Desvio médio entre os números sorteados e a média histórica da sua posição.",
+      "logica_principais": [
+        "precisao",
+        "posicao",
+        "historico"
+      ]
+    },
+    "frequencia_grupos": {
+      "descricao": "Frequência de grupos de 2, 3 e 4 números que já saíram juntos.",
+      "logica_principais": [
+        "grupos",
+        "combinacoes",
+        "frequencia"
+      ]
+    }
+  },
+  "dependencias_nao_usadas": [
+    "frequencia_trios"
+  ],
+  "potenciais_funcoes_duplicadas": {
+    "frequencia": [
+      "frequencia_total",
+      "frequencia_recente",
+      "frequencia_por_posicao",
+      "frequencia_por_ciclo",
+      "frequencia_por_ano",
+      "numeros_soma_mais_frequente",
+      "frequencia_grupos"
+    ],
+    "historico": [
+      "frequencia_total",
+      "frequencia_por_posicao",
+      "probabilidades_repeticoes",
+      "precisao_posicional_historica"
+    ],
+    "pares": [
+      "frequencia_pares",
+      "frequencia_vizinhos",
+      "pares_recentes",
+      "frequencia_pares_consecutivos",
+      "padrao_tipos_numeros"
+    ],
+    "combinacoes": [
+      "frequencia_pares",
+      "frequencia_trios",
+      "frequencia_grupos"
+    ],
+    "associacao": [
+      "frequencia_pares",
+      "frequencia_trios"
+    ],
+    "recente": [
+      "frequencia_recente",
+      "frequencia_por_ciclo",
+      "pares_recentes"
+    ],
+    "tendencia": [
+      "frequencia_recente",
+      "pares_recentes"
+    ],
+    "posicao": [
+      "frequencia_por_posicao",
+      "precisao_posicional_historica"
+    ],
+    "distribuicao": [
+      "distribuicao_dezenas",
+      "distribuicao_quadrantes"
+    ],
+    "agrupamento": [
+      "distribuicao_dezenas",
+      "distribuicao_quadrantes"
+    ]
+  }
+}
