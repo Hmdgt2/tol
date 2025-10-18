@@ -40,6 +40,74 @@ REGRAS_CANONICAS = {
     # Teoria da Informação → teoria_informacao.py
     ("mutual_info", "estatistica_multivariada"): ("teoria_informacao", None),
     ("normalized_mutual_info", "estatistica_multivariada"): ("teoria_informacao", None),
+
+    # REGRAS CANONICAS - Defina aqui TODAS as suas duplicações
+REGRAS_CANONICAS = {
+    # ... regras existentes ...
+    
+    # 🆕 SISTEMAS DINÂMICOS AVANÇADOS → sistemas_dinamicos_avancados.py
+    ("lyapunov_exponent", "analise_numerica_avancada"): ("sistemas_dinamicos_avancados", None),
+    ("takens_embedding", "analise_numerica_avancada"): ("sistemas_dinamicos_avancados", None),
+    ("permutation_entropy", "sistemas_dinamicos"): ("sistemas_dinamicos_avancados", None),
+    ("recurrence_plot", "sistemas_dinamicos"): ("sistemas_dinamicos_avancados", None),
+    ("rossler_attractor", "sistemas_dinamicos"): ("sistemas_dinamicos_avancados", None),
+    
+    # 🆕 COMPUTAÇÃO AVANÇADA → computacao_avancada.py
+    ("numba_optimized_operations", "computacao_jit"): ("computacao_avancada", None),
+    ("cupy_gpu_analysis", "gpu_computing"): ("computacao_avancada", None),
+    ("jax_autodiff_analysis", "diferenciação_automatica"): ("computacao_avancada", None),
+    ("dask_parallel_analysis", "processamento_distribuido"): ("computacao_avancada", None),
+    ("mpi_distributed_analysis", "computacao_cluster"): ("computacao_avancada", None),
+    
+    # 🆕 MATEMÁTICA SIMBÓLICA → matematica_simbolica.py
+    ("symbolic_sequence_analysis", "analise_simbolica"): ("matematica_simbolica", None),
+    ("closed_form_expression_finder", "analise_simbolica"): ("matematica_simbolica", None),
+    ("symengine_fast_symbolic", "simbolica_rapida"): ("matematica_simbolica", None),
+    
+    # 🆕 ANÁLISE QUÂNTICA → analise_quantica.py
+    ("quantum_wavefunction_analysis", "analise_quantica"): ("analise_quantica", None),
+    ("stochastic_process_classification", "analise_quantica"): ("analise_quantica", None),
+    
+    # 🆕 TEORIA DO CAOS → teoria_caos.py
+    ("chaotic_system_identification", "teoria_caos"): ("teoria_caos", None),
+    ("correlation_dimension_estimate", "teoria_caos"): ("teoria_caos", None),
+    
+    # 🆕 PADRÕES EVOLUTIVOS → padroes_evolutivos.py
+    ("evolutionary_fractal_dimension", "padroes_evolutivos_temporais"): ("padroes_evolutivos", None),
+    ("temporal_pattern_entropy", "padroes_evolutivos_temporais"): ("padroes_evolutivos", None),
+    ("phase_transition_detector", "transicoes_fase"): ("padroes_evolutivos", None),
+    ("critical_slowdown_analysis", "transicoes_fase"): ("padroes_evolutivos", None),
+    
+    # 🆕 TEORIA DAS CATÁSTROFES → teoria_catastrofe.py
+    ("catastrophe_theory_analyzer", "teoria_catastrofe"): ("teoria_catastrofe", None),
+    ("tipping_point_early_warning", "teoria_catastrofe"): ("teoria_catastrofe", None),
+    
+    # 🆕 PADRÕES CÓSMICOS → padroes_cosmicos.py
+    ("astronomical_cycle_detector", "padroes_cosmicos"): ("padroes_cosmicos", None),
+    ("galactic_pattern_analyzer", "padroes_cosmicos"): ("padroes_cosmicos", None),
+    
+    # 🆕 REDES COMPLEXAS → redes_complexas_avancadas.py
+    ("temporal_network_analysis", "redes_complexas_temporais"): ("redes_complexas_avancadas", None),
+    ("graph_spectral_gap", "funcoes_diversas"): ("redes_complexas_avancadas", None),
+    ("betweenness_centrality_approx", "funcoes_diversas"): ("redes_complexas_avancadas", None),
+    
+    # 🆕 OTIMIZAÇÃO AVANÇADA → otimizacao_avancada.py
+    ("simulated_annealing", "otimizacao_metaheuristicas"): ("otimizacao_avancada", None),
+    ("particle_swarm_optimization", "otimizacao_metaheuristicas"): ("otimizacao_avancada", None),
+    ("genetic_algorithm", "otimizacao_metaheuristicas"): ("otimizacao_avancada", None),
+    ("convex_function_test", "otimizacao_convexa"): ("otimizacao_avancada", None),
+    
+    # 🆕 ANÁLISE MULTIVARIADA AVANÇADA → analise_multivariada_avancada.py
+    ("mahalanobis_distance", "estatistica_multivariada_2"): ("analise_multivariada_avancada", None),
+    ("hotelling_t2_test", "estatistica_multivariada_2"): ("analise_multivariada_avancada", None),
+    ("canonical_correlation", "estatistica_multivariada_2"): ("analise_multivariada_avancada", None),
+    
+    # 🆕 BIG DATA E SCALE-OUT → big_data_scaleout.py
+    ("spark_big_data_analysis", "big_data_analysis"): ("big_data_scaleout", None),
+    ("vaex_lazy_dataframe_analysis", "big_dataframes"): ("big_data_scaleout", None),
+    ("modin_parallel_dataframe", "pandas_acelerado"): ("big_data_scaleout", None),
+    ("dask_ml_distributed_learning", "ml_distribuido"): ("big_data_scaleout", None),
+}
 }
 
 # Funções que requerem intervenção manual
@@ -47,6 +115,12 @@ ACOES_MANUAIS = [
     "sum_of_pairs",
     "sum_of_triples", 
     "shortest_paths_length",
+    "cupy_gpu_analysis",           # Requer GPU NVIDIA
+    "mpi_distributed_analysis",    # Requer MPI
+    "spark_big_data_analysis",     # Requer Apache Spark
+    "stan_bayesian_inference",     # Requer Stan/CmdStan
+    "arb_arbitrary_precision_analysis",  # Requer Flint/Arb
+    "gmpy2_multiprecision_analysis",     # Requer GMP/MPFR
 ]
 
 # =================================================================
