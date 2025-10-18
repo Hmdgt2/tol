@@ -2,3 +2,35 @@ scikit-learn
 numpy
 xgboost
 lightgbm
+
+
+# COMPUTAÇÃO AVANÇADA
+cupy-cuda12x
+jax[cpu]
+mpi4py
+dask[complete]
+numexpr
+
+# MATEMÁTICA SIMBÓLICA  
+sympy
+symengine
+
+# BIG DATA
+pyspark
+vaex
+modin[all]
+dask-ml
+
+# ESTATÍSTICA AVANÇADA
+pymc3
+cmdstanpy
+tensorflow-probability
+
+# ANÁLISE ESPECIALIZADA
+astropy
+biopython
+networkit
+
+# PRECISÃO ARBITRÁRIA
+gmpy2
+# flint-py (disponível via conda)
