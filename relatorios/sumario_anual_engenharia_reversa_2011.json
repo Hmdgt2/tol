@@ -1,0 +1,61 @@
+{
+    "ano": 2011,
+    "resumo_geral": {
+        "total_sorteios_analisados": 83,
+        "total_acertos_unicos": 203,
+        "melhores_logicas_do_ano": [
+            {
+                "nome": "soma_//_menor",
+                "acertos_totais": 8,
+                "taxa_acerto_percentual": "0.10%"
+            },
+            {
+                "nome": "ultimo_%_media",
+                "acertos_totais": 7,
+                "taxa_acerto_percentual": "0.08%"
+            },
+            {
+                "nome": "soma_//_primeiro",
+                "acertos_totais": 7,
+                "taxa_acerto_percentual": "0.08%"
+            },
+            {
+                "nome": "maior_%_soma",
+                "acertos_totais": 5,
+                "taxa_acerto_percentual": "0.06%"
+            },
+            {
+                "nome": "media_%_soma",
+                "acertos_totais": 5,
+                "taxa_acerto_percentual": "0.06%"
+            }
+        ]
+    },
+    "diagnostico_lacunas": {
+        "gaps_medios": {
+            "media_em_falta": Infinity,
+            "media_geral": 9.81,
+            "conclusao": "Os números em falta tinham consistentemente um valor acima da média geral."
+        },
+        "ausencia_atual": {
+            "media_em_falta": 8.0,
+            "media_geral": 8.12,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "probabilidades_repeticoes": {
+            "media_em_falta": 0.08,
+            "media_geral": 0.1,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        },
+        "frequencia_recente": {
+            "media_em_falta": 1.98,
+            "media_geral": 1.92,
+            "conclusao": "Os números em falta tinham consistentemente um valor acima da média geral."
+        },
+        "frequencia_total": {
+            "media_em_falta": 5.23,
+            "media_geral": 155.41,
+            "conclusao": "Os números em falta tinham consistentemente um valor abaixo da média geral."
+        }
+    }
+}
