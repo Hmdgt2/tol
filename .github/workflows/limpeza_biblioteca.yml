@@ -1,15 +1,14 @@
 name: Limpar e Consolidar Biblioteca (Staging)
 
 on:
-  # Permite correr manualmente
+  # Execução manual
   workflow_dispatch:
 
 jobs:
   organizar_funcoes:
     runs-on: ubuntu-latest
-    # Permissão necessária para o git-auto-commit-action fazer push de volta
     permissions:
-      contents: write
+      contents: write  # Necessário para fazer commit no repositório
 
     steps:
       - name: 📥 Checkout do Repositório
@@ -20,35 +19,64 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: 📦 Instalar Dependências Necessárias (Incluindo astunparse)
+      - name: 📦 Instalar Dependências Necessárias
         run: |
           python -m pip install --upgrade pip
-          # Instala dependências listadas em requirements.txt e a dependência AST
           pip install -r requirements.txt astunparse
-          # O ast_consolidador.py e organizador_biblioteca.py precisam de se importar
-          # mutuamente; garantimos que a pasta scripts está no PATH
+          echo "✅ Dependências instaladas com sucesso."
+
+      - name: 🧠 Adicionar pasta 'scripts' ao PYTHONPATH
+        run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
+          echo "PYTHONPATH atualizado: $PYTHONPATH"
+        shell: bash
 
-      - name: 🧹 Executar Limpeza e Staging da Biblioteca
+      - name: 🧹 Executar Limpeza e Consolidação da Biblioteca
         id: limpeza
-        run: python scripts/organizador_biblioteca.py
+        run: |
+          set -e  # Para falhar se algo correr mal
+          echo "🧩 A executar scripts/organizador_biblioteca.py..."
+          python scripts/organizador_biblioteca.py
+          echo "✅ Limpeza e consolidação concluídas."
         env:
-          PYTHONPATH: ${{ github.workspace }}/scripts # Ajuste o caminho se necessário
-        
-      # O script Python já gerou a pasta 'lib/funcoes_limpas' e a 'backup_biblioteca_...'
+          PYTHONPATH: ${{ github.workspace }}/scripts
 
-      - name: 💾 Commitar e Fazer Push dos Ficheiros Limpos e Backup
+      - name: 🧾 Verificar resultado da limpeza
+        run: |
+          echo "📂 Conteúdo da pasta lib/funcoes_limpas:"
+          if [ -d "lib/funcoes_limpas" ]; then
+            ls -R lib/funcoes_limpas
+          else
+            echo "⚠️ Pasta lib/funcoes_limpas não encontrada!"
+          fi
+
+          echo "📦 Verificar backups:"
+          ls -d backup_biblioteca_original_* || echo "Nenhum backup gerado."
+
+      - name: 💾 Commitar e Fazer Push dos Ficheiros Consolidados
+        id: commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          # Alteramos o padrão para incluir a PASTA inteira e o backup.
-          # Isto é mais robusto do que usar o wildcard recursivo (**/*.py).
-          file_pattern: 'lib/funcoes_limpas backup_biblioteca_original_*' 
+          file_pattern: 'lib/funcoes_limpas backup_biblioteca_original_*'
           commit_message: '✨ CI: Funções consolidadas e limpas para staging (lib/funcoes_limpas)'
           branch: ${{ github.ref_name }}
+          skip_dirty_check: false  # Evita commits se não houver alterações
+
+      - name: 📊 Mostrar resultado do commit
+        if: always()
+        run: |
+          echo "🔍 Resultado do commit automático:"
+          echo "commit_result=${{ steps.commit.outputs.changes_detected }}"
+          if [[ "${{ steps.commit.outputs.changes_detected }}" == "true" ]]; then
+            echo "✅ Alterações detectadas e commit realizado."
+          else
+            echo "ℹ️ Nenhuma alteração detectada. Nenhum commit necessário."
+          fi
 
       - name: ⬆️ Carregar Staging como Artefacto para Revisão
-        # Opcional: Permite que você baixe a pasta 'funcoes_limpas' diretamente da interface
+        if: ${{ steps.commit.outputs.changes_detected == 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: funcoes-limpas-staging
           path: lib/funcoes_limpas/
+          if-no-files-found: warn
