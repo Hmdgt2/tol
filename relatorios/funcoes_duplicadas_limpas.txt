@@ -1,6 +1,10 @@
 🔍 Funções com o mesmo nome em múltiplos ficheiros:
 
+⚠️ Função `catalan_number` aparece em:
+  - lib/funcoes_limpas/numeros_especiais.py
+  - lib/funcoes_limpas/combinatoria_avancada_1.py
+
 ⚠️ Função `euler_totient` aparece em:
-  - lib/funcoes_limpas/teoria_numeros.py
   - lib/funcoes_limpas/matematica_especial.py
+  - lib/funcoes_limpas/teoria_numeros.py
 

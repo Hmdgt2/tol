@@ -1,22 +1,25 @@
 🧠 Sugestões de Reorganização Funcional:
 
-🔧 Função `euler_totient` aparece em múltiplos módulos: teoria_numeros, matematica_especial
-   ➤ Sugestão: manter em `teoria_numeros.py`, remover duplicados
+🔧 Função `euler_totient` aparece em múltiplos módulos: matematica_especial, teoria_numeros
+   ➤ Sugestão: manter em `matematica_especial.py`, remover duplicados
 
-🔍 Funções semelhantes `sum_of_pairs` (analise_padroes) ≈ `sum_combinations2` (combinatoria_avancada)
-   🔁 Similaridade: 87.43%
+🔧 Função `catalan_number` aparece em múltiplos módulos: numeros_especiais, combinatoria_avancada_1
+   ➤ Sugestão: manter em `numeros_especiais.py`, remover duplicados
+
+🔍 Funções semelhantes `shortest_path_all_pairs` (algoritmos_grafos) ≈ `shortest_paths_length` (grafos)
+   🔁 Similaridade: 92.52%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `sum_of_pairs` (analise_padroes) ≈ `sum_combinations3` (combinatoria_avancada)
-   🔁 Similaridade: 86.23%
+🔍 Funções semelhantes `digamma_func` (matematica_especial) ≈ `gamma_func` (funcoes_especiais)
+   🔁 Similaridade: 88.64%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `sum_of_triples` (analise_padroes) ≈ `sum_combinations2` (combinatoria_avancada)
-   🔁 Similaridade: 87.43%
+🔍 Funções semelhantes `bessel_y` (matematica_especial) ≈ `bessel_j` (funcoes_especiais)
+   🔁 Similaridade: 88.89%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `sum_of_triples` (analise_padroes) ≈ `sum_combinations3` (combinatoria_avancada)
-   🔁 Similaridade: 88.62%
+🔍 Funções semelhantes `chebyshev_t` (matematica_especial) ≈ `chebyshev_T` (funcoes_especiais)
+   🔁 Similaridade: 86.49%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
 🔍 Funções semelhantes `fibonacci` (numeros_especiais) ≈ `fibonacci_num` (teoria_numeros)
@@ -31,19 +34,19 @@
    🔁 Similaridade: 95.73%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `shortest_paths_length` (grafos) ≈ `shortest_path_all_pairs` (algoritmos_grafos)
-   🔁 Similaridade: 92.52%
+🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
+   🔁 Similaridade: 87.43%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `gamma_func` (funcoes_especiais) ≈ `digamma_func` (matematica_especial)
-   🔁 Similaridade: 88.64%
+🔍 Funções semelhantes `sum_combinations2` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
+   🔁 Similaridade: 87.43%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `bessel_j` (funcoes_especiais) ≈ `bessel_y` (matematica_especial)
-   🔁 Similaridade: 88.89%
+🔍 Funções semelhantes `sum_combinations3` (combinatoria_avancada) ≈ `sum_of_pairs` (analise_padroes)
+   🔁 Similaridade: 86.23%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
-🔍 Funções semelhantes `chebyshev_T` (funcoes_especiais) ≈ `chebyshev_t` (matematica_especial)
-   🔁 Similaridade: 86.49%
+🔍 Funções semelhantes `sum_combinations3` (combinatoria_avancada) ≈ `sum_of_triples` (analise_padroes)
+   🔁 Similaridade: 88.62%
    ➤ Sugestão: avaliar fusão ou renomeação para consistência
 
