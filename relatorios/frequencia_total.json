@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere os números mais frequentes no histórico.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 613,
+      "total": 615,
       "taxa_sucesso": "40.41%"
     },
     "acerto_2": {
-      "total": 118,
-      "taxa_sucesso": "7.78%"
+      "total": 119,
+      "taxa_sucesso": "7.82%"
     },
     "acerto_3": {
       "total": 6,
-      "taxa_sucesso": "0.40%"
+      "taxa_sucesso": "0.39%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 202
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1314,
+    "sorteios_apos": 1319,
     "media_acertos_apos": 0.49
   }
 }

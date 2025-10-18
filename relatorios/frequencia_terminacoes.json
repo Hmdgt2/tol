@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números com terminações mais frequentes.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 644,
-      "taxa_sucesso": "42.45%"
+      "total": 647,
+      "taxa_sucesso": "42.51%"
     },
     "acerto_2": {
-      "total": 114,
-      "taxa_sucesso": "7.51%"
+      "total": 115,
+      "taxa_sucesso": "7.56%"
     },
     "acerto_3": {
       "total": 6,
-      "taxa_sucesso": "0.40%"
+      "taxa_sucesso": "0.39%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 234
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1282,
+    "sorteios_apos": 1287,
     "media_acertos_apos": 0.51
   }
 }

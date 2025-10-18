@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números que estão atrasados em relação ao seu ciclo histórico, com base no intervalo médio entre aparições.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 645,
-      "taxa_sucesso": "42.52%"
+      "total": 648,
+      "taxa_sucesso": "42.58%"
     },
     "acerto_2": {
       "total": 101,
-      "taxa_sucesso": "6.66%"
+      "taxa_sucesso": "6.64%"
     },
     "acerto_3": {
       "total": 9,
@@ -45,7 +45,7 @@
     "indice_sorteio": 315
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1201,
-    "media_acertos_apos": 0.49
+    "sorteios_apos": 1206,
+    "media_acertos_apos": 0.5
   }
 }

@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Prioriza grupos de números que saíram juntos recentemente, capturando pequenos clusters ou padrões.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 659,
-      "taxa_sucesso": "43.44%"
+      "total": 662,
+      "taxa_sucesso": "43.50%"
     },
     "acerto_2": {
-      "total": 128,
-      "taxa_sucesso": "8.44%"
+      "total": 129,
+      "taxa_sucesso": "8.48%"
     },
     "acerto_3": {
       "total": 8,
@@ -45,7 +45,7 @@
     "indice_sorteio": 8
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1508,
+    "sorteios_apos": 1513,
     "media_acertos_apos": 0.52
   }
 }

@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números cuja frequência tem aumentado de ano para ano.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 598,
-      "taxa_sucesso": "39.42%"
+      "total": 602,
+      "taxa_sucesso": "39.55%"
     },
     "acerto_2": {
-      "total": 98,
-      "taxa_sucesso": "6.46%"
+      "total": 99,
+      "taxa_sucesso": "6.50%"
     },
     "acerto_3": {
       "total": 11,
-      "taxa_sucesso": "0.73%"
+      "taxa_sucesso": "0.72%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 178
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1338,
-    "media_acertos_apos": 0.5
+    "sorteios_apos": 1343,
+    "media_acertos_apos": 0.51
   }
 }

@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere os números que estão ausentes há mais tempo.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 680,
-      "taxa_sucesso": "44.83%"
+      "total": 684,
+      "taxa_sucesso": "44.94%"
     },
     "acerto_2": {
-      "total": 108,
-      "taxa_sucesso": "7.12%"
+      "total": 109,
+      "taxa_sucesso": "7.16%"
     },
     "acerto_3": {
       "total": 5,
@@ -45,7 +45,7 @@
     "indice_sorteio": 315
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1201,
+    "sorteios_apos": 1206,
     "media_acertos_apos": 0.51
   }
 }

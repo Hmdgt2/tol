@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Combina os números mais frequentes e os mais ausentes.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 648,
-      "taxa_sucesso": "42.72%"
+      "total": 652,
+      "taxa_sucesso": "42.84%"
     },
     "acerto_2": {
       "total": 118,
-      "taxa_sucesso": "7.78%"
+      "taxa_sucesso": "7.75%"
     },
     "acerto_3": {
       "total": 11,
-      "taxa_sucesso": "0.73%"
+      "taxa_sucesso": "0.72%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 74
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1442,
+    "sorteios_apos": 1447,
     "media_acertos_apos": 0.51
   }
 }

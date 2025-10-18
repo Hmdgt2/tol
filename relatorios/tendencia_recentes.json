@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere os números mais frequentes nos últimos sorteios.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 651,
-      "taxa_sucesso": "42.91%"
+      "total": 653,
+      "taxa_sucesso": "42.90%"
     },
     "acerto_2": {
-      "total": 114,
-      "taxa_sucesso": "7.51%"
+      "total": 115,
+      "taxa_sucesso": "7.56%"
     },
     "acerto_3": {
       "total": 8,
@@ -45,7 +45,7 @@
     "indice_sorteio": 301
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1215,
+    "sorteios_apos": 1220,
     "media_acertos_apos": 0.51
   }
 }

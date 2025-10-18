@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números cuja ausência atual é um múltiplo do seu intervalo médio histórico.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 668,
-      "taxa_sucesso": "44.03%"
+      "total": 669,
+      "taxa_sucesso": "43.96%"
     },
     "acerto_2": {
-      "total": 117,
-      "taxa_sucesso": "7.71%"
+      "total": 118,
+      "taxa_sucesso": "7.75%"
     },
     "acerto_3": {
       "total": 6,
-      "taxa_sucesso": "0.40%"
+      "taxa_sucesso": "0.39%"
     },
     "acerto_4": {
       "total": 1,
@@ -45,7 +45,7 @@
     "indice_sorteio": 1437
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 79,
-    "media_acertos_apos": 0.7
+    "sorteios_apos": 84,
+    "media_acertos_apos": 0.68
   }
 }

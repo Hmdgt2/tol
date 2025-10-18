@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números com base na sua tendência de aparecerem em posições específicas do sorteio.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 662,
-      "taxa_sucesso": "43.64%"
+      "total": 664,
+      "taxa_sucesso": "43.63%"
     },
     "acerto_2": {
       "total": 117,
-      "taxa_sucesso": "7.71%"
+      "taxa_sucesso": "7.69%"
     },
     "acerto_3": {
       "total": 6,
-      "taxa_sucesso": "0.40%"
+      "taxa_sucesso": "0.39%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 120
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1396,
+    "sorteios_apos": 1401,
     "media_acertos_apos": 0.52
   }
 }

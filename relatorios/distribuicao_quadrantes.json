@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números de acordo com a distribuição mais comum por quadrantes.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 625,
+      "total": 627,
       "taxa_sucesso": "41.20%"
     },
     "acerto_2": {
       "total": 110,
-      "taxa_sucesso": "7.25%"
+      "taxa_sucesso": "7.23%"
     },
     "acerto_3": {
       "total": 6,
-      "taxa_sucesso": "0.40%"
+      "taxa_sucesso": "0.39%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 196
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1320,
+    "sorteios_apos": 1325,
     "media_acertos_apos": 0.5
   }
 }

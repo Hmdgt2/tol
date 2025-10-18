@@ -1,19 +1,19 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere os números menos frequentes que saíram em sorteios com a soma mais comum, promovendo uma maior diversidade.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 656,
-      "taxa_sucesso": "43.24%"
+      "total": 659,
+      "taxa_sucesso": "43.30%"
     },
     "acerto_2": {
       "total": 117,
-      "taxa_sucesso": "7.71%"
+      "taxa_sucesso": "7.69%"
     },
     "acerto_3": {
       "total": 6,
-      "taxa_sucesso": "0.40%"
+      "taxa_sucesso": "0.39%"
     },
     "acerto_4": {
       "total": 0,
@@ -45,7 +45,7 @@
     "indice_sorteio": 129
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1387,
+    "sorteios_apos": 1392,
     "media_acertos_apos": 0.5
   }
 }

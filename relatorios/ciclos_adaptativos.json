@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números com base na sua frequência e precisão em ciclos de tempo recentes.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 628,
-      "taxa_sucesso": "41.40%"
+      "total": 631,
+      "taxa_sucesso": "41.46%"
     },
     "acerto_2": {
-      "total": 104,
-      "taxa_sucesso": "6.86%"
+      "total": 105,
+      "taxa_sucesso": "6.90%"
     },
     "acerto_3": {
       "total": 8,
@@ -45,7 +45,7 @@
     "indice_sorteio": 87
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1429,
+    "sorteios_apos": 1434,
     "media_acertos_apos": 0.48
   }
 }

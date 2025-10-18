@@ -1,15 +1,15 @@
 {
   "nome_heuristica": "",
   "descricao": "Sugere números com terminações semelhantes ao último sorteio.",
-  "total_previsoes": 1517,
+  "total_previsoes": 1522,
   "metricas_acerto": {
     "acerto_1": {
-      "total": 677,
-      "taxa_sucesso": "44.63%"
+      "total": 679,
+      "taxa_sucesso": "44.61%"
     },
     "acerto_2": {
       "total": 107,
-      "taxa_sucesso": "7.05%"
+      "taxa_sucesso": "7.03%"
     },
     "acerto_3": {
       "total": 10,
@@ -45,7 +45,7 @@
     "indice_sorteio": 156
   },
   "desempenho_pos_pico": {
-    "sorteios_apos": 1360,
+    "sorteios_apos": 1365,
     "media_acertos_apos": 0.52
   }
 }
