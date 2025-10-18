@@ -9,24 +9,28 @@
   - lib/funcoes_analiticas/teoria_numeros.py
 
 ⚠️ Função `bessel_j` aparece em:
-  - lib/funcoes_analiticas/funcoes_especiais.py
   - lib/funcoes_analiticas/matematica_especial.py
+  - lib/funcoes_analiticas/funcoes_especiais.py
 
 ⚠️ Função `beta_func` aparece em:
-  - lib/funcoes_analiticas/funcoes_especiais.py
   - lib/funcoes_analiticas/matematica_especial.py
+  - lib/funcoes_analiticas/funcoes_especiais.py
+
+⚠️ Função `catalan_number` aparece em:
+  - lib/funcoes_analiticas/numeros_especiais.py
+  - lib/funcoes_analiticas/combinatoria_avancada_1.py
 
 ⚠️ Função `euler_totient` aparece em:
-  - lib/funcoes_analiticas/teoria_numeros.py
   - lib/funcoes_analiticas/matematica_especial.py
+  - lib/funcoes_analiticas/teoria_numeros.py
 
 ⚠️ Função `fft_phase` aparece em:
   - lib/funcoes_analiticas/temporais.py
   - lib/funcoes_analiticas/processamento_sinal.py
 
 ⚠️ Função `gamma_func` aparece em:
-  - lib/funcoes_analiticas/funcoes_especiais.py
   - lib/funcoes_analiticas/matematica_especial.py
+  - lib/funcoes_analiticas/funcoes_especiais.py
 
 ⚠️ Função `ifft_real` aparece em:
   - lib/funcoes_analiticas/temporais.py
@@ -36,21 +40,17 @@
   - lib/funcoes_analiticas/estatisticas.py
   - lib/funcoes_analiticas/conjuntos.py
 
-⚠️ Função `iqr_outliers` aparece em:
-  - lib/funcoes_analiticas/estatisticas.py
-  - lib/funcoes_analiticas/deteccao_anomalias.py
-
 ⚠️ Função `mirror_count` aparece em:
   - lib/funcoes_analiticas/estatisticas.py
   - lib/funcoes_analiticas/conjuntos.py
 
 ⚠️ Função `mutual_info` aparece em:
-  - lib/funcoes_analiticas/teoria_informacao.py
   - lib/funcoes_analiticas/estatistica_multivariada.py
+  - lib/funcoes_analiticas/teoria_informacao.py
 
 ⚠️ Função `normalized_mutual_info` aparece em:
-  - lib/funcoes_analiticas/teoria_informacao.py
   - lib/funcoes_analiticas/estatistica_multivariada.py
+  - lib/funcoes_analiticas/teoria_informacao.py
 
 ⚠️ Função `pair_sum_count` aparece em:
   - lib/funcoes_analiticas/estatisticas.py

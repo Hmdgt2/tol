@@ -1,28 +1,28 @@
 🔍 Funções com lógica semelhante (estrutura parecida):
 
-⚠️ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   ≈ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-   🔁 Similaridade: 87.43%
+⚠️ `shortest_path_all_pairs` em lib/funcoes_analiticas/algoritmos_grafos.py
+   ≈ `shortest_paths_length` em lib/funcoes_analiticas/grafos.py
+   🔁 Similaridade: 92.52%
 
-⚠️ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
-   ≈ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
-   🔁 Similaridade: 86.23%
+⚠️ `gamma_func` em lib/funcoes_analiticas/matematica_especial.py
+   ≈ `gamma_func` em lib/funcoes_analiticas/funcoes_especiais.py
+   🔁 Similaridade: 95.24%
 
-⚠️ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   ≈ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
-   🔁 Similaridade: 87.43%
+⚠️ `digamma_func` em lib/funcoes_analiticas/matematica_especial.py
+   ≈ `gamma_func` em lib/funcoes_analiticas/funcoes_especiais.py
+   🔁 Similaridade: 88.64%
 
-⚠️ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
-   ≈ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
-   🔁 Similaridade: 88.62%
+⚠️ `beta_func` em lib/funcoes_analiticas/matematica_especial.py
+   ≈ `beta_func` em lib/funcoes_analiticas/funcoes_especiais.py
+   🔁 Similaridade: 95.0%
 
-⚠️ `intersection` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `union` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 85.53%
+⚠️ `bessel_y` em lib/funcoes_analiticas/matematica_especial.py
+   ≈ `bessel_j` em lib/funcoes_analiticas/funcoes_especiais.py
+   🔁 Similaridade: 88.89%
 
-⚠️ `union` em lib/funcoes_analiticas/estatisticas.py
-   ≈ `intersection` em lib/funcoes_analiticas/conjuntos.py
-   🔁 Similaridade: 85.53%
+⚠️ `chebyshev_t` em lib/funcoes_analiticas/matematica_especial.py
+   ≈ `chebyshev_T` em lib/funcoes_analiticas/funcoes_especiais.py
+   🔁 Similaridade: 86.49%
 
 ⚠️ `fibonacci` em lib/funcoes_analiticas/numeros_especiais.py
    ≈ `fibonacci_num` em lib/funcoes_analiticas/teoria_numeros.py
@@ -56,27 +56,31 @@
    ≈ `bernoulli_number` em lib/funcoes_analiticas/teoria_numeros.py
    🔁 Similaridade: 96.0%
 
-⚠️ `shortest_paths_length` em lib/funcoes_analiticas/grafos.py
-   ≈ `shortest_path_all_pairs` em lib/funcoes_analiticas/algoritmos_grafos.py
-   🔁 Similaridade: 92.52%
+⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
+   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
+   🔁 Similaridade: 87.43%
 
-⚠️ `gamma_func` em lib/funcoes_analiticas/funcoes_especiais.py
-   ≈ `gamma_func` em lib/funcoes_analiticas/matematica_especial.py
-   🔁 Similaridade: 95.24%
+⚠️ `sum_combinations2` em lib/funcoes_analiticas/combinatoria_avancada.py
+   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
+   🔁 Similaridade: 87.43%
 
-⚠️ `gamma_func` em lib/funcoes_analiticas/funcoes_especiais.py
-   ≈ `digamma_func` em lib/funcoes_analiticas/matematica_especial.py
-   🔁 Similaridade: 88.64%
+⚠️ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
+   ≈ `sum_of_pairs` em lib/funcoes_analiticas/analise_padroes.py
+   🔁 Similaridade: 86.23%
 
-⚠️ `beta_func` em lib/funcoes_analiticas/funcoes_especiais.py
-   ≈ `beta_func` em lib/funcoes_analiticas/matematica_especial.py
-   🔁 Similaridade: 95.0%
+⚠️ `sum_combinations3` em lib/funcoes_analiticas/combinatoria_avancada.py
+   ≈ `sum_of_triples` em lib/funcoes_analiticas/analise_padroes.py
+   🔁 Similaridade: 88.62%
 
-⚠️ `bessel_j` em lib/funcoes_analiticas/funcoes_especiais.py
-   ≈ `bessel_y` em lib/funcoes_analiticas/matematica_especial.py
-   🔁 Similaridade: 88.89%
+⚠️ `intersection` em lib/funcoes_analiticas/estatisticas.py
+   ≈ `union` em lib/funcoes_analiticas/conjuntos.py
+   🔁 Similaridade: 85.53%
 
-⚠️ `chebyshev_T` em lib/funcoes_analiticas/funcoes_especiais.py
-   ≈ `chebyshev_t` em lib/funcoes_analiticas/matematica_especial.py
-   🔁 Similaridade: 86.49%
+⚠️ `union` em lib/funcoes_analiticas/estatisticas.py
+   ≈ `intersection` em lib/funcoes_analiticas/conjuntos.py
+   🔁 Similaridade: 85.53%
+
+⚠️ `pair_product_count` em lib/funcoes_analiticas/estatisticas.py
+   ≈ `pair_sum_count` em lib/funcoes_analiticas/conjuntos.py
+   🔁 Similaridade: 92.99%
 

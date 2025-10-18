@@ -16,8 +16,8 @@
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:
-  - `bessel_j` em lib/funcoes_analiticas/funcoes_especiais.py
   - `bessel_j` em lib/funcoes_analiticas/matematica_especial.py
+  - `bessel_j` em lib/funcoes_analiticas/funcoes_especiais.py
   ✅ Lógica funcional idêntica
 
 ⚠️ Implementações idênticas encontradas:
