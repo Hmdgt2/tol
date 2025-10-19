@@ -1,3 +1,13 @@
+- Função: evolutionary_fitness_landscape
+  Caminho: lib/funcoes_analiticas/evolucao_darwiniana.py
+  Args: ['seq']
+  Docstring: Analisa a sequência como um landscape evolutivo de fitness.
+
+- Função: evolutionary_algorithm_simulation
+  Caminho: lib/funcoes_analiticas/evolucao_darwiniana.py
+  Args: ['seq', 'generations']
+  Docstring: Simula evolução artificial para entender padrões evolutivos.
+
 - Função: wigner_ville_distribution
   Caminho: lib/funcoes_analiticas/processamento_sinais_avancado.py
   Args: ['signal_data']
@@ -67,6 +77,31 @@
   Caminho: lib/funcoes_analiticas/probabilidade_avancada.py
   Args: ['brownian_path', 'drift']
   Docstring: Densidade de Girsanov para mudança de medida.
+
+- Função: numexpr_vector_operations
+  Caminho: lib/funcoes_analiticas/computacao_high_performance.py
+  Args: ['seq']
+  Docstring: Operações vetoriais otimizadas com NumExpr.
+
+- Função: arb_arbitrary_precision_analysis
+  Caminho: lib/funcoes_analiticas/precisao_arbitraria.py
+  Args: ['seq', 'precision']
+  Docstring: Análise com precisão arbitrária usando Arb/Flint.
+
+- Função: _arb_special_functions
+  Caminho: lib/funcoes_analiticas/precisao_arbitraria.py
+  Args: ['arb_seq']
+  Docstring: Funções especiais com precisão arbitrária.
+
+- Função: _arb_polynomial_analysis
+  Caminho: lib/funcoes_analiticas/precisao_arbitraria.py
+  Args: ['arb_seq']
+  Docstring: Análise polinomial com precisão arbitrária.
+
+- Função: biopython_sequence_analysis
+  Caminho: lib/funcoes_analiticas/analise_biologica.py
+  Args: ['seq']
+  Docstring: Análise inspirada em bioinformática.
 
 - Função: dijkstra_path
   Caminho: lib/funcoes_analiticas/algoritmos_grafos.py
@@ -233,6 +268,11 @@
   Args: ['lst', 'k', 'trials']
   Docstring: Calcula a soma de k elementos selecionados aleatoriamente, repetindo por N testes.
 
+- Função: dask_ml_distributed_learning
+  Caminho: lib/funcoes_analiticas/ml_distribuido.py
+  Args: ['seq']
+  Docstring: Machine learning distribuído com Dask-ML.
+
 - Função: lebesgue_integral_approx
   Caminho: lib/funcoes_analiticas/teoria_medida.py
   Args: ['f', 'domain', 'measure', 'partitions']
@@ -383,6 +423,16 @@
   Args: ['x']
   Docstring: Função Airy Bi.
 
+- Função: quantum_wavefunction_analysis
+  Caminho: lib/funcoes_analiticas/analise_quantica.py
+  Args: ['seq']
+  Docstring: Análise inspirada em funções de onda quântica.
+
+- Função: stochastic_process_classification
+  Caminho: lib/funcoes_analiticas/analise_quantica.py
+  Args: ['seq']
+  Docstring: Classifica o processo estocástico subjacente.
+
 - Função: divisor_sigma
   Caminho: lib/funcoes_analiticas/teoria_numeros_avancada.py
   Args: ['n', 'k']
@@ -467,6 +517,16 @@
   Caminho: lib/funcoes_analiticas/nlp_avancado.py
   Args: ['text', 'entities']
   Docstring: Confiança de reconhecimento de entidades nomeadas.
+
+- Função: astronomical_cycle_detector
+  Caminho: lib/funcoes_analiticas/padroes_cosmicos.py
+  Args: ['seq', 'max_period']
+  Docstring: Detecta ciclos de longo prazo similares a ciclos astronômicos.
+
+- Função: galactic_pattern_analyzer
+  Caminho: lib/funcoes_analiticas/padroes_cosmicos.py
+  Args: ['seq']
+  Docstring: Análise de padrões em escala galáctica - padrões superpostos.
 
 - Função: fibonacci
   Caminho: lib/funcoes_analiticas/numeros_especiais.py
@@ -628,6 +688,26 @@ Returns:
   Args: ['points']
   Docstring: Embedding em espaço projetivo (homogeneização).
 
+- Função: dask_parallel_analysis
+  Caminho: lib/funcoes_analiticas/processamento_distribuido.py
+  Args: ['seq', 'chunksize']
+  Docstring: Análise paralela e distribuída de grandes sequências.
+
+- Função: chaotic_system_identification
+  Caminho: lib/funcoes_analiticas/teoria_caos.py
+  Args: ['seq']
+  Docstring: Identifica características de sistemas caóticos na sequência.
+
+- Função: symbolic_sequence_analysis
+  Caminho: lib/funcoes_analiticas/analise_simbolica.py
+  Args: ['seq']
+  Docstring: Análise simbólica da sequência usando álgebra computacional.
+
+- Função: closed_form_expression_finder
+  Caminho: lib/funcoes_analiticas/analise_simbolica.py
+  Args: ['seq']
+  Docstring: Tenta encontrar expressão fechada para a sequência.
+
 - Função: linear_regression_predict
   Caminho: lib/funcoes_analiticas/modelagem_preditiva.py
   Args: ['lst', 'steps']
@@ -762,6 +842,21 @@ Returns:
   Caminho: lib/funcoes_analiticas/temporais.py
   Args: ['lst', 'max_lag']
   Docstring: Calcula a série de autocorrelação para múltiplos atrasos.
+
+- Função: dynamic_time_warping_distance
+  Caminho: lib/funcoes_analiticas/analise_similaridade_avancada.py
+  Args: ['seq1', 'seq2']
+  Docstring: Distância de Dynamic Time Warping entre duas sequências.
+
+- Função: sequence_kernel_similarity
+  Caminho: lib/funcoes_analiticas/analise_similaridade_avancada.py
+  Args: ['seq1', 'seq2', 'kernel']
+  Docstring: Similaridade baseada em kernels entre sequências.
+
+- Função: pattern_cross_correlation
+  Caminho: lib/funcoes_analiticas/analise_similaridade_avancada.py
+  Args: ['seq1', 'seq2']
+  Docstring: Correlação cruzada com deslocamento para detectar padrões similares.
 
 - Função: character_orthogonality
   Caminho: lib/funcoes_analiticas/teoria_representacao.py
@@ -1023,6 +1118,21 @@ Returns:
   Args: ['lst']
   Docstring: Normalização Z-Score.
 
+- Função: numba_optimized_operations
+  Caminho: lib/funcoes_analiticas/computacao_jit.py
+  Args: ['arr']
+  Docstring: Operações matemáticas otimizadas com Numba.
+
+- Função: numba_vectorized_transform
+  Caminho: lib/funcoes_analiticas/computacao_jit.py
+  Args: ['x']
+  Docstring: Transformação vetorizada com Numba.
+
+- Função: jit_compiled_analysis
+  Caminho: lib/funcoes_analiticas/computacao_jit.py
+  Args: ['seq']
+  Docstring: Análise com compilação Just-In-Time para máxima performance.
+
 - Função: factorial_func
   Caminho: lib/funcoes_analiticas/combinatoria.py
   Args: ['a']
@@ -1042,6 +1152,26 @@ Returns:
   Caminho: lib/funcoes_analiticas/combinatoria.py
   Args: ['lst']
   Docstring: Calcula o coeficiente multinomial de uma lista de números.
+
+- Função: spark_big_data_analysis
+  Caminho: lib/funcoes_analiticas/big_data_analysis.py
+  Args: ['seq']
+  Docstring: Análise de grandes sequências usando Apache Spark.
+
+- Função: gmpy2_multiprecision_analysis
+  Caminho: lib/funcoes_analiticas/multiprecisao_gmp.py
+  Args: ['seq']
+  Docstring: Análise com múltipla precisão usando GMP/MPFR.
+
+- Função: _gmpy2_number_theory
+  Caminho: lib/funcoes_analiticas/multiprecisao_gmp.py
+  Args: ['seq']
+  Docstring: Análise de teoria dos números com GMP.
+
+- Função: _gmpy2_gcd_network
+  Caminho: lib/funcoes_analiticas/multiprecisao_gmp.py
+  Args: ['int_seq']
+  Docstring: Rede de GCDs entre elementos.
 
 - Função: q_learning_update
   Caminho: lib/funcoes_analiticas/aprendizado_reforco.py
@@ -1067,6 +1197,26 @@ Returns:
   Caminho: lib/funcoes_analiticas/aprendizado_reforco.py
   Args: ['q_values', 'rewards', 'gamma']
   Docstring: Resíduo da equação de otimalidade de Bellman.
+
+- Função: symengine_fast_symbolic
+  Caminho: lib/funcoes_analiticas/simbolica_rapida.py
+  Args: ['seq']
+  Docstring: Matemática simbólica de alta performance com SymEngine.
+
+- Função: _symengine_integrate
+  Caminho: lib/funcoes_analiticas/simbolica_rapida.py
+  Args: ['expr', 'x']
+  Docstring: Integração simbólica.
+
+- Função: _symengine_find_roots
+  Caminho: lib/funcoes_analiticas/simbolica_rapida.py
+  Args: ['expr', 'x']
+  Docstring: Encontra raízes simbólicas.
+
+- Função: mpi_distributed_analysis
+  Caminho: lib/funcoes_analiticas/computacao_cluster.py
+  Args: ['seq']
+  Docstring: Análise distribuída usando MPI para clusters.
 
 - Função: combinations_sum
   Caminho: lib/funcoes_analiticas/combinatoria_avancada.py
@@ -1183,6 +1333,31 @@ Returns:
   Args: ['lst']
   Docstring: Fatorial de cada elemento de uma lista.
 
+- Função: cupy_gpu_analysis
+  Caminho: lib/funcoes_analiticas/gpu_computing.py
+  Args: ['seq']
+  Docstring: Análise acelerada por GPU usando CuPy.
+
+- Função: _cupy_matrix_operations
+  Caminho: lib/funcoes_analiticas/gpu_computing.py
+  Args: ['gpu_array']
+  Docstring: Operações matriciais na GPU.
+
+- Função: _cupy_linear_algebra
+  Caminho: lib/funcoes_analiticas/gpu_computing.py
+  Args: ['gpu_array']
+  Docstring: Álgebra linear acelerada por GPU.
+
+- Função: multi_scale_entropy_analysis
+  Caminho: lib/funcoes_analiticas/analise_temporal_multiescala.py
+  Args: ['seq', 'max_scale']
+  Docstring: Análise de entropia em múltiplas escalas temporais.
+
+- Função: wavelet_multiresolution_analysis
+  Caminho: lib/funcoes_analiticas/analise_temporal_multiescala.py
+  Args: ['seq']
+  Docstring: Análise de multi-resolução usando wavelets.
+
 - Função: linear_trend_slope
   Caminho: lib/funcoes_analiticas/exploracao.py
   Args: ['lst']
@@ -1254,6 +1429,36 @@ Returns:
   Args: ['data', 'wavelet']
   Docstring: Calcula a energia total de um sinal em diferentes níveis de wavelet.
 
+- Função: astropy_astronomical_analysis
+  Caminho: lib/funcoes_analiticas/analise_astronomica.py
+  Args: ['seq']
+  Docstring: Análise de séries temporais astronômicas.
+
+- Função: phase_transition_detector
+  Caminho: lib/funcoes_analiticas/transicoes_fase.py
+  Args: ['seq', 'sensitivity']
+  Docstring: Detecta transições de fase em séries temporais longas.
+
+- Função: critical_slowdown_analysis
+  Caminho: lib/funcoes_analiticas/transicoes_fase.py
+  Args: ['seq']
+  Docstring: Análise de desaceleração crítica antes de transições de fase.
+
+- Função: pytorch_tensor_analysis
+  Caminho: lib/funcoes_analiticas/computacao_tensorial.py
+  Args: ['seq']
+  Docstring: Análise usando tensores PyTorch e GPU acceleration.
+
+- Função: _pytorch_autograd_optimization
+  Caminho: lib/funcoes_analiticas/computacao_tensorial.py
+  Args: ['tensor']
+  Docstring: Otimização usando autograd do PyTorch.
+
+- Função: _pytorch_neural_embedding
+  Caminho: lib/funcoes_analiticas/computacao_tensorial.py
+  Args: ['tensor']
+  Docstring: Embedding neural da sequência usando redes simples.
+
 - Função: convex_function_test
   Caminho: lib/funcoes_analiticas/otimizacao_convexa.py
   Args: ['f', 'domain', 'samples']
@@ -1289,6 +1494,21 @@ Returns:
   Args: ['objective', 'bounds', 'pop_size', 'generations']
   Docstring: Algoritmo genético simples.
 
+- Função: sequence_autocorrelation_pattern
+  Caminho: lib/funcoes_analiticas/analise_sequencias_avancada.py
+  Args: ['seq', 'max_lag']
+  Docstring: Padrão de autocorrelação multi-lag para detectar periodicidades complexas.
+
+- Função: number_theory_pattern_detector
+  Caminho: lib/funcoes_analiticas/analise_sequencias_avancada.py
+  Args: ['seq']
+  Docstring: Detecta padrões baseados em teoria dos números.
+
+- Função: recursive_sequence_analyzer
+  Caminho: lib/funcoes_analiticas/analise_sequencias_avancada.py
+  Args: ['seq']
+  Docstring: Analisa relações recursivas na sequência.
+
 - Função: mpmath_sqrt
   Caminho: lib/funcoes_analiticas/precisao.py
   Args: ['x']
@@ -1315,6 +1535,16 @@ Retorna None se x <= 0.
   Caminho: lib/funcoes_analiticas/precisao.py
   Args: ['lst']
   Docstring: Calcula a soma dos elementos de uma lista com alta precisão.
+
+- Função: jax_autodiff_analysis
+  Caminho: lib/funcoes_analiticas/diferenciação_automatica.py
+  Args: ['seq']
+  Docstring: Análise com diferenciação automática usando JAX.
+
+- Função: jax_hamiltonian_dynamics
+  Caminho: lib/funcoes_analiticas/diferenciação_automatica.py
+  Args: ['seq']
+  Docstring: Simula dinâmica Hamiltoniana usando JAX.
 
 - Função: sobolev_norm
   Caminho: lib/funcoes_analiticas/analise_funcional.py
@@ -1473,6 +1703,16 @@ Returns:
   Args: ['series', 'order', 'delay']
   Docstring: Entropia de permutação para análise de complexidade.
 
+- Função: modin_parallel_dataframe
+  Caminho: lib/funcoes_analiticas/pandas_acelerado.py
+  Args: ['seq']
+  Docstring: Pandas paralelizado com Modin.
+
+- Função: _modin_correlation_analysis
+  Caminho: lib/funcoes_analiticas/pandas_acelerado.py
+  Args: ['df']
+  Docstring: Análise de correlação paralelizada.
+
 - Função: fft_real
   Caminho: lib/funcoes_analiticas/processamento_sinal.py
   Args: ['lst']
@@ -1602,6 +1842,31 @@ Returns:
   Caminho: lib/funcoes_analiticas/processamento_sinal.py
   Args: ['b', 'a', 'x']
   Docstring: Filtra um sinal usando os coeficientes b e a.
+
+- Função: pymc3_probabilistic_modeling
+  Caminho: lib/funcoes_analiticas/modelagem_probabilistica.py
+  Args: ['seq']
+  Docstring: Modelagem probabilística com PyMC3.
+
+- Função: pymc3_gaussian_process
+  Caminho: lib/funcoes_analiticas/modelagem_probabilistica.py
+  Args: ['seq']
+  Docstring: Processos gaussianos com PyMC3.
+
+- Função: tfp_bayesian_analysis
+  Caminho: lib/funcoes_analiticas/estatistica_bayesiana.py
+  Args: ['seq']
+  Docstring: Análise estatística bayesiana com TensorFlow Probability.
+
+- Função: _tfp_posterior_estimation
+  Caminho: lib/funcoes_analiticas/estatistica_bayesiana.py
+  Args: ['seq']
+  Docstring: Estimação posterior com TFP.
+
+- Função: _tfp_bayesian_regression
+  Caminho: lib/funcoes_analiticas/estatistica_bayesiana.py
+  Args: ['seq']
+  Docstring: Regressão bayesiana.
 
 - Função: generate_key
   Caminho: lib/funcoes_analiticas/criptografia.py
@@ -1884,6 +2149,11 @@ Raises:
   Args: ['t_values']
   Docstring: Aproximação de zeros da função zeta de Riemann.
 
+- Função: stan_bayesian_inference
+  Caminho: lib/funcoes_analiticas/inferencia_bayesiana_stan.py
+  Args: ['seq']
+  Docstring: Inferência bayesiana com Stan.
+
 - Função: sum_of_pairs
   Caminho: lib/funcoes_analiticas/analise_padroes.py
   Args: ['lst']
@@ -2016,6 +2286,21 @@ Args:
 Returns:
     float: Valor máximo menos mínimo.
 
+- Função: polynomial_pattern_fitter
+  Caminho: lib/funcoes_analiticas/analise_algebrica.py
+  Args: ['seq', 'max_degree']
+  Docstring: Encontra o melhor polinômio que se ajusta à sequência.
+
+- Função: exponential_pattern_detector
+  Caminho: lib/funcoes_analiticas/analise_algebrica.py
+  Args: ['seq']
+  Docstring: Detecta padrões exponenciais e logarítmicos.
+
+- Função: networkit_large_scale_graphs
+  Caminho: lib/funcoes_analiticas/grafos_larga_escala.py
+  Args: ['seq']
+  Docstring: Análise de grafos em grande escala com Networkit.
+
 - Função: multinomial_coefficient
   Caminho: lib/funcoes_analiticas/combinatoria_avancada_1.py
   Args: ['params']
@@ -2075,6 +2360,21 @@ Returns:
   Caminho: lib/funcoes_analiticas/combinatoria_avancada_1.py
   Args: ['m', 'n']
   Docstring: Número de grafos bipartidos completos entre conjuntos de tamanhos m e n.
+
+- Função: xarray_multidimensional_analysis
+  Caminho: lib/funcoes_analiticas/dados_multidimensionais.py
+  Args: ['seq']
+  Docstring: Análise multidimensional com Xarray.
+
+- Função: _xarray_rolling_ops
+  Caminho: lib/funcoes_analiticas/dados_multidimensionais.py
+  Args: ['data_array']
+  Docstring: Operações de rolling com Xarray.
+
+- Função: _xarray_resampling
+  Caminho: lib/funcoes_analiticas/dados_multidimensionais.py
+  Args: ['data_array']
+  Docstring: Redimensionamento temporal.
 
 - Função: unique_count
   Caminho: lib/funcoes_analiticas/conjuntos.py
@@ -2441,6 +2741,16 @@ Returns:
   Args: ['target_func', 'start', 'iterations', 'proposal_std']
   Docstring: Geração de amostras MCMC usando o algoritmo Metropolis-Hastings.
 
+- Função: phase_space_reconstruction
+  Caminho: lib/funcoes_analiticas/sistemas_dinamicos_avancados.py
+  Args: ['seq', 'embedding_dim', 'tau']
+  Docstring: Reconstrução do espaço de fase usando método de delays.
+
+- Função: recurrence_quantification_analysis
+  Caminho: lib/funcoes_analiticas/sistemas_dinamicos_avancados.py
+  Args: ['seq', 'threshold']
+  Docstring: Análise de quantificação de recorrência para sistemas dinâmicos.
+
 - Função: multifractal_spectrum
   Caminho: lib/funcoes_analiticas/geometria_fractal.py
   Args: ['points', 'q_values']
@@ -2450,6 +2760,16 @@ Returns:
   Caminho: lib/funcoes_analiticas/geometria_fractal.py
   Args: ['points', 'box_sizes']
   Docstring: Análise de lacunaridade para conjuntos fractais.
+
+- Função: catastrophe_theory_analyzer
+  Caminho: lib/funcoes_analiticas/teoria_catastrofe.py
+  Args: ['seq']
+  Docstring: Aplica teoria das catástrofes para detectar pontos de virada brusca.
+
+- Função: tipping_point_early_warning
+  Caminho: lib/funcoes_analiticas/teoria_catastrofe.py
+  Args: ['seq']
+  Docstring: Sistema de alerta antecipado para pontos de virada.
 
 - Função: mahalanobis_distance
   Caminho: lib/funcoes_analiticas/estatistica_multivariada_2.py
@@ -2490,6 +2810,11 @@ Returns:
   Caminho: lib/funcoes_analiticas/algebra_categorias.py
   Args: ['objects', 'hom_functor']
   Docstring: Embedding de Yoneda simplificado.
+
+- Função: vaex_lazy_dataframe_analysis
+  Caminho: lib/funcoes_analiticas/big_dataframes.py
+  Args: ['seq']
+  Docstring: Análise com DataFrames lazy usando Vaex.
 
 - Função: arima_predict
   Caminho: lib/funcoes_analiticas/series_temporais.py
@@ -2601,6 +2926,16 @@ Returns:
   Caminho: lib/funcoes_analiticas/algebra_linear.py
   Args: ['mat']
   Docstring: Calcula a pseudoinversa de uma matriz.
+
+- Função: combinatorial_pattern_density
+  Caminho: lib/funcoes_analiticas/analise_combinatoria_avancada.py
+  Args: ['seq']
+  Docstring: Calcula densidade de padrões combinatórios em subconjuntos.
+
+- Função: sequence_complexity_measure
+  Caminho: lib/funcoes_analiticas/analise_combinatoria_avancada.py
+  Args: ['seq']
+  Docstring: Medidas de complexidade baseadas em compressão e informação.
 
 - Função: euler_totient
   Caminho: lib/funcoes_analiticas/teoria_numeros.py
@@ -2751,4 +3086,19 @@ Returns:
   Caminho: lib/funcoes_analiticas/probabilidade_distribuicoes.py
   Args: ['df', 'scale', 'size']
   Docstring: Simula uma distribuição de Wishart multivariada (avançada).
+
+- Função: evolutionary_fractal_dimension
+  Caminho: lib/funcoes_analiticas/padroes_evolutivos_temporais.py
+  Args: ['seq', 'window_sizes']
+  Docstring: Dimensão fractal evolutiva em múltiplas escalas temporais.
+
+- Função: temporal_pattern_entropy
+  Caminho: lib/funcoes_analiticas/padroes_evolutivos_temporais.py
+  Args: ['seq', 'time_scales']
+  Docstring: Entropia de padrões em diferentes escalas temporais (dias, semanas, meses, anos).
+
+- Função: temporal_network_analysis
+  Caminho: lib/funcoes_analiticas/redes_complexas_temporais.py
+  Args: ['seq', 'threshold']
+  Docstring: Constrói e analisa redes complexas a partir da evolução temporal.
 
