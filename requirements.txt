@@ -10,7 +10,7 @@ numexpr
 sympy
 symengine
 pyspark
-vaex
+vaex-core==4.17.0  # ⬅️ USA APENAS O CORE ESTÁVEL
 modin[all]
 dask-ml
 pymc3
