@@ -2,7 +2,7 @@ name: Gerar Previsão Completa do Totoloto
 
 on:
   schedule:
-    - cron: '30 8 * * *'  # Exemplo: 8h00 UTC, ajuste conforme necessário
+    - cron: '30 8 * * *'  # Corre todos os dias às 8h30 UTC
   workflow_dispatch:
 
 jobs:
@@ -10,20 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do repositório
-        uses: actions/checkout@v3
+      - name: 📥 Checkout do Repositório
+        uses: actions/checkout@v4
 
-      - name: Configurar Python e Dependências
-        uses: actions/setup-python@v4
+      - name: 🐍 Configurar Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.12'  # ✅ Versão estável para todas as libs
+          cache: 'pip'
 
-      - name: Instalar dependências
+      - name: 📦 Instalar Dependências
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip setuptools wheel
+          pip install -r requirements.txt --prefer-binary
 
-      - name: Executar o avaliador e o gerador de previsão
+      - name: 🔍 Executar Avaliador e Gerar Previsão
         run: |
           echo "Executando o avaliador/incrementador..."
           python avaliador/avaliador.py
@@ -31,22 +32,22 @@ jobs:
           python gerar_previsao.py
         env:
           PYTHONPATH: ${{ github.workspace }}
-          
-      - name: Fazer commit dos arquivos gerados
+
+      - name: 💾 Commitar e Fazer Push das Previsões e Modelos
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
-
-          # Adiciona os novos ficheiros e pastas da nova arquitetura
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+          # Adiciona ficheiros relevantes da nova arquitetura
           git add previsoes/previsao_atual.json
           git add previsoes/*.json
           git add decisor/modelos_salvos
           git add decisor/metadados_modelo.json
           git add decisor/sorteio_processado.json
           
-          # Verifica se há alterações antes de fazer o commit
-          git diff --cached --quiet || git commit -m "Atualização automática de modelo e previsão"
+          # Só faz commit se houver alterações
+          git diff --cached --quiet || git commit -m "🤖 Atualização automática de modelo e previsão"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
