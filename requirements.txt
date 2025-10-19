@@ -15,8 +15,10 @@ modin[all]
 dask-ml
 pymc3
 cmdstanpy
+tensorflow
 tensorflow-probability
 astropy
 biopython
 networkit
 gmpy2
+gplearn
