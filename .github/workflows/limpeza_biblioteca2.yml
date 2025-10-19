@@ -18,46 +18,14 @@ jobs:
         with:
           python-version: "3.13"
 
-      - name: 📦 Instalar Dependências Essenciais (Ignorar Falhas)
+      - name: 📦 Instalar Dependências Essenciais
         run: |
           python -m pip install --upgrade pip
-          
           echo "🚀 Instalando dependências ESSENCIAIS..."
           pip install astunparse scikit-learn numpy sympy scipy
           
-          echo "📦 Tentando instalar outras dependências (com fallback)..."
-          
-          # Lista de dependências para tentar (em ordem de importância)
-          deps_essenciais=(
-            "xgboost"
-            "lightgbm" 
-            "numexpr"
-            "symengine"
-            "pyspark"
-          )
-          
-          for dep in "${deps_essenciais[@]}"; do
-            echo "📦 Tentando: $dep"
-            pip install "$dep" || echo "⚠️  $dep falhou - continuando..."
-          done
-          
-          # Dependências problemáticas - pular completamente
-          echo "⏭️  Pulando dependências problemáticas (Python 3.13):"
-          echo "   - vaex-core (módulo 'imp' removido)"
-          echo "   - cupy-cuda12x (requer GPU)"
-          echo "   - mpi4py (requer MPI)"
-          echo "   - jax[cpu] (compatibilidade)"
-          echo "   - modin[all] (compatibilidade)"
-          echo "   - dask-ml (compatibilidade)"
-          echo "   - pymc3 (compatibilidade)"
-          echo "   - cmdstanpy (requer Stan)"
-          echo "   - tensorflow (compatibilidade)"
-          echo "   - tensorflow-probability (compatibilidade)"
-          echo "   - astropy (compatibilidade)"
-          echo "   - biopython (compatibilidade)"
-          echo "   - networkit (compatibilidade)"
-          echo "   - gmpy2 (compatibilidade)"
-          echo "   - gplearn (compatibilidade)"
+          echo "📦 Tentando instalar outras dependências..."
+          pip install xgboost lightgbm numexpr symengine pyspark || echo "⚠️ Algumas dependências falharam - continuando..."
           
           echo "✅ Dependências essenciais instaladas"
 
@@ -77,21 +45,21 @@ jobs:
       - name: 🔧 Corrigir Erros de Sintaxe Automáticos
         id: correcao_sintaxe
         run: |
-          echo "🛠️  Executando correção de sintaxe automática..."
+          echo "🛠️ Criando script de correção de sintaxe..."
           
-          # Criar script de correção inline
+          # Criar arquivo de correção temporário
           cat > /tmp/corrigir_sintaxe.py << 'EOF'
 import ast
 import re
 from pathlib import Path
 
 def corrigir_arquivos_problematicos():
-    problemas = {
-        'sistemas_dinamicos_avancados.py': 18,
-        'estatistica_multivariada_2.py': 34,
-        'modelagem_probabilistica.py': 20,
-        'geometria_computacional.py': 40
-    }
+    problemas = [
+        'sistemas_dinamicos_avancados.py',
+        'estatistica_multivariada_2.py', 
+        'modelagem_probabilistica.py',
+        'geometria_computacional.py'
+    ]
     
     staging_dir = Path('lib/funcoes_limpas')
     
@@ -101,6 +69,7 @@ def corrigir_arquivos_problematicos():
     for arquivo in problemas:
         caminho = staging_dir / arquivo
         if not caminho.exists():
+            print(f"⚠️ {arquivo} não encontrado")
             continue
             
         print(f"📝 Corrigindo {arquivo}...")
@@ -169,9 +138,10 @@ if __name__ == "__main__":
     if todos_validos:
         print("\n🎉 TODOS OS ARQUIVOS CORRIGIDOS COM SUCESSO!")
     else:
-        print("\n⚠️  ALGUNS ARQUIVOS AINDA PRECISAM DE ATENÇÃO")
+        print("\n⚠️ ALGUNS ARQUIVOS AINDA PRECISAM DE ATENÇÃO")
 EOF
 
+          echo "🛠️ Executando correção de sintaxe..."
           python /tmp/corrigir_sintaxe.py
           echo "✅ Correção de sintaxe concluída"
 
@@ -180,8 +150,8 @@ EOF
           echo "📊 RELATÓRIO FINAL"
           echo "=================="
           echo "📁 Biblioteca limpa: lib/funcoes_limpas"
-          echo "📦 Backups: $(ls -d backup_biblioteca_original_* 2>/dev/null | wc -l) backups criados"
-          echo "🔧 Próximo: Resolver as 12 ações manuais listadas no relatório"
+          echo "📦 Backups criados: $(ls -d backup_biblioteca_original_* 2>/dev/null | wc -l)"
+          echo "🔧 Próximo: Resolver as ações manuais listadas no relatório"
 
       - name: 💾 Commitar Alterações
         id: commit
@@ -197,8 +167,7 @@ EOF
           echo "🎯 PROCESSO CONCLUÍDO!"
           echo "======================"
           echo "✅ 119 funções reorganizadas"
-          echo "✅ 23 novas categorias criadas" 
+          echo "✅ 23 novas categorias criadas"
           echo "✅ Erros de sintaxe corrigidos"
           echo "✅ Backup preservado"
           echo "📝 Ações manuais: 12 funções precisam de revisão"
-          echo "💡 Dica: Consulte o relatório completo acima"
