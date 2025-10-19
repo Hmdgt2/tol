@@ -1,4 +1,4 @@
-name: Limpar e Consolidar Biblioteca (Staging)
+name: Limpar e Consolidar Biblioteca 2
 
 on:
   workflow_dispatch:
@@ -10,164 +10,47 @@ jobs:
       contents: write
 
     steps:
-      - name: 📥 Checkout do Repositório
+      - name: 📥 Checkout
         uses: actions/checkout@v4
 
-      - name: 🐍 Configurar Python
+      - name: 🐍 Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.13"
 
-      - name: 📦 Instalar Dependências Essenciais
+      - name: 📦 Install Dependencies
         run: |
-          python -m pip install --upgrade pip
-          echo "🚀 Instalando dependências ESSENCIAIS..."
           pip install astunparse scikit-learn numpy sympy scipy
-          
-          echo "📦 Tentando instalar outras dependências..."
-          pip install xgboost lightgbm numexpr symengine pyspark || echo "⚠️ Algumas dependências falharam - continuando..."
-          
-          echo "✅ Dependências essenciais instaladas"
+          pip install xgboost lightgbm || true
 
-      - name: 🧠 Configurar PYTHONPATH
+      - name: 🧹 Run Organization
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)/scripts
-          echo "PYTHONPATH atualizado: $PYTHONPATH"
-
-      - name: 🧹 Executar Limpeza e Consolidação
-        id: limpeza
-        run: |
-          set -e
-          echo "🧩 Executando organizador_biblioteca.py..."
           python scripts/organizador_biblioteca.py
-          echo "✅ Limpeza e consolidação concluídas"
 
-      - name: 🔧 Corrigir Erros de Sintaxe Automáticos
-        id: correcao_sintaxe
+      - name: 🔧 Fix Syntax Errors
         run: |
-          echo "🛠️ Criando script de correção de sintaxe..."
-          
-          # Criar arquivo de correção temporário
-          cat > /tmp/corrigir_sintaxe.py << 'EOF'
-import ast
-import re
-from pathlib import Path
+          python -c "
+          import ast, re, os
+          files = ['lib/funcoes_limpas/sistemas_dinamicos_avancados.py', 'lib/funcoes_limpas/estatistica_multivariada_2.py', 'lib/funcoes_limpas/modelagem_probabilistica.py', 'lib/funcoes_limpas/geometria_computacional.py']
+          for f in files:
+              if os.path.exists(f):
+                  with open(f, 'r') as file:
+                      content = file.read()
+                  content = re.sub(r'from\s+\.\.\s*import', 'from .. import', content)
+                  content = re.sub(r'\(\s*,\s*', '(', content)
+                  content = re.sub(r',\s*\)', ')', content)
+                  try:
+                      ast.parse(content)
+                      with open(f, 'w') as file:
+                          file.write(content)
+                      print(f'✅ Fixed: {f}')
+                  except: 
+                      print(f'❌ Still invalid: {f}')
+          "
 
-def corrigir_arquivos_problematicos():
-    problemas = [
-        'sistemas_dinamicos_avancados.py',
-        'estatistica_multivariada_2.py', 
-        'modelagem_probabilistica.py',
-        'geometria_computacional.py'
-    ]
-    
-    staging_dir = Path('lib/funcoes_limpas')
-    
-    print("🔧 CORREÇÃO DE SINTAXE AUTOMÁTICA")
-    print("=" * 50)
-    
-    for arquivo in problemas:
-        caminho = staging_dir / arquivo
-        if not caminho.exists():
-            print(f"⚠️ {arquivo} não encontrado")
-            continue
-            
-        print(f"📝 Corrigindo {arquivo}...")
-        
-        try:
-            with open(caminho, 'r', encoding='utf-8') as f:
-                conteudo = f.read()
-            
-            # Aplicar correções comuns
-            correcoes = [
-                (r'from\s+\.\.\s*import', 'from .. import'),
-                (r'import\s+\.\.', '# import .. removido'),
-                (r'\(\s*,\s*', '('),
-                (r',\s*\)', ')'),
-                (r"'\s*\+\s*'", ''),
-                (r'@\s+', '@'),
-                (r':\s*:\s*', ': '),
-                (r'->\s*->', '->'),
-                (r'\(\s*\)\s*\.', '().'),
-                (r'\[\s*,\s*', '['),
-                (r',\s*\]', ']'),
-            ]
-            
-            for padrao, substituicao in correcoes:
-                conteudo = re.sub(padrao, substituicao, conteudo)
-            
-            # Validar e salvar
-            ast.parse(conteudo)
-            with open(caminho, 'w', encoding='utf-8') as f:
-                f.write(conteudo)
-            print(f"   ✅ {arquivo} - Corrigido")
-            
-        except Exception as e:
-            print(f"   ❌ {arquivo} - Erro: {e}")
-
-def validar_correcoes():
-    arquivos = [
-        'sistemas_dinamicos_avancados.py',
-        'estatistica_multivariada_2.py',
-        'modelagem_probabilistica.py',
-        'geometria_computacional.py'
-    ]
-    
-    print("\n✅ VALIDAÇÃO DA SINTAXE")
-    print("=" * 50)
-    
-    staging_dir = Path('lib/funcoes_limpas')
-    todos_ok = True
-    
-    for arquivo in arquivos:
-        caminho = staging_dir / arquivo
-        try:
-            with open(caminho, 'r', encoding='utf-8') as f:
-                ast.parse(f.read())
-            print(f"   ✅ {arquivo} - VÁLIDO")
-        except Exception as e:
-            print(f"   ❌ {arquivo} - INVÁLIDO: {e}")
-            todos_ok = False
-    
-    return todos_ok
-
-if __name__ == "__main__":
-    corrigir_arquivos_problematicos()
-    todos_validos = validar_correcoes()
-    
-    if todos_validos:
-        print("\n🎉 TODOS OS ARQUIVOS CORRIGIDOS COM SUCESSO!")
-    else:
-        print("\n⚠️ ALGUNS ARQUIVOS AINDA PRECISAM DE ATENÇÃO")
-EOF
-
-          echo "🛠️ Executando correção de sintaxe..."
-          python /tmp/corrigir_sintaxe.py
-          echo "✅ Correção de sintaxe concluída"
-
-      - name: 🧾 Verificar Resultados
-        run: |
-          echo "📊 RELATÓRIO FINAL"
-          echo "=================="
-          echo "📁 Biblioteca limpa: lib/funcoes_limpas"
-          echo "📦 Backups criados: $(ls -d backup_biblioteca_original_* 2>/dev/null | wc -l)"
-          echo "🔧 Próximo: Resolver as ações manuais listadas no relatório"
-
-      - name: 💾 Commitar Alterações
-        id: commit
+      - name: 💾 Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          file_pattern: 'lib/funcoes_limpas backup_biblioteca_original_*'
-          commit_message: '✨ CI: Biblioteca consolidada (Python 3.13 compatível)'
+          commit_message: '✨ CI: Biblioteca consolidada'
           branch: main
-
-      - name: 📊 Resultado Final
-        if: always()
-        run: |
-          echo "🎯 PROCESSO CONCLUÍDO!"
-          echo "======================"
-          echo "✅ 119 funções reorganizadas"
-          echo "✅ 23 novas categorias criadas"
-          echo "✅ Erros de sintaxe corrigidos"
-          echo "✅ Backup preservado"
-          echo "📝 Ações manuais: 12 funções precisam de revisão"
