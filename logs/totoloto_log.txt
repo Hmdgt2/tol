@@ -88,3 +88,4 @@
 [2025-11-13 07:29:05] [vercapas] Resultado do concurso 091/2025 adicionado ao JSON 2025.
 [2025-11-15 21:55:12] [santacasa] Resultado do concurso 092/2025 adicionado ao JSON 2025.
 [2025-11-16 07:25:52] [vercapas] Resultado do concurso 092/2025 já existe. Nada a fazer.
+[2025-11-17 23:26:45] [vercapas] Resultado do concurso 092/2025 já existe. Nada a fazer.
