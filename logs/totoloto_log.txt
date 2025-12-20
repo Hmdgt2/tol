@@ -111,3 +111,4 @@
 [2025-12-15 23:29:00] [vercapas] Resultado do concurso 100/2025 já existe. Nada a fazer.
 [2025-12-17 21:51:59] [santacasa] Resultado do concurso 100/2025 já existe. Nada a fazer.
 [2025-12-18 07:32:18] [vercapas] Resultado do concurso 101/2025 adicionado ao JSON 2025.
+[2025-12-20 21:55:16] [santacasa] Resultado do concurso 101/2025 já existe. Nada a fazer.
