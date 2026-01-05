@@ -123,3 +123,4 @@
 [2026-01-01 07:32:18] [vercapas] Resultado do concurso 105/2025 já existe. Nada a fazer.
 [2026-01-03 21:55:34] [santacasa] Resultado do concurso 001/2026 adicionado ao JSON 2026.
 [2026-01-04 07:31:09] [vercapas] Resultado do concurso 001/2026 já existe. Nada a fazer.
+[2026-01-05 23:29:00] [vercapas] Resultado do concurso 001/2026 já existe. Nada a fazer.
