@@ -3,6 +3,7 @@ import smtplib
 from email.message import EmailMessage
 from email.utils import make_msgid
 from email.mime.image import MIMEImage
+from datetime import datetime
 
 def enviar_email_html(txt_path, remetente, senha_app, destinatario, assunto="Resultado Totoloto"):
     # Lê o conteúdo do txt, que tem o concurso, data, números etc
@@ -96,7 +97,14 @@ if __name__ == "__main__":
     senha_app = os.getenv("SENHA_APP")
     destinatario = os.getenv("EMAIL_DESTINO")
 
-    txt_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../dados/2025.txt")
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+ano_atual = datetime.now().year
+
+txt_path = os.path.join(
+    BASE_DIR,
+    "../dados",
+    f"{ano_atual}.txt"
+)
 
     if not remetente or not senha_app or not destinatario:
         print("Configure as variáveis de ambiente EMAIL_REMETENTE, SENHA_APP e EMAIL_DESTINO.")
