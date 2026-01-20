@@ -98,13 +98,13 @@ if __name__ == "__main__":
     destinatario = os.getenv("EMAIL_DESTINO")
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-ano_atual = datetime.now().year
+    ano_atual = datetime.now().year
 
-txt_path = os.path.join(
-    BASE_DIR,
-    "../dados",
-    f"{ano_atual}.txt"
-)
+    txt_path = os.path.join(
+        BASE_DIR,
+        "../dados",
+        f"{ano_atual}.txt"
+    )
 
     if not remetente or not senha_app or not destinatario:
         print("Configure as variáveis de ambiente EMAIL_REMETENTE, SENHA_APP e EMAIL_DESTINO.")
