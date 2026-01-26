@@ -138,3 +138,4 @@
 [2026-01-22 07:37:41] [vercapas] Resultado do concurso 006/2026 já existe. Nada a fazer.
 [2026-01-24 21:55:30] [santacasa] Resultado do concurso 006/2026 já existe. Nada a fazer.
 [2026-01-25 07:31:03] [vercapas] Resultado do concurso 007/2026 adicionado ao JSON 2026.
+[2026-01-26 23:32:22] [vercapas] Resultado do concurso 007/2026 já existe. Nada a fazer.
