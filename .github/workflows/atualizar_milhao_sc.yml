@@ -21,7 +21,7 @@ jobs:
           pip install selenium chromedriver-autoinstaller
 
       - name: Rodar script de scraping
-        run: python scripts/atualizar_m1lhao_sc.py
+        run: python scripts/atualizar_milhao_sc.py
 
       - name: Commit e push das alterações
         run: |
