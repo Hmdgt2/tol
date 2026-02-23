@@ -4,8 +4,14 @@ name: Atualizar Totoloto SC automaticamente
 
 on:
   schedule:
-    - cron: "50 21 * * 3"   # quartas, 22:50 em Portugal (21:50 UTC)
-    - cron: "50 21 * * 6"   # sábados, 22:50 em Portugal (21:50 UTC)
+    # Inverno — 22:50 PT = 22:50 UTC
+    - cron: "50 22 * * 3"
+    - cron: "50 22 * * 6"
+
+    # Verão — 22:50 PT = 21:50 UTC
+    - cron: "50 21 * * 3"
+    - cron: "50 21 * * 6"
+
   workflow_dispatch:
 
 jobs:
