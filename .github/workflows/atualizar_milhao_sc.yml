@@ -1,1 +1,41 @@
+name: Atualizar M1lhão automaticamente
+
+# horario: inverno
+
+on:
+  schedule:
+    - cron: "0 23 * * 5"   # sexta 23:00
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Instalar dependências Python
+        run: |
+          pip install selenium chromedriver-autoinstaller
+
+      - name: Rodar script de scraping
+        run: python scripts/atualizar_m1lhao_sc.py
+
+      - name: Commit e push das alterações
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dados_m1lhao/
+          git add logs/m1lhao_log.txt
+          git pull --rebase
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualização automática M1lhão"
+            git push
+          else
+            echo "Nenhuma alteração, nada para commitar."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
