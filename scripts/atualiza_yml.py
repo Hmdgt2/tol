@@ -5,39 +5,27 @@ from datetime import datetime, timezone, timedelta
 WORKFLOWS_DIR = os.path.join(os.path.dirname(__file__), "..", ".github", "workflows")
 
 def ultimo_domingo(ano, mes):
-    # Último dia do mês
     if mes == 12:
         d = datetime(ano + 1, 1, 1, tzinfo=timezone.utc) - timedelta(days=1)
     else:
         d = datetime(ano, mes + 1, 1, tzinfo=timezone.utc) - timedelta(days=1)
-
-    # Recuar até domingo
-    while d.weekday() != 6:  # 6 = domingo
+    while d.weekday() != 6:
         d -= timedelta(days=1)
-
     return d
 
 def detectar_modo():
     agora = datetime.now(timezone.utc)
     ano = agora.year
-
     inicio_verao = ultimo_domingo(ano, 3).replace(hour=1, minute=0)
     fim_verao = ultimo_domingo(ano, 10).replace(hour=1, minute=0)
-
     return inicio_verao <= agora < fim_verao
 
 def ajustar_hora_cron(cron_str, usar_verao=True):
     partes = cron_str.split()
     if len(partes) < 2:
         return cron_str
-
     hora = int(partes[1])
-
-    if usar_verao:
-        nova_hora = (hora + 1) % 24
-    else:
-        nova_hora = (hora - 1) % 24
-
+    nova_hora = (hora + 1) % 24 if usar_verao else (hora - 1) % 24
     partes[1] = str(nova_hora)
     return " ".join(partes)
 
@@ -51,17 +39,14 @@ def obter_horario_registado(filepath):
 def atualizar_comentario_horario(filepath, modo_atual):
     with open(filepath, "r", encoding="utf-8") as f:
         linhas = f.readlines()
-
     encontrou = False
     for i, linha in enumerate(linhas):
         if linha.strip().startswith("# horario:"):
             linhas[i] = f"# horario: {modo_atual}\n"
             encontrou = True
             break
-
     if not encontrou:
         linhas.insert(0, f"# horario: {modo_atual}\n")
-
     with open(filepath, "w", encoding="utf-8") as f:
         f.writelines(linhas)
 
@@ -74,7 +59,11 @@ def atualizar_crons_em_arquivo(filepath, usar_verao):
         return
 
     with open(filepath, "r", encoding="utf-8") as f:
-        data = yaml.safe_load(f)
+        try:
+            data = yaml.safe_load(f)   # ← ADICIONADO try/except
+        except yaml.YAMLError as e:
+            print(f"Erro ao ler YAML em {filepath}: {e}")
+            return
 
     if "on" not in data or "schedule" not in data["on"]:
         print(f"'{os.path.basename(filepath)}' não tem schedule. Ignorando.")
