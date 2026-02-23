@@ -64,21 +64,29 @@ def extrair_totoloto_sc():
         numeros = list(map(int, partes[0].strip().split()))
         especial = int(partes[1].strip())
 
-        # Extrair prémios
+        # Extrair prémios (HTML real usa <ul class="colums">)
         premios = []
         try:
-            linhas_premios = driver.find_elements(By.CSS_SELECTOR, "table.premiosTable tr")
-            for linha in linhas_premios[1:]:  # ignorar cabeçalho
-                cols = linha.find_elements(By.TAG_NAME, "td")
-                if len(cols) >= 3:
-                    nome = cols[0].text.strip()
-                    vencedores = cols[1].text.strip()
-                    valor = cols[2].text.strip()
+            listas = driver.find_elements(
+                By.CSS_SELECTOR,
+                "div.stripped.betMiddle.fourcol.regPad ul.colums"
+            )
+
+            for ul in listas:
+                itens = ul.find_elements(By.TAG_NAME, "li")
+                if len(itens) >= 4:
+                    nome = itens[0].text.strip()
+                    descricao = itens[1].text.strip()
+                    vencedores = itens[2].text.strip()
+                    valor = itens[3].text.strip()
+
                     premios.append({
                         "premio": nome,
+                        "descricao": descricao,
                         "vencedores": vencedores,
                         "valor": valor
                     })
+
         except Exception as e:
             escrever_log(f"Erro ao extrair prémios: {e}", "santacasa")
 
@@ -115,7 +123,10 @@ def atualizar_resultados():
         # Adicionar prémios ao TXT
         f.write("Prémios:\n")
         for p in resultado["premios"]:
-            f.write(f"{p['premio']} | Vencedores: {p['vencedores']} | Valor: {p['valor']}\n")
+            f.write(
+                f"{p['premio']} - {p['descricao']} | "
+                f"Vencedores: {p['vencedores']} | Valor: {p['valor']}\n"
+            )
         f.write("-" * 40 + "\n")
 
     # Parte original do JSON mantida
