@@ -1,11 +1,11 @@
 name: Atualizar Totoloto SC automaticamente
 
-# horario: verao
+# horario: inverno
 
 on:
   schedule:
-    - cron: "50 21 * * 3"   # quartas, 22:50 em Portugal (21:50 UTC)
-    - cron: "50 21 * * 6"   # sábados, 22:50 em Portugal (21:50 UTC)
+    - cron: "50 22 * * 3"   # quartas, 22:50 em Portugal no inverno (22:50 UTC)
+    - cron: "50 22 * * 6"   # sábados, 22:50 em Portugal no inverno (22:50 UTC)
   workflow_dispatch:
 
 jobs:
@@ -30,7 +30,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add dados/
           git add logs/totoloto_log.txt
-          # Só faz commit/push se houver mudanças
           if ! git diff --cached --quiet; then
             git commit -m "Atualização automática Totoloto SC"
             git push
