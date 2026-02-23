@@ -1,5 +1,3 @@
-# atualizar_eurodreams_sc.py
-
 import json
 import os
 import re
@@ -47,15 +45,21 @@ def extrair_eurodreams_sc():
         driver.get(url)
         wait = WebDriverWait(driver, 20)
 
-        # Extrair concurso e data
+        # Extrair concurso e data (robusto)
         span_data_info = wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
         )
-        texto = span_data_info.get_attribute("innerHTML").replace("<br>", "\n")
-        linhas = texto.split("\n")
+        texto = span_data_info.text
 
-        concurso = re.search(r"\d{3}/\d{4}", linhas[0]).group(0)
-        data_sorteio = re.search(r"\d{2}/\d{2}/\d{4}", linhas[1]).group(0)
+        concurso_match = re.search(r"\d{3}/\d{4}", texto)
+        data_match = re.search(r"\d{2}/\d{2}/\d{4}", texto)
+
+        if not concurso_match or not data_match:
+            escrever_log("Falha ao extrair concurso ou data", "eurodreams")
+            return None
+
+        concurso = concurso_match.group(0)
+        data_sorteio = data_match.group(0)
 
         # Extrair chave
         chave_ul = driver.find_element(By.CSS_SELECTOR, "div.betMiddle.twocol.regPad ul.colums")
@@ -66,31 +70,21 @@ def extrair_eurodreams_sc():
 
         # Extrair prémios
         premios = []
-        try:
-            listas = driver.find_elements(
-                By.CSS_SELECTOR,
-                "div.stripped.betMiddle.customfiveCol.regPad ul.colums"
-            )
+        listas = driver.find_elements(
+            By.CSS_SELECTOR,
+            "div.stripped.betMiddle.customfiveCol.regPad ul.colums"
+        )
 
-            for ul in listas:
-                itens = ul.find_elements(By.TAG_NAME, "li")
-                if len(itens) >= 5:
-                    premio = itens[0].text.strip()
-                    descricao = itens[1].text.strip()
-                    vencedores_pt = itens[2].text.strip()
-                    vencedores_eu = itens[3].text.strip()
-                    valor = itens[4].text.strip()
-
-                    premios.append({
-                        "premio": premio,
-                        "descricao": descricao,
-                        "vencedores_pt": vencedores_pt,
-                        "vencedores_eu": vencedores_eu,
-                        "valor": valor
-                    })
-
-        except Exception as e:
-            escrever_log(f"Erro ao extrair prémios: {e}", "eurodreams")
+        for ul in listas:
+            li = ul.find_elements(By.TAG_NAME, "li")
+            if len(li) >= 5:
+                premios.append({
+                    "premio": li[0].text.strip(),
+                    "descricao": li[1].text.strip(),
+                    "vencedores_pt": li[2].text.strip(),
+                    "vencedores_eu": li[3].text.strip(),
+                    "valor": li[4].text.strip()
+                })
 
         return {
             "concurso": concurso,
@@ -105,6 +99,9 @@ def extrair_eurodreams_sc():
 
 def atualizar_resultados():
     resultado = extrair_eurodreams_sc()
+    if resultado is None:
+        return
+
     ano = resultado["concurso"].split("/")[1]
 
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -113,7 +110,7 @@ def atualizar_resultados():
 
     json_path = os.path.join(pasta_dados, f"{ano}.json")
 
-    # Guardar no TXT
+    # Guardar TXT
     txt_path = os.path.join(pasta_dados, f"{ano}.txt")
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"Concurso: {resultado['concurso']}\n")
@@ -130,12 +127,11 @@ def atualizar_resultados():
             )
         f.write("-" * 40 + "\n")
 
-    # JSON mantém apenas dados essenciais
+    # JSON sem prémios
     dados = ler_json(json_path, ano)
     lista = dados[str(ano)]
 
-    existe = any(r["concurso"] == resultado["concurso"] for r in lista)
-    if not existe:
+    if not any(r["concurso"] == resultado["concurso"] for r in lista):
         lista.append({
             "concurso": resultado["concurso"],
             "data": resultado["data"],
