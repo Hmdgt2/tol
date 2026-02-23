@@ -21,7 +21,7 @@ jobs:
           pip install selenium chromedriver-autoinstaller
 
       - name: Rodar script de scraping
-        run: python scripts/atualizar_milhao_sc.py
+        run: python scripts/atualizar_m1lhao_sc.py
 
       - name: Commit e push das alterações
         run: |
@@ -29,7 +29,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add dados/
           git add logs/
-          git pull --rebase
           if ! git diff --cached --quiet; then
             git commit -m "Atualização automática M1lhão"
             git push
