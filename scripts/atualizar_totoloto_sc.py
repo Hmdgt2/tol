@@ -13,7 +13,6 @@ import datetime
 
 def escrever_log(mensagem, origem):
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    # Grave em logs/ ou na raiz
     pasta_logs = os.path.join(pasta_repo, "logs")
     os.makedirs(pasta_logs, exist_ok=True)
     log_path = os.path.join(pasta_logs, "totoloto_log.txt")
@@ -43,39 +42,68 @@ def extrair_totoloto_sc():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(options=options)
+
     try:
         driver.get(url)
         wait = WebDriverWait(driver, 20)
+
+        # Extrair concurso e data
         span_data_info = wait.until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
         )
         texto_sorteio = span_data_info.text.strip()
         linhas = texto_sorteio.split("\n")
+
         concurso = re.search(r"\d{3}/\d{4}", linhas[0]).group(0)
         data_sorteio = re.search(r"\d{2}/\d{2}/\d{4}", linhas[1]).group(0)
+
+        # Extrair chave
         chave_li = driver.find_element(By.CSS_SELECTOR, "div.betMiddle.twocol.regPad ul.colums li")
         chave_texto = chave_li.text.strip()
         partes = chave_texto.split("+")
         numeros = list(map(int, partes[0].strip().split()))
         especial = int(partes[1].strip())
+
+        # Extrair prémios
+        premios = []
+        try:
+            linhas_premios = driver.find_elements(By.CSS_SELECTOR, "table.premiosTable tr")
+            for linha in linhas_premios[1:]:  # ignorar cabeçalho
+                cols = linha.find_elements(By.TAG_NAME, "td")
+                if len(cols) >= 3:
+                    nome = cols[0].text.strip()
+                    vencedores = cols[1].text.strip()
+                    valor = cols[2].text.strip()
+                    premios.append({
+                        "premio": nome,
+                        "vencedores": vencedores,
+                        "valor": valor
+                    })
+        except Exception as e:
+            escrever_log(f"Erro ao extrair prémios: {e}", "santacasa")
+
         return {
             "concurso": concurso,
             "data": data_sorteio,
             "numeros": numeros,
-            "especial": especial
+            "especial": especial,
+            "premios": premios
         }
+
     finally:
         driver.quit()
 
 def atualizar_resultados():
     resultado = extrair_totoloto_sc()
     ano = resultado["concurso"].split("/")[1]
+
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_dados = os.path.join(pasta_repo, "dados")
     os.makedirs(pasta_dados, exist_ok=True)
+
     json_path = os.path.join(pasta_dados, f"{ano}.json")
 
-    # NOVO BLOCO — guardar no .txt independentemente de já existir no JSON
+    # Guardar no TXT (reescreve sempre)
     txt_path = os.path.join(pasta_dados, f"{ano}.txt")
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"Concurso: {resultado['concurso']}\n")
@@ -84,7 +112,13 @@ def atualizar_resultados():
         f.write(f"Especial: {resultado['especial']}\n")
         f.write("-" * 40 + "\n")
 
-    # Parte original mantida
+        # Adicionar prémios ao TXT
+        f.write("Prémios:\n")
+        for p in resultado["premios"]:
+            f.write(f"{p['premio']} | Vencedores: {p['vencedores']} | Valor: {p['valor']}\n")
+        f.write("-" * 40 + "\n")
+
+    # Parte original do JSON mantida
     dados = ler_json(json_path, ano)
     lista = dados[str(ano)]
 
@@ -105,13 +139,12 @@ def atualizar_resultados():
 if __name__ == "__main__":
     atualizar_resultados()
 
-    # NOVO BLOCO - criar ficheiro sorteio_atual.json
+    # Criar ficheiro sorteio_atual.json
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_dados = os.path.join(pasta_repo, "dados")
     ano = datetime.datetime.now().year
     json_path = os.path.join(pasta_dados, f"{ano}.json")
 
-    # Lê os dados do ano, pega o último concurso
     if os.path.exists(json_path):
         with open(json_path, "r", encoding="utf-8") as f:
             dados = json.load(f)
