@@ -1,5 +1,3 @@
-# atualizar_m1lhao_sc.py
-
 import json
 import os
 import re
@@ -11,11 +9,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
 
+JOGO = "milhao"
+
 def escrever_log(mensagem, origem):
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_logs = os.path.join(pasta_repo, "logs")
     os.makedirs(pasta_logs, exist_ok=True)
-    log_path = os.path.join(pasta_logs, "m1lhao_log.txt")
+    log_path = os.path.join(pasta_logs, f"{JOGO}_log.txt")
     agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(f"[{agora}] [{origem}] {mensagem}\n")
@@ -47,15 +47,21 @@ def extrair_m1lhao_sc():
         driver.get(url)
         wait = WebDriverWait(driver, 20)
 
-        # Extrair concurso e data
+        # Extrair concurso e data (robusto)
         span_data_info = wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
         )
-        texto = span_data_info.get_attribute("innerHTML").replace("<br>", "\n")
-        linhas = texto.split("\n")
+        texto = span_data_info.text
 
-        concurso = re.search(r"\d{3}/\d{4}", linhas[0]).group(0)
-        data_sorteio = re.search(r"\d{2}/\d{2}/\d{4}", linhas[1]).group(0)
+        concurso_match = re.search(r"\d{3}/\d{4}", texto)
+        data_match = re.search(r"\d{2}/\d{2}/\d{4}", texto)
+
+        if not concurso_match or not data_match:
+            escrever_log("Falha ao extrair concurso ou data", JOGO)
+            return None
+
+        concurso = concurso_match.group(0)
+        data_sorteio = data_match.group(0)
 
         # Extrair código vencedor
         ul_premio = driver.find_element(By.CSS_SELECTOR, "div.stripped.betMiddle3.threecol.regPad ul")
@@ -91,16 +97,24 @@ def extrair_m1lhao_sc():
 
 def atualizar_resultados():
     resultado = extrair_m1lhao_sc()
+    if resultado is None:
+        return
+
     ano = resultado["concurso"].split("/")[1]
 
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pasta_dados = os.path.join(pasta_repo, "dados_m1lhao")
+    pasta_dados = os.path.join(pasta_repo, "dados")
     os.makedirs(pasta_dados, exist_ok=True)
 
-    json_path = os.path.join(pasta_dados, f"{ano}.json")
+    # Nome do TXT por concurso
+    ficheiro_txt = f"{JOGO}_{resultado['concurso'].replace('/', '_')}.txt"
+    txt_path = os.path.join(pasta_dados, ficheiro_txt)
 
-    # Guardar no TXT
-    txt_path = os.path.join(pasta_dados, f"{ano}.txt")
+    # Nome do JSON por ano
+    ficheiro_json = f"{JOGO}_{ano}.json"
+    json_path = os.path.join(pasta_dados, ficheiro_json)
+
+    # Guardar TXT
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"Concurso: {resultado['concurso']}\n")
         f.write(f"Data: {resultado['data']}\n")
@@ -113,12 +127,11 @@ def atualizar_resultados():
             f.write(f"{e['nome']}: {e['valor']}\n")
         f.write("-" * 40 + "\n")
 
-    # JSON mantém apenas dados essenciais
+    # JSON sem prémios
     dados = ler_json(json_path, ano)
     lista = dados[str(ano)]
 
-    existe = any(r["concurso"] == resultado["concurso"] for r in lista)
-    if not existe:
+    if not any(r["concurso"] == resultado["concurso"] for r in lista):
         lista.append({
             "concurso": resultado["concurso"],
             "data": resultado["data"],
