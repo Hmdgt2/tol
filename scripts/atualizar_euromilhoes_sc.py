@@ -1,5 +1,3 @@
-# atualizar_euromilhoes_sc.py
-
 import json
 import os
 import re
@@ -11,11 +9,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import datetime
 
+JOGO = "euromilhoes"
+
 def escrever_log(mensagem, origem):
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pasta_logs = os.path.join(pasta_repo, "logs")
     os.makedirs(pasta_logs, exist_ok=True)
-    log_path = os.path.join(pasta_logs, "euromilhoes_log.txt")
+    log_path = os.path.join(pasta_logs, f"{JOGO}_log.txt")
     agora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(f"[{agora}] [{origem}] {mensagem}\n")
@@ -47,15 +47,21 @@ def extrair_euromilhoes_sc():
         driver.get(url)
         wait = WebDriverWait(driver, 20)
 
-        # Extrair concurso e data
+        # Extrair concurso e data (robusto)
         span_data_info = wait.until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "span.dataInfo"))
         )
-        texto = span_data_info.get_attribute("innerHTML").replace("<br>", "\n")
-        linhas = texto.split("\n")
+        texto = span_data_info.text
 
-        concurso = re.search(r"\d{3}/\d{4}", linhas[0]).group(0)
-        data_sorteio = re.search(r"\d{2}/\d{2}/\d{4}", linhas[1]).group(0)
+        concurso_match = re.search(r"\d{3}/\d{4}", texto)
+        data_match = re.search(r"\d{2}/\d{2}/\d{4}", texto)
+
+        if not concurso_match or not data_match:
+            escrever_log("Falha ao extrair concurso ou data", JOGO)
+            return None
+
+        concurso = concurso_match.group(0)
+        data_sorteio = data_match.group(0)
 
         # Extrair chave
         chave_ul = driver.find_element(By.CSS_SELECTOR, "div.betMiddle.twocol.regPad ul.colums")
@@ -66,31 +72,21 @@ def extrair_euromilhoes_sc():
 
         # Extrair prémios
         premios = []
-        try:
-            listas = driver.find_elements(
-                By.CSS_SELECTOR,
-                "div.stripped.betMiddle.customfiveCol.regPad ul.colums"
-            )
+        listas = driver.find_elements(
+            By.CSS_SELECTOR,
+            "div.stripped.betMiddle.customfiveCol.regPad ul.colums"
+        )
 
-            for ul in listas:
-                itens = ul.find_elements(By.TAG_NAME, "li")
-                if len(itens) >= 5:
-                    premio = itens[0].text.strip()
-                    descricao = itens[1].text.strip()
-                    vencedores_pt = itens[2].text.strip()
-                    vencedores_eu = itens[3].text.strip()
-                    valor = itens[4].text.strip()
-
-                    premios.append({
-                        "premio": premio,
-                        "descricao": descricao,
-                        "vencedores_pt": vencedores_pt,
-                        "vencedores_eu": vencedores_eu,
-                        "valor": valor
-                    })
-
-        except Exception as e:
-            escrever_log(f"Erro ao extrair prémios: {e}", "euromilhoes")
+        for ul in listas:
+            li = ul.find_elements(By.TAG_NAME, "li")
+            if len(li) >= 5:
+                premios.append({
+                    "premio": li[0].text.strip(),
+                    "descricao": li[1].text.strip(),
+                    "vencedores_pt": li[2].text.strip(),
+                    "vencedores_eu": li[3].text.strip(),
+                    "valor": li[4].text.strip()
+                })
 
         return {
             "concurso": concurso,
@@ -105,16 +101,24 @@ def extrair_euromilhoes_sc():
 
 def atualizar_resultados():
     resultado = extrair_euromilhoes_sc()
+    if resultado is None:
+        return
+
     ano = resultado["concurso"].split("/")[1]
 
     pasta_repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    pasta_dados = os.path.join(pasta_repo, "dados_euromilhoes")
+    pasta_dados = os.path.join(pasta_repo, "dados")
     os.makedirs(pasta_dados, exist_ok=True)
 
-    json_path = os.path.join(pasta_dados, f"{ano}.json")
+    # Nome do TXT por concurso
+    ficheiro_txt = f"{JOGO}_{resultado['concurso'].replace('/', '_')}.txt"
+    txt_path = os.path.join(pasta_dados, ficheiro_txt)
 
-    # Guardar no TXT
-    txt_path = os.path.join(pasta_dados, f"{ano}.txt")
+    # Nome do JSON por ano
+    ficheiro_json = f"{JOGO}_{ano}.json"
+    json_path = os.path.join(pasta_dados, ficheiro_json)
+
+    # Guardar TXT
     with open(txt_path, "w", encoding="utf-8") as f:
         f.write(f"Concurso: {resultado['concurso']}\n")
         f.write(f"Data: {resultado['data']}\n")
@@ -130,12 +134,11 @@ def atualizar_resultados():
             )
         f.write("-" * 40 + "\n")
 
-    # JSON mantém apenas dados essenciais
+    # JSON sem prémios
     dados = ler_json(json_path, ano)
     lista = dados[str(ano)]
 
-    existe = any(r["concurso"] == resultado["concurso"] for r in lista)
-    if not existe:
+    if not any(r["concurso"] == resultado["concurso"] for r in lista):
         lista.append({
             "concurso": resultado["concurso"],
             "data": resultado["data"],
