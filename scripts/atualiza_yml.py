@@ -1,13 +1,35 @@
 import os
 import yaml
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 WORKFLOWS_DIR = os.path.join(os.path.dirname(__file__), "..", ".github", "workflows")
+
+def ultimo_domingo(ano, mes):
+    # Último dia do mês
+    if mes == 12:
+        d = datetime(ano + 1, 1, 1, tzinfo=timezone.utc) - timedelta(days=1)
+    else:
+        d = datetime(ano, mes + 1, 1, tzinfo=timezone.utc) - timedelta(days=1)
+
+    # Recuar até domingo
+    while d.weekday() != 6:  # 6 = domingo
+        d -= timedelta(days=1)
+
+    return d
+
+def detectar_modo():
+    agora = datetime.now(timezone.utc)
+    ano = agora.year
+
+    inicio_verao = ultimo_domingo(ano, 3).replace(hour=1, minute=0)
+    fim_verao = ultimo_domingo(ano, 10).replace(hour=1, minute=0)
+
+    return inicio_verao <= agora < fim_verao
 
 def ajustar_hora_cron(cron_str, usar_verao=True):
     partes = cron_str.split()
     if len(partes) < 2:
-        return cron_str  # inválido, não altera
+        return cron_str
 
     hora = int(partes[1])
 
@@ -71,10 +93,6 @@ def atualizar_crons_em_arquivo(filepath, usar_verao):
 
     atualizar_comentario_horario(filepath, modo_atual)
     print(f"{os.path.basename(filepath)} atualizado para {modo_atual}.")
-
-def detectar_modo():
-    mes = datetime.now(timezone.utc).month
-    return 3 <= mes <= 10  # março a outubro
 
 def main():
     usar_verao = detectar_modo()
