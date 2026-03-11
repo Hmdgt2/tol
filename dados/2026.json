@@ -231,6 +231,19 @@
       ],
       "especial": 2,
       "premios": []
+    },
+    {
+      "concurso": "020/2026",
+      "data": "11/03/2026",
+      "numeros": [
+        17,
+        26,
+        29,
+        33,
+        46
+      ],
+      "especial": 3,
+      "premios": []
     }
   ]
 }
