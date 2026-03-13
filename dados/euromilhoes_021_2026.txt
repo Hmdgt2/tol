@@ -1,0 +1,20 @@
+Concurso: 021/2026
+Data: 13/03/2026
+Chave: 13 17 26 41 48 + 4 10
+Ordem de saída: 26 17 48 41 13 + 10 4
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 0 | Valor: (1)
+2.º Prémio - 5 Números + 1 Estrela | PT: 1 | EU: 2 | Valor: € 415.147,60
+3.º Prémio - 5 Números + 0 Estrelas | PT: 1 | EU: 5 | Valor: € 38.810,73
+4.º Prémio - 4 Números + 2 Estrelas | PT: 6 | EU: 54 | Valor: € 1.119,31
+5.º Prémio - 4 Números + 1 Estrela | PT: 62 | EU: 867 | Valor: € 128,42
+6.º Prémio - 3 Números + 2 Estrelas | PT: 117 | EU: 1.980 | Valor: € 59,44
+7.º Prémio - 4 Números + 0 Estrelas | PT: 189 | EU: 2.202 | Valor: € 37,56
+8.º Prémio - 2 Números + 2 Estrelas | PT: 1.861 | EU: 27.769 | Valor: € 14,89
+9.º Prémio - 3 Números + 1 Estrela | PT: 3.257 | EU: 39.875 | Valor: € 11,56
+10.º Prémio - 3 Números + 0 Estrelas | PT: 9.283 | EU: 97.919 | Valor: € 8,77
+11.º Prémio - 1 Número + 2 Estrelas | PT: 9.287 | EU: 142.691 | Valor: € 7,29
+12.º Prémio - 2 Números + 1 Estrela | PT: 46.847 | EU: 569.073 | Valor: € 5,75
+13.º Prémio - 2 Números + 0 Estrelas | PT: 133.364 | EU: 1.399.692 | Valor: € 3,77
+----------------------------------------
