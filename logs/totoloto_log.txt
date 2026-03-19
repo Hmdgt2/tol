@@ -178,3 +178,4 @@
 [2026-03-15 07:51:17] [vercapas] Resultado do concurso 021/2026 já existe. Nada a fazer.
 [2026-03-16 23:41:44] [vercapas] Resultado do concurso 021/2026 já existe. Nada a fazer.
 [2026-03-18 23:16:27] [santacasa] Resultado do concurso 022/2026 adicionado ao JSON 2026.
+[2026-03-19 07:52:59] [vercapas] Resultado do concurso 022/2026 já existe. Nada a fazer.
