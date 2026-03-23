@@ -1,0 +1,13 @@
+Concurso: 024/2026
+Data: 23/03/2026
+Chave: 1 4 6 13 16 28 + 5
+Ordem de saída: 28 1 4 13 16 6 + 5
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 30.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 18 | EU: 132 | Valor: € 422,21
+4.º Prémio - 4 Números | PT: 742 | EU: 5.252 | Valor: € 29,74
+5.º Prémio - 3 Números | PT: 10.220 | EU: 70.172 | Valor: € 4,67
+6.º Prémio - 2 Números | PT: 57.986 | EU: 390.116 | Valor: € 2,50
+----------------------------------------
