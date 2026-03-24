@@ -1,0 +1,20 @@
+Concurso: 024/2026
+Data: 24/03/2026
+Chave: 12 16 17 18 27 + 1 3
+Ordem de saída: 18 27 16 12 17 + 3 1
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 0 | Valor: (1)
+2.º Prémio - 5 Números + 1 Estrela | PT: 0 | EU: 3 | Valor: € 172.870,72
+3.º Prémio - 5 Números + 0 Estrelas | PT: 0 | EU: 9 | Valor: € 13.467,57
+4.º Prémio - 4 Números + 2 Estrelas | PT: 4 | EU: 29 | Valor: € 1.301,84
+5.º Prémio - 4 Números + 1 Estrela | PT: 66 | EU: 804 | Valor: € 86,49
+6.º Prémio - 3 Números + 2 Estrelas | PT: 176 | EU: 1.602 | Valor: € 45,89
+7.º Prémio - 4 Números + 0 Estrelas | PT: 148 | EU: 1.645 | Valor: € 31,40
+8.º Prémio - 2 Números + 2 Estrelas | PT: 1.935 | EU: 20.456 | Valor: € 12,62
+9.º Prémio - 3 Números + 1 Estrela | PT: 2.831 | EU: 31.703 | Valor: € 9,08
+10.º Prémio - 3 Números + 0 Estrelas | PT: 5.957 | EU: 70.112 | Valor: € 7,65
+11.º Prémio - 1 Número + 2 Estrelas | PT: 8.697 | EU: 95.948 | Valor: € 6,77
+12.º Prémio - 2 Números + 1 Estrela | PT: 38.369 | EU: 433.402 | Valor: € 4,72
+13.º Prémio - 2 Números + 0 Estrelas | PT: 80.931 | EU: 950.092 | Valor: € 3,46
+----------------------------------------
