@@ -1,0 +1,20 @@
+Concurso: 025/2026
+Data: 27/03/2026
+Chave: 4 10 43 44 48 + 2 4
+Ordem de saída: 44 4 43 10 48 + 4 2
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 0 | Valor: (1)
+2.º Prémio - 5 Números + 1 Estrela | PT: 0 | EU: 2 | Valor: € 353.647,25
+3.º Prémio - 5 Números + 0 Estrelas | PT: 1 | EU: 6 | Valor: € 27.551,06
+4.º Prémio - 4 Números + 2 Estrelas | PT: 1 | EU: 31 | Valor: € 1.660,93
+5.º Prémio - 4 Números + 1 Estrela | PT: 48 | EU: 605 | Valor: € 156,77
+6.º Prémio - 3 Números + 2 Estrelas | PT: 116 | EU: 1.398 | Valor: € 71,72
+7.º Prémio - 4 Números + 0 Estrelas | PT: 84 | EU: 1.172 | Valor: € 60,11
+8.º Prémio - 2 Números + 2 Estrelas | PT: 2.151 | EU: 23.682 | Valor: € 14,87
+9.º Prémio - 3 Números + 1 Estrela | PT: 2.289 | EU: 29.474 | Valor: € 13,33
+10.º Prémio - 3 Números + 0 Estrelas | PT: 4.661 | EU: 60.402 | Valor: € 12,11
+11.º Prémio - 1 Número + 2 Estrelas | PT: 12.219 | EU: 133.485 | Valor: € 6,63
+12.º Prémio - 2 Números + 1 Estrela | PT: 39.560 | EU: 478.401 | Valor: € 5,83
+13.º Prémio - 2 Números + 0 Estrelas | PT: 80.670 | EU: 990.321 | Valor: € 4,53
+----------------------------------------
