@@ -1,0 +1,13 @@
+Concurso: 027/2026
+Data: 02/04/2026
+Chave: 3 4 13 21 30 37 + 4
+Ordem de saída: 4 13 30 37 3 21 + 4
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 30.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 1 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 21 | EU: 120 | Valor: € 472,40
+4.º Prémio - 4 Números | PT: 863 | EU: 5.135 | Valor: € 30,94
+5.º Prémio - 3 Números | PT: 11.228 | EU: 71.933 | Valor: € 4,63
+6.º Prémio - 2 Números | PT: 62.282 | EU: 409.244 | Valor: € 2,50
+----------------------------------------
