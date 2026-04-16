@@ -1,0 +1,13 @@
+Concurso: 031/2026
+Data: 16/04/2026
+Chave: 23 24 28 29 31 40 + 3
+Ordem de saída: 31 24 23 40 29 28 + 3
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 20.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 8 | EU: 75 | Valor: € 728,51
+4.º Prémio - 4 Números | PT: 576 | EU: 3.521 | Valor: € 43,50
+5.º Prémio - 3 Números | PT: 9.081 | EU: 57.131 | Valor: € 5,62
+6.º Prémio - 2 Números | PT: 57.087 | EU: 365.629 | Valor: € 2,50
+----------------------------------------
