@@ -1,0 +1,20 @@
+Concurso: 032/2026
+Data: 21/04/2026
+Chave: 13 16 29 40 47 + 3 4
+Ordem de saída: 29 47 16 13 40 + 4 3
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 3 | Valor: € 48.175.066,00
+2.º Prémio - 5 Números + 1 Estrela | PT: 1 | EU: 5 | Valor: € 152.175,42
+3.º Prémio - 5 Números + 0 Estrelas | PT: 1 | EU: 10 | Valor: € 17.782,95
+4.º Prémio - 4 Números + 2 Estrelas | PT: 2 | EU: 34 | Valor: € 1.629,10
+5.º Prémio - 4 Números + 1 Estrela | PT: 50 | EU: 819 | Valor: € 124,58
+6.º Prémio - 3 Números + 2 Estrelas | PT: 85 | EU: 1.543 | Valor: € 69,90
+7.º Prémio - 4 Números + 0 Estrelas | PT: 108 | EU: 1.645 | Valor: € 46,07
+8.º Prémio - 2 Números + 2 Estrelas | PT: 1.546 | EU: 23.601 | Valor: € 16,05
+9.º Prémio - 3 Números + 1 Estrela | PT: 2.465 | EU: 37.302 | Valor: € 11,33
+10.º Prémio - 3 Números + 0 Estrelas | PT: 5.099 | EU: 76.810 | Valor: € 10,24
+11.º Prémio - 1 Número + 2 Estrelas | PT: 8.460 | EU: 130.852 | Valor: € 7,28
+12.º Prémio - 2 Números + 1 Estrela | PT: 37.276 | EU: 555.464 | Valor: € 5,40
+13.º Prémio - 2 Números + 0 Estrelas | PT: 75.878 | EU: 1.139.139 | Valor: € 4,24
+----------------------------------------
