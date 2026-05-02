@@ -209,3 +209,4 @@
 [2026-04-28 00:00:33] [vercapas] Resultado do concurso 033/2026 já existe. Nada a fazer.
 [2026-04-29 23:39:23] [santacasa] Resultado do concurso 034/2026 adicionado ao JSON 2026.
 [2026-04-30 09:23:03] [vercapas] Resultado do concurso 034/2026 já existe. Nada a fazer.
+[2026-05-02 23:27:41] [santacasa] Resultado do concurso 035/2026 adicionado ao JSON 2026.
