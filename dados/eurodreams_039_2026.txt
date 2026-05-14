@@ -1,0 +1,13 @@
+Concurso: 039/2026
+Data: 14/05/2026
+Chave: 3 7 9 21 24 27 + 4
+Ordem de saída: 21 7 9 24 27 3 + 4
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 20.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 26 | EU: 185 | Valor: € 224,29
+4.º Prémio - 4 Números | PT: 1.129 | EU: 6.648 | Valor: € 17,49
+5.º Prémio - 3 Números | PT: 13.132 | EU: 79.080 | Valor: € 3,08
+6.º Prémio - 2 Números | PT: 63.818 | EU: 390.136 | Valor: € 2,50
+----------------------------------------
