@@ -517,6 +517,19 @@
       ],
       "especial": 10,
       "premios": []
+    },
+    {
+      "concurso": "042/2026",
+      "data": "27/05/2026",
+      "numeros": [
+        22,
+        28,
+        38,
+        42,
+        47
+      ],
+      "especial": 1,
+      "premios": []
     }
   ]
 }
