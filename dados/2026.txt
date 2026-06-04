@@ -1,7 +1,13 @@
-Concurso: 043/2026
-Data: 30/05/2026
-Números: 4 17 20 21 43
-Especial: 2
+Concurso: 044/2026
+Data: 03/06/2026
+Números: 7 13 24 34 43
+Especial: 13
 ----------------------------------------
 Prémios:
+1.º Prémio - 5 Números + Nº da Sorte | Vencedores: 0 | Valor: (1)
+2.º Prémio - 5 Números | Vencedores: 1 | Valor: € 20.159,62
+3.º Prémio - 4 Números | Vencedores: 181 | Valor: € 139,22
+4.º Prémio - 3 Números | Vencedores: 6.343 | Valor: € 3,97
+5.º Prémio - 2 Números | Vencedores: 78.111 | Valor: € 1,93
+Nº da Sorte - Nº da Sorte | Vencedores: 83.595 | Valor: Reembolso do valor da aposta de Totoloto
 ----------------------------------------
