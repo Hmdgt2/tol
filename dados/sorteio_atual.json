@@ -1,50 +1,13 @@
 {
-  "concurso": "044/2026",
-  "data": "03/06/2026",
+  "concurso": "045/2026",
+  "data": "06/06/2026",
   "numeros": [
-    7,
-    13,
-    24,
-    34,
-    43
+    6,
+    8,
+    15,
+    33,
+    49
   ],
-  "especial": 13,
-  "premios": [
-    {
-      "premio": "1.º Prémio",
-      "descricao": "5 Números + Nº da Sorte",
-      "vencedores": "0",
-      "valor": "(1)"
-    },
-    {
-      "premio": "2.º Prémio",
-      "descricao": "5 Números",
-      "vencedores": "1",
-      "valor": "€ 20.159,62"
-    },
-    {
-      "premio": "3.º Prémio",
-      "descricao": "4 Números",
-      "vencedores": "181",
-      "valor": "€ 139,22"
-    },
-    {
-      "premio": "4.º Prémio",
-      "descricao": "3 Números",
-      "vencedores": "6.343",
-      "valor": "€ 3,97"
-    },
-    {
-      "premio": "5.º Prémio",
-      "descricao": "2 Números",
-      "vencedores": "78.111",
-      "valor": "€ 1,93"
-    },
-    {
-      "premio": "Nº da Sorte",
-      "descricao": "Nº da Sorte",
-      "vencedores": "83.595",
-      "valor": "Reembolso do valor da aposta de Totoloto"
-    }
-  ]
+  "especial": 12,
+  "premios": []
 }
