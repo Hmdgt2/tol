@@ -240,3 +240,4 @@
 [2026-06-11 00:04:13] [santacasa] Resultado do concurso 046/2026 adicionado ao JSON 2026.
 [2026-06-11 11:44:57] [vercapas] Resultado do concurso 046/2026 já existe. Nada a fazer.
 [2026-06-13 23:47:29] [santacasa] Resultado do concurso 047/2026 adicionado ao JSON 2026.
+[2026-06-14 10:30:01] [vercapas] Resultado do concurso 047/2026 já existe. Nada a fazer.
