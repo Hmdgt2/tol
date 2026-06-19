@@ -1,0 +1,20 @@
+Concurso: 049/2026
+Data: 19/06/2026
+Chave: 8 34 39 41 42 + 2 7
+Ordem de saída: 39 41 42 8 34 + 2 7
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 0 | Valor: (1)
+2.º Prémio - 5 Números + 1 Estrela | PT: 0 | EU: 0 | Valor: (2)
+3.º Prémio - 5 Números + 0 Estrelas | PT: 1 | EU: 7 | Valor: € 110.334,53
+4.º Prémio - 4 Números + 2 Estrelas | PT: 3 | EU: 19 | Valor: € 2.398,57
+5.º Prémio - 4 Números + 1 Estrela | PT: 40 | EU: 453 | Valor: € 185,32
+6.º Prémio - 3 Números + 2 Estrelas | PT: 119 | EU: 1.531 | Valor: € 57,96
+7.º Prémio - 4 Números + 0 Estrelas | PT: 80 | EU: 1.110 | Valor: € 56,18
+8.º Prémio - 2 Números + 2 Estrelas | PT: 2.152 | EU: 23.965 | Valor: € 13,01
+9.º Prémio - 3 Números + 1 Estrela | PT: 2.197 | EU: 26.024 | Valor: € 13,36
+10.º Prémio - 3 Números + 0 Estrelas | PT: 4.679 | EU: 55.202 | Valor: € 11,73
+11.º Prémio - 1 Número + 2 Estrelas | PT: 12.901 | EU: 141.949 | Valor: € 5,52
+12.º Prémio - 2 Números + 1 Estrela | PT: 34.941 | EU: 404.196 | Valor: € 6,11
+13.º Prémio - 2 Números + 0 Estrelas | PT: 73.414 | EU: 848.710 | Valor: € 4,68
+----------------------------------------
