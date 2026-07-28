@@ -1,0 +1,20 @@
+Concurso: 060/2026
+Data: 28/07/2026
+Chave: 5 7 24 30 49 + 10 11
+Ordem de saída: 7 5 49 24 30 + 11 10
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 0 | Valor: (1)
+2.º Prémio - 5 Números + 1 Estrela | PT: 0 | EU: 1 | Valor: € 522.575,94
+3.º Prémio - 5 Números + 0 Estrelas | PT: 0 | EU: 2 | Valor: € 61.067,30
+4.º Prémio - 4 Números + 2 Estrelas | PT: 2 | EU: 29 | Valor: € 1.311,79
+5.º Prémio - 4 Números + 1 Estrela | PT: 36 | EU: 596 | Valor: € 117,57
+6.º Prémio - 3 Números + 2 Estrelas | PT: 65 | EU: 1.010 | Valor: € 73,34
+7.º Prémio - 4 Números + 0 Estrelas | PT: 87 | EU: 1.506 | Valor: € 34,56
+8.º Prémio - 2 Números + 2 Estrelas | PT: 921 | EU: 14.328 | Valor: € 18,16
+9.º Prémio - 3 Números + 1 Estrela | PT: 1.449 | EU: 25.052 | Valor: € 11,58
+10.º Prémio - 3 Números + 0 Estrelas | PT: 4.953 | EU: 68.880 | Valor: € 7,84
+11.º Prémio - 1 Número + 2 Estrelas | PT: 5.159 | EU: 73.599 | Valor: € 8,89
+12.º Prémio - 2 Números + 1 Estrela | PT: 23.673 | EU: 350.687 | Valor: € 5,88
+13.º Prémio - 2 Números + 0 Estrelas | PT: 75.900 | EU: 959.974 | Valor: € 3,46
+----------------------------------------
