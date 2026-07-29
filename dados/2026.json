@@ -862,6 +862,19 @@
       ],
       "especial": 1,
       "premios": []
+    },
+    {
+      "concurso": "060/2026",
+      "data": "29/07/2026",
+      "numeros": [
+        16,
+        33,
+        39,
+        42,
+        45
+      ],
+      "especial": 4,
+      "premios": []
     }
   ]
 }
