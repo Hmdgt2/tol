@@ -278,3 +278,4 @@
 [2026-08-02 09:17:22] [vercapas] Resultado do concurso 061/2026 já existe. Nada a fazer.
 [2026-08-05 23:40:48] [santacasa] Resultado do concurso 062/2026 adicionado ao JSON 2026.
 [2026-08-08 23:04:37] [santacasa] Resultado do concurso 063/2026 adicionado ao JSON 2026.
+[2026-08-12 23:24:19] [santacasa] Resultado do concurso 064/2026 adicionado ao JSON 2026.
