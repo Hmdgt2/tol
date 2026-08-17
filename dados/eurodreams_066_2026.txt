@@ -1,0 +1,13 @@
+Concurso: 066/2026
+Data: 17/08/2026
+Chave: 8 12 19 21 26 36 + 4
+Ordem de saída: 19 21 8 36 26 12 + 4
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 20.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 2 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 17 | EU: 99 | Valor: € 452,40
+4.º Prémio - 4 Números | PT: 802 | EU: 4.412 | Valor: € 28,45
+5.º Prémio - 3 Números | PT: 10.673 | EU: 61.092 | Valor: € 4,31
+6.º Prémio - 2 Números | PT: 59.491 | EU: 337.211 | Valor: € 2,50
+----------------------------------------
