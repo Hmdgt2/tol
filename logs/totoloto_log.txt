@@ -281,3 +281,4 @@
 [2026-08-12 23:24:19] [santacasa] Resultado do concurso 064/2026 adicionado ao JSON 2026.
 [2026-08-15 22:58:21] [santacasa] Resultado do concurso 065/2026 adicionado ao JSON 2026.
 [2026-08-19 23:03:07] [santacasa] Resultado do concurso 066/2026 adicionado ao JSON 2026.
+[2026-08-22 22:58:35] [santacasa] Resultado do concurso 067/2026 adicionado ao JSON 2026.
