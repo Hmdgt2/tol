@@ -1,14 +1,14 @@
 {
-  "concurso": "068/2026",
-  "data": "26/08/2026",
+  "concurso": "069/2026",
+  "data": "29/08/2026",
   "numeros": [
-    1,
-    8,
-    24,
-    26,
-    40
+    19,
+    22,
+    29,
+    42,
+    46
   ],
-  "especial": 4,
+  "especial": 1,
   "premios": [
     {
       "premio": "1.º Prémio",
@@ -25,25 +25,25 @@
     {
       "premio": "3.º Prémio",
       "descricao": "4 Números",
-      "vencedores": "101",
-      "valor": "€ 400,71"
+      "vencedores": "89",
+      "valor": "€ 544,97"
     },
     {
       "premio": "4.º Prémio",
       "descricao": "3 Números",
-      "vencedores": "4.688",
-      "valor": "€ 4,79"
+      "vencedores": "4.494",
+      "valor": "€ 5,99"
     },
     {
       "premio": "5.º Prémio",
       "descricao": "2 Números",
-      "vencedores": "65.973",
-      "valor": "€ 2,04"
+      "vencedores": "67.407",
+      "valor": "€ 2,39"
     },
     {
       "premio": "Nº da Sorte",
       "descricao": "Nº da Sorte",
-      "vencedores": "64.316",
+      "vencedores": "56.414",
       "valor": "Reembolso do valor da aposta de Totoloto"
     }
   ]
