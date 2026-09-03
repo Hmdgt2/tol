@@ -1,13 +1,13 @@
-Concurso: 069/2026
-Data: 29/08/2026
-Números: 19 22 29 42 46
-Especial: 1
+Concurso: 070/2026
+Data: 02/09/2026
+Números: 5 7 8 29 45
+Especial: 9
 ----------------------------------------
 Prémios:
 1.º Prémio - 5 Números + Nº da Sorte | Vencedores: 0 | Valor: (1)
 2.º Prémio - 5 Números | Vencedores: 0 | Valor: (2)
-3.º Prémio - 4 Números | Vencedores: 89 | Valor: € 544,97
-4.º Prémio - 3 Números | Vencedores: 4.494 | Valor: € 5,99
-5.º Prémio - 2 Números | Vencedores: 67.407 | Valor: € 2,39
-Nº da Sorte - Nº da Sorte | Vencedores: 56.414 | Valor: Reembolso do valor da aposta de Totoloto
+3.º Prémio - 4 Números | Vencedores: 122 | Valor: € 336,33
+4.º Prémio - 3 Números | Vencedores: 5.096 | Valor: € 4,47
+5.º Prémio - 2 Números | Vencedores: 69.177 | Valor: € 1,97
+Nº da Sorte - Nº da Sorte | Vencedores: 74.683 | Valor: Reembolso do valor da aposta de Totoloto
 ----------------------------------------
