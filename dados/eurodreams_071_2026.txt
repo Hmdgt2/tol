@@ -1,0 +1,13 @@
+Concurso: 071/2026
+Data: 03/09/2026
+Chave: 8 18 20 22 33 40 + 1
+Ordem de saída: 33 40 8 20 22 18 + 1
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 20.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 15 | EU: 136 | Valor: € 381,82
+4.º Prémio - 4 Números | PT: 819 | EU: 5.183 | Valor: € 28,08
+5.º Prémio - 3 Números | PT: 11.056 | EU: 67.449 | Valor: € 4,53
+6.º Prémio - 2 Números | PT: 60.812 | EU: 373.448 | Valor: € 2,50
+----------------------------------------
