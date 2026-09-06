@@ -1,13 +1,13 @@
-Concurso: 070/2026
-Data: 02/09/2026
-Números: 5 7 8 29 45
-Especial: 9
+Concurso: 071/2026
+Data: 05/09/2026
+Números: 13 19 29 35 46
+Especial: 13
 ----------------------------------------
 Prémios:
 1.º Prémio - 5 Números + Nº da Sorte | Vencedores: 0 | Valor: (1)
-2.º Prémio - 5 Números | Vencedores: 0 | Valor: (2)
-3.º Prémio - 4 Números | Vencedores: 122 | Valor: € 336,33
-4.º Prémio - 3 Números | Vencedores: 5.096 | Valor: € 4,47
-5.º Prémio - 2 Números | Vencedores: 69.177 | Valor: € 1,97
-Nº da Sorte - Nº da Sorte | Vencedores: 74.683 | Valor: Reembolso do valor da aposta de Totoloto
+2.º Prémio - 5 Números | Vencedores: 1 | Valor: € 21.556,02
+3.º Prémio - 4 Números | Vencedores: 127 | Valor: € 212,16
+4.º Prémio - 3 Números | Vencedores: 5.191 | Valor: € 5,19
+5.º Prémio - 2 Números | Vencedores: 73.428 | Valor: € 2,20
+Nº da Sorte - Nº da Sorte | Vencedores: 91.557 | Valor: Reembolso do valor da aposta de Totoloto
 ----------------------------------------
