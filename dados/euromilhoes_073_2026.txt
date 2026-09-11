@@ -1,0 +1,20 @@
+Concurso: 073/2026
+Data: 11/09/2026
+Chave: 1 7 15 39 50 + 1 11
+Ordem de saída: 39 15 7 1 50 + 1 11
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 1 | Valor: (1) € 111.516.282,00
+2.º Prémio - 5 Números + 1 Estrela | PT: 0 | EU: 3 | Valor: € 265.189,67
+3.º Prémio - 5 Números + 0 Estrelas | PT: 0 | EU: 6 | Valor: € 30.989,59
+4.º Prémio - 4 Números + 2 Estrelas | PT: 9 | EU: 39 | Valor: € 1.484,99
+5.º Prémio - 4 Números + 1 Estrela | PT: 80 | EU: 830 | Valor: € 128,53
+6.º Prémio - 3 Números + 2 Estrelas | PT: 218 | EU: 1.977 | Valor: € 57,04
+7.º Prémio - 4 Números + 0 Estrelas | PT: 163 | EU: 1.861 | Valor: € 42,58
+8.º Prémio - 2 Números + 2 Estrelas | PT: 2.285 | EU: 26.167 | Valor: € 15,14
+9.º Prémio - 3 Números + 1 Estrela | PT: 3.891 | EU: 37.853 | Valor: € 11,67
+10.º Prémio - 3 Números + 0 Estrelas | PT: 8.355 | EU: 86.849 | Valor: € 9,47
+11.º Prémio - 1 Número + 2 Estrelas | PT: 10.481 | EU: 131.709 | Valor: € 7,56
+12.º Prémio - 2 Números + 1 Estrela | PT: 47.717 | EU: 533.172 | Valor: € 5,88
+13.º Prémio - 2 Números + 0 Estrelas | PT: 116.322 | EU: 1.276.869 | Valor: € 3,96
+----------------------------------------
