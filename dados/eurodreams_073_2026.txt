@@ -1,0 +1,13 @@
+Concurso: 073/2026
+Data: 10/09/2026
+Chave: 3 6 12 24 38 40 + 4
+Ordem de saída: 3 38 12 40 6 24 + 4
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 20.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 1 | EU: 2 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 17 | EU: 120 | Valor: € 422,93
+4.º Prémio - 4 Números | PT: 832 | EU: 4.733 | Valor: € 30,05
+5.º Prémio - 3 Números | PT: 10.774 | EU: 64.353 | Valor: € 4,64
+6.º Prémio - 2 Números | PT: 60.459 | EU: 360.574 | Valor: € 2,50
+----------------------------------------
