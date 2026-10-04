@@ -309,3 +309,4 @@
 [2026-10-01 01:36:17] [santacasa] Resultado do concurso 078/2026 adicionado ao JSON 2026.
 [2026-10-01 14:25:03] [vercapas] Resultado do concurso 078/2026 já existe. Nada a fazer.
 [2026-10-04 01:59:41] [santacasa] Resultado do concurso 079/2026 adicionado ao JSON 2026.
+[2026-10-04 13:09:03] [vercapas] Resultado do concurso 079/2026 já existe. Nada a fazer.
