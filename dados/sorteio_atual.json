@@ -1,14 +1,14 @@
 {
-  "concurso": "078/2026",
-  "data": "30/09/2026",
+  "concurso": "079/2026",
+  "data": "03/10/2026",
   "numeros": [
-    4,
-    9,
-    19,
-    22,
-    24
+    8,
+    27,
+    38,
+    41,
+    44
   ],
-  "especial": 13,
+  "especial": 12,
   "premios": [
     {
       "premio": "1.º Prémio",
@@ -20,30 +20,30 @@
       "premio": "2.º Prémio",
       "descricao": "5 Números",
       "vencedores": "1",
-      "valor": "€ 18.149,13"
+      "valor": "€ 21.962,67"
     },
     {
       "premio": "3.º Prémio",
       "descricao": "4 Números",
-      "vencedores": "153",
-      "valor": "€ 148,27"
+      "vencedores": "109",
+      "valor": "€ 251,86"
     },
     {
       "premio": "4.º Prémio",
       "descricao": "3 Números",
-      "vencedores": "6.412",
-      "valor": "€ 3,53"
+      "vencedores": "4.681",
+      "valor": "€ 5,86"
     },
     {
       "premio": "5.º Prémio",
       "descricao": "2 Números",
-      "vencedores": "75.815",
-      "valor": "€ 1,79"
+      "vencedores": "70.595",
+      "valor": "€ 2,33"
     },
     {
       "premio": "Nº da Sorte",
       "descricao": "Nº da Sorte",
-      "vencedores": "75.972",
+      "vencedores": "61.794",
       "valor": "Reembolso do valor da aposta de Totoloto"
     }
   ]
