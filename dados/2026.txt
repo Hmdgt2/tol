@@ -1,13 +1,13 @@
-Concurso: 083/2026
-Data: 17/10/2026
-Números: 13 26 39 44 49
-Especial: 6
+Concurso: 084/2026
+Data: 21/10/2026
+Números: 1 4 12 18 26
+Especial: 8
 ----------------------------------------
 Prémios:
 1.º Prémio - 5 Números + Nº da Sorte | Vencedores: 0 | Valor: (1)
-2.º Prémio - 5 Números | Vencedores: 1 | Valor: € 22.030,54
-3.º Prémio - 4 Números | Vencedores: 130 | Valor: € 211,83
-4.º Prémio - 3 Números | Vencedores: 5.424 | Valor: € 5,07
-5.º Prémio - 2 Números | Vencedores: 75.549 | Valor: € 2,18
-Nº da Sorte - Nº da Sorte | Vencedores: 93.782 | Valor: Reembolso do valor da aposta de Totoloto
+2.º Prémio - 5 Números | Vencedores: 0 | Valor: (2)
+3.º Prémio - 4 Números | Vencedores: 141 | Valor: € 290,81
+4.º Prémio - 3 Números | Vencedores: 5.766 | Valor: € 3,95
+5.º Prémio - 2 Números | Vencedores: 73.058 | Valor: € 1,87
+Nº da Sorte - Nº da Sorte | Vencedores: 80.508 | Valor: Reembolso do valor da aposta de Totoloto
 ----------------------------------------
