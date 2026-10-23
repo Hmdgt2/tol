@@ -1,0 +1,13 @@
+Concurso: 085/2026
+Data: 22/10/2026
+Chave: 6 7 13 14 25 30 + 1
+Ordem de saída: 25 30 13 7 6 14 + 1
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 50.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 17 | EU: 147 | Valor: € 470,43
+4.º Prémio - 4 Números | PT: 1.288 | EU: 7.214 | Valor: € 26,87
+5.º Prémio - 3 Números | PT: 17.360 | EU: 100.244 | Valor: € 4,06
+6.º Prémio - 2 Números | PT: 96.907 | EU: 561.365 | Valor: € 2,50
+----------------------------------------
