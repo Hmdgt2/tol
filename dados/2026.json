@@ -1828,6 +1828,56 @@
           "valor": "Reembolso do valor da aposta de Totoloto"
         }
       ]
+    },
+    {
+      "concurso": "086/2026",
+      "data": "28/10/2026",
+      "numeros": [
+        3,
+        14,
+        24,
+        27,
+        41
+      ],
+      "especial": 4,
+      "premios": [
+        {
+          "premio": "1.º Prémio",
+          "descricao": "5 Números + Nº da Sorte",
+          "vencedores": "0",
+          "valor": "(1)"
+        },
+        {
+          "premio": "2.º Prémio",
+          "descricao": "5 Números",
+          "vencedores": "1",
+          "valor": "€ 18.223,68"
+        },
+        {
+          "premio": "3.º Prémio",
+          "descricao": "4 Números",
+          "vencedores": "124",
+          "valor": "€ 183,70"
+        },
+        {
+          "premio": "4.º Prémio",
+          "descricao": "3 Números",
+          "vencedores": "4.993",
+          "valor": "€ 4,56"
+        },
+        {
+          "premio": "5.º Prémio",
+          "descricao": "2 Números",
+          "vencedores": "67.152",
+          "valor": "€ 2,03"
+        },
+        {
+          "premio": "Nº da Sorte",
+          "descricao": "Nº da Sorte",
+          "vencedores": "64.784",
+          "valor": "Reembolso do valor da aposta de Totoloto"
+        }
+      ]
     }
   ]
 }
