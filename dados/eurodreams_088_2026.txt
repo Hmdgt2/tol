@@ -1,0 +1,13 @@
+Concurso: 088/2026
+Data: 02/11/2026
+Chave: 5 7 22 23 29 36 + 1
+Ordem de saída: 36 23 5 29 7 22 + 1
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 50.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 21 | EU: 152 | Valor: € 424,61
+4.º Prémio - 4 Números | PT: 1.005 | EU: 6.088 | Valor: € 29,71
+5.º Prémio - 3 Números | PT: 14.714 | EU: 84.983 | Valor: € 4,47
+6.º Prémio - 2 Números | PT: 89.238 | EU: 486.387 | Valor: € 2,50
+----------------------------------------
