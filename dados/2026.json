@@ -1991,6 +1991,18 @@
           "valor": "Reembolso do valor da aposta de Totoloto"
         }
       ]
+    },
+    {
+      "concurso": "090/2026",
+      "data": "11/11/2026",
+      "numeros": [
+        10,
+        14,
+        22,
+        25,
+        28
+      ],
+      "especial": 13
     }
   ]
 }
