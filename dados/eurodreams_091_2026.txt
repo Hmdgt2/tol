@@ -1,0 +1,13 @@
+Concurso: 091/2026
+Data: 12/11/2026
+Chave: 5 10 15 18 19 37 + 1
+Ordem de saída: 15 18 10 5 19 37 + 1
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 50.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 1 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 38 | EU: 146 | Valor: € 492,80
+4.º Prémio - 4 Números | PT: 1.121 | EU: 5.888 | Valor: € 34,25
+5.º Prémio - 3 Números | PT: 15.537 | EU: 86.683 | Valor: € 4,88
+6.º Prémio - 2 Números | PT: 88.246 | EU: 505.139 | Valor: € 2,50
+----------------------------------------
