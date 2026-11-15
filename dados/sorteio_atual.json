@@ -1,12 +1,12 @@
 {
-  "concurso": "089/2026",
-  "data": "07/11/2026",
+  "concurso": "091/2026",
+  "data": "14/11/2026",
   "numeros": [
-    2,
-    3,
-    17,
-    21,
-    36
+    4,
+    14,
+    30,
+    36,
+    42
   ],
   "especial": 1,
   "premios": [
@@ -25,25 +25,25 @@
     {
       "premio": "3.º Prémio",
       "descricao": "4 Números",
-      "vencedores": "148",
-      "valor": "€ 379,63"
+      "vencedores": "100",
+      "valor": "€ 545,97"
     },
     {
       "premio": "4.º Prémio",
       "descricao": "3 Números",
-      "vencedores": "6.158",
-      "valor": "€ 5,06"
+      "vencedores": "4.915",
+      "valor": "€ 6,17"
     },
     {
       "premio": "5.º Prémio",
       "descricao": "2 Números",
-      "vencedores": "90.568",
-      "valor": "€ 2,06"
+      "vencedores": "74.987",
+      "valor": "€ 2,42"
     },
     {
       "premio": "Nº da Sorte",
       "descricao": "Nº da Sorte",
-      "vencedores": "68.203",
+      "vencedores": "65.248",
       "valor": "Reembolso do valor da aposta de Totoloto"
     }
   ]
