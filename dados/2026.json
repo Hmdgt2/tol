@@ -2103,6 +2103,56 @@
           "valor": "Reembolso do valor da aposta de Totoloto"
         }
       ]
+    },
+    {
+      "concurso": "093/2026",
+      "data": "21/11/2026",
+      "numeros": [
+        2,
+        3,
+        8,
+        19,
+        38
+      ],
+      "especial": 12,
+      "premios": [
+        {
+          "premio": "1.º Prémio",
+          "descricao": "5 Números + Nº da Sorte",
+          "vencedores": "0",
+          "valor": "(1)"
+        },
+        {
+          "premio": "2.º Prémio",
+          "descricao": "5 Números",
+          "vencedores": "0",
+          "valor": "(2)"
+        },
+        {
+          "premio": "3.º Prémio",
+          "descricao": "4 Números",
+          "vencedores": "130",
+          "valor": "€ 397,37"
+        },
+        {
+          "premio": "4.º Prémio",
+          "descricao": "3 Números",
+          "vencedores": "6.241",
+          "valor": "€ 4,59"
+        },
+        {
+          "premio": "5.º Prémio",
+          "descricao": "2 Números",
+          "vencedores": "85.975",
+          "valor": "€ 2,00"
+        },
+        {
+          "premio": "Nº da Sorte",
+          "descricao": "Nº da Sorte",
+          "vencedores": "65.529",
+          "valor": "Reembolso do valor da aposta de Totoloto"
+        }
+      ]
     }
   ]
 }
