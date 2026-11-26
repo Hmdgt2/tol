@@ -345,3 +345,4 @@
 [2026-11-22 02:40:02] [santacasa] Resultado do concurso 093/2026 adicionado ao JSON 2026.
 [2026-11-22 15:12:58] [vercapas] Resultado do concurso 093/2026 já existe. Nada a fazer.
 [2026-11-24 06:54:05] [vercapas] Resultado do concurso 093/2026 já existe. Nada a fazer.
+[2026-11-26 04:27:42] [santacasa] Resultado do concurso 094/2026 adicionado ao JSON 2026.
