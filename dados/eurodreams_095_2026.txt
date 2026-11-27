@@ -1,0 +1,13 @@
+Concurso: 095/2026
+Data: 26/11/2026
+Chave: 1 11 15 25 31 32 + 4
+Ordem de saída: 11 31 32 15 1 25 + 4
+----------------------------------------
+Prémios:
+1.º Prémio - 6 Números + 1 Nº de Sonho | PT: 0 | EU: 0 | Valor: € 50.000/mês x 30 anos
+2.º Prémio - 6 Números | PT: 0 | EU: 0 | Valor: € 2.000/mês x 5 anos
+3.º Prémio - 5 Números | PT: 19 | EU: 130 | Valor: € 685,27
+4.º Prémio - 4 Números | PT: 760 | EU: 5.946 | Valor: € 42,00
+5.º Prémio - 3 Números | PT: 11.517 | EU: 89.446 | Valor: € 5,86
+6.º Prémio - 2 Números | PT: 71.412 | EU: 543.374 | Valor: € 2,50
+----------------------------------------
