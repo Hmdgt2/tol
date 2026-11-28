@@ -1,0 +1,20 @@
+Concurso: 095/2026
+Data: 27/11/2026
+Chave: 12 17 26 34 38 + 5 9
+Ordem de saída: 34 26 12 17 38 + 9 5
+----------------------------------------
+Prémios:
+1.º Prémio - 5 Números + 2 Estrelas | PT: 0 | EU: 0 | Valor: (1)
+2.º Prémio - 5 Números + 1 Estrela | PT: 0 | EU: 6 | Valor: € 110.077,58
+3.º Prémio - 5 Números + 0 Estrelas | PT: 0 | EU: 9 | Valor: € 17.151,29
+4.º Prémio - 4 Números + 2 Estrelas | PT: 11 | EU: 80 | Valor: € 600,99
+5.º Prémio - 4 Números + 1 Estrela | PT: 135 | EU: 975 | Valor: € 90,83
+6.º Prémio - 3 Números + 2 Estrelas | PT: 345 | EU: 2.490 | Valor: € 37,60
+7.º Prémio - 4 Números + 0 Estrelas | PT: 186 | EU: 1.913 | Valor: € 34,39
+8.º Prémio - 2 Números + 2 Estrelas | PT: 3.840 | EU: 31.275 | Valor: € 10,51
+9.º Prémio - 3 Números + 1 Estrela | PT: 3.973 | EU: 37.953 | Valor: € 9,66
+10.º Prémio - 3 Números + 0 Estrelas | PT: 6.542 | EU: 76.349 | Valor: € 8,94
+11.º Prémio - 1 Número + 2 Estrelas | PT: 18.057 | EU: 155.471 | Valor: € 5,32
+12.º Prémio - 2 Números + 1 Estrela | PT: 49.220 | EU: 513.066 | Valor: € 5,08
+13.º Prémio - 2 Números + 0 Estrelas | PT: 89.037 | EU: 1.052.671 | Valor: € 3,98
+----------------------------------------
